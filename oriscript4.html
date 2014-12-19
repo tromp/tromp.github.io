@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>OriMaze in JavaScript</title>
+<script language="JavaScript">
+<!--
+var mc = 0
+var b = new Array()
+var fs = 10
+b[0] = 2; b[1] = 2; b[2] = 2; b[3] = 1;
+b[4] = 1; b[5] = 3; b[6] = 1; b[7] = 1;
+b[8] = 2; b[9] = 1; b[10] = 0; b[11] = 1;
+b[12] = 1; b[13] = 1; b[14] = 2; b[15] = 2;
+
+function checkforwin() {
+  if (b[4] > 2) {
+    alert("Great job, you solved it!")
+  }
+}
+
+function gotkey(a) {
+ if (document.all) {
+        a = window.event;
+    }
+  if (a.keyCode == 39 && canMoveRight()) { doMove(fs+1) }
+  if (a.keyCode == 40 && canMoveDown()) { doMove(fs+4) }
+  if (a.keyCode == 38 && canMoveUp()) { doMove(fs-4) }
+  if (a.keyCode == 37 && canMoveLeft()) { doMove(fs-1) }
+  drawboard()
+  checkforwin()
+}
+
+document.onkeydown = gotkey
+
+var imgname = new Array()
+imgname[0] = 'img/go.gif'
+imgname[1] = 'img/ver.gif'
+imgname[2] = 'img/hor.gif'
+imgname[3] = 'img/target.gif'
+
+function xco() { return fs % 4 }
+function yco() { return fs / 4 }
+function drawboard() {
+  for (i=0;i<16;i++) {
+    document.images[i].src = imgname[b[i]]
+  }
+  document.mcform.mc.value = mc
+}
+
+function canMoveLeft() { return (xco() > 0) && (b[fs-1] > 1) }
+function canMoveRight() { return (xco() < 3) && (b[fs+1] > 1) }
+function canMoveUp() { return (yco() > 0) && (b[fs-4] == 1) }
+function canMoveDown() { return (yco() < 3) && (b[fs+4] == 1) }
+
+function doMove(j) {
+  var tmp = b[fs]
+  b[fs] = b[j]
+  b[j] = tmp
+  fs = j
+  mc++
+}
+// -->
+</script>
+</head>
+<body onload="drawboard();">
+
+The puzzle shown below is the hardest possible on 4x4 and takes a few
+dozen moves to solve.
+<P>
+Get the target piece <-- to the left.
+Use cursor keys to move around.
+<p>
+<table border=1 cellspacing='0' cellpadding='0'><tr>
+<td><image></td>
+<td><image></td>
+<td><image></td>
+<td><image></td></tr><tr>
+<td><image></td>
+<td><image></td>
+<td><image></td>
+<td><image></td></tr><tr>
+<td><image></td>
+<td><image></td>
+<td><image></td>
+<td><image></td></tr><tr>
+<td><image></td>
+<td><image></td>
+<td><image></td>
+<td><image></td></tr></table>
+<form name="mcform">moves: <input name="mc" value="0"></form>
+
+<!--
+<P> Claudio Baiocchi revised the puzzle to offer mouse support and
+a history of visited cells.
+-->
+
+<HR>
+Back to my <A HREF="http://www.cwi.nl/~tromp/">home page</A>. <BR>
+<a href="mailto:tromp@cwi.nl">tromp@cwi.nl</a>
+</BODY>
+</HTML>
