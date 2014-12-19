@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<title>Counting Legal Positions in Go</title>
+</HEAD>
+<BODY>
+
+<h1> <img alt="[pic of L10 board]" align=bot src="../img/go/legal10.gif"> Number of legal Go positions </h1>
+
+This is sequence <a href = "http://oeis.org/A094777">A094777</a> in the fabulous
+<a href="http://oeis.org/">On-Line Encyclopedia of Integer Sequences</a>.
+<p>
+
+L10 is <a href="ternary.html">represented in ternary</a> in the 10x10 position above, with empty representing 0, and
+black and white stones representing 1 and 2 respectively. The trits are in row-major order,
+with the most significant trit in the top-left. Of the 17 values below, only L2, L3, L7 and L10
+can be represented as legal positions themselves. Here's hoping that L19 can be as well...
+<p>
+Click on the left links to find tables for L(m,n).
+<p>
+
+<table border>
+<tr><td> n</td> <td> number of legal n*n positions</td> </tr>
+<tr><td><a href=L1.html>1</a></td> <td>1</td> </tr>
+<tr><td><a href=L2.html>2</a></td> <td>57</td> </tr>
+<tr><td><a href=L3.html>3</a></td> <td>12675</td> </tr>
+<tr><td><a href=L4.html>4</a></td> <td>24318165</td> </tr>
+<tr><td><a href=L5.html>5</a></td> <td>414295148741</td> </tr>
+<tr><td><a href=L6.html>6</a></td> <td>62567386502084877</td> </tr>
+<tr><td><a href=L7.html>7</a></td> <td>83677847847984287628595</td> </tr>
+<tr><td><a href=L8.html>8</a></td> <td>990966953618170260281935463385</td> </tr>
+<tr><td><a href=L9.html>9</a></td> <td>103919148791293834318983090438798793469</td> </tr>
+<tr><td><a href=L10.html>10</a></td> <td>96498428501909654589630887978835098088148177857</td> </tr>
+<tr><td><a href=L11.html>11</a></td> <td>793474866816582266820936671790189132321673383112185151899</td> </tr>
+<tr><td><a href=L12.html>12</a></td> <td>57774258489513238998237970307483999327287210756991189655942651331169</td> </tr>
+<tr><td><a href=L13.html>13</a></td> <td>37249792307686396442294904767024517674249157948208717533254799550970595875237705</td> </tr>
+<tr><td><a href=L14.html>14</a></td> <td>212667732900366224249789357650440598098805861083269127196623872213228196352455447575029701325</td> </tr>
+<tr><td><a href=L15.html>15</a></td> <td>10751464308361383118768413754866123809733788820327844402764601662870883601711298309339239868998337801509491</td> </tr>
+<tr><td><a href=L16.html>16</a></td> <td>4813066963822755416429056022484299646486874100967249263944719599975607459850502222039591149331431805524655467453067042377</td> </tr>
+<tr><td><a href=L17.html>17</a></td> <td>19079388919628199204605726181850465220151058338147922243967269231944059187214767997105992341735209230667288462179090073659712583262087437</td> </tr>
+<tr><td><a href=L18.html>18</a></td> <td>~0.017322427762 * 3^324 ~ 6.697231143 * 10^152 </td> </tr>
+<tr><td><a href=L19.html>19</a></td> <td>~0.011957528698 * 3^361 ~ 2.081681994 * 10^170 </td> </tr>
+</table>
+
+<p>
+The results for n=14,15,16 and 17 were obtained in a joint effort between
+<a href="http://iuuk.mff.cuni.cz/~koucky/">Michal Kouck&yacute;</a> and John Tromp.
+
+<!--We are now verifying the n=17 result.
+All eight partial results are in:
+<p> legal(17x17) % 18446744073709551616 =  7133925477256079629 <p>
+<p> legal(17x17) % 18446744073709551613 =  1897129492139602218 <p>
+<p> legal(17x17) % 18446744073709551611 =  1406730347805751613 <p>
+<p> legal(17x17) % 18446744073709551609 = 16845858969464128427 <p>
+<p> legal(17x17) % 18446744073709551607 =  7175283057132860288 <p>
+<p> legal(17x17) % 18446744073709551605 = 17572984714135843242 <p>
+<p> legal(17x17) % 18446744073709551601 = 14697903872394913189 <p>
+<p> legal(17x17) % 18446744073709551577 =  9895749638558742166 <p> -->
+<p>
+A <a href="gostate.ps">preliminary version</a> of our paper
+``Combinatorics of Go'' that contains these and many other results.
+<p>
+This <a href="legal.tgz">gzipped tar</a> contains various programs
+used to compute the exact numbers. Many thanks to
+<a href="http://www.isy.liu.se/~gf/">Gunnar Farneb&auml;ck</a> and
+<a href="http://iuuk.mff.cuni.cz/~koucky/">Michal Kouck&yacute;</a>
+for their contributions. Gunnar wrote a
+<a href="http://www.lysator.liu.se/~gunnar/legal.pike.txt">legal counting
+program</a> in pike, while Michal suggested the use of Chinese Remaindering
+and implemented a file based program.
+<p>
+This <a href="approx.c">small program</a> approximates the probability
+of a random n*n position being legal.
+<p>
+Additions and corrections are welcome.
+
+<a href="mailto:john.tromp@gmail.com">john.tromp@gmail.com</a>
+</body>
+
+</HTML>

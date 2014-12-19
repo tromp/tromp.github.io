@@ -1,0 +1,215 @@
+<html>
+<title>John's Combinatory Logic Playground</title>
+<body>
+<table cellspacing=16><tr>
+<td><IMG ALT="[picture of Ulambda]" ALIGN=top SRC="/~tromp/img/cl/int.gif"></td>
+<td>
+<H2 style="text-align: middle">
+John's <br>
+Lambda Calculus<br>
+and<br>
+Combinatory Logic<br>
+Playground
+</h2>
+</td>
+<td>
+<pre>
+    <span style="color:firebrick;">00</span><span style="color:green;">01</span><span style="color:firebrick;">00</span><span style="color:green;">01</span><span style="color:blue;">10</span><span style="color:green;">01</span><span style="color:blue;">10</span><span style="color:green;">0101</span><span style="color:firebrick;">00</span><span style="color:green;">01</span><span style="color:blue;">1010</span><span style="color:firebrick;">0
+     00000</span><span style="color:green;">0101</span><span style="color:blue;">10</span><span style="color:firebrick;">0000</span><span style="color:blue;">10</span><span style="color:green;">01</span><span style="color:firebrick;">00</span><span style="color:green;">010101
+     </span><span style="color:blue;">11110111          1010</span><span style="color:green;">01</span><span style="color:firebrick;">00</span><span style="color:green;">0
+     1</span><span style="color:blue;">1010</span><span style="color:firebrick;">00</span><span style="color:blue;">0          1110</span><span style="color:green;">01</span><span style="color:blue;">101
+     0</span><span style="color:firebrick;">00000000</span><span style="color:green;">0101</span><span style="color:blue;">101110</span><span style="color:green;">01</span><span style="color:blue;">110</span><span style="color:green;">01</span><span style="color:blue;">1
+     11111011110</span><span style="color:firebrick;">000000</span><span style="color:green;">01</span><span style="color:blue;">11110</span><span style="color:green;">01
+     </span><span style="color:blue;">101110</span><span style="color:firebrick;">00
+     00</span><span style="color:green;">0101</span><span style="color:blue;">10
+    </span><span style="color:firebrick;">0000</span><span style="color:blue;">110110   </span> <IMG ALT="[picture of Primes]" ALIGN=top SRC="/~tromp/img/cl/primes.gif">
+
+  0011010100 0101000101 0001000001
+  0100000100 0101000100 0001000001
+  0100000100 0101000001 0001000001
+  0000000100 0101000101 0001000000
+  0000000100 0100000101 0000000001
+  0100000100 0001000100 0001000001
+  0100000000 0101000101 0000000000
+  0100000000 0001000101 0001000001
+  0100000000 0100000100 0001000001
+  0100000100 0101000000 0001000000
+  ...
+</pre>
+</td>
+</tr></table>
+<P>
+Pictured above you can see on the left the 206 bit binary lambda calculus (blc) self-interpreter
+in <a href="diagrams.html">graphical notation</a>, and on the right a 167 bit primes program,
+in both binary and graphical notation, together with the first 300 bits of output.
+You can run this right away by feeding <A HREF="primes.blc">primes.blc</A> into
+the tiny <A HREF="blc.pl">blc interpreter in perl</A> with
+<pre>
+  perl blc.pl -b < primes.blc | head -c 300
+</pre>
+(Outputting much more than 300 bits in Perl will land your computer in swap hell.)
+or into the <A HREF="uni.c">blc interpreter in C</A> with
+<pre>
+  cc -DM=999999 -m32 -std=c99 uni.c -o uni
+  ./uni -b < primes.blc | head -c 1024
+</pre>
+Option -b denotes bit-oriented IO rather than the default byte-oriented mode.
+An <A href="http://www.ioccc.org/2012/tromp/tromp.c">obfuscated version</A> of this interpreter
+won as <A href="http://www.ioccc.org/2012/tromp/hint.html">Most functional</a>
+in the 2012 International Obfuscated C Code Contest.
+<p>
+
+Binary lambda calculus is explained in detail in my latest paper available in
+<A HREF="LC.ps">PostScript</A> and <A HREF="LC.pdf">PDF</A>,
+and in somewhat less detail in <A HREF="http://en.wikipedia.org/wiki/Binary_lambda_calculus">Wikipedia</A>.
+<p>
+Inspired by an April 13, 2008
+<a href="http://sneezy.cs.nott.ac.uk/fplunch/weblog/?m=200804">FP Lunch</a> blog by
+<a href="http://www.cs.nott.ac.uk/~txa/">Thorsten Altenkirch</a>,
+I was able to improve the constant in the symmetry-of-information theorem
+from 1876 down to 1636, and again on Mar 3, 2009 down to 1388.
+On September 3, 2011, Bertram Felgenhauer came up with a monadic evaluator that allows one
+to keep track of the bits of input read so far, which avoids the need for symbolic reduction,
+and cut the constant all the way down to 667 bits. Bertram also improved the brainfuck interpreter
+by 64 bits.
+<p>
+On Mar 10, 2009, I determined the first 4 bits of the halting probability: .0001.
+On June 17, 2011, following a suggestion by Chris Hendrie, I changed the integer/string correspondence to avoid reversing. This big-endian representation makes lexicographic order on delimited numbers coincide with numeric order.
+<p>
+In March 2012 I worked out <A HREF="HOAS.lhs">this</A> simplest stepwise lambda calculus reducer,
+a necessary ingredient in a proof of the Symmetry of Information theorem.
+
+<p>
+This design of a minimalistic universal computer was motivated by
+my desire to come up with a concrete definition of
+<A HREF="http://www.cwi.nl/~paulv/kolmogorov.html">
+Kolmogorov Complexity</A>, which studies randomness of individual
+objects.
+All ideas in the paper have been
+<A HREF="https://github.com/tromp/AIT.git">implemented</A>
+in the the wonderfully elegant <A HREF="http://haskell.org/">Haskell</A>
+language, which is basically pure typed lambda calculus with lots of
+syntactic sugar on top. An example session:
+<pre>
+# alias uni8="./blc run8 uni8.lam"
+# cat > stutter.lam
+let
+  stutter = \l l(\c\r\d\z z c (\z z c (stutter r)))l
+in stutter
+^D
+# make stutter.Blc
+./blc Blc stutter.lam > stutter.Blc
+# od -Ad -x stutter.Blc
+0000000 8446 0016 c25b 3fdf 9ade
+0000010
+# cat stutter.Blc - | uni8
+hello
+hheelllloo
+
+# make primes.Blc
+./blc Blc primes.lam > primes.Blc
+# od -Ad -x primes.Blc
+0000000 9911 8046 2458 de57 a191 00cd ce2d 787f
+0000016 cd07 b0c0 006c
+0000021
+# cat primes.Blc - | uni8 | head -c 50
+00110101000101000101000100000101000001000101000100
+# make bf.Blc
+./blc Blc bf.lam > bf.Blc
+# wc bf.Blc
+  0   2 104 bf.Blc
+# cat hw.bf
+# ++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.]
+# cat bf.Blc hw.bf | uni8
+Hello World!
+</pre>
+showing a 10 byte program for ``stuttering'', a 21 byte program for primes,
+and a 104 byte <A HREF="http://www.muppetlabs.com/~breadbox/bf/">Brainfuck</A> interpreter.
+<P>
+This
+<A HREF="http://web.archive.org/web/19971009064824/www.cs.oberlin.edu/classes/cs280/labs/lab4/lab4.html">online course</A> at Oberlin College
+provides a very readable introduction to combinators.
+Colin Taylor has written a very similar
+<A HREF="http://ctp.di.fct.unl.pt/~lcaires/lp2/Lambda.html">interpreter</A>
+for the Lambda Calculus, while
+<A HREF="http://www.umcs.maine.edu/~chaitin/">Gregory Chaitin</A>,
+promotor of algorithmic information theory, wrote
+<A HREF="http://www.cs.auckland.ac.nz/CDMTCS/chaitin/unknowable/lisp.html">one
+for LISP</A>.
+The
+<A HREF="http://www.eleves.ens.fr:8080/home/madore/programs/unlambda/">Unlambda
+Programming Language</A> is a combinator based language with input, output,
+delayed evaluation, and call-with-current-continuation. Interpreters
+have been
+written in many languages, including c, java, perl, scheme, SMLNJ, CAML,
+and even in <A HREF="http://home.nvg.org/~oerjan/unlambda/">unlambda
+itself</A>!
+Recently, Ben Rudiak-Gould (benrgATdarkDOTdarkwebDOTcom)
+made available a
+<!--(<A HREF="http://www.devlib.org/Encyclopedia-of-Stupid-Languages_L17462/">stupid?</A>)-->
+most comprehensive combinatory logic interpreter, using
+Church numerals for character encodings. By tying the combinator code to
+standard input/output, his <A HREF="lazy-k.html">Lazy K</A> language
+supports familiar utilities such as sort! To top it off, he
+provides a compiler (itself written in Scheme) from (a subset of)
+<A HREF="http://www.schemers.org/">Scheme</A> into Lazy K.
+<A HREF="http://homepages.nyu.edu/~cb125/">Chris Barker</A> also has several
+pages of interest, including a <A HREF="http://homepages.nyu.edu/~cb125/Lambda/">
+Lambda tutorial</A> and some <A HREF="http://semarch.linguistics.fas.nyu.edu/barker/Iota/">
+highly minimalistic languages</A>. 
+<P>
+
+<hr>
+Before discovering how to interpret lambda calculus in binary,
+I figured out how to make a universal machine in binary combinatory logic.
+The former turns out to be a lot more descriptive, i.e. generally needing
+fewer bits. But for historical interest, I keep this old applet here:
+Actually, it slows down page loading too much, so I comment it out.
+<!--
+<P>
+<applet code=CLApp.class width=600 height=300 align=MIDDLE hspace=10>
+</applet>
+-->
+<P>
+<A HREF="cl.tar.gz">This program</A> is an interpreter for the simplest language possible:
+both functions and data are represented by combinators, built up
+from S and K by application.
+The primitive combinators are defined by
+<UL>
+<LI> Kxy=x
+<LI> Sxyz=xz(yz)
+</UL>
+Combinator identifiers are all a single character.
+Apart from the primitive combinators S and K, the interpreter has
+the following predefined combinators:
+<UL>
+<LI> I=SKK
+<LI> Y=SSK(S(K(SS(S(SSK))))K)
+<LI> Pxyz=zxy
+<LI> 0xy=x
+<LI> 1xy=y
+<LI> ?$=0
+<LI> ?(Pxy)=1
+</UL>
+
+In the text input field, you can enter definitions such as the
+above, or combinations to be evaluated. In case the result is too large
+to be shown in detail, parts of it are shown as asterisks.
+If the result can be interpreted as a list, this is shown as an output string
+with bits 0,1 and again asterisks indicating non-bit elements.
+
+An example session is (input lines shown with a > prompt):
+
+<PRE>
+> 2fx=f(fx)
+defines 2 as (S(S(KS)K)I)
+> 222(P0)$
+of size 46
+head reduces in 53 steps to S(S(K(S(SKK)))KK)(K(SKK(S(K(S(*K)))K)(SKK(S(K(*K))(SKK(S(*)K)))(SKK(S(K(*))(*K(*(*))))(SKK(S(*)(*(*)))(KK)))))) of size 167
+outputs 16 bits "0000000000000000"
+
+</PRE>
+
+<P>
+</body>
+</html>
