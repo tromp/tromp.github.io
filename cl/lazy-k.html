@@ -1,0 +1,405 @@
+<html><head><title>The Lazy K Programming Language</title></head><body>
+
+
+<h1 align=center>Lazy K</h1>
+
+
+<h2>Executive summary</h2>
+
+<p>Lazy K is a garbage-collected, referentially transparent functional programming language, with a simple stream-based I/O system.
+
+<p>What distinguishes Lazy K from other such languages is its almost total lack of other features. It does not, for example, offer an integrated Hindley-Milner polymorphic type system. It is not shipped with an extensive standard library with support for platform-independent GUI programming and bindings to other languages. Nor could any such library be written since, among other things, Lazy K does not provide any way to define or refer to any functions other than built-ins. This inability is complemented by a matching lack of support for numbers, strings, or any other data type. Nevertheless, Lazy K is Turing-complete.
+
+
+<h2>Sample code</h2>
+
+<p>Here's a Lazy K program which prints out the prime numbers (all of them, if you wait long enough). It's based on an elegant implementation of the sieve of Eratosthenes using lazy lists, and it's surprisingly fast: about 80 primes in the first second of execution on my machine (of course it gets progressively slower).
+
+<pre>
+ K
+ (SII(S(K(S(S(K(SII(S(S(KS)(S(K(S(KS)))(S(K(S(S(KS)(SS(S(S(KS)K))(KK)))))
+ (S(S(KS)(S(KK)(S(KS)(S(S(KS)(S(KK)(S(KS)(S(S(KS)(S(KK)(SII)))
+ (K(SI(KK)))))))(K(S(K(S(S(KS)(S(K(SI))(S(KK)(S(K(S(S(KS)K)(S(S(KS)K)I)
+ (S(SII)I(S(S(KS)K)I)(S(S(KS)K)))))(SI(K(KI)))))))))(S(KK)K)))))))(K(S(KK)
+ (S(SI(K(S(S(S(S(SSK(SI(K(KI))))(K(S(S(KS)K)I(S(S(KS)K)(S(S(KS)K)I))
+ (S(K(S(SI(K(KI)))))K)(KK))))(KK))(S(S(KS)(S(K(SI))(S(KK)(S(K(S(S(KS)K)))
+ (SI(KK))))))(K(K(KI)))))(S(S(KS)(S(K(SI))(SS(SI)(KK))))(S(KK)
+ (S(K(S(S(KS)K)))(SI(K(KI)))))))))(K(K(KI))))))))))(K(KI)))))(SI(KK)))))
+ (S(K(S(K(S(K(S(SI(K(S(K(S(S(KS)K)I))(S(SII)I(S(S(KS)K)I)))))))K))))
+ (S(S(KS)(S(KK)(SII)))(K(SI(K(KI)))))))(SII(S(K(S(S(KS)(S(K(S(S(SI(KK))
+ (KI))))(SS(S(S(KS)(S(KK)(S(KS)(S(K(SI))K)))))(KK))))))(S(S(KS)
+ (S(K(S(KS)))(S(K(S(KK)))(S(S(KS)(S(KK)(SII)))(K(S(S(KS)K)))))))(K(S(S(KS)
+ (S(K(S(S(SI(KK))(KI))))(S(KK)(S(K(SII(S(K(S(S(KS)(S(K(S(K(S(S(KS)(S(KK)
+ (S(KS)(S(K(SI))K))))(KK)))))(S(S(KS)(S(KK)(S(K(SI(KK)))(SI(KK)))))
+ (K(SI(KK))))))))(S(S(KS)(S(K(S(KS)))(S(K(S(KK)))(S(S(KS)(S(KK)(SII)))
+ (K(SI(K(KI))))))))(K(K(SI(K(KI)))))))))(S(K(SII))(S(K(S(K(SI(K(KI))))))
+ (S(S(KS)(S(KK)(SI(K(S(K(S(SI(K(KI)))))K)))))(K(S(K(S(SI(KK))))
+ (S(KK)(SII)))))))))))(K(SI(K(KI))))))))(S(S(KS)K)I)
+ (SII(S(K(S(K(S(SI(K(KI)))))K))(SII)))))
+</pre>
+
+<p>Here's a Lazy K program which simply reverses its input on a character-by-character basis. For example, if you type in "stressed", it'll spit out "desserts". It's written in the Jot dialect of Lazy K, which is substantially less compact than the CL dialect I used above.
+
+<pre>
+ 1111100011111111100000111111111000001111111000111100111111000111111
+ 1000111100111110001111111000111100111001111111000111100111111111000
+ 1111111110000011111111100000111111110001111111110000011111111100000
+ 1111111000111111100011110011111000111001111111110000011111110001111
+ 0011111100011111111100000111001110011111110001111001111110001111001
+ 1111100011111110001111111000111111111000001111001110011110011111110
+ 0011110011111100011111111100000111001111111000111100111111000111100
+ 1111110001111001110011111110001111111000111100111110001111111000111
+ 1001111110001111001111100011111110001111111000111100111110001111111
+ 0001111001110011111110001111001111100011111110001111001110011111110
+ 0011111111100000111111111000001111001111111000111100111111000111111
+ 1000111100111110001111111000111100111111000111111111000001111111100
+ 0111110001111110001111111110000011110011100111111100011110011100111
+ 0011110011110011111110001111111110000011110011110011111111100000111
+ 1001111111100011111111100000111111111000001111111100011111111100000
+ 1111111110000011111110001111111000111100111110001110011111111100000
+</pre>
+
+<p>Here's a complete implementation of the Unlambda language, written in Lazy K's Unlambda notation. I might point out that this is over 5 times shorter than the shortest existing Unlambda-in-Unlambda interpreter (which is missing support for several language features) and over 10 times shorter than the only fully-featured Unlambda-in-Unlambda interpreter.
+
+<pre>
+ ````sii``s``s`ks``s`k`s`ks``s``s`ks``s`kk``s`ks``s`k`s`k``si`kk``s`k`s``s``si`
+ kk`k``si`k`ki``s`kk``s``s`k``s``s`ks``s`kk``s`k``s``s`ksk``s`k``s``s`kski```s`
+ `siii``s``s`kski``s``s`ks``s`kk``s`ks``s`k`sik`kk``s`k`s``s`k``s``s`kski``s``s
+ `ks``s`kk``s`ks``s`k`sik`kk``s``s`ks``s`kk``s`ks``s`k`si``s`kk``s`k`s`k``sii``
+ s``s`ks``s`k`s`ks``s`k`s`kk``s`k`s`ks`s`k`s``s``s``s``si`kk`k``si`k`ki`k````s`
+ `s`kski```s``s`ksk```sii``s``s`kski``s`k`s``si`k`kik``s``si`kk`k```sii``s`k``s
+ `k`s``si`k`kik``sii`kk`k`k``s``s`ks``s`kk``sii`k``si`k`ki``s`k`s`kk``s`k`s``s`
+ k``s``s`kski``s`k``s``s`ksk```sii``s``s`kski``s``s`ks``s`kk``s`ks``s`k`sik`kk`
+ `s`k`s`k``s`k`s``si`k``s``s`ks``s``s`ksk`k``s`k`si``s`kk``s`k`s``s`ksk``s`kk``
+ s`ks``s`kk``s`ks```ss`s``s`ks``s`kk``s`ks``s`k`si```ss`si`kk`kk`k``si`k`kik``s
+ `k`s``s`k```s``siii``s``s`kski``s``s`ks``s`kk``s`ks``s`k`sik`kk``s`k`s`k``s`k`
+ s``si`k``s``s`ks``s``s`ksk`k``s`k`si``s`kk``s`k`s``s`ksk``s`kk``s``s`ks``s`k`s
+ `ks``s`k`s`k`s`ks``s``s`ks``s`kk``s`ks``s`k`s`ks``s`k`s``s`ksk``s`kk``s`k`s`k`
+ `s`k`sik``s`k`s`k``si`kk``s`k`s``s``si`kk`k``si`k`ki``s`kk``s``s``si`kk`k``s`k
+ `s``si`kik`k``s``si`k```sii``s`k`s``s`ksk``s`kk``s`k`s`kk``s`k`si``s`kk``sii`k
+ ```sii``s`k``s`k`s``si`kik``sii`k``s`kkk`k`k`ki`k``si`k`kik``s`k`s`k``s`k`s``s
+ i`k``si`k``si`k``s``s`ksk`k``s``s`ks``s`k`s`ks``s`k`s``s`ks``s``s`ksk`k``s`k`s
+ i``s`kk``s`k``si`kk``s``s``s``si`k`ki`kk`k``si`k`ki`k`````sii```sii``s``s`kski
+ ``s`k`s``si`kik`k```sii``s`k`s``s`ksk``s`kk``s`k`s`kk``s`k`si``s`kk``sii``s`kk
+ k`k`k``si`k`kik``s`k`s`k``si`k`ki``s`k`s``s`k``s``s`kski``s`k```s``siii``s``s`
+ kski``s``s`ks``s`kk``s`ks``s`k`sik`kk``s``s`ks``s`kk``s`ks``s`k`si``s`kk``s``s
+ `ksk``s``s`ks``s`kk``s`ksk`k``s``s`ks``s`kk``s`ksk`k``s``s`ks``s`kk``s`ksk`k``
+ s``s`ks``s`kk``s`ks``s`k`sik`kk`k``s`kk``s``s`k``s``s`kski``s``s`ks``s`kk``s`k
+ s``s`k`sik`kk``s`k`s``si`k``si`k``si`k``s``s`ksk`k``s``s`ks``s`k`si``s`kk``s`k
+ `si``s`kk``s`k`s`kk``s`k`sikk``s`kk``s`k`s``si`k``si`k``si`k``s`k`si``s`kk``s`
+ k`s``s`ksk``s`kk``s``s`ks``s`kk``s`ksk`k``s`k`s``s`ks``s`k`si``s`kk``s`k`sik``
+ s`kkk``s`kk``s`k`s``si`k``si`k``si`k``s`kk``si`k`k`k`k```sii```sii``s``s`kski`
+ `s`kk``s``s`k``s``s`ksk``s``s`kski``s``s`ks``s`kk``s`ks``s`k`sik`kk``s`k`s``si
+ `k``si`k``si`ki``s`kk``s``s`ks``s`k`sik``s`kk``s`k`s``si`k``si`k``si`k``s``s`k
+ sk`k``s``s`ksk`k``s`k`s``s`ksk``s`kk``s`k`s`kk``s`k`sik``s`kk``s``s`k``s``s`ks
+ ki``s`k``s``s`ksk``s``s`kski``s``s`ks``s`kk``s`ks``s`k`sik`kk``s`k`s``si`k``si
+ `k``si`k``s``s`ksk`k`s`k`s`k``s`k`s``si`k``s`k``s``s`kski``s``s`ksk```sii``s``
+ s`kskik``s`kk``s`k`s``si`k``si`k``si`k``s``s`ksk`k``s``s`ksk`k``s`k`s``s`ksk``
+ s`kk``s`k`s``s`ksk``s`kk``s`k`s`k`s``s`ksk``s`k`s`kk``s``s`ks``s`kk``s`ks``s`k
+ k``s`ks``s``s`ksk`k``s`k`sik`k``s``s`ks``s`kk``s`ks``s`k`s`ks``s`k`s`k`si``s`k
+ `s`kk``s``s`ksk`k``s`k`sik`k``s`kkk``s`kk``s``s`k``s``s`kski``s``s`ks``s`kk``s
+ `ks``s`k`sik`kk``s`k`s``si`k``si`k``si`k```sii``s`k`s``s`ksk``s`kk``s`k`s`kk``
+ s`k`si``s`kk``sii``s`kk``s``s`k``s``s`ksk```sii``s``s`kski``s``s`ks``s`kk``s`k
+ s``s`k`sik`kk``s`k`s``si`k``si`k``si`k``s``s`ksk`k``s``s`ks``s`k`s`ks``s`k`s``
+ s`ks``s``s`ksk`k``s`k`si``s`kk``s``s``s`k``si`kk``s``s``si`kk`k``si`k`ki`k````
+ `sii```sii``s``s`kski``s`k`s``si`kkk`k`ki``s`k`s``s`ksk``s`kk``s`ks``s`kk``s`k
+ s```ss`s``s`ks``s`kk``s`ks``s`k`si```ss`si`kk`kk`k```sii``s`k`s``s`ksk``s`kk``
+ s`k`s`kk``s`k`si``s`kk``sii``s`kkk`k`ki``s`kk```ss`s``s`ks```ss`s``s`ks``s`kk`
+ `s`ks``s`k`sik`kk`k``sii``sii`k`k``s`k`s``si`k``s``s`ksk``s`k``s``s`kski`````s
+ ii``s``s`kski`s``s`ksk```sii``s``s`ksk``s``s`kskik`kk`k`k``si`k`ki``s``s`ks``s
+ `kk``si`k`k`k`k```sii```sii``s``s`kski`k``s`k`s``si`k```sii```sii``s``s`kskik
+</pre>
+
+
+<p>If this looks like your idea of fun, read on.
+
+
+<h2>Why the world needs Lazy K</h2>
+
+<p>... or, in other words, what's wrong with <a href="http://www.eleves.ens.fr:8080/home/madore/programs/unlambda/">Unlambda</a>?
+
+<p>Just as <a href="http://www.muppetlabs.com/~breadbox/bf/">Brainfuck</a> captures the distilled essence of (structured) imperative programming, so should there be a language which captures the essence of functional programming. Unlambda would seem to be the natural candidate for that position. But although it is a very pretty language, it just isn't functional enough for my taste.
+
+<p>The Unlambda page states that a functional programming language is one in which functions have first-class citizenship. But I think that this is incorrect: for one thing, by that definition almost any high-level language would qualify as functional, even Perl (and perhaps even C, which has <tt>qsort</tt>). More usually, "functional programming" is programming in which functions behave like real mathematical functions &mdash; that is, without side effects &mdash; and a pure functional language, then, is just one which requires this of all functions. In this sense, Unlambda isn't even close to being purely functional, because its I/O system depends crucially on side effects (or, equivalently, on the order of evaluation). The idea of side effects (or of meaning depending on evaluation order) is antithetical to the design of the combinator calculus, and there are strange interactions between them which make writing Unlambda programs a frustrating experience. This is, of course, deliberate: Unlambda is billed as "your functional programming language nightmares come true," and the author credits Intercal as an inspiration.
+
+<p>In designing Lazy K, I was interested only in elegance. Lazy K does not compromise the purity of the SKI combinator calculus in any way. There are no special combinators for I/O. There are no exceptions to the rules of abstraction elimination; the shortcuts are always valid. There are none of the evaluation-order games which permeate almost every other programming language, even most so-called functional languages: if there is any order in which a Lazy K program can be evaluated to work properly, the Lazy K interpreter will find it. There is no <tt>d</tt> operator, nor even any meaningful way to define one (except as equivalent to the identity function), and there's no need to add a dummy argument to argumentless functions, because the function and its value are interchangeable.
+
+<p>Lazy K programs live in the same timeless Platonic realm as mathematical functions, what the Unlambda page calls "the blessed realm of the pure untyped lambda calculus." Just as garbage collection hides the process of memory management from the programmer, so referential transparency hides the process of evaluation. The fact that some calculation is necessary in order to view a picture of the Mandelbrot set, or in order to "run" a Lazy K program, is an implementation detail. That's the essence of functional programming.
+
+
+<h2>I/O in Lazy K</h2>
+
+<p>How to handle input and output in a language without side effects? In a certain sense, input and output aren't side effects; they are, so to speak, front- and back-effects. So it is in Lazy K, where a program is simply treated as a function from the space of possible inputs to the space of possible outputs.
+
+<p>Input and output streams are represented as lists of natural numbers from 0 to 255, each corresponding to one byte. End-of-file is represented by the value 256, not by end of list. (This is because it is often easier to deal with EOF as a character than as a special case. Nevertheless, I wonder if it wouldn't be better to use end-of-list.)
+
+<p>For the purpose of making these lists, pairs are represented in the usual way (that is, the pair <tt>(X . Y)</tt> is the function <tt>(lambda (f) (f X Y))</tt>) and natural numbers are represented as Church numerals (that is, the number <i>n</i> is represented by the operation of <i>n</i>-fold composition).
+
+<p>The input list is infinite in length, and all elements after the first occurrence of 256 are also 256. The output list is never examined beyond the first occurrence of 256; it doesn't matter what is in the cdr of that cell. In fact, since the car of each cell is examined by applying it to <tt>(lambda (x y) x)</tt>, you can represent the end of your output simply by <tt>(k 256)</tt>: for example, <tt>(lambda (input) (k 256))</tt> is a valid program which ignores its input and prints nothing.
+
+<p>(Incidentally, the Church numeral 256 has a very compact representation in lambdas or combinators: it is <tt>((lambda (n) (n n)) ((lambda (n) (n n)) (lambda (f x) (f (f x)))))</tt>, or <tt>SII(SII(S(S(KS)K)I))</tt>.)
+
+<p>The present interpreter actually accepts any value of 256 or greater as the end of the output, and its return code to the operating system is that value minus 256.
+
+<p>Note that under these rules, the identity function is a program which copies its input to its output. Since Lazy K's syntax is such that the empty program is the identity function, the behavior of the UNIX <tt>cat</tt> utility (without arguments) can be expressed at least as compactly in Lazy K as in any other language.
+
+
+<h2>Lazy K syntax and semantics</h2>
+
+<p>Lazy K's motto is "there's more than one way to do it." In fact, there are exactly four ways to do it: combinator-calculus style, Unlambda style, Iota style, and Jot style.
+
+<ul>
+
+<li><b>Combinator-calculus style</b>: Lazy K programs can be written as expressions in the usual notation of the combinator calculus. The only predefined combinators you may use are <tt>S</tt>, <tt>K</tt>, and <tt>I</tt>, and there is no way to define your own (named) combinators. The prime-sieve example above uses this notation.
+
+<li><b>Unlambda style</b>: The Unlambda syntax is just another notation for combinator expressions, with a binary application operator <tt>`</tt> and the combinators <tt>s</tt>, <tt>k</tt>, and <tt>i</tt>. Other Unlambda functions are useless or meaningless in Lazy K and are not supported. Unlambda notation is usually a bit more compact than CC notation (though not always: e.g. <tt>SII(SII)</tt> vs. <tt>```sii``sii</tt>). Also, it looks nicer.
+
+<li><b>Iota and Jot style</b>: <a href="http://ling.ucsd.edu/~barker/Iota/">Iota and Jot</a> are two languages created by Chris Barker, each of which is Turing-complete with only two symbols. Iota has a single named function and a binary application operator; Jot has two operators only (they act initially on the identity function). Exactly the same functions can be represented in Iota and Jot as in the usual combinator calculus, but Iota and Jot programs are several times larger than their counterparts using the S, K, and I combinators. The input-reversing example above is written in Jot.
+
+</ul>
+
+<p>The grammar of Lazy K is approximately the union of the grammars of the four languages just described:
+
+<pre>
+          Syntax                            Semantics
+
+  Program  ::= CCExpr                     CCExpr
+
+  CCExpr   ::= CCExpr Expr                (CCExpr Expr)
+             | epsilon                    (lambda (x) x)
+
+  Expr     ::= "i"                        (lambda (x) x)
+             | Expr'                      Expr'
+
+  IotaExpr ::= "i"                        (lambda (x) (x S K)) ; with S and K defined as below
+             | Expr'                      Expr'
+
+  Expr'    ::= "I"                        (lambda (x) x)
+             | "K" | "k"                  (lambda (x y) x)
+             | "S" | "s"                  (lambda (x y z) ((x z) (y z)))
+             | NonemptyJotExpr            NonemptyJotExpr
+             | "`" Expr1 Expr2            (Expr1 Expr2)
+             | "*" IotaExpr1 IotaExpr2    (IotaExpr1 IotaExpr2)
+             | "(" CCExpr ")"             CCExpr
+
+  NonemptyJotExpr
+           ::= JotExpr "0"                (JotExpr S K)
+             | JotExpr "1"                (lambda (x y) (JotExpr (x y)))
+
+  JotExpr  ::= NonemptyJotExpr            NonemptyJotExpr
+             | epsilon                    (lambda (x) x)
+</pre>
+
+<p>An additional stipulation is necessary to disambiguate the grammar: a <tt>NonemptyJotExpr</tt> always matches the longest possible uninterrupted string of zeroes and ones.
+
+<p>Whitespace is ignored wherever it appears (including in the middle of a Jot expression). Comments are introduced by <tt>#</tt> and continue to the end of the line.
+
+<p>This grammar recognizes <em>almost</em> every valid CC, Unlambda, Iota and Jot expression. Annoyingly, there is one (and only one) collision between the languages: <tt>i</tt> is both a valid Unlambda expression and a valid Iota expression, and it has different meanings in the two. In Lazy K, the Unlambda meaning takes precedence. (This is implicit in the grammar above.)
+
+<p>Because this grammar allows you to mix your metaphors, the Lazy K language is much larger than the union of its four constituent languages. You can, for example, write <tt>SII``sii</tt> or <tt>****i*i*i*ii*ii*ii11111110001111111110000011111111100000</tt> instead of <tt>SII(SII)</tt>. I haven't pursued this possibility because I think Lazy K is obfuscated enough already.
+
+<p>There's no reason that Lazy K couldn't also support a lambda-calculus syntax, but, at least for now, it doesn't.
+
+
+<h2>The fall from grace</h2>
+
+<p>It's not difficult to write interactive programs in Lazy K. However, you should be aware that doing so is, technically speaking, a sin.
+
+<p>The trouble is that Lazy K provides no explicit mechanism for synchronizing input with output. In a referentially transparent language, anything not explicitly synchronized is fair game for evaluation in any order whatsoever, at the run-time system's discretion.
+
+<p>Consider a program which asks for the user's name and then prints a greeting, like this: (bold italics represent text typed by the user)
+
+<blockquote>
+ <p><tt>What is your name?</tt>
+<br><tt><i><b>Ben</b></i></tt>
+<br><tt>Hello, Ben!</tt>
+</blockquote>
+
+<p>In principle, you might get this instead:
+
+<blockquote>
+ <p><tt>What is your name?</tt>
+<br><tt>Hello, <i><b>Ben</b></i></tt>
+<br><tt>Ben!</tt>
+</blockquote>
+
+<p>... or this:
+
+<blockquote>
+ <p><tt><i><b>Ben</b></i></tt>
+<br><tt>What is your name?</tt>
+<br><tt>Hello, Ben!</tt>
+</blockquote>
+
+<p>... or even something in between.
+
+<p>In practice, however, interactive Lazy K programs tend not to exhibit these problems. The first case cannot arise if the "H" of "Hello" depends in some way on the end of the user's input. The most obvious way of writing this particular program is to cons together the "Hello, [name]!" string in an expression which is conditioned on receipt of a newline. If you do this you are safe, because there's no way for any evaluator to prove in advance that the user will ever type a newline.
+
+<p>The second case does not occur as long as the prompt ("What is your name?") is consed together irrespective of the input &mdash; again the obvious thing to do. The reason this works is that the Lazy K interpreter uses lazy evaluation, which by definition tries to produce output as early as possible and do everything else (including input) as late as possible.
+
+<p>So there's no practical problem with interactive software. Nevertheless, there's something unpleasant about the way the second case is prevented. A referentially transparent program should not have to rely on lazy evaluation in order to work properly.
+
+<p>How to escape this moral dilemma? The hard way is to switch to a more sophisticated I/O system, perhaps based on Haskell's, in which input and output are explicitly synchronized. I'm rather disinclined to do this, as I much prefer the simplicity of the current system. The easy way out is to write batch programs which <em>happen</em> to work well interactively. This is mainly just a matter of not prompting the user. The "interactive" programs included with the Lazy K distribution follow this model.
+
+
+<h2>The interpreter</h2>
+
+<p>The Lazy K interpreter, cleverly named <tt>lazy</tt>, has the following command-line syntax:
+
+<pre>
+    lazy [-b] { -e program-code | program-file.lazy } *
+</pre>
+
+<p>Arguments preceded by <tt>-e</tt> are interpreted as in-line Lazy K code (just as in Perl), and arguments not preceded by <tt>-e</tt> are interpreted as names of files containing Lazy K code. You can specify more than one chunk of code, in which case they are combined by backwards functional composition. Because of the way Lazy K's I/O model works, this is equivalent to piping the output of each program to the input of the next: i.e. <tt>lazy prog1 prog2 prog3</tt> is equivalent to <tt>lazy prog1 | lazy prog2 | lazy prog3</tt>, except that it's more efficient (and the intermediate results needn't be byte streams). The first program's input always comes from standard input, and the last program's output always goes to standard output.
+
+<p>If you don't specify any programs at all, you'll get an empty composition, which results in the identity function, which causes <tt>lazy</tt> to behave like <tt>cat</tt> (except much slower). If you want <tt>lazy</tt> to read source code from standard input, use <tt>lazy -</tt>.
+
+<p>The <tt>-b</tt> option puts standard input and standard output into binary mode on systems which care (i.e. Windows). If you have problems with any of the sample programs (particularly the Unlambda interpreter), try using this switch.
+
+
+<h2>The compiler</h2>
+
+<p>There is a Lazy K compiler, but it does not compile from Lazy K into machine code or C; rather, it compiles <em>to</em> Lazy K from a meta-language in which one actually has some hope of writing programs. Like Unlambda, Lazy K itself is better considered as bytecode for an unorthodox kind of virtual machine. The compiler is written in Scheme and is located in the file <tt>lazier.scm</tt>.
+
+<p>The language Lazier compiles is just the lambda calculus written in Scheme notation. The <tt>laze</tt> function performs optimized abstraction elimination. (Note that you must quote all arguments because Lazier functions are not special forms.)
+
+<pre>
+  > (laze '(lambda (pair) (pair (lambda (a d) d))))
+  ((s i) (k (k i)))
+</pre>
+
+<p>You can use the <tt>lazy-def</tt> function to define macros (not functions!) which are expanded in-place in other code. Macros live at the top level lexically, and can be hidden by lambda bindings. Macros can refer to other macros (as long as there are no dependency loops). Macro names can be anything that can be compared reliably with <tt>eqv?</tt>: this includes not only identifiers but also numbers, characters, #t and #f, and the empty list.
+
+<pre>
+  > (lazy-def 'cdr '(lambda (pair) (pair (lambda (a d) d))))
+  > (laze 'cdr)
+  ((s i) (k (k i)))
+  > (laze '(cdr x))
+  (x (k i))
+  > (lazy-def '(cdr pair) '(pair (lambda (a d) d)))
+  > (laze 'cdr)
+  ((s i) (k (k i)))
+  > (laze '(cdr x))
+  (x (k i))
+</pre>
+
+<p>There are four <tt>print-as</tt> functions which format <tt>laze</tt>'s output as Lazy K source code.
+
+<pre>
+  > (lazy-def '(myprog input) '(cdr (cdr input)))
+  > (laze 'myprog)
+  ((s ((s i) (k (k i)))) (k (k i)))
+  > (print-as-cc (laze 'myprog))
+  S(SI(K(KI)))(K(KI))
+  > (print-as-unlambda (laze 'myprog))
+  ``s``si`k`ki`k`ki
+  > (print-as-iota (laze 'myprog))
+  ***i*i*i*ii***i*i*i*ii*ii**i*i*ii**i*i*ii*ii**i*i*ii**i*i*ii*ii
+  > (print-as-jot (laze 'myprog))
+  11111110001111111000111111111000001111001111001111111110000011110011110011111111100000
+</pre>
+
+<p>If you feel like programming closer to the bare metal, Lazier can help you by preserving free variables through the process of abstraction elimination, thus giving you a Lazy K "template" into which you can plug other expressions by hand.
+
+<pre>
+  > (lazy-def '(cons a b) '(lambda (f) (f a b)))
+  > (print-as-unlambda (laze 'cons))
+  ``s``s`ks``s`kk``s`ks``s`k`sik`kk
+  > (print-as-unlambda (laze '(cons p)))
+  ``s`k`s``si`k[p]k
+  > (print-as-unlambda (laze '(cons p q)))
+  ``s``si`k[p]`k[q]
+</pre>
+
+<p>The file <tt>prelude.scm</tt> contains some useful predefined macros such as <tt>cons</tt>, <tt>if</tt>, <tt>+</tt>, and so on. Notably absent are any higher-level combinators (except for Y and functional composition); I've been writing everything out by hand each time. Sorry about that. The file <tt>prelude-numbers.scm</tt> contains space-optimized definitions of the Church numerals up to 128.
+
+<p>The hardest part of writing Lazier programs, other than debugging them, is avoiding code bloat from multiple inclusions of a macro. If you write a complicated "function" as a macro and want to use it more than once, you either need to bind it to a variable and then pass it around to every location in the code which calls it, or else live with the multiple inclusion. The former solution may be even less efficient than the latter, since introducing a new variable binding itself adds a lot of bloat at the combinator level.
+
+
+<h2>Sample code</h2>
+
+<p>Here's a list of the Lazy K examples included in the distribution, with brief descriptions. More detailed descriptions can usually be found in the files themselves.
+
+<p><table border>
+<tr>
+<td><tt>ab.scm</tt><br><tt>ab.lazy</tt>
+<td>Prints ABABABAB... forever.
+<tr>
+<td><tt>befunge.scm</tt><br><tt>befunge.lazy</tt>
+<td>A Befunge-93 interpreter. Supports all opcodes except for <tt>?</tt>.
+<tr>
+<td><tt>brainfuck.scm</tt><br><tt>bf2lazy.c</tt>
+<td>A Brainfuck-to-Lazy K compiler which translates every Brainfuck instruction to a fixed block of Lazy K code. Matching [ and ] code blocks find each other at run time.
+<tr>
+<td><tt>calc.scm</tt><br><tt>calc.lazy</tt>
+<td>An infix expression evaluator which supports addition, multiplication, and exponentiation of arbitrary-precision integers.
+<tr>
+<td><tt>fib.scm</tt><br><tt>fib.lazy</tt>
+<td>Lazy K version of the "print the Fibonacci sequence as rows of asterisks" example from the Unlambda distribution.
+<tr>
+<td><tt>iota-in-iota.scm</tt><br><tt>iota-in-iota.lazy</tt><br><tt>jot-in-jot.scm</tt><br><tt>jot-in-jot.lazy</tt>
+<td>Interpreters for the Iota and Jot language subsets. The Iota version weighs in at 1651 symbols, and the Jot version at 1541.
+<tr>
+<td><tt>mergesort.scm</tt><br><tt>sort.lazy</tt><br><tt>bwt.lazy</tt>
+<td>A nice mergesort implementation using lazy lists. (Just about every algorithm seems to work better with lazy lists.) Two applications are included: a UNIX <tt>sort</tt> clone and a Burrows-Wheeler block sort utility.
+<tr>
+<td><tt>powers2.scm</tt><br><tt>powers2.lazy</tt>
+<td>Like <tt>fib</tt>, except prints powers of 2.
+<tr>
+<td><tt>primes.scm</tt><br><tt>primes.lazy</tt>
+<td>Prints the prime numbers in decimal.
+<tr>
+<td><tt>quine.lazy</tt>
+<td>A Lazy K quine, 2792 symbols long. The Lazier code for this one is not included, although you'll probably be able to guess how it works by looking at the Lazy K code. (Or its output...)
+<tr>
+<td><tt>reverse.scm</tt><br><tt>reverse.lazy</tt>
+<td>Reverses the input character-by-character.
+<tr>
+<td><tt>rot13.scm</tt><br><tt>rot13.lazy</tt>
+<td>Implements the rot13 encryption algorithm. For double rot13, the standard in most discussion forums, specify <tt>rot13.lazy</tt> twice on the command line.
+<tr>
+<td><tt>unlambda.scm</tt><br><tt>unlambda.lazy</tt>
+<td>An Unlambda interpreter. Supports all Unlambda 2.0.0 features, including input and <tt>#</tt> comments.
+</table>
+
+<p>Some obvious projects:
+
+<ul>
+
+<li>"Hello, World!", "99 bottles", and the like. A property Lazy K shares with Brainfuck is that printing large quantities of text is cumbersome, if not exactly difficult.
+
+<li>A shorter or otherwise more interesting quine.
+
+<li>A full Lazy K interpreter. There are two ways of viewing this problem. If you simply want to write a Lazy K program which reads Lazy K code and does what that code will do, that's easy: just parse the program directly into the corresponding combinators, apply it to its input, and return its output. If, on the other hand, you want to implement your own lazy graph-reduction machine in Lazy K, that will be much more difficult, because the obvious algorithm requires destructive update.
+
+<li>A lambda-calculus interpreter, which would perform abstraction elimination and then run the result as native Lazy K code.
+
+</ul>
+
+<p>A <a href="http://wouter.fov120.com/false/">False</a> interpreter might also be fun (and not too hard) to write.
+
+
+<h2>Bugs and warts</h2>
+
+<ul>
+
+<li>Most of the Lazy K programs I've written consume more and more memory with the passage of time, some of them at a frightening rate (many megabytes per second). It's possible that there's a leak in the interpreter; I haven't checked carefully for one, although some ad hoc tests turned up nothing suspicious. Another possibility is that this behavior is inherent in the interpreter's design. "Real" lazy languages, like Haskell, do have this problem. It occurs because even simple values (like 0) can be the result of arbitrarily complicated and growing calculations (like 1-1+1-1+...-1), and the whole calculation will be preserved unevaluated as long as the value is unused and not provably unneeded. Detecting this problem and evaluating such structures more eagerly might prevent this. I'm sure lots of research has been done on this subject, and I really ought to read up on it.
+
+<li>In Unlambda, every program which is statically valid is also dynamically valid: that is, there is no possibility of a run-time error (other than nontermination or memory exhaustion). Unfortunately, this is not the case in Lazy K, because the return value of a Lazy K program must be a list of numbers, and not every function is a valid list of numbers. Effectively this imposes a dynamic type on Lazy K programs, even though they are typeless in the conventional sense. This problem derives fundamentally from the fact that standard input and standard output accept only streams of characters and not functions of the combinator calculus. I can think of four ways of addressing this, none of which is very satisfactory:
+
+<ol>
+
+<li>Revoke the first-class status of characters (and streams). I don't see any way to do this without losing referential transparency, in which case you basically have Unlambda.
+
+<li>Come up with some encoding for combinator-calculus expressions across byte-oriented serial lines. Any computable stream of bytes would have to have a corresponding expression and vice versa, and in order to preserve referential transparency all behaviorally equivalent expressions would have to have the same encoding. I'm not sure there even exists a computable encoding of this type, much less a "nice" one.
+
+<li>Define the problem away by stipulating that any non-number denotes end-of-output.
+
+<li>Remove output entirely. You still have a Turing-complete language this way, and it is if anything more elegant. But, as with the equally elegant <a href="http://www.catseye.mb.ca/esoteric/smetana/">SMETANA</a>, you can't do anything with it except stare at it in admiration, and the novelty of that wears off after a few minutes.
+
+</ol>
+
+</ul>
+
+
+</body></html>

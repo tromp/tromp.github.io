@@ -1,0 +1,107 @@
+<html>
+<title>Lambda Diagrams</title>
+
+<body>
+<H1><img src="/~tromp/img/cl/Y.logo.gif"> Lambda Diagrams</h1>
+
+Lambda Diagrams are a graphical notation for closed lambda terms,
+in which abstractions (lambdas) are represented by horizontal lines,
+variables by vertical lines emanating down from their binding lambda,
+and applications by horizontal links connecting the leftmost variables.
+In the alternative style, applications link the nearest deepest variables,
+for a more stylistic, if less uniform, look.
+<p>
+
+The following table shows diagrams of identity, the booleans, some standard combinators,
+some Church numerals, the predecessor function on Church numerals, and Omega.
+
+<table cellspacing=16>
+<tr> <td>term</td><td>definition</td> <td>diagram</td> <td>alternative</td> </tr>
+<tr> <td>I</td> <td> &lambda;x.x</td>
+  <td><IMG SRC="/~tromp/img/cl/I.gif"><td> </tr>
+<tr> <td>K/true</td> <td> &lambda;x.&lambda;y.x</td>
+  <td><IMG SRC="/~tromp/img/cl/K.gif"><td> </tr>
+<tr> <td>false</td> <td> &lambda;x.&lambda;y.y</td>
+  <td><IMG SRC="/~tromp/img/cl/false.gif"><td> </tr>
+<tr> <td>S</td> <td> &lambda;x.&lambda;y.&lambda;z.(x z)(y z)</td>
+  <td><IMG SRC="/~tromp/img/cl/S.gif"></td>
+  <td><IMG SRC="/~tromp/img/cl/S.alt.gif"></td> </tr>
+<tr> <td>Y</td> <td> &lambda;f.(&lambda;x.x x)(&lambda;x.f(x x))</td>
+  <td><IMG SRC="/~tromp/img/cl/Y.gif"></td>
+  <td><IMG SRC="/~tromp/img/cl/Y.alt.gif"></td> </tr>
+<tr> <td>2</td> <td> &lambda;f.&lambda;x.f(f x)</td>
+  <td><IMG SRC="/~tromp/img/cl/2.gif"></td>
+  <td><IMG SRC="/~tromp/img/cl/2.alt.gif"></td> </tr>
+<tr> <td>3</td> <td> &lambda;f.&lambda;x.f(f(f x))</td>
+  <td><IMG SRC="/~tromp/img/cl/3.gif"></td>
+  <td><IMG SRC="/~tromp/img/cl/3.alt.gif"></td> </tr>
+<tr> <td>4</td> <td> &lambda;f.&lambda;x.f(f(f(f x)))</td>
+  <td><IMG SRC="/~tromp/img/cl/4.gif"></td>
+  <td><IMG SRC="/~tromp/img/cl/4.alt.gif"></td> </tr>
+<tr> <td>pred</td> <td> &lambda;n.&lambda;f.&lambda;x.n(&lambda;g.&lambda;h.h(g f))(&lambda;u.x)(&lambda;u.u)</td>
+  <td><IMG SRC="/~tromp/img/cl/pred.gif"></td>
+  <td><IMG SRC="/~tromp/img/cl/pred.alt.gif"></td> </tr>
+<tr> <td>&Omega;</td> <td> (&lambda;x.x x)(&lambda;x.x x)</td>
+  <td><IMG SRC="/~tromp/img/cl/Omega.gif"></td>
+  <td><IMG SRC="/~tromp/img/cl/Omega.alt.gif"></td> </tr>
+</table>
+Curiously, the alternative Omega diagram somewhat resembles an (upside-down) Omega.
+<p>
+And here, on a larger scale, is a prime number sieve (alternative style): <p>
+<IMG SRC="/~tromp/img/cl/primes.alt.gif">
+<p>
+which reduces to an infinite list of booleans that starts out as
+<p>
+<IMG SRC="/~tromp/img/cl/primebits.gif">
+
+<h2>Dimensions and complexity</h2>
+
+In terms of pixels, a diagram's width is one less than 4 times the number of variables
+(vertical lines),
+and its height is one more than twice the maximum number of nested abstractions and applications
+(one less for alternaitve diagrams with multiple variables).
+<p>
+The size of the binary encoding of a term is closely related to
+the graphical complexity: it is exactly twice the number of lines
+plus the number of (4-way) intersections.
+
+<h2>Reduction</h2>
+
+Beta-reduction on lambda diagrams can be shown in several steps, as demonstrated in this reduction
+from Y=&lambda;f.(&lambda;x.x x)(&lambda;x.f(x x)) to &lambda;f.(&lambda;x.f(x x))(&lambda;x.f(x x))
+
+<table cellspacing=16>
+<tr><td>initial term</td><td><IMG SRC="/~tromp/img/cl/Y.gif"></td></tr>
+<tr><td>show application of abstraction</td><td><IMG SRC="/~tromp/img/cl/Y0.gif"></td></tr>
+<tr><td>show bound variables and argument</td><td><IMG SRC="/~tromp/img/cl/Y1.gif"></td></tr>
+<tr><td>expand function body</td><td><IMG SRC="/~tromp/img/cl/Y2.gif"></td></tr>
+<tr><td>to make room for substitution</td><td><IMG SRC="/~tromp/img/cl/Y3.gif"></td></tr>
+<tr><td>substitute argument for variables</td><td><IMG SRC="/~tromp/img/cl/Y4.gif"></td></tr>
+<tr><td>final term</td><td><IMG SRC="/~tromp/img/cl/Y5.gif"></td></tr>
+</table>
+
+In the third frame, we show only the part of bound variables below abstractions, e.g. when
+applying <IMG SRC="/~tromp/img/cl/applied.gif">, the function body x(&lambda;y.x) shows as <IMG SRC="/~tromp/img/cl/bound.gif">.
+
+<h2> Related work</h2>
+<a href="http://dkeenan.com">Dave Keenan</a> has a comprehensive online paper
+<a href="http://dkeenan.com/Lambda/">To Dissect a Mockingbird:
+A Graphical Notation for the Lambda Calculus with Animated Reduction</a>,
+which partly inspired this page.
+<p>
+In his <a href="http://bntr.planet.ee/lambda/work/visual_lambda.pdf">Master thesis</a>, Viktor Massal&otilde;gin discusses 4 existing graphical notations before introducing his own "bubble" notation. Figure 3 on page 10 shows 4 depictions of the fixpoint combinator (which differs from Y above in one beta reduction), while the bubble form is in Figure 5 on page 13.
+
+<h3>Note</h3>
+
+The diagram in the title, produced by the postscript code below, is a slightly deformed alternative Y diagram made to look like a Y.
+<PRE>
+%!PS-Adobe-2.0 EPSF-2.0
+%%BoundingBox:0 0 118 110
+/m{moveto}def/l{lineto}def/c{concat 6 m 0 6 l 7 8 m 0 8 l l l 3 6 l 2 6 m 7 6 l
+3 4 m 6 4 l 6 6 l stroke}def 3 0 0 0 1[-8 4 0 8 60 9]c 3 2 0 2 2[-1 1 0 1 0 0]c
+</PRE>
+
+<HR>
+Back to my <A HREF="http://www.cwi.nl/~tromp/cl/cl.html">Binary Lambda Calculus page</A>. <BR>
+</body>
+</html>
