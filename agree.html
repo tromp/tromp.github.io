@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+<TITLE>Dead Stone Removal</TITLE>
+</HEAD>
+<BODY>
+
+<H1>
+How to agree on dead stones in Go?
+</H1>
+
+After 2 consecutive passes in a game of Go,
+how can two players (who may lack a common language) come to an
+agreement about what stones to be considered dead and removed prior to scoring?
+This is particularly important to online Go servers.
+
+<H2>
+Agreement Proposal: marking strings
+</H2>
+Let's assume that stones can be visibly marked as dead.
+
+After 2 passes, the players keep alternating with the following
+3 choices on each turn:
+<P>
+
+Marking a string as dead, which automatically marks all other
+same colored strings neighbouring the adjacent empty region(s).
+<P>
+
+Disputing a string marked as dead.
+In this case, all markings are removed and
+play continues as if the agreement phase had not existed. If both
+players pass immediately in this continuation, then there are 4 consecutive
+passes and the board is scored as is without any removals.
+
+<P>
+A <EM>done</EM>, when one is done indicating dead groups.
+Two consecutive done's end the game with dead groups removed as agreed.
+<HR>
+The Kiseido Go Server implements a similar protocol,
+but in an asynchronous manner, and without the 4 pass ending.
+The asynchronous nature presents a problem when
+the opponent manages to mark another group as
+dead just when we choose Done. Thus we require a confirmation of the Done,
+complicating the protocol. Alternation seems to be better behaved,
+and clocks can be kept running.
+<P>
+
+When playing with symmetric (lens shaped) stones on a real board,
+it's not clear how to implement the marking. Suggestions are welcomed.
+
+<HR>
+Back to my <A HREF="http://www.cwi.nl/~tromp/">home page</A>. <BR>
+<a href="mailto:tromp@cwi.nl">tromp@cwi.nl</a>
+</BODY>
+</HTML>
