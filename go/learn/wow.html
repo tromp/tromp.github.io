@@ -1,0 +1,319 @@
+<HTML>
+<HEAD>
+<TITLE>6x6 go</TITLE>
+</HEAD>
+<body bgcolor="LightGoldenRodYellow">
+
+<H2>Go by example</H2>
+Let us illustrate the rules of Go by guiding you through a sample game.
+Throughout we will <EM>emphasize</EM> words that are standard terminology in Go.
+<!--
+The game is played near-perfectly; all Black moves are optimal while
+White only makes two non-optimal moves. To the go-buffs among you:
+see if you can find them...
+-->
+<BR>&nbsp;
+<TABLE>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow0.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>Play starts on an empty board, which is
+a square grid of horizontal and vertical lines. This is a small one with
+6x6 lines forming 36 intersections, or <EM>points</EM>. The standard size is
+19x19, while 9x9 is ideally suited to beginners. The object of the game
+is to conquer a majority of the points on the board, either by occupying
+or enclosing them.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow2.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow4.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>The two players, Black and White, alternate in placing a stone
+of their color on an empty intersection. Black moves first. Stones cannot
+be moved, but can be captured. The unit of capture is a <EM>string</EM>:
+a group of stones of one color that are connected along the board lines.
+A string is captured when it has no more adjacent empty points, or
+<EM>liberties</EM>.
+Above we see two single-stone strings with 4 liberties each.
+Note that diagonal points are not adjacent.
+</TD>
+
+<TD>
+Black 3 extends her string while taking a liberty away from the white string.
+White 4 is played symmetrically to restore the balance of liberties at 4 each.
+Each player has now staked out roughly half of the board.
+<!--
+After another two moves, we again have two strings with 4
+liberties each. This time, each string takes away 2 liberties from the other.
+On small boards, playing in the center is best since it maximizes the stones'
+influence over the whole board. Already the players are pushing and leaning
+against each other, each staking out half of the board. If white had played
+move 4 anywhere else, then black would take C4 on her next move,
+leaving White little room to manoeuvre.
+-->
+</TD>
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow6.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow8.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>
+Black 5 is played <EM>at the head</EM> of White's 2 stones,
+to find its progress <EM>blocked</EM> by White 6.
+<!--
+proceeds to bend around White's string.
+A move like this,
+called ``hane'' in Japanese (pronounce as ha-neh), is typical in Go.
+Although Black leaves a ``cutting point'', White cannot
+take advantage of it by playing 6 at D2, since Black would play at E2
+and chase White toward the edge where she could not escape capture.
+-->
+
+<TD>
+Black 7 allows White 8 to <EM>cut off</EM>
+the lonely stone at C2. This stone is said to be <EM>in atari</EM>,
+meaning it has only one liberty and is in danger of being captured on the next
+move. Running away to C1 would only invite white to play at B1, leaving
+Black no way to get out of atari.
+</TD>
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow10.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow12.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>
+Instead Black 9 <EM>counter-atari</EM>'s White,
+<!--
+White could block at B3, but then Black
+gets to play another atari at E2 (and could proceed to block off the right
+side at E1), so White instead captures C2 by occupying its last liberty.
+Now Black E2 won't be atari and since Black still has cutting points at
+B5 and D5, he won't have time to play there.
+-->
+who regains a liberty by capturing the black stone with White 10.
+</TD>
+
+<TD>
+After yet another atari at Black 11, White 12 wisely <EM>connects</EM>.
+</TD>
+
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow14.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow18.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>
+With two <EM>cutting points</EM> at B5 and D5,
+Black decides to defend one of them.
+<!--
+If Black defends at D5 instead, then White could play A3 and
+Black would have to defend B5 still. So White
+would keep the initiative. The Japanese say that White plays A3
+``in sente'' (pronounce sen-teh).
+By defending B5 in the first place, Black makes sure that A3 is ``gote''
+(pronounce go-teh) for White; it loses the initiative.
+-->
+White 14 is a solid extension into the biggest open space.
+<!--
+E3 would have been a good alternative but then Black will just block at E4
+forcing White to defend at E2. Playing E2 directly presents more pitfalls
+for Black.  For instance, playing 15 at E3 would be a mistake for Black,
+as White could play F3 next and Black wouldn't be able to block at F4.
+(this is a tricky variation that you may have
+trouble visualizing. The key points are D5 and E5.)
+-->
+</TD>
+
+<TD>
+After Black 15, White <EM>pushes in</EM> at 16 before blocking at 18.
+</TD>
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow20.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow23.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>
+Black 19 seeks to minimize White's area on the left, leaving White
+to capture a black stone with 20.
+</TD>
+
+<TD>
+<!--It seems Black has lost more on the right than he gained
+on the left, but Black has a trick up her sleeve...
+-->
+The blocking move Black 21 turns into a <EM>sacrifice</EM>
+as White 22 compels Black to
+connect her stones together with Black 23.
+</TD>
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow25.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow26.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>
+After White 24 captures, Black plays 25 smack into the middle of White's group.
+This may not make much sense, until one realizes that a White move at 25 would
+create 2 permanent liberties, or <EM>eyes</EM>, at D1 and F1, that Black
+could never occupy...
+<!--
+the even more mysterious looking
+25. What is Black doing playing in the middle of White's area?
+Actaully, Black is trying to capture the big White string, and that means
+Black will have to takes away all of its liberties, including the
+internal ones at D1, E1, and F1.
+The liberty at E1 is crucial since a White move there would make it impossible
+for Black to take either of the other 2 liberties away.
+-->
+</TD>
+
+<TD>
+The <EM>throw-in</EM> of White 26 similarly prepares to prevent Black from
+making 2 eyes.
+</TD>
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow30.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow33.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>
+Black 27 saves A2, but after reducing Black on the top as well,
+White similarly succeeds in limiting Black to one eye.
+</TD>
+<TD>
+Black 31 shows that capture of the opponent takes precedence over
+self capture; the captured white stone provides the liberty Black
+needs to stay on the board.
+White would now like to capture back at D6.
+This would however recreate the position in the left diagram,
+and thus lead to a neverending cycle of capturing back and forth.
+This is called a <EM>ko</EM> situation, and is
+resolved by the <EM>superko</EM> rule,
+that forbids any move recreating an earlier whole-board position.
+White 32 is a <EM>ko threat</EM>; after the defense at Black 33...
+</TD>
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow36.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow40.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>
+White is allowed to recapture in the <EM>ko</EM>. Black 35 takes another
+internal liberty of White who has ample time to connect her stones
+with White 36.
+</TD>
+<TD>
+After Black 37, both sides connect. White's atari at 40 gives
+an almost symmetrical situation.
+</TD>
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow43.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow46.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>
+Fortunately for Black, she gets to capture first in the remaining ko,
+forcing White to capture 2 stones. After the atari at 43,
+</TD>
+<TD>
+White can recapture in the ko, and we get a sense of deja-vu.
+</TD>
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow48.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow51.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>
+But now when Black recaptures the ko, White is lost, since the capture
+at 48 leaves her in atari still...
+</TD>
+<TD>
+Allowing Black to capture the lot. Realizing the futility
+of playing stones which Black can easily capture, White passes.
+Black spends another move to capture the last White stone, and both
+sides pass in succession, signalling the end of the game.
+</TD>
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow53.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="wow39.gif"></TD></TR></TABLE></TD>
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>
+After 2 consecutive passes, the game is scored. Black has 18 points
+occupied and 18 points enclosed for a total of 36 points, leaving White
+nothing:(
+</TD>
+<TD>
+Had Black ignored the ko-threat to win the upper-right ko at move 33,
+the game would end more peacefully.
+The players could just agree to remove the <EM>dead stones</EM> at
+A6 and E1 before scoring, resulting in a 20-16 win to Black.
+</TD>
+</TR>
+</TABLE>
+
+<P>
+Hope you enjoyed this game! One may consult
+<A HREF="http://homepages.cwi.nl/~tromp/go.html">The Logical Rules</A>
+as a concise rules reference, using the comments to link to the
+above terminology.
+<BR>
+<HR>Diagrams courtesy of <a href="http://www.igoweb.org/~wms/comp/cgoban/">cgoban</a>.
+<BR>Back to my <A HREF="index.html">home page</A>.
+<BR><A HREF="mailto:tromp@cwi.nl">tromp@cwi.nl</A>
+</BODY>
+</HTML>

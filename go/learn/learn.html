@@ -1,0 +1,163 @@
+<HTML>
+<HEAD>
+   <TITLE>Tutorial on the Rules of Go</TITLE>
+</HEAD>
+<BODY>
+
+<H2>
+Tutorial on the Rules of Go</H2>
+A small example game suffices to illustrate all the rules of Go.
+<BR>&nbsp;
+<TABLE>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="cap0.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>Play starts on an empty board, which is
+a square grid of horizontal and vertical lines. This is a small one with
+5x5 lines forming 25 intersections, or ``points''. The standard size is
+19x19, while 9x9 is ideally suited to beginners. The object of the game
+is to conquer a majority of the points on the board, either by occupying
+or enclosing them.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="cap4.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="cap8.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>The two players, Black and White, alternate in placing a stone
+of their color on an empty intersection. Black moves first. Stones cannot
+be moved, but can be captured. The unit of capture is a ``string'': a group
+of stones of one color that are connected along the board lines. A string
+is captured when it has no more adjacent empty points, or ``liberties''.
+Above we see four strings with 4 liberties each.
+<!--
+Note that diagonal points are not adjacent.
+-->
+</TD>
+
+<TD>After another four moves, we again have four strings with 4
+liberties each. The center point is a liberty of all strings.
+If black were to play there next, then the two black strings would
+be joined into one big string with 6 liberties,
+while reducing each white string to 3 liberties. Indeed,
+that would be the best move by far for black, but this game is to take
+a different course.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="cap18.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="cap19.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>The next ten moves are not an example of normal play but serve to set up
+a position in which we can show all varieties of capture.
+Note that each string now has only one or two liberties.
+Strings with only one liberty are said
+to be in atari. If the opponent occupies their last liberty, they get
+captured. From now on we will see the players making the best possible
+moves. Black had better not play in the center now as the
+resulting string would be in atari and get captured by white.</TD>
+
+<TD>Instead, Black captures the white bottom string that had put
+itself in atari. This capture provides black 19 with the liberty it needs
+to exist on the board.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="cap20.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="cap21.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>The center still being the most important point on the board,
+white wastes no time in occupying it. This puts Black's string above
+in atari. With the top left corner stone also in atari, White threatens
+to capture 2 strings at once. Black could now capture the top white stone,
+but White would just play another stone at the same spot to recapture four
+black stones!</TD>
+
+<TD>So Black captures the other white stone and in turn puts the
+big white string in atari. A play by White on the middle right would now
+result in self-capture. (some other rulesets forbid such
+suicide, but there are no compelling reasons to do so.)</TD>
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="cap22.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="cap23.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>So White obtains another liberty by capturing at 22. Now black
+and white could capture back and forth in the corner till eternity (a ``ko''
+situation), were it not for the ``super-ko'' rule, which states that one
+is forbidden to recreate an earlier board position.
+(This same rule prohibited White from capturing black 19 back,
+as that would recreate the position after Black 17.)
+</TD>
+
+<TD>Black 23 captures a white stone, putting two white strings in atari.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="cap24.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="cap26a.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>But is then itself captured by white 24.</TD>
+
+<TD>Note that black 25 is not forbidden, since the resulting position differs
+from that after black 23 by one black stone. White 26 is a clever throw-in.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<BR>&nbsp;
+<TABLE CELLSPACING=8>
+<TR ALIGN=CENTER VALIGN=BOTTOM>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="cap27.gif"></TD></TR></TABLE></TD>
+<TD><TABLE BORDER=4><TR><TD><IMG SRC="cap29.gif"></TD></TR></TABLE></TD>
+</TR>
+
+<TR ALIGN=LEFT VALIGN=TOP>
+<TD>The capture at 27 costs Black an important liberty, which would
+have allowed her to put white into atari. Now, neither side can approach
+the other without self atari. Unable to expand their territories, both
+sides now ``pass''. Passing is allowed at any time in the game. (even though
+it repeats the board position:-)
+The game is over when both sides pass consecutively.</TD>
+
+<TD>Like stones forming strings, adjacent empty points form
+empty spaces. A space having only stones of one color adjacent to it is
+said to be enclosed by that side (so a single stone in the middle of
+the board encloses 24 empty points:-)
+<BR>Black has 11 points occupied and 4 points enclosed, for a total of
+15 points. White has 7 points occupied and only 1 point enclosed, for
+a total of 8 points. The 2 remaining empty points border on both colors
+and thus remain unconquered. Black wins the game by 7 points!</TD>
+</TR>
+</TABLE>
+
+<P>Congratulations! You have now learned the rules of this magnificent
+game.
+<BR>
+<HR>Diagrams courtesy of <a href="http://www.igoweb.org/~wms/comp/cgoban/">cgoban</a>.
+<BR>Back to my <A HREF="index.html">home page</A>.
+<BR><A HREF="mailto:tromp@cwi.nl">tromp@cwi.nl</A>
+</BODY>
+</HTML>

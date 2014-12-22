@@ -1,0 +1,231 @@
+<HTML>
+<HEAD>
+<TITLE>John's Go Page</TITLE>
+</HEAD>
+<BODY>
+
+<BR>
+<H1>
+<IMG ALT="[picture of my .sig]" ALIGN=left SRC="img/yinyang.gif">
+The game of Go <BR> aka Weiqi in Chinese, Baduk in Korean</H1>
+<HR>
+<table cellspacing=5>
+<tr>
+<td><A <A HREF="go/learn/learn.html">Tutorial on the Rules of Go</A>
+<td><A HREF="http://www.gokgs.com">Kiseido Go Server</A>
+<td> <A HREF="http://members.tripod.com/~juegosdetablero/rtt.html">Las Reglas L&oacute;gicas del Go</A>
+<td> <A HREF="http://www.figg.org/corso/matematica.html">Le regole logiche del Go</A>
+</tr><tr>
+<td><A HREF="http://playgo.to/iwtg/en/">The Interactive Way To Go</A>
+<td><A HREF="http://home.snafu.de/~jasiek/rules.html">Go (Weiqi, Baduk) Rules</A>
+<td><A <A HREF="go/legal.html">number of legal positions</A>
+<td><A <A HREF="java/go/twoxtwo.html">Solving 2x2 go with alpha-beta search</A>
+</tr><tr>
+<td><A <A HREF="http://www.gokgs.com/tutorial/">Learn to play Go</A>
+<td><A href="http://www.britgo.org/rules/compare.html">Comparison of some Go rules</A>
+<td><A HREF="http://www.goproblems.com/">Interactive Problems</A>
+<td><A <A HREF="tweet.html">So long, IGS</A>
+</tr><tr>
+<td><A <A HREF="go/learn/wow.html">Instructive 6x6 game</A>
+<td><A HREF="http://www.cs.cmu.edu/~wjh/go/rules/">Compendium of go rules</A>.
+<td> <A HREF="gostory.html">Go: Life Itself</A>
+</tr>
+</table>
+<HR>
+<A NAME="rules"><H2>The Logical Rules</H2></A>
+
+<OL>
+<LI> Go is played on a 19x19 square grid of points, by two players called
+     Black and White.
+
+<LI> Each point on the grid may be colored black, white or empty.
+
+<LI> A point P, not colored C, is said to <EM>reach</EM> C,
+     if there is a path of (vertically or horizontally) <BR> adjacent 
+     points of P's color from P to a point of color C.
+<LI> <EM>Clearing</EM> a color is the process of emptying all
+     points of that color that don't reach empty.
+
+<LI> Starting with an empty grid, the players alternate turns,
+     starting with Black.
+
+<LI> A turn is either a pass; or a move that
+     doesn't repeat an earlier grid coloring.
+
+<LI> A move consists of coloring an empty point one's own color; <BR>
+     then clearing the opponent color, and then clearing one's own color.
+
+<LI> The game ends after two consecutive passes.
+
+<LI> A player's score is the number of points of her color, plus the number
+     of empty points that reach only her color.
+
+<LI> The player with the higher score at the end of the game is the winner.
+     Equal scores result in a tie.
+</OL>
+
+<HR>
+<A HREF="go/SimpleGo.hs">Here</A> are the rules expressed in
+<A HREF="http://www.haskell.org/">Haskell</A>. 
+An <A HREF="go/Go.hs">array based version</A> with parametrized board topology.
+<HR>
+
+<H2>Comments</H2>
+
+<OL>
+<LI> The grid of points is usually marked by a set of 19x19 lines on a wooden
+   board. <BR>
+   Each player has an arbitrarily large set of stones of his own color. <BR>
+   By prior agreement a rectangle of different dimensions may be used.
+
+<LI> Using boards, coloring a point (intersection) black or white means
+   placing a stone of that color on the point. <BR> Coloring a point
+   empty, i.e. emptying a point, means removing the stone from it.
+
+<LI> Connected stones of the same color, sometimes called <EM>strings</EM>,
+     all reach the same colors. <BR> Reaching empty means having empty points
+     adjacent to the string, called <EM>liberties</EM>.
+
+<LI> Strings without liberties cannot exist on the board at the end of a turn.
+
+<LI> For handicap games, the weaker player, taking black, may be given an
+   <EM>n stone handicap</EM>; <BR> these are n consecutive moves played before the
+   first white move.
+
+<LI> This is the <EM>positional superko</EM> (PSK) rule, while the <EM>situational superko</EM> (SSK) rule forbids repeating the same grid coloring with the same player to move. Only in exceedingly rare cases does the difference matter, sufficient reason for the simpler PSK rule to be prefered.
+
+<LI> For any specific move, at most one of the clearing processes can
+   have effect; <BR> the first is called capture, the second suicide.
+   Allowing suicide means that a play on an empty point can be illegal
+   only due to superko.
+
+<!-- no suicide variation (allows removal of rule 4.)
+ A move consists of coloring an empty point one's own color,
+ such that it reaches empty after emptying all points of the
+ opponent color that don't reach empty,
+-->
+
+<LI> As a practical shortcut, the following amendment allows
+   <EM>dead stone removal</EM>: <BR>
+   After only 2 consecutive passes, the players may end the game by
+   <A HREF="agree.html">agreeing on which points to empty</A>. <BR>
+   After 4 consecutive passes, the game ends as is.
+
+<LI> This is called <EM>area scoring</EM>.
+<!-- Since the number of moves a player makes
+   equals the number of passes plus #stones captured
+   plus #stones still on the board, -->
+   An almost equivalent result is reached
+   by <EM>territory scoring</EM> where in addition to empty surrounded space
+   we count opponent stones captured instead of own stones not captured.
+
+<LI> By prior agreement, for games between equals, a fixed amount can be added
+   to white's final score. <BR> This is called <EM>komi</EM>, and can be chosen a
+   non-integer such as 5.5 to avoid ties.
+</OL>
+
+<HR>
+
+<ALT="[igo character]" ALIGN=left SRC="img/igo.gif">
+<H3> Background (by Bill Taylor)</H3>
+
+These are essentially the New Zealand rules,
+re-worded to be as simple and elegant as possible. The NZ rules are in turn
+the simplest version of Chinese-style rules around.  The NZ rules are worded
+with definitions given recursively, which is elegant and a joy to computer
+scientists, logicians and mathematicians, but perhaps not so nice for most
+others. John Tromp came up with the key idea of a stone "seeing" (or as I've
+presently worded "reaching") a different color. This was the brilliant step
+which enabled such succinct rules. My modest contribution was the wording for
+the end-of-game criterion, and putting an expansion into a second tier of
+interpretations rather than rules. This was
+<OL>
+<LI>to keep the logical rules as simple as possible, and
+<LI>to keep things close to how the game is actually played by humans.
+</OL>
+
+If you like the Tromp/Taylor rules as presented here, you are earnestly
+enjoined to present a copy to your local, national or international clubs
+and committees. This is especially the case for the European Go Association,
+which is long overdue in making the inevitable shift to Chinese-style rules,
+thus following the excellent American precedent set about four years ago;
+(even though the Americans sadly couldn't quite admit they'd in fact shifted
+to Chinese rules, as they have done, in effect). <P>
+
+If you DON'T like the rules presented here, please contact us, explaining why.
+<P>
+
+Let me just re-iterate the motivations for wanting to
+adopt Chinese-style rules. They are by far the simplest, most elegant, most
+easily worded, and most easily umpired of the main rule sets. The matter of
+when the game finishes, and what is dead/removable, in particular, is far
+more logical and simple than in the Japanese variants, where the main
+motivations seem to be undue respect for tradition, and a feeling for the
+"beauty of omission", (a criterion possibly more appropriate to Noh opera
+than to a worldwide game of strategy). It is of <STRONG>particular </STRONG>
+concern that the
+rules be made as "natural" and comprehensible as possible for beginners, so
+that they not be turned away from the game by puzzlement or outrage, notably
+at the unfair-looking "free removal" of scoring prisoners at the end of the
+game. Many of us have known this to happen with promising beginners. Western
+countries especially cannot afford this kind of wastage of recruits. <P>
+
+Another point which has come up in email is this. There are four main
+areas in which Chinese and Japanese rules differ, and are effectively
+independent of one another. So in principle there are 2x2x2x2 = 16 ways
+of forming the rules, in these respects. Only the first difference is crucial.
+<P>
+
+<OL>
+<LI> The whole network of rules concerning scoring; prisoners; end of the game;
+    passing; removable stones; special positions; when are extra moves needed.
+    This is "the" defining difference between the two rulesets. Chinese is far 
+    and away the simpler, by a country mile.
+
+<LI> The ko rules.  Japanese is simpler, but has an annoying gap:- non-games
+     resulting from long cycles.  Chinese is more elegantly wordable.
+
+<LI> Suicide.  Neutral; I have a slight preference for allowing it.
+       (It allows slightly more options, thus more exercise of skill.)
+
+<LI> Where to put handicap stones. I much prefer the Chinese "free-placing"
+     style - more game variation, and more opportunity for exercising skill.
+</OL>
+
+Some people may object that I've "cheated" by relegating many concepts 
+to `comments and interpretations', and have thus kept the core rules 
+artificially concise.   However I don't think so.   The core rules are
+precisely those that (e.g.) a computer or game-theoretician needs to know; 
+which surely qualifies them as being the "real" rules.   The remaining
+`comments and interpretations' are merely about those matters that real live
+players have to worry about for reasons of convenience, impatience, and a 
+desire (usually) to play with physical equipment. <P>
+
+It should be noted that (especially for tournaments) there would need
+to be a further layer of rules and proprieties concerning things like clocks
+and time, physical disturbances, ambiguous placements, getting unfair advice,
+and so on.  (What Barry Phease succinctly dubbed "not rules of the game, but
+rules about playing the game".)     I have completely ignored such matters. <P>
+
+<A HREF="img/ladders.gif">
+for all x there exists y such that y is not equal to x
+</A>
+<P>
+Preliminary version of <A HREF="lad.ps">
+Ladders are PSPACE complete
+</A>
+<P>
+<A HREF="img/kos.gif">
+black to play and capture the white T group
+</A>
+<P>
+I just noticed that people are discussing this problem on <A HREF="http://senseis.xmp.net/?path=BigQuestionMark&page=BQM336">sensei's</A>
+and found it broken; I should have put it on a bigger board, like 15x15,
+to prevent the alternative ladder.
+
+<HR>
+Back to my <A HREF="http://tromp.github.io">home page</A>. <BR>
+<a href="mailto:john.tromp@gmail.com">john.tromp@gmail.com</a>
+
+</BODY>
+</HTML>

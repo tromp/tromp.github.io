@@ -1,0 +1,159 @@
+<HTML>
+<HEAD>
+<title>John's Chess Playground</title>
+</HEAD>
+<BODY>
+<H1>
+John's Chess Playground</h1>
+<HR>
+
+<H2>al-Suli's Diamond</H2>
+One <a href="https://en.wikipedia.org/wiki/Abu_Bakr_bin_Yahya_al-Suli">Abu Bakr Muhammad bin Yahya al-Suli</a> composed this ancient problem that went unsolved for over a thousand years.
+It uses the <a href="https://en.wikipedia.org/wiki/Ferz_%28chess%29">ferz</a> piece which is like a bishop that only moves one step.
+<pre>
+ . . . . . . . .
+ . . . . . . . .
+ . . . . . . . .
+ . . . k . . . .
+ . . . . . . . .
+ . K F . . . . .
+ . . . . . . . .
+ f . . . . . . .
+</pre>
+White to move and win by capturing Black's ferz (without losing his own on the next ply).
+
+The solution takes no less than 39 ply, starting with Kb4.
+The principal variation with optimal alternatives is
+<pre>
+ 1 Kb4 Kd6 2 Kc4 Ke6 3 Kd4 Kf6 4 Kd5 Kf7 5 Ke5 (Fd2) Kg7 6 Ke6 (Fd2) Kf8 7 Kd6 (Kf6/Kf5/Fb4/Fd2) Ke8 8 Kc6 (Ke5/Fd2) Kd8 9 Kb6 (Kd5/Fd2) Kc8 (Ke8/Ke7) 10 Kc5 (Fd2) Kd7 11 Kb5 (Fd2) Kc7 (Ke7/Ke6) 12 Kc4 (Fd2) Kd6 13 Kb4 (Fd2) Kc6 (Ke6/Ke5) 14 Fd2 Kd5 15 Kc3 Ke4 16 Kb3 Kd4 (Kd3/Kf3) 17 Kc2 Kc4 (Ke4) 18 Kb1 (Fc1 Fe1) Kd3 19 Fc1 ~ 20 Kxf
+</pre>
+Black's attempted defense is to maintain the same distance from the White king as the
+White ferz has from the Black one, which White defeats by driving the Black king to the edge.
+Indeed, White cannot win if his King has to avoid e6/f5.
+<p>
+I'd like to think that al-Suli arrived at his problem by polishing
+<H2>al-Suli's Rough Diamond</H2>
+<pre>
+ . . . F . . . k
+ . . . . . . . .
+ . . . . . . . .
+ K . . . . . . .
+ . . . . . . . .
+ . . . . . . . .
+ . . . . . . . .
+ f . . . . . . .
+</pre>
+which has the maximum distance-to-win among all such positions, at 53 plies, and the very same first move Kb4 (though no longer unique). Witness the polishing:
+<pre>
+ 1 Kb4 (Ka4/Fc7) Kg7 (Kg8) 2 Kb3 (Fc7) Kf7 (Kf8) 3 Fc7 Ke6 (Ke7) 4 Fb6 Kd5 (Kd6) 5 Fa5 Kc5 6 Fb4 Kc6 6 Fc3 Kd5
+</pre>
+A <a href="diamond.c">C-program</a> computing and navigating the solution space.
+Compile without optimization to avoid segmentation faults.
+
+<H2>Number of chess diagrams and positions</H2>
+
+<a href= "http://www.eecs.berkeley.edu/~flab/">Fran&ccedil;ois Labelle</a>
+provides exact definitions of diagrams and positions in
+<a href="http://www.eecs.berkeley.edu/~flab/chess/statistics-positions.html">Statistics on chess positions</a>.
+<P>
+
+
+In a 2006 <a href="http://groups.google.com/group/rec.games.chess.computer/browse_thread/thread/be6bc8d1e3c7da42/9656fff9a921d4eb?pli=1">posting</a>
+to newsgroup rec.games.chess.computer, Will Entriken proved an upper bound of
+23937533792747905898433845980097921846050276105440 on the number
+of chess diagrams (roughly 2^164).
+
+The following <a href="http://www.haskell.org/">Haskell</a> program improves this
+to 45193640626062205213735739171550309047984050718 (less than 2^155)
+for the number of positions.
+
+<pre>
+import Control.Monad
+import System(getArgs)
+import Array
+ 
+-- given a maximum number of pawns (normally 8, but 7 with fixed en-passant)
+-- and maximum number of initial rooks (normally 2, but 1 or 0 with castling)
+-- to choose, return list of possibly armies, where each army is summarized
+-- as a tuple of <#pieces, #pawns, #promotions, #factorial_product>
+armies np ir = do
+  q <- [0..1+np]
+  let prom1 =         max (q-1) 0
+  r <- [0..ir+np-prom1]
+  let prom2 = prom1 + max (r-ir) 0
+  b <- [0..2+np-prom2]
+  let prom3 = prom2 + max (b-2) 0
+  n <- [0..2+np-prom3]
+  let proms = prom3 + max (n-2) 0
+  guard $ proms <= np
+  p <- [0..np-proms]
+  return (q+r+b+n, p, proms, fac q*fac r*fac b*fac n*fac p)
+ 
+-- precompute first 65 factorials into array for efficiency
+fac :: Int -> Integer
+fac n = fac64!n where fac64 = listArray (0,64) (scanl (*) 1 [1..64])
+ 
+-- given a number of pawns to fix for each color (1 for en passant)
+-- and amount of space available for pawns
+-- and number of white and black rookks fixed by castling
+-- return number of possible positions
+count fixp pspace fixwr fixbr = sum $ do
+  let np = 8-fixp
+  (wpcs,wp,wproms,wprod) <- armies np (2-fixwr)
+  let wpx = np-wp-wproms                 -- white p captured
+  (bpcs,bp,bproms,bprod) <- armies np (2-fixbr)
+  let bpx = np-bp-bproms                 -- black p captured
+  let caps = 30-2*fixp-fixwr-fixbr-wp-bp-wpcs-bpcs
+  guard $ wproms <= bpx + caps
+  guard $ bproms <= wpx + caps
+  let space = 62-4*fixp-fixwr-fixbr-wp-bp
+  return $ (fac pspace `div` fac (pspace-wp-bp)) *
+           (fac space `div` fac (space-wpcs-bpcs)) `div` (wprod * bprod)
+ 
+count0 (mul,ek) = mul * count 0 (46+ek) 0 0
+ 
+-- Diagrams
+-- there are 212 configurations of kings on ranks 1&8
+-- there are 1448 configurations of one king on ranks 1&8, and the other on 2-6
+-- there are 1952 configurations of kings on ranks 2-6
+main0 = print . sum $ map count0 [(212,2),(1448,1),(1952,0)]
+-- 22124621884617108585387385940828998876019391612
+ 
+-- given a multiplier, number of edge (first or last rank) kings,
+-- fixed white and fixed black rooks
+-- return number of possible positions
+-- this assumes that side-to-move is known, say white
+-- each of the squares a5-h5 can have a black pawn en-passent
+-- capturable by 2 white pawns, except a5/h5, which could only
+-- be captured by 1 white pawn
+countep (mul,ek,fwr,fbr) = mul *
+  (count 0 (46+ek) fwr fbr + (8*2-2) * count 1 (42+ek) fwr fbr)
+ 
+-- Positions
+-- the first seven tuples count configurations
+-- of kings that can castle in various ways
+-- and where the other king is either on ranks 1&8 or 2-6
+-- The factor (* 2) counts for either side-to-move
+main = print . (* 2) . sum $ map countep
+  [(1,2,2,2),(4,2,1,2),(4,2,1,1),
+   (2*9,2,0,2),(2*43,1,0,2),(4*11,2,0,1),(4*44,1,0,1),
+   (212,2,0,0),(1448,1,0,0),(1952,0,0,0)]
+-- 45193640626062205213735739171550309047984050718
+</pre>
+
+I have a significantly more complex program that proves
+an upper bound of 7728772977965919677164873487685453137329736522
+(about 10^45.888 or ~ 2^152.437) on the number of positions, but,
+like the bound of ~10^46.25 published by Shirish Chinchalkar in
+"An Upper Bound for the Number of Reachable Positions",
+ICCA Journal, Vol. 19, No. 3, pp. 181-183, 1996,
+it requires much better documentation to be considered verifiable,
+<HR>
+<a href="http://tromp.github.io/chess/longest.html">The longest possible chess game</a>.
+<HR>
+Back to my <A HREF="http://tromp.github.io">home page</A>. <BR>
+<a href="mailto:john.tromp@gmail.com">john.tromp@gmail.com</a>
+
+</body>
+
+</HTML>
