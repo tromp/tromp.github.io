@@ -1,0 +1,119 @@
+<HTML>
+<HEAD>
+<title>John's Connect Four Playground</title>
+</HEAD>
+<BODY>
+<H1><img alt="[pic of c4 board]" align=bot src="../img/c4.gif">
+John's Connect Four Playground</h1>
+<HR>
+
+The first person to (weakly)
+<a href="http://en.wikipedia.org/wiki/Solved_board_games">
+solve</a> the game of <a href="http://en.wikipedia.org/wiki/Connect_Four">
+Connect-4</a> was
+<a href="http://fabpedigree.com/james/index.htm">
+James D. Allen</a>, as announced in a rec.games.programmer posting on
+Oct 1 1988. <P>
+Only 15 days later,
+<a href="http://en.wikipedia.org/wiki/Victor_Allis">Victor Allis</a>
+announced his independently discovered solution, described in
+<a href="http://www.connectfour.net/Files/connect4.pdf">his thesis</a>.
+<P>
+Inspired by these results, I set out to strongly solve the game by compiling a
+database of all 8-ply positions with their theoretical result.
+This took about 40,000 hours of computation on the Sun and SGI workstations at the CWI.
+A subset of this database, namely the 67557 unfinished and unforced positions,
+is available as a <A HREF="http://archive.ics.uci.edu/ml/datasets/Connect-4">dataset</A>
+for machine learning experiments.
+The value of all 1+7+49+343+2401=2801 up to 4-ply positions turned out
+to make a nice
+<a href="../thesis.html">illustration</A> for my own thesis cover.
+With the help of this database, any position in the game can be evaluated
+in a matter of seconds.
+<P>
+If you see no PLAY! button right below this line, then your browser has Java absent or disabled;
+I suggest you try this <a href="http://nyc.cs.berkeley.edu:8080/gcweb/ui/game.jsp?game=connect4">Javascript based solver</a> instead, which also sports a more conventional interface.
+<P>
+<applet code=ConnectFourLaunch.class width=100 height=50>
+<param name=file value=book.8>
+<param name=label value="PLAY!">
+</applet>
+This applet plays a perfect game of connect-4 with the help
+of the 8-ply database (read from a 12Kbyte compressed file).
+The applet understands the keys b, f, m, 1-7 and q for
+back, forward, move, play, and quit.
+The right mouse button takes you back or forward to when a certain stone
+was played.
+<P>
+Solving connect-4 positions also makes a decent benchmark aptly named 
+<a href="fhour.html">Fhourstones </a> as a pun on
+the <a href="http://en.wikipedia.org/wiki/Dhrystone">Dhrystone</a> benchmark.
+The included source is a useful guide to writing an exhaustive alpha-beta
+search program with a transposition table and dynamic move ordering.
+<P>
+This somewhat improved
+<A HREF="Connect4.java">board logic code</A> shows
+how to best represent connect-4 bitboards, test for a win with 8 shifts/ands,
+and encode a position in 49 bits.
+<P>
+Based on that code and a smarter transposition table replacement strategy,
+my solver is now busy compiling results on different board sizes:
+<P>
+<table border>
+<tr><th> height </th> </tr>
+<tr><th>11</th> <td>=</td> </tr>
+<tr><th>10</th> <td>=</td> <td>=</td> </tr>
+<tr><th> 9</th> <td>=</td> <td>=</td> <td>+</td> </tr>
+<tr><th> 8</th> <td>=</td> <td>=</td> <td>-</td> <td>+</td> </tr>
+<tr><th> 7</th> <td>=</td> <td>=</td> <td>+</td> <td>=</td> <td>+</td> </tr>
+<tr><th> 6</th> <td>=</td> <td>=</td> <td>-</td> <td>+</td> <td>-</td> <td>-</td> </tr>
+<tr><th> 5</th> <td>=</td> <td>=</td> <td>=</td> <td>=</td> <td>+</td> <td>+</td> <td>+</td> </tr>
+<tr><th> 4</th> <td>=</td> <td>=</td> <td>-</td> <td>=</td> <td>-</td> <td>-</td> <td>-</td> <td>-</td> </tr>
+<tr><th>  </th> <th>4</th> <th>5</th> <th>6</th> <th>7</th> <th>8</th> <th>9</th> <th>10</th> <th>11</th> <th>width</th> </tr>
+</table>
++ is a first player win, = a tie, and - a second player win. <br>
+New results and independent verification more than welcome!
+
+The 9x6 result just finished in Nov 2005, requiring examination
+of about 2E13 positions, which took some 2000 hours of computation
+on a 1.4Ghz Opteron 840.
+
+One curious observation is that in the 6xh games, the winning starting moves
+are NEVER in the central columns.
+<P>
+<H2> Number of connect-4 positions</H2>
+
+I've started a project to count the number of possible positions
+in standard 7x6 connect-4. So far, I've obtained the following
+results for smaller boards. Independent verification is more than welcome!
+
+<table border>
+<tr><th> height </th> </tr>
+<tr><th> 8</th> <td>9</td> <td>13343</td> <td>8424616</td> <td>1104642469</td> </tr>
+<tr><th> 7</th> <td>8</td> <td>4587</td> <td>1417322</td> <td>135385909</td> <td>14171315454</td> </tr>
+<tr><th> 6</th> <td>7</td> <td>1571</td> <td>235781</td> <td>15835683</td> <td>1044334437</td> <td>69173028785</td> <td>4531985219092</td> </tr>
+<tr><th> 5</th> <td>6</td> <td>537</td> <td>38310</td> <td>1706255</td> <td>69763700</td> <td>2818972642</td> <td>112829665923</td> </tr>
+<tr><th> 4</th> <td>5</td> <td>179</td> <td>6000</td> <td>161029</td> <td>3945711</td> <td>94910577</td> <td>2265792710</td> <td>54233186631</td> </tr>
+<tr><th> 3</th> <td>4</td> <td>58</td> <td>869</td> <td>12031</td> <td>158911</td> <td>2087325</td> <td>27441956</td> <td>362940958</td> </tr>
+<tr><th> 2</th> <td>3</td> <td>18</td> <td>116</td> <td>741</td> <td>4688</td> <td>29737</td> <td>189648</td> <td>1216721</td> </tr>
+<tr><th> 1</th> <td>2</td> <td>5</td> <td>13</td> <td>35</td> <td>96</td> <td>267</td> <td>750</td> <td>2118</td> </tr>
+<tr></tr>
+<tr><th>  </td> <th>1</th> <th>2</th> <th>3</th> <th>4</th> <th>5</th> <th>6</th> <th>7</th> <th>8</th> <th>width</th> </tr>
+</table>
+
+Googling for the final result, 4531985219092, shows that it was
+already determined back in 2008 by Stefan Edelkamp and Peter Kissmann in
+their paper <a href="http://www.tzi.de/~edelkamp/publications/conf/ki/EdelkampK08-1.pdf">Symbolic Classification of General Two-Player Games</a>.
+I didn't expect independent verification so quickly!
+<a href="https://oeis.org/A212693">Corresponding entry in OEIS</a>.
+<P>
+
+<H2>Useful connect-4 links</H2>
+<A HREF="http://www.cwi.nl/~tromp/c4.html">Expert Play in Connect-Four</A>
+
+<HR>
+Back to my <A HREF="http://tromp.github.io">home page</A>. <BR>
+<a href="mailto:john.tromp@gmail.com">john.tromp@gmail.com</a>
+</body>
+
+</HTML>

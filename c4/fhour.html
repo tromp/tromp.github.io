@@ -1,0 +1,300 @@
+<html>
+<title>The Fhourstones Benchmark</title>
+<body>
+<H2><img alt="[pic of c4 board]" align=bot src="../img/c4.gif">
+The Fhourstones Benchmark (version 3.1)</h2>
+
+<table border>
+<tr>
+<td> MACHINE </td>
+<td> CPU </td>
+<td> MHZ </td>
+<td> COMPILER/JVM </td>
+<td> KPOS/S </td>
+</tr>
+<tr>
+<td> Apple iMac (late 2013) </td>
+<td> Intel Core i5 </td>
+<td> 3200 </td>
+<td> clang -O3 </td>
+<td> 12123 </td>
+</tr>
+<tr>
+<td> PC running Linux </td>
+<td> Intel Xeon E5-2687W </td>
+<td> 3660 </td>
+<td> cc -O3 -march=native </td>
+<td> 12032 </td>
+</tr>
+<tr>
+<td> PC running Ubuntu 9.10</td>
+<td> Intel Core i7 975 </td>
+<td> 3333 </td>
+<td> gcc-4.4.1 -O3 -march=native -m64</td>
+<td> 10741 </td>
+</tr>
+<tr>
+<td> PC running Ubuntu 9.10</td>
+<td> Intel Core i7 920 </td>
+<td> 2667 </td>
+<td> gcc-4.4.1 -O3 </td>
+<td> 9069 </td>
+</tr>
+<tr>
+<td> MacBook Air 13.3 running OS X Lion</td>
+<td> Intel Core i5 </td>
+<td> 1700 </td>
+<td> cc -O3</td>
+<td> 8089 </td>
+</tr>
+<tr>
+<td> PC running RedHat Linux</td>
+<td> Xeon 5160 </td>
+<td> 3000 </td>
+<td> gcc-4.1.2 -O3 </td>
+<td> 7653 </td>
+</tr>
+<tr>
+<td> homemade workstation </td>
+<td> overclocked AMD Opteron 250 </td>
+<td> 2592 </td>
+<td> gcc-4.1.2 -march=opteron -m64 -O3 </td>
+<td> 6501 </td>
+</tr>
+<tr>
+<td> Supermicro PC </td>
+<td> Intel Core2 duo 6600 </td>
+<td> 2400 </td>
+<td> gcc -m64 -O3 </td>
+<td> 6444 </td>
+</tr>
+<tr>
+<td> PC running Ubuntu 9.10</td>
+<td> Intel Core i7 975 </td>
+<td> 3333 </td>
+<td> javac.1.6.0 -O; java -d64 -Xms1024m -Xmixed</td>
+<td> 6310 </td>
+</tr>
+<tr>
+<td> ASUS A8N5X Windows XP/64 </td>
+<td> AMD Athlon64 4800+ </td>
+<td> 2400 </td>
+<td> Visual C 8.0 /O2... </td>
+<td> 6141 </td>
+</tr>
+<tr>
+<td> MacBook Pro </td>
+<td> Intel Core 2 Duo T7500 </td>
+<td> 2200 </td>
+<td> gcc-4.3.0 -O3 -m64 ...</td>
+<td> 6077 </td>
+</tr>
+<tr>
+<td> PC running Debian </td>
+<td> AMD Athlon 64 3400+ </td>
+<td> 2400 </td>
+<td> gcc-4.0.3-1 -O3 -fprofile-use </td>
+<td> 5881 </td>
+</tr>
+<tr>
+<td> PC </td>
+<td> AMD Opteron 144 </td>
+<td> 1804 </td>
+<td> gcc -O3 -m64 </td>
+<td> 4599 </td>
+</tr>
+<tr>
+<td> Dual CPU server </td>
+<td> AMD Opteron 242 </td>
+<td> 1593 </td>
+<td> gcc-3.4.2 -O3 -m64 </td>
+<td> 4395 </td>
+</tr>
+<tr>
+<td> Itanium server </td>
+<td> Intel Itanium2 18MB cache</td>
+<td> 1600 </td>
+<td> icc </td>
+<td> 3632 </td>
+</tr>
+<tr>
+<td> Apple Powermac </td>
+<td> G5 </td>
+<td> 2000 </td>
+<td> gcc-4.0.0 -O3 -fast </td>
+<td> 3290 </td>
+</tr>
+<tr>
+<td> PC running Debian </td>
+<td> AMD Athlon 64 3400+ </td>
+<td> 2400 </td>
+<td> javac -O3 / jre1.6.0 </td>
+<td> 3177 </td>
+</tr>
+<tr>
+<td> ASUS A8N5X Windows XP/32 </td>
+<td> AMD Athlon64 4800+ </td>
+<td> 2400 </td>
+<td> Visual C 8.0 /O2... </td>
+<td> 3141 </td>
+</tr>
+<tr>
+<td> PC </td>
+<td> AMD Athlon XP 2700+ </td>
+<td> 2171 </td>
+<td> gcc-3.3.3 -O3 </td>
+<td> 2337 </td>
+</tr>
+<tr>
+<td> Dual CPU server </td>
+<td> AMD Opteron 242 </td>
+<td> 1593 </td>
+<td> jdk1.5.0-amd64 -O </td>
+<td> 2086 </td>
+</tr>
+<tr>
+<td> Apple PowerMac </td>
+<td> G4 7455 </td>
+<td> 1467 </td>
+<td> gcc 4.0 -O3 -fast - mcpu=7450 </td>
+<td> 2043 </td>
+</tr>
+<tr>
+<td> PC </td>
+<td> AMD Athlon XP 2700+ </td>
+<td> 2171 </td>
+<td> jdk1.5.0/bin/javac -O </td>
+<td> 1284 </td>
+</tr>
+<tr>
+<td> PC </td>
+<td> AMD Athlon XP 2700+ </td>
+<td> 2171 </td>
+<td> ghc-6.4 -O </td>
+<td> 106 </td>
+</tr>
+</table>
+<P>
+This integer benchmark solves positions in the game
+of connect-4, as played on a vertical 7x6 board.
+<P>
+By default, it uses a 64Mb transposition table with the
+<a href="http://www.xs4all.nl/~breukerd/thesis/">twobig</a>
+replacement strategy.
+Positions are represented as 64-bit bitboards, and the hash function is
+computed using a single 64-bit modulo operation,
+giving 64-bit machines a slight edge.
+<!--However, this is not entirely
+unfair since 64-bit arithmetic capability is expected to pay off in
+other applications as well.-->
+The alpha-beta searcher sorts moves dynamically based
+on the <a href="http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=2CF02453697E760B2F5A5A8C2D7FF54A?doi=10.1.1.56.9124&rep=rep1&type=pdf">history heuristic</a>. A move causing a cutoff is rewarded
+as many points as moves previously tried, each of which gets a -1 penalty,
+thus preserving total weight and avoiding renormalization
+(uniform penalties were found to work much better than depth dependent ones).
+<!-- The program performs no unnecessary
+operations that a compiler could eliminate, and reads positions to be solved
+from standard input, so that the compiler cannot precompute any results.
+The latter also makes it easy to adapt to workload to ever increasing
+machine speeds.-->
+<P>
+The default input file features 4 positions of increasing
+complexity, the last one being the starting position. Completing this
+benchmark amounts to solving the game of Connect-4! This takes about
+10 minutes on contemporary PCs.
+<P>
+Gprof shows the following distribution of operations:
+<PRE>
+  %   cumulative   self              self     total
+ time   seconds   seconds    calls   s/call   s/call  name
+ 28.15     13.66    13.66        2     6.83    21.39  ab
+ 25.47     26.03    12.37 47489097     0.00     0.00  haswon
+ 14.40     33.02     6.99  5596155     0.00     0.00  transpose
+  6.49     36.17     3.15 88085127     0.00     0.00  islegal
+  6.19     39.17     3.00 30986763     0.00     0.00  islegalhaswon
+  4.10     41.16     1.99        2     0.99     0.99  emptyTT
+  3.84     43.03     1.86        2     0.93     0.93  htstat
+  3.58     44.77     1.74                             __umoddi3
+  2.43     45.95     1.18  8768342     0.00     0.00  makemove
+  2.43     47.13     1.18  8768326     0.00     0.00  backmove
+  1.12     47.67     0.55  3875486     0.00     0.00  transtore
+  1.07     48.20     0.52  5596155     0.00     0.00  hash
+  0.39     48.38     0.19  5596155     0.00     0.00  positioncode
+</PRE>
+<P>
+An example benchmark run looks like
+<PRE>
+(myprompt) gcc -O SearchGame.c -o SearchGame
+(myprompt) ./SearchGame  < inputs
+Fhourstones 3.1 (C)
+Boardsize = 7x6
+Using 8306069 transposition table entries.
+ 
+Solving 8-ply position after 45461667 . . .
+score = 5 (+)  work = 14
+51596 pos / 23 msec = 2243.3 Kpos/sec
+- 0.281  < 0.000  = 0.001  > 0.001  + 0.716
+ 
+Solving 8-ply position after 35333571 . . .
+score = 1 (-)  work = 21
+8716732 pos / 3863 msec = 2256.5 Kpos/sec
+- 0.271  < 0.036  = 0.020  > 0.089  + 0.584
+ 
+Solving 8-ply position after 13333111 . . .
+score = 3 (=)  work = 26
+169704432 pos / 72417 msec = 2343.4 Kpos/sec
+- 0.216  < 0.144  = 0.021  > 0.242  + 0.377
+ 
+Solving 0-ply position after  . . .
+score = 5 (+)  work = 29
+1479113766 pos / 632956 msec = 2336.8 Kpos/sec
+- 0.249  < 0.125  = 0.027  > 0.191  + 0.408
+</PRE>
+
+Performance is expressed in the intuitively appealing and meaningful
+measure of thousands of positions per second.
+The above machine achieved almost 2337 fhourstones, where a fhourstone
+is taken as a thousand positions searched per second.
+<P>
+
+The benchmark is currently available in C, Java, and haskell:
+<UL>
+<LI>
+<A HREF="Fhourstones.tar.gz">Fhourstones.tar.gz</A> (11396 bytes)
+</UL>
+and is also available on <a href="https://github.com/qu1j0t3/fhourstones">github</a>.
+The latter, courtesy of Toby Thain, provides a Makefile and support for Windows systems,
+<P>
+The C version can be compiled and run with
+<PRE>
+(myprompt) gcc -O3 SearchGame.c
+(myprompt) ./SearchGame < inputs
+</PRE>
+The Java version can be compiled and run with
+<PRE>
+(myprompt) javac -O SearchGame.java
+(myprompt) java -Xmx70m SearchGame < inputs
+</PRE>
+The Haskell version can be compiled and run with
+<PRE>
+(myprompt) ghc -O --make Main.hs
+(myprompt) ./a.out < inputs
+</PRE>
+Note that Java measures real-time, for lack of a cpu-time measure.
+On my machine, the Java version is 75% slower than the C one, which
+I find hard to explain.
+
+Please let me know if you find any bugs, have any comments,
+or suggestions for improvements.
+Also please email any bench results to me mentioning
+machine, cpu, clockspeed, cache size, and compiler options.
+I'm mostly interested in new records and cpu's not yet listed.
+
+<P>
+Happy benching!
+
+<HR>
+Back to my <A HREF="http://tromp.github.io">home page</A>. <BR>
+<a href="mailto:john.tromp@gmail.com">john.tromp@gmail.com</a>
+</body>
+</html>
