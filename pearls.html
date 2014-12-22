@@ -1,0 +1,306 @@
+<HTML>
+<HEAD>
+<TITLE>Programming Pearls</TITLE>
+</HEAD>
+<BODY>
+
+<H1><IMG ALT="[picture of a maze]" ALIGN=top SRC="img/maze.gif">
+Programming Pearls</H1>
+
+My favourite
+<A HREF="http://www.uwsg.iu.edu/usail/library/humor/tao.of.programming.html">programming</A>
+language by far is <A HREF="http://haskell.org/">Haskell</A>.
+Sometimes, when I have a big need for speed, I might fall back on
+<A HREF="http://www.lysator.liu.se/c/index.html">C</A>
+(or <A HREF="http://java.sun.com/">C++</A> for better data structures
+and saner memory management while putting up with all its ugly warts).
+After my very first programming language,
+<A HREF="http://www.earth.ox.ac.uk/~steve/Spectrum/">Sinclair</A>
+BASIC, Z80 assembly next, and Pascal as freshman in University,
+C made a refreshing change. Behold the
+<A HREF="http://www.lysator.liu.se/c/ten-commandments.html">
+Ten Commandments for C Programmers</A>.
+Also see Frans Faase's list of
+<A HREF="http://www.iwriteiam.nl/SigProg.html">signature programs</A>.
+
+<H1>A Space Filling Program</H1>
+
+<PRE>
+p(c){putchar(   c);}f(x,y,m){
+(y=m-   abs(m   -y))-   m&&m-
+x?f(x   &lt;m?y:x&m,x&lt;m?   x:y,m
+/2):p                   (x-m-
+1&&y?32:64);}   main(z){for(z
+        =N*N;   z--;p        
+(z%N?32:10))f   (z%N,z/N,N);}
+</PRE>
+<p>
+compiles with -DN=1, -DN=3, -DN=7, or -DN=15 (powers of two minus one) to produce outputs
+<p>
+<TABLE><TR valign="bottom"><TD>
+<PRE>
+@
+</PRE>
+</TD><TD>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD><TD>
+<PRE>
+@ @ @
+@   @
+@   @
+</PRE>
+</TD><TD>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD><TD>
+<PRE>
+@ @ @   @ @ @
+@   @   @   @
+@   @ @ @   @
+@           @
+@ @ @   @ @ @
+    @   @    
+@ @ @   @ @ @
+</PRE>
+</TD><TD>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD><TD>
+<PRE>
+@ @ @   @ @ @   @ @ @   @ @ @
+@   @   @   @   @   @   @   @
+@   @ @ @   @   @   @ @ @   @
+@           @   @           @
+@ @ @   @ @ @   @ @ @   @ @ @
+    @   @           @   @    
+@ @ @   @ @ @ @ @ @ @   @ @ @
+@                           @
+@   @ @ @ @ @   @ @ @ @ @   @
+@   @       @   @       @   @
+@ @ @   @ @ @   @ @ @   @ @ @
+        @           @        
+@ @ @   @ @ @   @ @ @   @ @ @
+@   @       @   @       @   @
+@   @ @ @ @ @   @ @ @ @ @   @
+</PRE>
+</TD></TR></TABLE>
+
+This improved version (inspired by <a href="http://golf.shinh.org/p.rb?Hilbert+Curve+FIXED">nu's codegolf entry</a>)
+<PRE>
+f(y,x,m){return   x?x=abs(~m+x),y
+>m?-f     (x,y,   m):x&     m?f(y
+,x,m/     2):m==y&y:-2;     }main
+(y,x)                       {for(
+x=0;N/y;)y+=20/   putchar("\n| _"
+          [++x&   !f(y+
+ 1,x&N,N)|f(y-x   %2,x&N,N)+2]);}
+</PRE>
+produces prettier output (with N=3,7,15,31):
+<p>
+<TABLE><TR valign="bottom"><TD>
+</TD><TD>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD><TD>
+<PRE>
+ _ 
+| |
+</PRE>
+</TD><TD>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD><TD>
+<PRE>
+ _   _ 
+| |_| |
+|_   _|
+ _| |__
+</PRE>
+</TD><TD>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD><TD>
+<PRE>
+ _   _   _   _ 
+| |_| | | |_| |
+|_   _| |_   _|
+ _| |_____| |_ 
+|  ___   ___  |
+|_|  _| |_  |_|
+ _  |_   _|  _ 
+| |___| |___| |
+</PRE>
+</TD><TD>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD><TD>
+<PRE>
+ _   _   _   _   _   _   _   _ 
+| |_| | | |_| | | |_| | | |_| |
+|_   _| |_   _| |_   _| |_   _|
+ _| |_____| |_   _| |_____| |_ 
+|  ___   ___  | |  ___   ___  |
+|_|  _| |_  |_| |_|  _| |_  |_|
+ _  |_   _|  _   _  |_   _|  _ 
+| |___| |___| |_| |___| |___| |
+|_   ___   ___   ___   ___   _|
+ _| |_  |_|  _| |_  |_|  _| |_ 
+|  _  |  _  |_   _|  _  |  _  |
+|_| |_| | |___| |___| | |_| |_|
+ _   _  |  ___   ___  |  _   _ 
+| |_| | |_|  _| |_  |_| | |_| |
+|_   _|  _  |_   _|  _  |_   _|
+ _| |___| |___| |___| |___| |__
+</PRE>
+</TD></TR></TABLE>
+
+<H1>Amazing</H1>
+
+This is my favourite programming pearl, a 237 character program that
+generates
+<A HREF="http://www.astrolog.org/labyrnth.htm">mazes</A>
+ of arbitrary length. It was my 1988 submission to the
+<A HREF="http://www.ioccc.org/">
+International Obfuscated C Code Contest</A>.
+
+<PRE>
+char*M,A,Z,E=40,J[40],T[40];main(C){for(*J=A=scanf(M="%d",&amp;C);
+--            E;             J[              E]             =T
+[E   ]=  E)   printf("._");  for(;(A-=Z=!Z)  ||  (printf("\n|"
+)    ,   A    =              39              ,C             --
+)    ;   Z    ||    printf   (M   ))M[Z]=Z[A-(E   =A[J-Z])&amp;&amp;!C
+&amp;    A   ==             T[                                  A]
+|6&lt;&lt;27&lt;rand()||!C&amp;!Z?J[T[E]=T[A]]=E,J[T[A]=A-Z]=A,"_.":" |"];}
+</PRE>
+
+Note that the constant 27 assumes a 31-bit random number generator,
+and needs to be replaced with 11 if <TT>rand()</TT> produces 15-bit numbers
+instead. Modern C compilers don't allow constant strings to be overwritten,
+which can be avoided by changing the first line to
+<PRE>
+char M[3],A,Z,E=40,J[40],T[40];main(C){for(*J=A=scanf("%d",&C);
+</PRE>
+If you want to know how this program achieves its mystery, read
+<A HREF="maze.html">this</A>.
+
+<H1>Tetris</H1>
+In 1989, in collaboration with my friend
+<A HREF="http://www.cs.kun.nl/~freek/">Freek Wiedijk</A>,
+I submitted a 1467 character <A HREF="tetris.html">tetris</A>
+program, which won the Best Game category.
+
+<H1>A heap of sorts</H1>
+
+The following C-code sorts integers t[1]...t[j] in ascending order:
+
+<PRE>
+        for (i = j/2; j > 1; t[l] = k) {
+                if (i) k = t[i--]; else { k = t[j]; t[j--] = t[1]; }
+                for (l = i + 1; (m = l + l) &lt;= j; t[l] = t[m], l = m) {
+                        if (m &lt; j &amp;&amp; t[m] &lt; t[m+1]) m++;
+                        if (t[m] &lt;= k) break;
+                }
+        }
+</PRE>
+
+<H1>Hanoi revisited</H1>
+
+Some problems, which are presented in algorithm textbooks as ideal candidates
+for recursion, turn out to be much better suited to iteration:
+
+<PRE>
+    max = 1 &lt;&lt; no_of_discs;
+    for (x = 1; x &lt; max; x++)
+        printf("move a disc from %d to %d\n", (x&amp;x-1)%3, ((x|x-1)+1)%3);
+</PRE>
+
+
+<a name="goodstein"></a>
+<H1>How fast can you grow?</H1>
+
+Here's a one line Haskell-script that computes a <STRONG>very</STRONG> fast growing
+function. It was introduced by
+<a href="http://en.wikipedia.org/wiki/Goodstein's_theorem">R. L. Goodstein</a>
+as an example of a function
+that is total (i.e. defined on any input), although this fact is not provable
+in first-order Peano Arithmetic!
+(see also this <a href="http://en.wikipedia.org/wiki/Goodstein's_theorem">Wikipedia entry</a> including a proof).
+<PRE>
+main=mapM_(print.gs)[0..]where
+gs=g 2
+g b 0=b;g b n=g c$s 0 n-1where s _ 0=0;s e n=mod n b*c^s 0 e+s(e+1)(div n b);c=b+1
+</PRE>
+
+The values gs(0)=2,gs(1)=3,gs(2)=5,gs(3)=7 seem pretty modest
+and in fact suspiciously familiar. <P>
+
+But the function really takes off at gs(4)=3 * 2^402653211 - 1,
+which is the
+<a href="http://primes.utm.edu/glossary/page.php?sort=WoodallNumber">
+Woodall number</a> W<sub>402653184</sub>, divisible by 29.
+<BR>
+Here's a Postscript picture showing how values <a href="img/goodstein.eps">grow as a function of the base</a> for this Goodstein sequence (all bigger ones
+look the same, only differing in scale).
+<P>
+
+A more legible representation of function g is
+<PRE>
+g b 0 = b
+g b n = g c ((s 0 n) - 1) where
+        s _ 0 = 0
+        s e n = (n `mod` b) * c^(s 0 e) + (s (e + 1) (n `div` b))
+        c = b + 1
+</PRE>
+
+Small values of gs() can be expressed in terms of a close analogue
+of <a href="http://en.wikipedia.org/wiki/Ackermann_function">Ackerman's function</a>,
+the finite part of this <a href="http://en.wikipedia.org/wiki/Fast-growing_hierarchy#Definition">fast-growing hierarchy</a>:
+<p>f<sub>0</sub>(n)=n+1
+<br> f<sub>k+1</sub>(n)=f<sub>k</sub><sup>n</sup>(n).
+<p>
+ Then gs(4)=f<sub>3</sub>(3)-1,
+gs(5)=f<sub>4</sub>(4)-1, gs(6)=f<sub>6</sub>(6)-1 and gs(7)=f<sub>8</sub>(8)-1.
+
+<a name="sieve"></a>
+<H1>A compact prime sieve</H1>
+
+<PRE>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#define DO(P,R,I,M,E,S,i0,v0,i1,v1,i2,v2,i3,v3,i4,v4,i5,v5,i6,v6,i7,v7) k=P;\
+if (!(sieve[n] & (1&lt;&lt;R)))\
+{ printf(" %ld",30*n + bits[R]);\
+  e = eos - I*n - M;\
+  for (m = sieve + (30*n + E) * n + S; m &lt; e; m += i0)\
+  { *m        |= (1&lt;&lt;v0); *(m += i1) |= (1&lt;&lt;v1);\
+    *(m +=i2) |= (1&lt;&lt;v2); *(m += i3) |= (1&lt;&lt;v3);\
+    *(m +=i4) |= (1&lt;&lt;v4); *(m += i5) |= (1&lt;&lt;v5);\
+    *(m +=i6) |= (1&lt;&lt;v6); *(m += i7) |= (1&lt;&lt;v7);\
+  }\
+  if (m &lt; eos) { *m|=(1&lt;&lt;v0);\
+    if ((m += i1) &lt; eos) { *m |= (1&lt;&lt;v1);\
+      if ((m += i2) &lt; eos) { *m |= (1&lt;&lt;v2);\
+        if ((m += i3) &lt; eos) { *m |= (1&lt;&lt;v3);\
+          if ((m += i4) &lt; eos) { *m |= (1&lt;&lt;v4);\
+            if ((m += i5) &lt; eos) { *m |= (1&lt;&lt;v5);\
+              if ((m += i6) &lt; eos)   *m |= (1&lt;&lt;v6);\
+} } } } } } }
+char bits[] = {1,7,11,13,17,19,23,29} ;
+
+int main(int argc, char *argv[])
+{
+  unsigned long p,q,r,k=0,n,s;
+  char *m,*e,*eos,*sieve;
+  long bytes,atol();
+  
+  if (argc!=2) printf("usage: %s (&lt;bytes_used&gt; or -&lt;maxprime&gt;)\n",*argv), exit(0);
+  if ((bytes=atol(argv[1])) &lt; 0) bytes = 1 + (-bytes)/30;
+  if (!(sieve = calloc(bytes,1))) printf("Out of memory.\n"), exit(0);
+  if (bytes &gt; 30) for (k = r = (bytes-1)/30; (q = r/k) &lt; k; k &gt;&gt;= 1) k += q;
+  eos = sieve + bytes; s = k + 1; *sieve = 1; printf("2 3 5");
+  for (n = p = q = r = 0; n &lt; s; n++)
+  { DO(p++,0,28, 0, 2, 0,p,0,r,1,q,2,k,3,q,4,k,5,q,6,r,7); r++;
+    DO(q++,1,24, 6,14, 1,r,5,q,4,p,0,k,7,p,3,q,2,r,6,p,1); r++; q++;
+    DO(p-1,2,26, 9,22, 4,q,0,k,6,q,1,k,7,q,3,r,5,p,2,r,4); r++;
+    DO(q-1,3,28,12,26, 5,p,5,q,2,p,1,k,7,r,4,p,3,r,0,k,6);
+    DO(q+1,4,26,15,34, 9,q,5,p,6,k,0,r,3,p,4,r,7,k,1,p,2); r++;
+    DO(p+1,5,28,17,38,12,k,0,q,4,r,2,p,5,r,3,q,7,k,1,q,6); r++; q++;
+    DO(q++,6,26,20,46,17,k,5,r,1,p,6,r,2,k,3,p,7,q,0,p,4); r++;
+    DO(p++,7,24,23,58,28,r,0,k,7,r,6,q,5,p,4,q,3,p,2,q,1);
+  }
+  printf(" ...");
+  for (p = bytes - s; p &lt; bytes; p++)
+    for (k = 0; k &lt; 8; k++)
+      if (!(sieve[p] & (1&lt;&lt;k))) printf(" %ld",30 * p + bits[k]);
+  for (p = 0, n=3; p &lt; bytes; p++)
+    for (k = 0; k &lt; 8; k++) n += !(sieve[p] & (1&lt;&lt;k));
+  printf("\n%ld primes found\n", n);
+  exit(0);
+}   
+</PRE>
+
+<HR>
+Back to my <A HREF="http://tromp.github.io">home page</A>. <BR>
+<a href="mailto:john.tromp@gmail.com">john.tromp@gmail.com</a>
+</BODY>
+</HTML>

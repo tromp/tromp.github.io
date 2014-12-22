@@ -1,0 +1,398 @@
+<HTML>
+<HEAD>
+<TITLE>On a Maze program</TITLE>
+</HEAD>
+<BODY>
+
+<BR>
+<H1><IMG ALT="[picture of a maze]" ALIGN=top SRC="img/maze.xbm">
+The art of obfuscation</H1>
+
+<HR> <STRONG>Note:</STRONG> this text appears in the following,
+highly recommended book. Do not reproduce without permission
+from the author. Note that connections formed by a partial maze
+correspond to a "Murasaki diagram".
+<BLOCKQUOTE>
+"Obfuscated C and Other Mysteries" by Don Libes, John Wiley &amp; Sons,
+1993, pp 425 including disk with complete source code.  All source is
+in the public domain.  ISBN 0-471-57805-3.
+</BLOCKQUOTE>
+<HR>
+
+I have a long history of writing maze-generating programs.
+The first I ever saw must have been one in a book containing
+listings of Sinclair ZX-Spectrum programs. As I remember,
+it didn't make a whole lot of sense. <P>
+
+That was before I knew about recursion. As I became familiar with the
+notion, I had little trouble writing my own maze generator, taking care
+of the stacky bits with a simple array. Later still I suffered quite a
+few headaches from converting the program to Z-80 assembly for speed's
+sake. Developments of the program were since directed by availability
+of output devices. On occasion I took a long train-ride to a friend
+with an ink-jet printer to produce mazes in all kinds of color. <P>
+
+I perceived two problems with that method of generating mazes.
+First of all, the mazes produced were hardly random,
+having very long corridors with very few junctions.
+This made solving the mazes a bit too easy, in my opinion.
+Second, the generator had to allocate memory for the entire maze.
+This limited the length of the mazes I could print. Being rather obsessed
+with mazes, I wasn't satisfied with a `mere' 4 meters worth of maze. <P>
+
+This got me thinking about generating mazes on the fly, line by line,
+without having to remember much information. That way, you could
+conceivably just start printing a maze, and tell it to somehow finish
+it nicely as you notice the printer running out of paper. <P>
+
+My submission is an obfuscated and nicely laid out version of
+a program I wrote to generate mazes in this way.
+Let me now describe this program. <P>
+
+Its central data-structure is
+a collection of circular doubly linked lists, the elements of which
+correspond to the maze-cells of one row of the maze, the one currently
+being generated.
+More precisely, each list contains all the cells
+on the current row that are connected by a path in the,
+already generated, part of the maze above the current row.
+Thus the lists form a partition of the cells in the current row;
+each cell is contained in exactly one of these lists.
+The doubly linked lists are stored in the two arrays L[] (for left)
+and R[] (for right).
+For a set of cells i_1,i_2,...,i_k (from left to right) that are all
+connected in the part of the maze above the current row, R[i_1] = i_2,
+R[i_2] = i_3, ..., and R[i_k] = i_1. Similarly for the left `pointers'. <P>
+
+How do we make use of this data-structure?
+Well, for each new row of the maze, we will visit all its cells from left
+to right, and for each one decide whether it should be connected
+to its right neighbour (the next cell visited) and
+whether it should be connected to its neighbour below (in the next row).
+What do we base these decision on?
+Well, we would like the decision to be as random as possible, but at the same
+time, we want the resulting maze to be what is formally known as a
+spanning tree. That means that there should be exactly one path between any
+two cells in the maze, understandably a highly desirable property of mazes.
+Since this property prohibits having a cycle in the maze,
+connections which would result in a cycle will have to be avoided.
+Since it also requires all cells to be connected,
+certain vital connections will have to be enforced.
+It turns out that the prohibition of connections is an issue only for
+right-connections, while the enforcement of connections is an issue only
+for down-connections. <P>
+
+Our data-structure is ideally suited to testing for either condition,
+and for the necessary updates.
+Here's what we do at cell i with right neighbour i'. <P>
+
+Note that:
+<UL>
+<LI>
+i' = i-1 in the algorithm but I want to avoid the apparent confusion.
+<LI>
+no update of the data-structure is required when omitting
+a right-connection or when making a down-connection.
+<LI>
+a cell takes over the identity of its down-neighbour after the 2nd decision.
+</UL>
+
+<H2>To decide on a right connection:</H2>
+Check if i equals L[i']; if so then a right-connection is prohibited
+as it would create a cycle. otherwise, flip a (slightly biased) coin.
+to MAKE the connection, we join the two lists by the following operations:
+<PRE>
+R[L[i']]=R[i] ; L[R[i]]=L[i'] ; /* link L[i'] to R[i] */
+R[  i  ]=  i' ; L[  i']=  i   ; /* link   i   to   i' */
+</PRE>
+We will later print a '.' (right-connection) or a '|' (no right-connection),
+after we print the character for the presence/absence of a down connection.
+
+<H2>To decide on a down connection:</H2>
+Check if i equals L[i]; if so then this cell is alone in its list and
+a down-connection is enforced to keep it connected to the rest of the maze.
+otherwise, flip a (slightly biased) coin.
+to OMIT the connection, we take the cell out of its list by the following
+operations:
+<PRE>
+R[L[i]]=R[i] ; L[R[i]]=L[i] ; /* link L[i] to R[i] */
+R[  i ]=  i  ; L[  i ]=  i  ; /* link   i   to  i  */
+</PRE>
+We now print a ' ' (down-connection) or a '_' (no down-connection),
+followed by the character for the presence/absence of a right connection. <P>
+
+A trick is used to make sure that the last cell j in a row does not try
+to connect to its non-existing right neighbour. We ensure that the test
+for equality of j and L[j'] always succeeds by creating a dummy cell
+for j' and setting L[j'] to j. (in the algorithm j=1 and j'=0.) <P>
+
+To finish the maze, a special last row is created in which some right
+connections are enforced to ensure the connectedness of the entire maze.
+The workings of the corresponding piece of code are not hard to understand
+given the above, and are left as an exercise for the reader. <P>
+
+Here is a minimally obfuscated impression of the original code:
+
+<PRE>
+char M[3];		/* holds the 2 characters printed for each cell */
+int H,			/* height of the maze */
+    C,			/* current cell */
+    E,			/* temporary pointer used in the updating */
+    L[40],R[40];        /* left and right pointers */
+
+main()
+{
+  L[0] = scanf("%d",&amp;H);		/* reads height and sets L[0] to 1 */
+  for (E = 40; --E; L[E] = R[E] = E)
+    printf("._");			/* close top of maze */
+  printf("\n|");
+  while (--H)                           /* more rows to do */
+  { for (C = 40; --C; printf(M))	/* visit cells from left to right */
+    { if (C != (E=L[C-1]) &amp;&amp; 6&lt;&lt;27&lt;rand())	/* make right-connection ? */
+      { R[E] = R[C];			/* link E */
+        L[R[C]] = E;			/* to R[C] */
+        R[C] = C-1;			/* link C */
+        L[C-1] = C;			/* to C-1 */
+        M[1] = '.';			/* no wall to the right */
+      }
+      else M[1] = '|';			/* wall to the right */
+      if (C != (E=L[C]) &amp;&amp; 6&lt;&lt;27&lt;rand()) 	/* omit down-connection ? */
+      { R[E] = R[C];			/* link E */
+        L[R[C]] = E;			/* to R[C] */
+        L[C] = C;			/* link C */
+        R[C] = C;			/* to C */
+        M[0] = '_';			/* wall downward */
+      }
+      else M[0] = ' ';			/* no wall downward */
+    }
+    printf("\n|");
+  }
+  M[0] = '_';				/* close bottom of maze */
+  for (C = 40; --C; printf(M))		/* bottom row */
+  { if (C != (E=L[C-1]) &amp;&amp; (C == R[C] || 6&lt;&lt;27&lt;rand()))
+    { L[R[E]=R[C]]=E;
+      L[R[C]=C-1]=C;
+      M[1] = '.';
+    }
+    else M[1] = '|';
+    E = L[C];
+    R[E] = R[C];
+    L[R[C]] = E;
+    L[C] = C;
+    R[C] = C;
+  }
+  printf("\n");
+}
+</PRE>
+
+Let's look at the obfuscation process step by step. <P>
+
+First, we of course get rid of all the comments.
+Then we cut on the white space, nest a few assignments, abbreviate
+zero array indices, replace if-then-elses by the more concise
+conditional expression, initialize M[] with the scanf format string,
+and generally move things about a bit:
+
+<PRE>
+char M[]="%d",C,E=40,L[40],R[40];
+main(H)
+{
+  for (*L=scanf(M,&amp;H); --E; L[E]=R[E]=E)
+    printf("._");
+  printf("\n|");
+  while (--H)
+  { for (C=40; --C; printf(M))
+    { M[1] = C!=(E=L[C-1]) &amp;&amp; 6&lt;&lt;27&lt;rand() ?
+      L[R[E]=R[C]]=E,L[R[C]=C-1]=C,'.' : '|';
+      *M = C!=(E=L[C]) &amp;&amp; 6&lt;&lt;27&lt;rand() ?
+        L[R[E]=R[C]]=E,L[C]=R[C]=C,'_' : ' ';
+    }
+    printf("\n|");
+  }
+  *M='_';
+  for (C=40; --C; printf(M))
+  { M[1] = C!=(E=L[C-1]) &amp;&amp; (C==R[C] || 6&lt;&lt;27&lt;rand()) ?
+      L[R[E]=R[C]]=E,L[R[C]=C-1]=C,'.' : '|';
+    E=L[C]; L[R[E]=R[C]]=E; L[C]=R[C]=C;
+  }
+  printf("\n");
+}
+</PRE>
+
+To shorten the program further, we integrate the last row loop into the main
+one. The test for omitting the down connection should always succeed on the
+last row, so we simply extend this test to C!=(E=L[C]) &amp;&amp; 6&lt;&lt;27&lt;rand() || !H.
+<P>
+
+The main loop then becomes:
+
+<PRE>
+      M[1] = C!=(E=L[C-1]) &amp;&amp; 6&lt;&lt;27&lt;rand() ?
+        L[R[E]=R[C]]=E,L[R[C]=C-1]=C,'.' : '|';
+      *M   = C!=(E=L[C  ]) &amp;&amp; 6&lt;&lt;27&lt;rand() || !H ?
+        L[R[E]=R[C]]=E,L[C]=R[C]  =C,'_' : ' ';
+</PRE>
+
+and we notice a lot of similarity between the right and down cases.
+Once we get the idea to loop on a variable, say Z, from 1 to 0, we
+quickly arrive at the following huge improvement (in obfuscation):
+
+<PRE>
+    for (Z=1; Z&gt;=0; Z--)
+    { M[Z] = C!=(E=L[C-Z]) &amp;&amp; 6&lt;&lt;27&lt;rand() || !H&amp;!Z ?
+        L[R[E]=R[C]]=E,L[R[C]=C-Z]=C,"_."[Z] : " |"[Z];
+    }
+</PRE>
+
+Due to the enormous amount of functionality captured in these few lines,
+it is already amazingly hard to comprehend them without knowing their
+evolution. This code is shortened further by reversing the string constants
+and their index Z, thus allowing Z to be lifted from the entire assignment.
+Also, the inequality is replaced by a subtraction, a technique discovered
+and used by many OCCC authors:
+
+<PRE>
+    for (Z=1; Z&gt;=0; Z--)
+    { M[Z] = Z[C-(E=L[C-Z]) &amp;&amp; 6&lt;&lt;27&lt;rand() || !H&amp;!Z ?
+        L[R[E]=R[C]]=E,L[R[C]=C-Z]=C,"_." : " |"];
+    }
+</PRE>
+
+(the L[C-Z] will later be replaced by the more obfuscated C[L-Z]. restricting
+ the obfuscation to only this occurrence of L hopefully adds to the mystery.)
+<P>
+
+The program now has 3 nested loops, one over the rows of the maze,
+one over the cells within this row, and one over the two directions
+in which connections can be made:
+
+<PRE>
+  while (--H)
+  { for (C=40; --C; printf(M))
+    { for (Z=1; Z&gt;=0; Z--)
+      {
+      }
+    }
+    printf("\n|");
+  }
+</PRE>
+
+With yet another trick, we will fold them all into one big loop!
+From the point of view of the innermost loop, Z toggles between 1 and 0;
+when it goes from 0 to 1, then M must be printed and
+C must be decremented; when C becomes 0, then \n| must be printed,
+C must be reset to 39 and H must be decremented.
+This can be expressed by the following code:
+
+<PRE>
+  if (Z == 0)
+    printf(M);
+  if ((C-=Z=!Z) == 0)
+  { printf("\n|");
+    C = 39;
+    H--;
+  }
+</PRE>
+    
+Other useful obfuscation techniques are
+<UL>
+<LI> replacing if-then statements by ||, &amp;&amp; expressions
+<LI> avoiding the block constructors { ... } by using the comma operator.
+</UL>
+This yields:
+
+<PRE>
+  Z || printf(M);
+  (C-=Z=!Z) || (printf("\n|"), C = 39, H--);
+</PRE>
+
+and these two statements will be used as the update and test components
+of our single for loop.
+We also rename our variables to
+<UL>
+<LI> spell MAZE
+<LI> `sign' the program with the author's initials
+<LI> give the impression of a copyright symbol (not to be taken seriously) <P>
+</UL>
+
+By making all variables of the type (pointer to) char (except the
+maze height which is made the argument of main()), we avoid the need for
+declaring ints, saving another 4 characters. <P>
+
+We thus arrive at the following, arguably minimal length, program for
+generating arbitrary length mazes:
+
+<PRE>
+char*M,A,Z,E=40,J[40],T[40];main(C){for(*J=A=scanf(M="%d",&amp;C);--E;J[E]=T[E]=E)
+printf("._");for(;(A-=Z=!Z)||(printf("\n|"),A=39,C--);Z||printf(M))M[Z]=Z[A-(E=A
+[J-Z])&amp;&amp;!C&amp;A==T[A]|6&lt;&lt;27&lt;rand()||!C&amp;!Z?J[T[E]=T[A]]=E,J[T[A]=A-Z]=A,"_.":" |"];}
+</PRE>
+
+The only issue that remains to be considered is aesthetics.
+While the above code nicely emphasizes the minimality of the code,
+it's not particularly pleasing to the eye. We could do with a better layout.
+<P>
+
+After some thinking, an ingenious idea struck me.
+The layout of the code should resemble a maze. Not just any maze,
+but one whose very structure contains yet another reference to mazes!
+I first started experimenting with layouts where the internal walls of the
+maze would spell the word MAZE, but I somehow failed to be satisfied.
+Then I tried the other possibility of having the corridors spell MAZE.
+Since this requires less internal wall-structure, it allows for a much
+better impression of the four letters spelling MAZE.
+Here is the program in its final layout:
+
+<PRE>
+char*M,A,Z,E=40,J[40],T[40];main(C){for(*J=A=scanf(M="%d",&amp;C);
+--            E;             J[              E]             =T
+[E   ]=  E)   printf("._");  for(;(A-=Z=!Z)  ||  (printf("\n|"
+)    ,   A    =              39              ,C             --
+)    ;   Z    ||    printf   (M   ))M[Z]=Z[A-(E   =A[J-Z])&amp;&amp;!C
+&amp;    A   ==             T[                                  A]
+|6&lt;&lt;27&lt;rand()||!C&amp;!Z?J[T[E]=T[A]]=E,J[T[A]=A-Z]=A,"_.":" |"];}
+</PRE>
+
+Note how the two decrement operators suggest an entry and exit to the maze!
+<P>
+
+Running the translate command
+<PRE>
+tr " -}" "O "
+</PRE>
+(or "O[ *99]" on systems with a braindead tr)
+on the above code exposes the hidden reference:
+
+<PRE>
+  OOOOOOOOOOOO  OOOOOOOOOOOOO  OOOOOOOOOOOOOO  OOOOOOOOOOOOO
+  OOO  OO  OOO             OO              OO  OO
+ OOOO OOO OOOO OOOOOOOOOOOOOO  OOOOOOOOOOOOOO  OOOOOOOOOOOOO
+ OOOO OOO OOOO  OOOO      OOO  OOO             OOO
+ OOOO OOO  OOOOOOOOOOOOO  OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+                                                        O
+</PRE>
+
+The following program, by Carl Shapiro, won the
+Grand Prize for most well-rounded in confusion of the 1985 International
+Obfuscated C Code Contest:
+
+<PRE>
+#define P(X)j=write(1,X,1)
+#define C 39
+int M[5000]={2},*u=M,N[5000],R=22,a[4],l[]={0,-1,C-1,-1},m[]={1,-C,-1,C},*b=N,
+*d=N,c,e,f,g,i,j,k,s;main(){for(M[i=C*R-1]=24;f|d&gt;=b;){c=M[g=i];i=e;for(s=f=0;
+s&lt;4;s++)if((k=m[s]+g)&gt;=0&amp;&amp;k&lt;C*R&amp;&amp;l[s]!=k%C&amp;&amp;(!M[k]||!j&amp;&amp;c&gt;=16!=M[k]&gt;=16))a[f++
+]=s;if(f){f=M[e=m[s=a[rand()/(1+2147483647/f)]]+g];j=j&lt;f?f:j;f+=c&amp;-16*!j;M[g]=
+c|1&lt;&lt;s;M[*d++=e]=f|1&lt;&lt;(s+2)%4;}else e=d&gt;b++?b[-1]:e;}P(" ");for(s=C;--s;P("_")
+)P(" ");for(;P("\n"),R--;P("|"))for(e=C;e--;P("_ "+(*u++/8)%2))P("| "+(*u/4)%2
+);}
+</PRE>
+
+The contest rules said that the judges would not like submissions that are
+similar to previous winners (or losers:-) ...
+
+<HR>
+Back to my <A HREF="http://tromp.github.io">home page</A>. <BR>
+<a href="mailto:john.tromp@gmail.com">john.tromp@gmail.com</a>
+</BODY>
+</HTML>
