@@ -1,0 +1,1858 @@
+<HTML>
+<HEAD>
+<TITLE>Connect-4</TITLE>
+</HEAD>
+<BODY>
+
+<H1>Expert Play in Connect-Four</H1>
+<HR>
+
+<ADDRESS>
+James D. Allen <BR>
+19785 Stanton Ave <BR>
+Castro Valley CA  94546 <BR>
+(c) Copyright 1990 <BR>
+All Rights Reserved. <BR>
+</ADDRESS>
+<HR>
+
+<H2> Upcoming book </H2>
+Hasbro and Sterling Publishing have hired James to write 
+<a href="http://fabpedigree.com/james/connect4.htm">
+The Complete Book of Connect 4</a>.
+And now it's <a href="http://www.goodreads.com/book/show/12396673-the-complete-book-of-connect-4">out</a>!
+
+<H2> Introduction to Connect-Four </H2>
+
+We will introduce the game with two poorly-played games which demonstrate
+simple themes.  As we will see, the strategy for the First_Player is
+completely different from that of the Second_Player.  All of our games are
+taken from a match between Miss Jacqueline Eques ("X") who always moves first
+and Sir Hilary Knott ("O") who always moves second. <P>
+
+Game 1:	Mate on the Seventh Stone - combinatorial play
+
+<PRE>
+						    a b c d e f g
+1)	C1  d1					6   . . . . . . . 
+2)	D2  d3					5   . . . . . . . 
+3)	D4  b1					4   . . . X . . . 
+4)	C2  f1					3   . . . O . . . 
+						2   . . X X . . . 
+				diagram 1-1	1   . O X O . O . 
+</PRE>
+
+	We label the 42 cells on the board A1-G6 as shown.  We have put
+the Second Player's (Knott or O) moves in lower case. <P>
+	Each player has made weak moves in this opening but in diagram 1-1,
+Knott's stones are scattered out-of-play while all four of Eques's stones
+are about to participate in a quick forced win. <P>
+	The game continues:
+
+<PRE>
+						    a b c d e f g
+5)	C3  c4					6   . . . . . . . 
+6)	B2  a1					5   . . . . . . . 
+7)	A2					4   . . O X . . . 
+						3   . . X O . . . 
+						2   X X X X . . . 
+				diagram 1-2	1   O O X O . O . 
+</PRE>
+
+	Here are two more examples of combinatorial play you may wish to solve
+for yourself.  Eques can force four-in-a-row by her ninth stone in Diagram 1-3
+and by her eleventh stone in Diagram 1-4.  Unlike the moves
+above, these games were played in expert fashion, although there were two
+errors in the moves up to Diagram 1-3.
+
+<PRE>
+						    a b c d e f g
+1)	D1  e1		5)	C4  f1?		6   . . . . . . . 
+2)	A1  c1					5   . . . . . . . 
+3)	E2? e3					4   . . X . . . . 
+4)	C2  c3					3   . . O . O . . 
+						2   . . X . X . . 
+				diagram 1-3	1   X . O X O O . 
+
+
+						    a b c d e f g
+1)	D1  d2		5)	G1  e1		6   . . . . . . . 
+2)	D3  c1		6)	G2  g3		5   . . . O . . . 
+3)	C2  c3		7)	E2  g4		4   . . . X . . O 
+4)	D4  d5					3   . . O X . . O 
+						2   . . X O X . X 
+				diagram 1-4	1   . . O X O . X 
+</PRE>
+
+Game 2:	Second_Player gets Two Stones in the Second Row - positional play
+
+<PRE>
+						    a b c d e f g
+1)	D1  d2		5)	E3  .. 		6   . . . . . . . 
+2)	D3  e1					5   . . . . . . . 
+3)	D4  a1					4   . . . X . . . 
+4)	A2  e2					3   . . . X X . . 
+						2   X . . O O . . 
+				diagram 2-1	1   O . . X O . . 
+</PRE>
+
+	Unlike Game 1, where Eques's stones were poised for a
+quick "combinational" attack based on immediate threats, in diagram 2-1
+the game will "drag on" without incident into the ending.  But
+Knott is just as sure of victory as Eques was in diagram 1-1.  All he
+has to do is avoid playing in the first row.  Later when X runs out
+of other moves, X will play in the first row, O will play above her
+and eventually complete a horizontal 4-in-a-row on the second row.
+Play the game out a few times until you're convinced that Knott
+victory is inevitable. <P>
+	In diagram 2-1, the unoccupied cells C2 and F2 (and B2 and G2
+as well) are called "Threat cells" for Knott.  We will call these
+"Minor Threats" since Knott doesn't yet even have 3-in-a-row and he
+will need to complete two of the Threats to win.  "Major Threats" --
+whose occupation wins at once -- are of course better than Minor Threats.
+But from this diagram the Minor Threats are good enough to win. <P>
+	"Positional play" is different from the "Combinatorial"
+fireworks of Game 1.  In Game 1 Eques fills in key threatening cells
+and gets what she wants with a sequence (combination) of forcing
+plays.  In Game 2, Knott's win will come in the ending and cannot be
+hurried. <P>
+	The "Two Stones in the Second Row" are of value only to
+the Second_Player.  If Eques got this configuration it would be
+comparatively valueless.  In the ending, as the columns are filled in, the
+First_Player will generally occupy the first, third and fifth rows
+on a column while the Second_Player gets the second, fourth and
+sixth rows.  Eques therefore wants threats on an Odd Row. <P>
+
+	Although in the opening Knott strives for two stones on the second
+row, it should be noted that the threats can actually be on any even row
+if there is no odd-row Eques threat underneath them.  Furthermore a single
+stone may be enough if Knott also has a stone on the cell below:
+
+<PRE>
+						    a b c d e f g
+1)	A1  d1		5)	F3  f4		6   . . . O . X . 
+2)	D2  d3		6)	F5  d6		5   . . . O . X . 
+3)	F1  f2		7)	F6  ..		4   . . . X . O . 
+4)	D4  d5					3   . . . O . X . 
+						2   . . . X . O . 
+				diagram 2-2	1   X . . O . X . 
+</PRE>
+
+	Knott will eventually win on the sixth row at a6-b6-c6-d6! <P>
+	Eques has odd-row minor threats at C3 and E5, but you can verify that
+Eques cannot possibly obtain an odd-row threat on either the B- or G-column.
+The only possible odd-row threat in the A-column (A5) depends on both B4
+and C3 and there is no way Eques can ever develop this.  With no tactical
+chances and Odd Minor Threats in only two columns, Eques cannot counterattack.
+If one of Eques's threats were at C5 -- adjacent to Knott's threat -- a Draw
+might be possible, but as it stands Knott will win readily with ordinary
+caution. <P>
+
+	The next example (or something very similar) arises constantly in
+actual play if Knott knows what he's doing and Eques doesn't.  Here Eques has
+no chance for any Odd threats at all and Knott can get seven-in-a-row
+on the top row if he chooses.  An inexperienced Eques player may be pleased
+with her Major Threats at B2 and F2, but these worthless threats will
+evaporate under Zugzwang in the ending.
+
+<PRE>
+						    a b c d e f g
+1)	D1  e1		5)	E4  d6		6   . . . O . . . 
+2)	E2  e3		6)	A1  c1		5   . . . O . . . 
+3)	D2  d3		7)	C2  ..		4   . . . X X . . 
+4)	D4  d5					3   . . . O O . . 
+						2   . . X X X . . 
+				diagram 2-3	1   X . O X O . . 
+</PRE>
+
+Let's look now in detail at an expert opening. <P>
+
+Game 3:	The 3-4 Opening -- D4 is Poison  [Joseki 13]
+
+<PRE>
+						    a b c d e f g
+1)	D1  d2					6   . . . . . . . 
+2)	D3  c1					5   . . . . . . . 
+3)	C2  c3					4   . . X . . . . 
+4)	C4  ..					3   . . O X . . . 
+						2   . . X O . . . 
+				diagram 3-1	1   . . O X . . . 
+</PRE>
+
+	Although the rightside is still empty of stones, Eques has great
+influence there.  She is threatening F1 which is quite strong and may
+build an attack along the C5-G1 diagonal as well.  Let us consider the
+various possible Knott plays from diagram 3-1. <P>
+	Knott plays A1 or B1 are too weak to consider. <P>
+	If Knott defends with E1, Eques can play E2 with Sente, followed by
+E3 or B1 to win easily. <P>
+	If Knott defends at F1, the variation might be:
+
+<PRE>
+						    a b c d e f g
+Game 3 variation				6   . . . . . . . 
+4)	..  f1 					5   . . O . . . . 
+5)	F2  f3					4   . . X X . O . 
+6)	D4  c5					3   . . O X . O . 
+7)	G1  f4					2   . . X O . X . 
+				diagram 3-2	1   . . O X . O X 
+</PRE>
+
+	The Major Threat at E3 will win for Eques (even though Knott
+has a Major Threat on the same cell).  The plays at C5 and G1 could
+have been reversed.  Knott F3 was intended to prevent third row
+horizontal threats; but D4 would have give Eques somewhat more trouble. <P>
+	Knott can also put his fourth stone at C5:
+
+<PRE>
+						    a b c d e f g
+Game 3 variation				6   . . . . . . . 
+4)	..  c5		8)	D5  f5		5   . * O X . O . 
+5)	G1  f1		9)	A1  a2		4   . . X O . O . 
+6)	F2  d4		10)	E1  ..		3   . . O X * X * 
+7)	F3  f4					2   O . X O * X . 
+				diagram 3-3	1   X . O X X O X 
+</PRE>
+
+	It is possible to analyze the endgame from diagram 3-3.
+Knott has the only Major Threat (E3) but this will be an irrelevant threat.
+Eques has odd-row threats on three columns: B5, E3, G3.  (The minor
+threat B5 is counted as the equivalent of a Major Threat because of the
+way threats E2 and E3 work together.)  To be sure that Eques can win, we
+must convince ourselves that the B5 threat will survive any Knott
+counterplay on the leftside.  The only way for Knott to cause trouble
+is if he gets to occupy both A4 and A5; then the Knott Threat at B4 will
+neutralize Eques's at B5.  Obviously Eques can prevent Knott from getting
+both A4 and A5 so Eques's threats will survive.  (Knott needs A4 since
+Eques gets a winning Threat at B3 if Eques gets A4). <P>
+	In other words, Eques's partial diagonal C4-D3 is "undercut" by
+Knott's partial diagonal C3-D2 but that in turn is "undercut" by the
+Eques partial diagonal at C2-D1.  Finding the bottom-most such diagonal
+threat is an essential part of most endgame analyses. <P>
+	In this variation both Eques and Knott played rather well, but
+there were three errors.  Eques should have played her fifth stone at E1.
+After Eques plays G1 Knott can force a draw with perfect play, and in
+fact Knott can win after Eques's seventh stone at F3.  (Eques should have
+played D5 first.)  Knott failed to win however; he should have played his
+eighth stone at A1 instead of F5.  Even as it was Eques had to play at A1
+and E1 precisely as she did to win. <P>
+
+	Except for his eighth stone, Knott's defense was quite sound.
+(If F4 is omitted for example, Eques plays there and next at B1 or D5
+to get a positional win.) <P>
+
+	If Knott plays D4 in diagram 3-1, Eques can play D5 and transpose 
+into the "5-4 Opening".  But in that opening, Eques never gets an Even Major
+Threat to go with her right-side odd threats and is forced to attack on both
+sides of the board.  In the 3-4 opening Eques can play F1, building a Threat
+at E2 immediately and winning with relative ease:
+
+<P>
+[Editor's comment: The following line is incorrect
+as noted by babblefish@LineOne.net;
+ 8) D6 loses and should be 8) F4 instead.]
+<PRE>
+						    a b c d e f g
+Game 3 variation				6   . . . X . . . 
+4)	..  d4		8)	D6  ..		5   . . O X . . . 
+5)	F1  g1					4   . . X O . . . 
+6)	F2  f3					3   . . O X . O . 
+7)	D5  c5					2   . . X O . X . 
+				diagram 3-4	1   . . O X . X O 
+</PRE>
+
+	In diagram 3-4, Eques will answer G2 with G3, or F4 with F5, and
+otherwise just take F4.  Thus she gets Odd Minor Threats at E5 (and
+either G5 or G3) with a win similar to the previous variation.
+Again, a possible Knott Threat at E3 is irrelevant. <P>
+
+	Finally we let Knott play G1 as his fourth stone.  This turns out
+to be his toughest defense.
+
+<PRE>
+						    a b c d e f g
+4)	..  g1					6   . . . . . . . 
+5)	G2  g3					5   . . X . . . . 
+6)	E1  e2					4   . . X . . . . 
+7)	C5  ..					3   . . O X . . O 
+						2   . . X O O . X 
+				diagram 3-5	1   . . O X X . O 
+</PRE>
+
+	The plays at G2 and G3 correctly block enemy horizontal
+threats.  Eques E1 is a Sente (forcing) move since if Eques plays E2, Eques
+has a fairly routine endgame win at her B5 Threat cell.  Eques C5 was a Gote
+move (it threatens nothing immediately) but takes the only important
+central cell which can be taken "for free".  (Taking D4 would give
+the enemy D5 and E3 would give up E4.) <P>
+
+	In the game through diagram 3-5, all of Eques's moves have
+been unconditionally forced (if she wants to guarantee victory) except
+for her third and fourth stones at C2 and C4.  Suppose she decides to
+play C5 Gote before E1 Sente in the above line.  Transposing the Gote
+stone C5 to be the sixth stone is losing play for Eques:
+
+<PRE>
+						    a b c d e f g
+Game 3 Variation				6   . . . . . . . 
+4)	..  g1					5   . . X X . . . 
+5)	G2  g3					4   . . X O . . . 
+6)	C5  d4					3   . . O X . . O 
+7)	D5  ..					2   . . X O . . X 
+				diagram 3-6	1   . . O X . . O 
+</PRE>
+
+	In this variation, Eques E1 instead of D5 is ineffective,
+because Knott can answer E1 at F1 which is now strong enough for Knott.
+In diagram 3-6, Knott can now draw by playing at F1 or even win by
+playing A1. <P>
+
+	Returning to the main line (see diagram 3-5), what should be
+Knott's plan?  He can't very well take a good cell like D4 or E3
+since Eques will get the even better cell above it (D5 or E4).  Since
+he's forced to play on the periphery, he should make the most of it.
+If he can grab A1 and G4, followed by D4, he'll have both sides of the
+board locked up with even threats.  Of course Eques will not permit
+this.  In fact Eques must catch on to this plan at once (to avoid being
+forced to take D4 later), and play A1 (or B1) in response to G4
+and specifically G4 in response to A1. <P>
+	In the game, Knott took A1 though the ending might be similar
+after G4 as well.
+
+<PRE>
+						    a b c d e f g
+7)	..  a1					6   . . O . . . O 
+8)	G4  c6					5   . . X . . . X 
+9)	G5  g6					4   . . X . . . X 
+10)	E3  ..					3   . . O X X . O 
+						2   . . X O O . X 
+				diagram 3-7	1   O . O X X . O 
+</PRE>
+
+	Knott doesn't want to open up anywhere so he plays passively
+on the sixth row.  Eques could of course have played E3 the turn before
+with equal effect. <P>
+	In the following Eques goes after Major Threats at F5, B3 and B5
+so most of Knott's moves are forced.
+
+<PRE>
+						    a b c d e f g
+10)	..  e4					6   . . O . . . O 
+11)	E5  ..					5   . . X * X * X 
+						4   . . X * O . X 
+						3   . . O X X . O 
+						2   . . X O O * X 
+				diagram 3-8	1   O . O X X . O 
+</PRE>
+
+	We've interrupted the game briefly to indicate how hard it
+is for mere human Eques to always win.  Wherever Knott now plays,
+Eques must answer in the same column!  (Exceptions: F1 can also be
+answered with D4.  E6 must be answered at A2.) <P>
+	The Eques threat configuration D4-D5-F5-F2 is a winner, with both
+Eques and Knott threats in the A column irrelevant.
+
+<PRE>
+						    a b c d e f g
+11)	..  a2	 				6   O . O . X . O 
+12)	A3  a4					5   X . X * X * X 
+13)	A5  a6					4   O . X * O . X 
+14)	E6  ..					3   X . O X X . O 
+						2   O . X O O * X 
+				diagram 3-9	1   O . O X X . O 
+</PRE>
+
+	Eques has played passively at E6 (she could also have played
+there the turn before) to let Knott come to her.  Eques has the winning
+triple-odd threat configuration at B5-D5-F5.  Knott's even threats
+at B2-D4 would defeat Eques if viewed in isolation, but Eques also has
+even threats at D4-F2 and Knott must now move (ZUGZWANG). <P>
+	Knott has nothing to gain from letting Eques play F2 and then D5 so
+the game continues:
+
+<PRE>
+						    a b c d e f g
+14)	..  b1	 				6   O . O . X . O 
+15)	B2  b3					5   X . X * X * X 
+						4   O . X * O . X 
+						3   X O O X X . O 
+						2   O X X O O * X 
+				diagram 3-10	1   O O O X X . O 
+</PRE>
+
+	It is now fairly clear that Eques has a simple endgame win.  Worth
+noting is that with only four minor exceptions (shown on the Joseki chart),
+all of Eques's first 15 moves were forced in this game!
+<UL>
+<LI>	E6 is as good as A5 on the passive thirteenth move.
+<LI>	E3 could have been substituted for the passive ninth stone at G5.
+<LI>	D4 gives an easier win than E4 as the fourth stone.
+<LI>	The third stone can also be played at F1 or G1.
+</UL>
+
+Game 4:	The Difficulty of Joseki  [Joseki 17]
+
+<PRE>
+	    a b c d e f g		    a b c d e f g
+	6   . . . . . . .		6   . . . . . . .
+	5   . . . . . . .		5   . . O . X . .
+	4   . . X . . . .		4   . . X . O . .
+	3   . . O . X . .		3   . . O O X . .
+	2   . . X . O . .		2   X . X X O . .
+	1   X . O X O . .		1   X . O X O . .
+	      Diag 4-1			      Diag 4-2
+
+
+	1) D1 e1 A1 c1 C2 c3 C4 e2 E3 .. 	(Diag 4-1)
+	5) .. e4 D2 d3 E5 c5 A2 ..		(Diag 4-2)
+</PRE>
+
+	In Diagram 4-2 it is apparent that Eques has a routine win.
+Eventually the play will be B1 b2 B3 and Eques will have a winning threat
+at D5.  Note how the play Eques 8 A2 suddenly brings the stone 2 A1 back to
+life.  This means the stone at A1 had "Aji" (latent value) although it was
+very latent in this case since A2 would be a premature play for either player
+any earlier. <P>
+	The moves through Diagram 4-2 constitute a Joseki: both sides have
+played with excellent skill.  Eques 2 A1 threatens to seize B2 quickly (eg,
+2 A1 d2 B1 c1 B2) and Knott c1 was the only way to prevent that.  If Eques
+got B2 it would establish the cells C3 and D4 as minor threats; since these
+are central cells the configuration would be very strong for Eques.  For one
+thing Eques could claim D3 since Knott d3 conceding Eques D4 is out of the
+question. <P>
+	Alternative Eques plays are 6 E5 and 2 B1 (no other deviations will
+guarantee victory.)  Since Knott is destined to lose in any event against
+expert Eques play it isn't easy to make quantitative judgement about his play,
+but Knott 5 .. d2 and 2 .. e2 are alternatives which also require Eques to
+play with care.  Note that each of the plays e2-e4-d3-c5 were played where
+Eques was about to play to establish Odd Minor Threats. <P>
+	Many of the Eques plays in this opening are easy to find.  Eques 4 C4,
+5 E3 and 7 E5 seize valuable central cells for example.  The play 8 A2 would
+be easy to find; but Eques would have to foresee this to drop the stone 6 D2.
+<P>
+	Eques's third stone should be played in the second row since all
+first row horizontal threats are resolved.  3 A2 seems "out of the way",
+while 3 D2 d3 is unthinkable -- D3 is by far the best cell on the board.
+This leaves 3 C2 and 3 E2 as possibilities; by symmetry only the meaning of
+Eques's prior play at A1 is relevant. <P>
+	Since Knott will need to answer an eventual Eques A3 with a4 in any
+event, the possibility of Eques A1-A2-A3 has no extra value.  It appears that
+the only offensive significance of A1 is along the B2-C3-D4 diagonal.
+But Knott kills this diagonal by answering C2 at c3; hence 3 E2 may seem
+superior to 3 C2. <P>
+	But as we have seen, Eques A1 has a hidden offensive meaning: Eques
+now has the eventual option of dropping a stone at A2 which works
+together nicely with Eques stones C2-C4.  True Knott may play a2 first,
+but this cell has no offensive value for Knott and would be a Gote play
+(lose a tempo) to boot. <P>
+	The fact is that the "Aji" of a possible future Eques A2 makes 3 C2
+the only winning play.  3 A2 and 3 G1 lose; other plays Draw.  Here is an
+easy notation to reflect this:
+
+<PRE>
+				a2  b1  c2  d2  e2  f1  g1
+	X's Response to
+		1 D1 e1 A1 c1	O   =   X   =   =   =   O
+</PRE>
+
+	With the alternative (Eques 3 E2) a position identical to Diag 4-1
+may be reached but with the stones at E2 and E3 having color reversed.
+
+<PRE>
+	    a b c d e f g		    a b c d e f g
+	6   . . . . . . .		6   . . . . . . .
+	5   . . . . . . .		5   . . . . . . .
+	4   . . X . . . .		4   . . X . X . .
+	3   . . O . O . .		3   . . O X O . .
+	2   . . X . X . .		2   . . X O X . .
+	1   X . O X O . .		1   X O O X O O .
+	      Diag 4-3			      Diag 4-4
+
+	1) D1 e1 A1 c1 E2 e3 C2 c3 C4	(Diag 4-3)
+</PRE>
+
+	In the short term, Diag 4-3 is tactically stronger than Diag 4-1:
+Knott must block the C4-F1 diagonal. <P>
+	Except for the subtle error of Eques 3 E2, the moves through
+Diagram 4-3 also constitute Joseki.  To achieve the guaranteed draw, Eques
+can substitute only 5 D2, 5 E4 or 4 D2 and Knott can substitute only 4 ..d2.
+
+<PRE>
+	5) .. d2 D3 f1 E4 b1		(Diag 4-4)
+</PRE>
+
+	These moves are all logical and required.  Knott 5 .. f1 fails
+because of the combination:
+<PRE>
+		5) .. f1? D2 f2 B1 b2 D3 d4 E4
+</PRE>
+
+	Diagram 4-4 is very difficult to analyze, but it strongly favors Knott.
+Knott has the upper part of the board locked up with his Major Threats at
+b4 and f4, and either of these threats is enough for Knott victory if Eques
+cannot counterattack.  Conversely Knott can force a Draw with relative ease,
+for example:
+<PRE>
+		8) G1 c5  F2 d4  D5 e5  B2 f3  F4 f5  F6 b3  B4 b5  B6
+</PRE>
+
+	But "the best defense is a good offense" and Eques's only chance --
+even for a draw -- is to go after her own winning threats.  She has five
+potential odd-row threats (A3,B3,D5,F3,G3) and she will have to develop at
+least three of these to have a chance.  Because of the way Knott's diagonals
+dominate the sides of the board, an Eques threat at A3 is almost worthless
+without an Eques threat at B3, and G3 similarly depends on F3. <P>
+	The cell D5 is absolutely essential for Eques (unless Knott carelessly
+plays b3 or f3 before taking d4 D5).  Eques must therefore defend now on the
+C5-F2-G1 diagonal or Knott will take f2 and either c5 or g1 and force Eques to
+play D4 d5. <P>
+	If Eques now takes F2, Knott's C5-G1 diagonal will disappear, while if
+Eques takes C5 or G1, Knott can take the other cell (Miai cell) and force
+Eques to expend another stone at F2.  However Eques 8 F2 would be a weak play;
+this cell has no offensive significance for Eques and indeed undermines Eques's
+eventual threat at F3.  Instead Eques should take G1 or C5 -- whichever is
+better.  If Knott replies at the Miai cell and forces Eques to take F2, at
+least Eques will have gotten the better of the two Miai cells. <P>
+	But C5 and G1 also have minimal offensive value.  C5 can contribute
+only to the A3-B4-C5-D6 diagonal which is worthless unless Eques can undercut
+the B-column at B3 (ie, occupy A2, A4 or E6).  And G1 contributes to no
+possible four-in-a-row except the unlikely-looking G1-G2-G3-G4. <P>
+
+	The game may continue:
+
+<PRE>
+	    a b c d e f g		    a b c d e f g
+	6   . . . . . . .		6   . . X . O . .
+	5   . . X . . . .		5   . . X . X . .
+	4   . . X . X . .		4   . . X . X . .
+	3   . . O X O . .		3   . . O X O . .
+	2   O . X O X X .		2   O O X O X X X
+	1   X O O X O O O		1   X O O X O O O
+	      Diag 4-5			      Diag 4-6
+
+	8)  C5? g1  F2 a2!	(Diag 4-5)
+</PRE>
+
+	After Knott makes the fine play of a2, Eques would need E6 to secure
+the B3 threat.  Eques will thus need to build her attack on the right-hand
+side. <P>
+	But if she plays something like  10) C6 e5  B2 e6, Knott grabs the
+remaining E-column cells while Eques wastes a stone at B2.  (In other words,
+Knott e5 was a Sente move threatening to consume the key cell D5.)  Thus,
+Eques will probably start with E5:
+
+<PRE>
+	10) E5 e6  C6 b2  G2	(Diag 4-6)
+</PRE>
+
+	The exchange C6-b2 can be omitted from this game with a similar final
+result, but if Eques does play C6, Knott is almost in Zugzwang and the passive
+play at b2 is his only salvation.  Eques needed three odd-threat columns to
+win the Zugzwang but she has only two: D5 and F3. <P>
+	In Diag 4-6 Knott has only one possible play or Eques will win quickly.
+
+<PRE>
+	    a b c d e f g		    a b c d e f g
+	6   . . X . O . .		6   . . X . O . .
+	5   . . X X X O .		5   . . O X X O .
+	4   . . X O X X .		4   . . X O X X .
+	3   . . O X O O .		3   . . O X O O .
+	2   O O X O X X X		2   O O X O X X X
+	1   X O O X O O O		1   X O O X O O X
+	      Diag 4-7			      Diag 4-8
+
+	12) .. d4  D5 f3  F4 f5 	(Diag 4-7)
+</PRE>
+
+	In Diag 4-7 Eques can play  15) D6 g3 A3 a4, but Eques Even Threat B4
+is worthless -- it is Knott who will inevitably play at b4 and win in the
+ending.  Eques's attack has simply fizzled out. <P>
+	Referring way back to Diag 4-4 in which C5 and G1 appeared to be
+Miai cells, Eques might have played 8 G1 which Knott would answer at c5.  If
+the game then proceeded exactly as above (which it well might since the cells
+C5 and G1 had minimal effect on the analysis) then a position ALMOST identical
+to Diagram 4-7 is reached (Diag 4-8).  But now Eques wins at once with a
+double Atari, 15) G3 d6 G4.  (After Eques 8 G1, Knott 9 ..a2 is no longer
+Tesuji but is a subtle blunder; instead Knott must play to draw as mentioned
+above.) <P>
+
+	In the sequence 5) C4 d2 D3 f1 E4 b1 G1, all of the moves are
+uniquely forced if the players wish to guarantee their best result (Draw).
+Knott fails to win only because of Eques's Tesuji at 8 G1, which in turn
+derives its special value only from the tactical possibility of
+<PRE>
+		8 G1 ... 12 G2 ... 15 G3 ... 16 G4
+</PRE>
+	And this study arose from my failure to see the hidden Aji of Eques A1
+in Diagram 4-1.  3 E2 seemed to be a more logical move but I found Eques
+struggling just to draw. <P>
+	Who said Connect-Four is a trivial game? <P>
+
+	If you decide to play 1 D1 e1 A1 as Eques, you will also want to
+memorize Joseki 18.  It is very pleasing:
+
+<PRE>
+	    a b c d e f g
+	6   . . . . . . .	1) D1 e1  A1 e2  B1 c1  B2 b3
+	5   . . . . . . .	5) C2 c3  D2 a2  D3 d4
+	4   . . . O . . .
+	3   . O O X . . .
+	2   O X X X O . .
+	1   X X O X O . .
+	     Diag 4-9
+</PRE>
+
+	Knott's 2 .. e2 appears logical since it threatens to make the forcing
+move e3 and also works towards getting Two Stones in the Second Row.  Eques
+can prevail but she must play a precise sequence of forcing moves. <P>
+	Usually Eques' goal is to get stones in the Third Row, but in this
+unusual opening she plays in the second row with B2-C2-D2.  Knott's plays at
+b3 and c3 are almost forced (Eques gets very strong threats if permitted to
+occupy the Third Row) and there was of course no choice about a1 or d4.
+After this exchange, most of Eques' stones are out-of-play but the Eques
+configuration "peeks" out from Knott's blanket at D3 and this is just enough
+to win. <P>
+	It turns out that Eques wins easily in this diagram: the threat
+formation on the rightside (D2-E3-F4-G5, D3-E3-F3-G3, along with the E4
+Major Threat) is victorious (it's similar to a "J" but more
+complicated-looking); Knott's stones on the leftside may look impressive
+but they can accomplish nothing.  The simplest way for Eques to continue is
+
+<PRE>
+	    a b c d e f g
+	6   . . . . . . .	8) E3 e4  D5 c4  B4
+	5   . . . X . . *
+	4   . X O O O * .
+	3   . O O X X * *
+	2   O X X X O . .
+	1   X X O X O . .
+	     Diag 4-10
+</PRE>
+
+	Eventually Eques will get F4 and win the ending at G5.  If this isn't
+obvious, play the game out remembering to answer Knott g2 at G3.
+
+<H2> Threat Analysis </H2>
+
+	When an ending is devoid of tactical complications a simple
+analysis will predict the outcome.  This analysis is useful earlier in
+the game to determine which potential threats are worth pursuing.
+
+<H3>Briefly:</H3>
+
+Step 1) Analyze the Odd Threats of each player and classify the game as
+Won for Eques, Won for Knott or Drawn.  Even Threats are relevant only when
+in the same column as an Odd Threat. <P>
+Step 2) Only if step 1 indicates a Draw, check for Knott Even Threats.
+Any such threat is then enough for Knott victory.
+
+<H3>In more detail:</H3>
+
+	Assuming Knott does not get a counterthreat, an Eques Major Threat on
+an odd row (row 3 or 5) will normally be enough to win. <P>
+	Odd Minor Threats may be good enough if Eques has three of them in
+separate columns.
+
+<PRE>
+	    a b c d e f g	    a b c d e f g
+	6   . . . . . . .	6   . . . . . . .
+	5   . * * X X O .	5   . * X * X * .
+	4   . . . . . . .	4   . . . . . . .
+	3   * X * X O . .	3   . . . . . . .
+	2   . . . . . . .	2   . . . . . . .
+	1   . . . . . . .	1   . . . . . . .
+	      Eques Wins	      Eques Wins	
+</PRE>
+
+	Just a pair of odd minor threats are enough to win if Eques has
+an Even Threat in one of the same columns.  The Even threat can be a Major
+threat or it can be half of a Mixed (Odd/Even) Minor threat pair.
+
+<PRE>
+	    a b c d e f g	    a b c d e f g           a b c d e f g
+	6   . * . . . . .	6   . . . . . . .	6   . . . X . . . 
+	5   * * X X . . .	5   . . . . . . .	5   . . * . . . . 
+	4   . . . X . . .	4   . . . . X . .	4   . X . O X . . 
+	3   . . . . X . .	3   * X * X . . .	3   * O . X . . . 
+	2   . . . . . . .	2   . . * . . . .	2   . . * . . . . 
+	1   . . . . . . .	1   . X . . . . .	1   . X . . . . . 
+	      Eques Wins	      Eques Wins	      Eques Wins
+</PRE>
+
+	In the absence of Eques threats, Knott needs two Odd Major Threats
+to win.  He also wins with any Even Threat.  As seen in Diagram 2-1, the
+Even Threat can be a Minor threat pair (but not a Mixed Threat), or even
+a nearly empty row (Diagrams 2-2, 2-3).  But Knott's Even Threat is worthless
+when Eques has winning Odd threats unless the Knott Threat undercuts (is on
+the same column as and below) the Eques threats. <P>
+
+	When both players have Odd Major Threat(s), the important
+consideration is the total number of columns with Odd Threats.  With two
+such columns, either player needs threats in both of them to win.  Eques has
+the advantage with one or three such columns; Knott has the advantage with
+four.  When both players have two Odd Major Threats Knott wins if the threats
+occupy two columns, Eques if three, the game is Drawn with the threats on
+four separate columns. <P>
+
+	In counting the odd-threat columns for the above rule, a Knott Minor
+Threat is counted only if it is a Mixed threat with the Even threat on the
+same column as and below another odd threat (whether Eques's or Knott's). <P>
+	When one column has two threats of the same player, they are of
+special value only when adjacent (or a 2nd-row/5th-row pair.)  If Knott has
+Major Threats on the 2nd and 5th rows of the same column, and Eques has an
+Odd Major Threat elsewhere the game is only Drawn; if a third column contains
+another Odd Major Threat Knott wins if it is his, the game is still Drawn if
+it is Eques's. <P>
+	When one column has threats of each player, Eques dominates when both
+threats are Odd (unless there are an even number of odd-threat columns),
+and Knott dominates when both are Even.  If one threat is Odd and the other
+Even, the lowermost threat dominates. <P>
+
+	Here is a configuration which may arise from time to time.
+
+<PRE>
+	    a b c d e f g
+	6   . . . . . . .	1) D1 d2  D3 d4  D5 e1  E2 e3
+	5   . . . X O . .	5) E4 b1  G1 b2  G2 e5
+	4   . . . O X . .
+	3   . . * X O . .
+	2   * O * O X . X
+	1   . O . X O . X
+</PRE>
+
+	Knott will win at A2 eventually, because of his compound Threats
+in the C-column.  But he must be in no hurry to play c2.  Instead he must
+preserve his c3 threat until Eques is in Zugzwang and forced to play F2.
+	Eques has an Odd Major Threat at F3, but she would need a <P>
+second Odd Major Threat to prevail.  Eques's adventures in the G-column
+were of course mistakes.
+
+<HR>
+	It is not so easy to analyze early positions but you will often be
+able to find the best moves if you understand the endgame objectives.  It
+is also easy to go wrong.  For example:
+
+<PRE>
+	    a b c d e f g
+	6   . . . O . . .	1) D1 d2  D3 d4  D5 e1  E2 e3
+	5   . O . X . . .	5) E4 b1  B2 b3  B4 b5  G1 d6
+	4   . X . O X . .
+	3   . O . X O . .
+	2   . X . O X . .
+	1   . O . X O . X
+</PRE>
+
+	Both sides have played with skill so far.  Eques could have grabbed
+Odd Minor Threats on the leftside with 8 D6, but victory would still require
+care and the play 8 G1 is just as good.  Where should Eques play next? <P>
+	Eques may be tempted to play 9 G2 and establish F3 as an Odd Major
+Threat.  If Knott responds at b6 in an effort to Draw with the Counterthreat
+at c5, Eques can then take 10 F1 which kills ("undercuts") the Knott leftside
+threat. <P>
+	But 9 G2 doesn't work.  After  9 G2 f1! B6, Eques will discover that
+the Knott threat at c5 is still valid (refer to Endgame Principles II and III).
+Eques will eventually be in Zugzwang and forced to give up her Threat
+(18 C4 c5 F2 f3). <P>
+	Instead Eques must play 9 F1 to destroy Knott's leftside, and when
+Knott answers 9 .. g2, 10 C1 is the move to destroy Knott's even Threat at
+f4.
+
+<PRE>
+	    a b c d e f g
+	6   . . . O . . .	9) F1 g2  C1
+	5   . O . X . . .
+	4   . X . O X . .
+	3   . O . X O . .
+	2   . X . O X . O
+	1   . O X X O X X
+</PRE>
+
+	Eques threatens C2 which establishes F5 as an Odd Major Threat at once.
+If Knott takes c2 first, Eques plays 11 E5 and F5 will still become a Major
+Threat eventually, since Eques must get G5 or G6.  But if Knott plays 10 .. f2
+in the diagram how should Eques respond? <P>
+	If Eques responds at C2 or E5 to 10 .. f2, Knott will play 11 .. f3
+and undercut Eques' rightside threat with the Mixed Minor Threat f4-g5.
+The Eques partial diagonal D1-E2 is underneath Knott's partial diagonal d2-e3
+and this advantage must be preserved.  In the diagram Eques must answer
+f2 at F3. <P>
+
+
+	The following configuration (called the "J") is seen very frequently.
+Usually it is good enough for Eques victory.
+
+<PRE>
+			    a b c d e f g
+			6   . . . . . . . 
+			5   . . . . . . . 
+			4   . . . . . . * 
+			3   . . . X X * * 
+			2   . . . . X . . 
+			1   . . . X . . . 
+			 "J Configuration"
+</PRE>
+
+	When the G-column is eventually played, Eques will get G3 or G4.  In
+either case F3 becomes an Odd Major Threat.  Of course it is really the
+arrangement of the empty (Threat) cells -- shown here with "*"s -- that
+provides the victory. <P>
+	Often Knott will prevent Eques from establishing this formation;
+when Eques plays E2, Knott takes e3.  But sometimes Eques can build a "J"
+by force.  In that case Knott has only two hopes:
+<UL>
+<LI> to build counterthreat(s) on the opposite side of the board, or
+<LI> to "cap" the "J" with a Major Horizontal Threat:
+</UL>
+
+<PRE>
+			    a b c d e f g
+			6   . . . . . . . 
+			5   . . . . . . . 
+			4   . . O O O . . 
+			3   . . O X X . . 
+			2   . . . . X . . 
+			1   . . . X . . . 
+			 "Capped J Configuration"
+</PRE>
+
+	Here Knott intends to play up the F-column since Eques cannot play F3.
+Eques will get F4, but her "J" is destroyed.  Eques can defend by playing up
+the G-column to convert the F3 Threat into a Major Threat; then Knott cannot
+play f2 -- or if he has played f1-f2 while Eques takes G1-G2-G3, Knott will
+be in Double Atari at G4 and F3.  Hence in the "Capped J" there will be a race
+between the players in the F- and G-columns. <P>
+
+	There are other configurations which win in a fashion similar to the
+"J".  For example in Joseki 18, Eques wins when she gets this configuration:
+
+<PRE>
+			    a b c d e f g
+			6   . . . . . . . 
+			5   . . . . . . * 
+			4   . . . O O * . 
+			3   . . . X X * * 
+			2   . . . X O . . 
+			1   . . O X O . . 
+</PRE>
+
+	(Here there are four Minor Threat cells compared with three in the "J".
+But the effect is equivalent: since G3 and G5 are in the same column and both
+on Odd Rows, they behave like a single Threat.) <P>
+
+	The "J" configuration is so common that you should memorize some of
+the variations that can arise.  If Knott plays poorly the "J" will win easily,
+but in these games Knott plays well.
+
+<H3>Example "J" Game 1)</H3>
+<PRE>
+		1) D1 d2 D3 d4 D5 d6 E1 c1 C2 c3 E2 c4 E3 e4 G1 f1 G2
+
+			    a b c d e f g
+			6   . . . O . . . 
+			5   . . . X . . . 
+			4   . . O O O . . 
+			3   . . O X X . . 
+			2   . . X O X . X 
+			1   . . O X X O X 
+</PRE>
+
+	Knott blocks the leftside "J" by playing 5 .. c3, but he would lose
+quickly if he played 6 .. e3 to block the "J" on the right.  He succeeds in
+"capping the J" with 7 .. e4, and the race is on as mentioned above.  As
+you can see, Eques has won.  Here Knott made two questionable moves.  3 .. d6
+is usually considered too passive.  Having made that play, Knott should
+answer 4 E1 at f1.  Eques could still prevail, but she can no longer force an
+easy win with "J".
+
+<H3>Example "J" Game 2)</H3>
+<PRE>
+		1) D1 d2 D3 d4 D5 e1 B1 a1 E2 b2 E3
+
+			    a b c d e f g
+			6   . . . . . . . 
+			5   . . . X . . . 
+			4   . . . O . . . 
+			3   . . . X X . . 
+			2   . O . O X . . 
+			1   O X . X O . . 
+</PRE>
+
+	Knott could have played 5 .. e3 to stop the "J", but Eques would
+answer at E4 and, with Even Major Threat C2 already in the bag, would have
+a very strong attack.  (If Knott responds to E4 on the leftside you can
+win easily on the rightside:  7 G1 g2 G3 g4 G5 g6 E5; while if Knott plays
+his sixth stone at g1 the leftside provides victory:  7 B2 b3 B4 b5 D6.) <P>
+	Instead Knott plays 5 .. b2.  This builds his own Odd Major Threat
+at c3 and he is threatening to get a Major Threat at c2 as well.
+Eques was not immediately concerned about this Double Threat, since
+after 6 .. a2 E4 e5, the Knott c3 threat becomes irrelevant -- Knott would
+have the leftside under control but no way to stop Eques from winning on the
+rightside with her "J".  The game continues
+
+<PRE>
+		6) .. e4 A2 b3 B4 b5 D6 a3 E5
+
+			    a b c d e f g
+			6   . . . X . . . 
+			5   . O . X X . . 
+			4   . X . O O * * 
+			3   O O . X X * * 
+			2   X O . O X . . 
+			1   O X . X O . . 
+</PRE>
+
+	When Knott takes e4, Eques must of course play A2 to prevent the
+Double Threat.  Similarly Knott must then play b3 or Eques will get another
+Odd Threat and Knott must respond B4 or Knott will get a Double Threat.
+Eques then goes about trying to build a second Threat at C5 -- Remember that
+an Odd Threat cannot be "undercut" by an enemy Odd Threat in the same column.
+<P>
+	Eques has stones at B4 and D5 and when Knott takes b5, Eques takes
+D6 hoping that A3-C5 will be Odd Threats.  This sequence arises frequently.
+Here it "fails": Knott can block at a3 at once.  But it doesn't really fail:
+Eques D6 is a much more powerful stone than Knott a3 as Eques demonstrates
+when she grabs E5.  In the diagram, Eques has compound rightside threats
+(shown with the four "*"s) and will win.  Eventually Knott will be forced
+to play c2, f2 or g2.  (Three columns have Odd Threats as required for
+Eques victory according to the Endgame Principles.)
+
+<H3>Example "J" Game 3)</H3>
+<PRE>
+		1) D1 d2 D3 d4 D5 e1 B1 b2 A1 c1 C2 c3 E2 c4
+
+			    a b c d e f g
+			6   . . . . . . . 
+			5   . . . X . . . 
+			4   . . O O . . . 
+			3   . . O X . . . 
+			2   . O X O X . . 
+			1   X X O X O . . 
+</PRE>
+
+	Here Knott tries 4 .. b2, blocks the leftside "J" with 5 .. c3, but
+succumbs to a rightside "J" due to the Eques Major Threat at E4.  Eques can
+now take her "J" by playing E3 whenever she wants but it is often good
+enough to grab it at once:
+
+<PRE>
+		8) E3 e4 E5 f1
+
+			    a b c d e f g
+			6   . . . . . . . 
+			5   . . . X X . . 
+			4   . . O O O . . 
+			3   . . O X X . . 
+			2   . O X O X . . 
+			1   X X O X O O . 
+</PRE>
+
+	Knott has "capped" the "J" and appears to be winning the race since
+he gets to drop a stone in the F-column before Eques can drop at G1.  But
+Eques has a trick up her sleeve:
+
+<PRE>
+		10) G1 f2 G2 f3 F4
+
+			    a b c d e f g
+			6   . . . . . . . 
+			5   . . . X X . . 
+			4   . . O O O X . 
+			3   . . O X X O . 
+			2   . O X O X O X 
+			1   X X O X O O X 
+</PRE>
+
+	Eques wins since she threatens Eques F5 with a winning Odd Threat at
+G5, and if Knott blocks at f5, Eques 13 G3 wins at once. <P>
+	I suggest you memorize these three games in which Eques has played
+well.  Then it will be easy to win with 4 B1 as in Example Games 2 and 3 and
+you have less need to master the complicated lines that arise after 4 E2. <P>
+
+	In the next game Eques makes a mistake and loses despite her "J"
+configuration.
+
+<H3>Game 5:	Counterthreat</H3>
+
+	Here is an endgame analysis based on the above rules.  This
+formation should lead to a Knott win:
+
+<PRE>
+						    a b c d e f g
+						6   . . . . X . . 
+						5   . . X O O * * 
+						4   * . O O O * . 
+						3   * * X X O . . 
+						2   . . X O X . . 
+				diagram 5-1	1   X . O X . . . 
+</PRE>
+
+	Eventually the A column will be played and Eques will get A3 or
+A4.  In either case, B3 becomes a Major Threat -- thus B3 can be treated as
+a Major Threat as it stands.  Similarly G5 can eventually be promoted to
+a Major Threat for Knott.  With two odd-threat columns and neither player
+having threats in both columns, we have an Odd-Threat Draw.  Knott will win
+the game of course since he doesn't actually have to play up the F-column to
+enjoy the G5 threat: his Even Threat F4 will win the ending. <P>
+	Usually the Eques partial diagonal at D1-E2 will threaten F3-G4
+and will neutralize Knott threat G5.  That does not apply here since
+Eques can hardly play F3.  The winning Knott threat configuration is a bit
+fragile, by the way, and Knott will get only a Draw (or even lose) unless he
+is careful. <P>
+	Even without knowing the moves that led to diagram 5-1, a glance
+suggests that Eques neglected to seize the key cell D5 when she had the chance.
+
+<PRE>
+						    a b c d e f g
+1)	D1  d2 		5)	C2  e4		6   . . . . . . . 
+2)	D3  d4		6)	C3  c4		5   . . . . . . . 
+3)	C1  e1					4   . . O O O . . 
+4)	E2  e3					3   . . X X O . . 
+						2   . . X O X . . 
+				diagram 5-2	1   . . X X O . . 
+</PRE>
+
+	Eques has succeeded in building a "J configuration" in the lower left,
+but she should have played 3 D5 instead.  Knott is developing a huge plurality
+in the upper center.  Knott is even threatening to destroy Eques's "J" by
+playing up the B column (Eques cannot answer b2 with B3 since Knott
+wins at b4).  To preserve the "J" Eques must drive up the A column
+immediately:
+
+<PRE>
+						    a b c d e f g
+7)	A1  b1 					6   . . . . X . . 
+8)	A2  e5					5   . . X O O . . 
+9)	E6  d5					4   . . O O O . . 
+10)	C5  ..					3   . . X X O . . 
+						2   X . X O X . . 
+				diagram 5-3	1   X O X X O . . 
+</PRE>
+
+	This is the threat configuration shown in Diagram 5-1.  Where should
+Knott play next in diagram 5-3, by the way, or does it matter? <P>
+	It appears that Knott can win quickly by playing at C6 and then
+up the F column since F3 and F4 would both be winning cells.  But
+this won't work:
+
+<PRE>
+						    a b c d e f g
+10)	..  c6	 				6   . . O X X . . 
+11)	A3  a4					5   . . X O O . . 
+12)	D6  f1					4   O . O O O . . 
+13)	B2  ..					3   X . X X O . . 
+						2   X X X O X . . 
+				diagram 5-4	1   X O X X O O . 
+</PRE>
+
+	Knott gets his Double Threat at F3-F4 but Eques gets a Double
+Threat at B3-B4 and wins first.  In diagram 5-3, Knott can win with any
+play except C6 or B2. <P>
+	The tactical complications in diagram 5-3 may obfuscate the essential
+strategic considerations in diagram 5-2.  Suppose that Eques reverses his
+tenth and eleventh stones:
+
+<PRE>
+						    a b c d e f g
+7)	A1  b1 					6   . . X O X . . 
+8)	A2  e5					5   . . X O O . . 
+9)	E6  d5					4   O . O O O . . 
+10)	A3  a4					3   X . X X O . . 
+11)	C5  d6					2   X . X O X . . 
+12)	C6			diagram 5-5	1   X O X X O . . 
+</PRE>
+
+	Knott must now take care to grab the critical G-column cells before
+playing even a single stone in the F-column:
+<PRE>
+		12) .. g1 G2 a5 G3 a6 G4 g5
+</PRE>
+	Eventually Knott will play f1 and there will be no stopping his
+Double Threat f4-f5.  13 g3 and 12 a5 also lead to Knott victory. <P>
+
+	To avoid misleading the reader I should point out that Knott does have
+other winning sequences besides those shown in diagrams 5-3 and 5-5.  But the
+key configuration shown in diagram 5-1 is ultimately Knott's target.
+
+<H2> Problems </H2>
+
+<PRE>
+	 			Problem A	(Joseki 14)
+				---------
+	 . . . . . . . 		1. D1  d2
+	 . . . O . . . 		2. D3  c1	("X" = Eques = 1st player)
+	 . . . X . . . 		3. C2  c3	("O" = Knott = 2nd player)
+	 . . O X . . . 		4. D4  d5
+	 . . X O . . . 
+	 . . O X . . . 		Eques to play and win.
+
+
+	 			Problem B	(Joseki 2)
+				---------
+	 . . . X . . . 		1. D1  d2	7. B4  b5
+	 . O . X . . . 		2. D3  d4	8. D6  g1
+	 . X . O X . . 		3. D5  e1
+	 . O . X O . . 		4. E2  e3	Eques to play and win.
+	 . X . O X . . 		5. E4  b1
+	 . O . X O . O 		6. B2  b3
+
+
+	 			Problem C	(Joseki 4)
+				---------
+	 . . . . . . . 		1. D1  d2	7. B3  b4
+	 . X . X O . . 		2. D3  d4	8. G1  g2
+	 . O . O X . O 		3. D5  e1	9. B5  c1
+	 . X . X O . X 		4. E2  e3      10. G3  g4
+	 . X . O X . O 		5. E4  b1
+	 . O O X O . X 		6. B2  e5	Eques to play and win.
+
+
+	 			Problem D	(Joseki 13, Game 3)
+				---------
+	 . . . . . . . 		1. D1  d2	Eques to play and win.
+	 . . . . . . . 		2. D3  c1
+	 . . X . . . . 		3. C2  c3	After Eques makes her best
+	 . . O X . . O 		4. C4  g1	play,  Knott answers at A1.
+	 . . X O O . X 		5. G2  g3	Where should Eques now play?
+	 . . O X X . O 		6. E1  e2
+
+
+	 			Problem E	(Game 4)
+				---------
+	 . . . . . . . 		1. D1  e1	7. E4  b1
+	 . . . . . . . 		2. A1  c1
+	 . . X . X . . 		3. E2  e3	Eques to play with what result?
+	 . . O X O . . 		4. C2  c3
+	 . . X O X . . 		5. C4  d2
+	 X O O X O O . 		6. D3  f1
+
+
+	 			Problem F	(Joseki 19)
+				---------
+	 . . . . . . . 		1. D1  e1
+	 . . . . . . . 		2. B1  a1
+	 . X . . . . . 		3. B2  b3	Eques to play and win
+	 . O . . . . . 		4. B4  a2
+	 O X . . . . .
+	 O X . X O . .
+</PRE>
+
+<H2>  Solutions</H2>
+<H3>Problem A</H3>
+  Eques must play G1 and go after the D4-G1 diagonal.  If she tries
+to force the issue with
+<PRE>
+	5.  F1 c4  G1 e1  F2 c5  C6 b1
+</PRE>
+she loses to Knott's counterattack on the upper left side.
+When Eques does play 5 G1, a pretty continuation is
+<PRE>
+	5.  G1 e1  G2 g3  E2 g4		(Diag 1-4)
+</PRE>
+with Eques then able to force four-in-a-row by her tenth stone. Here Eques
+must also play specifically 6 G2 and 7 E2 to win. <P>
+
+<H3>Problem B</H3>
+  Eques has a slight advantage on each side of the board.
+She must make her threats "work together" to win.  The Knott Major
+Threat at F2 appears to neutralize the rightside, but Eques intends to
+play C4 eventually and thereby kill the F2 threat.  But first things
+first!  Eques must start at B6 since if Knott plays there, Eques C4 is
+no longer playable.  In some variations Eques will eventually win at
+B6-C6-D6-E6.
+
+<H3>Problem C</H3>
+  Eques can play up the A-column and then the
+C-column with a series of Sente moves, eventually winning on the
+C6-D5-E4-F3 diagonal.  But Knott has a Major Threat at F4 and can
+therefore foil Eques's plan by playing F1-F2-F3.  It's a race and
+Eques wins if she plays A1 immediately.
+
+<H3>Problem D</H3>
+  The third-row cells are generally the best cells on the
+board.  Good players avoid playing on the second row (especially at D2)
+if it gives their opponent the better cell above it.  But fourth-row
+and fifth-row cells are also valuable.  Thus here the great value of E4
+cuts down on the value of E3.  D4 is almost unplayable for either
+player since it gives up D5 (the best cell on the board after D3).
+Although it is "Gote", C5 has good long-term strategic value and Eques
+should play there.  It is a "free" play: C6 has little value. <P>
+
+On the topic of "avoiding the second row", consider the common opening
+<PRE>
+	1.  D1 c1  C2 ...
+</PRE>
+in which Knott and Eques respectively did and didn't follow this advice.
+The strongest continuation is then
+<PRE>
+	2. ... c3  C4 g1
+</PRE>
+Both Victor and I wasted many computer-hours on this position in a
+fruitless search for Eques victory: the game is drawn.
+
+<H3>Problem D2</H3>
+  After Eques C5 in Problem D, Knott takes A1.  Knott hopes
+to get G4 followed by D4 which would "lock up" both sides of the board
+with even-row threats.  If Eques lets Knott get G4, Eques will have to
+then take D4 whereupon Knott can get a draw by grabbing the key cell D5.
+Therefore Eques must answer A1 at G4.
+
+<H3>Problem E</H3>
+ Eques must play 8 G1! to draw against expert Knott play.
+Earlier Eques should have played 3 C2 to win.  Knott will win easily with
+his b4 and f4 threats unless Eques can build threats at B3 and/or F3.  Hence
+Eques wants to occupy cells like A2, A4, E6, etc but especially D5.  But she
+cannot afford to play A2 now since then she loses the key cell D5:
+<PRE>
+	8.  A2 f2  C5 g1  D4 d5
+</PRE>
+Thus Eques must play along the C5-G1 diagonal now to have any chance.  None
+of these cells has much offensive value but, hard as it is to foresee, the
+possibility of G1-G2-G3-G4 makes G1 the correct play and if Eques plays
+anywhere else Knott can win.  This is explained more thoroughly in the text.
+
+<H3>Problem F</H3>
+ Eques must play A3 to Win.  If Eques plays D2 eventually she will
+establish Odd Minor Threats at A5 and C3 and the main virtue of A3 is to
+protect this latent threat by preventing a Knott "pushup" (eg, 5 B5 a3 A4 a5).
+A3 may seem out-of-the-way with the center up for grabs, but there are
+no prime cells available.  As usual the preeminent value of D3 makes D2 a poor
+Eques play despite the diagonal connection with B4 (5 D2 d3 A3 e2 is very
+strong for Knott.)  E2 is a good-looking play for Eques since it works
+towards an Even Threat at C2 or C4.  But against 5 E2 Knott will not waste a
+tempo taking a5, as he would against 5 B5.  Instead he will take e3 and (with
+b3 in the bag already) Eques would no longer have Third Row Horizontal
+possibilities.  (After E2 an expert continuation might be
+<PRE>
+	5   E2 a3 A4 e3 D2 a5 B5 d3 G1 g2 G3 g4 E4 e5 E6 b6 A6
+</PRE>
+with Eques finally blocking on the sixth row just to salvage a Draw.)
+After Eques makes the correct play of A3, one example continuation is
+<PRE>
+	5   A3 e2 E3 e4 A4 a5 E5 b5 D2 d3 D4
+</PRE>
+
+<H2>Further Notes on the Problems</H2>
+
+<H3>Problem F</H3>
+ Note the bizarre leftside-heavy position after 5 B4 a3 A4 a5, even
+though the entire opening (except 5 B4) is expert.
+	One good way to see the answer is to first realize that A3 and E2
+are the most valuable available cells, but that E2 "gives up" more -- E3
+is also very valuable, but A4 isn't.
+
+	The opening position (empty board) is won for Eques, but 3 of the 4
+distinct 1-stone positions are won for Knott.  Among 25 distinct 2-stone
+positions, 14 are won by Eques, 5 by Knott and 6 are drawn. <P>
+	Among 121 distinct 3-stone positions, 18 are won by Eques, 74 are
+won by Knott and 29 are Drawn.  Details of this are shown next.
+
+<H2>	First Move Results </H2>
+
+<PRE>
+			Legend
+			------
+
+		"X" --> X (Eques, First Player) Wins after the indicated Move
+	        "O" --> O (Knott, Second Player) Wins after the indicated Move
+	        "=" --> Drawn Game after the indicated Move
+
+				 - - - -  Move  - - - -
+				a   b   c   d   e   f   g
+				-------------------------
+
+	X's First Move:		O   O   =   X   =   O   O
+
+	O's Response to
+		1 A1		X   O   O   O   X   O   X
+		1 B1		X   =   O   =   X   X   X
+		1 C1		X   X   =   =   =   =   X
+		1 D1		X   X   X   X   X   X   X
+
+	X's Response to
+
+		1 A1 a2		O   =   =   X   O   X   O
+		1 A1 b1		O   O   O   O   O   O   O
+		1 A1 c1		O   O   O   O   O   O   O
+		1 A1 d1		O   O   O   O   O   O   O
+		1 A1 e1		O   O   O   X   O   O   O
+		1 A1 f1		O   O   O   O   O   O   O
+		1 A1 g1		O   O   O   X   O   O   O
+
+		1 B1 a1		=   X   =   O   X   O   O
+		1 B1 b2		O   O   O   O   =   O   O
+		1 B1 c1		O   O   O   O   O   O   O
+		1 B1 d1		O   =   O   =   O   O   O
+		1 B1 e1		O   O   O   X   O   O   O
+		1 B1 f1		O   X   =   X   X   =   O
+		1 B1 g1		O   X   =   X   =   O   O
+
+		1 C1 a1		=   =   =   X   =   =   O
+		1 C1 b1		O   =   O   O   =   X   O
+		1 C1 c2 	O   =   O   =   O   O   O
+		1 C1 d1		O   O   =   =   O   O   O
+		1 C1 e1 	O   O   =   O   =   O   O
+		1 C1 f1		O   =   =   =   =   =   O
+		1 C1 g1		O   =   X   X   =   X   O
+
+		1 D1 a1		=   O   X   X   X   X   X
+		1 D1 b1		O   X   O   =   =   X   O    [Joseki 26]
+		1 D1 c1		O   O   =   =   O   X   X    [Joseki 16 - 25]
+		1 D1 d2		O   O   O   X   O   O   O
+
+	X's Response to
+
+		1 D1 d2 D3 b1	O   X   O   X   X   X   O
+		1 D1 d2 D3 c1	O   O   X   X   O   X   X    [Joseki 13 - 15]
+		1 D1 d2 D3 d4	O   O   O   X   O   O   O    [Joseki  1 - 12]
+</PRE>
+
+Results assume that all remaining moves are played as "joseki" (best way for
+both players).  For example if Eques starts at D1 and Knott answers a1, Knott
+can force victory if Eques plays B1, the game is drawn with best play if Eques
+plays A2, and Eques can win with any other play. <P>
+
+There isn't room to show Knott's second stone in the lines where Eques has
+blundered; the best play is often on the third row or in the D column.
+Of course there are many exceptions:  In the variation
+<PRE>
+	C1 f1 F2 c2 C3 c4
+</PRE>
+Knott loses if he plays on the third row (f3) at either his 2nd or 3rd turn.
+<P>
+
+For common openings, continued best Eques play is shown on the next page
+as "Joseki."
+
+<H2> Opening Game Tree ("Joseki") </H2>
+<PRE>
+		(Variations with 1 .. d2 or 1 .. b1 )
+
+   x-1-o x-2-o x-3-o x-4-o --5-- --6-- --7-- --8-- --9-- -10-- -11-- -12-- 
+
+   D1 d2 D3 d4 D5 e1 E2 e3 E4 b1 B2 b3 B4 b5 G1 d6 F1 g2 C1 f2 F3 f4 F5    [1]
+    |     |     |  |           |  |  \ E5  | 
+    |     |     |  |           |  |        \ D6 g1 B6                      [2]
+    |     |     |  |           |  |           \ f1 G1
+    |     |     |  |           |  |              \ C1 f2 G1 f3 F4 e5 etc.  [3]
+    |     |     |  |           |  |   
+    |     |     |  |           |  \ e5 B3 b4 G1 g2 B5 c1 G3 g4 A1 f1 etc.  [4]
+    |     |     |  |           |     |           \ A1  \ A1
+    |     |     |  |           |     \ G1        \ C1
+    |     |     |  |           |     |
+    |     |     |  |           |     \ D6 g1 E6 b3 B4 b5 B6 f1 F2 f3 F4    [5]
+    |     |     |  |           |
+    |     |     |  |           \ E5 b2 B3 a1 A2 a3 A4                      [6]
+    |     |     |  | 
+    |     |     |  \ B1 e2 A1 c1 C2 c3 C4 b2 C5                            [7]
+    |     |     |     | 
+    |     |     |     \ a1 E2 b2 E3 e4 A2 b3 B4 b5 D6 a3 E5                [8]
+    |     |     |        \ B2  \ A2 b3 B4
+    |     |     |
+    |     |     \ b1 B2 b3 B4 f1 F2 f3 F4 b5 F5                            [9]
+    |     |     |           | 
+    |     |     |           \ b5 F1 e1 E2 d6 E3                           [10]
+    |     |     |                       | 
+    |     |     |                       \ e3 G1 d6 E4 f2 F3 g2 C1 f4 F5   [11]
+    |     |     |                          \ D6
+    |     |     \ d6 E1
+    |     |        \ C1 b1 F1 e1 E2 e3 E4 b2 C2 e5 C3 c4 C5 g1 F2 b3 etc. [12]
+    |     |
+    |     \ c1 C2 c3 C4 g1 G2 g3 E1 e2 C5 a1 G4 c6 G5 g6 E3 e4 E5 a2 etc. [13]
+    |        |     |                             \ E3
+    |        \ F1  \ D4 d5 G1 c4 B1 c5 C6 e1 E2                           [14]
+    |        \ G1           |
+    |        \ D4           \ e1 G2 g3 E2 g4                              [15]
+    |
+    \ b1 F1 e1 F2 f3 D2 d3 C1 d4 F4                                       [26]
+       \ B2              \ D4
+                         \ F4
+
+						(continuations)
+   				     -12-- -13-- -14-- -15-- -16-- -17--
+
+			 [3]	     C2 f5 C3 c4 C5
+			 [4]	     A2 a3 A4 c2 C3 c4 C5 a5 C6 f2 F3
+			[12]	     B4 b5 F3
+			[13]	     A3 a4 A5 a6 E6 b1 B2
+			            \E6   \E6
+<HR>
+
+		(Variations with 1 .. e1 )
+
+
+   x-1-o x-2-o x-3-o x-4-o --5-- --6-- --7-- --8-- --9-- -10-- -11-- -12-- 
+
+   D1 e1 A1 d2 D3 d4 B1 c1 C2 c3 E2 c4 D5 c5 C6 f1 D6                     [20]
+       |  |  \ B1              \ C4
+       |  |                    \ D5
+       |  |
+       |  \ c1 C2 c3 C4 e2 E3 d2 E4 e5 F1 d3 D4 d5 F2                     [16]
+       |                    |        \ D3
+       |                    \ e4 E5
+       |                       \ D2 d3 E5 c5 A2                           [17]
+       |
+       \ B1 a1 B2 b3 B4 a2 A3 d2 D3
+          |        \ D2     \ e2 E3 d2 D3 d4 D5 d6 B5                     [19]
+          |                       \ b5 D2 d3 E4
+          |                       |        \ D4
+          |                       |        \ A4
+          |                       |
+          |                       \ e4 E5 b5 D2 d3 A4 d4 A5               [21]
+          |                          |  |        \ D4
+          |                          |  |
+          |                          |  \ d2 B5 g1 G2 c1 D3
+          |                          |     \ D3        \ C2
+          |                          |
+          |                          \ A4 a5 E5 b5 D2 d3 D4
+          |
+          \ e2 B2 b3 D2 e3 E4 a1 D3 d4 B4 a2 D5 a3 A4 a5 E5               [22]
+          |  \ E3  \ A1        \ B4  \ G1  \ G1        \ C1 c2 E5 b5 G1
+          |  |     \ C1        \ E5  \ D5  \ E5        \ G1
+          |  |     \ E3
+          |  |
+          |  \ A1 c1 B2 b3 C2 c3 D2 a2 D3 d4                              [18]
+          |
+          \ b2 A1 c1 C2 c3 C4 e2 C5 a2 A3 b3 B4 d2 D3
+                   |     |        |  \ E3        \ E3
+                   |     |        \ g1 G2 b3 B4 e3 E4                     [23]
+                   |     |        \ c6 A2 or E3
+                   |     |
+                   |     \ E2 c4 C5 d2 D3 d4 D5 d6 G1
+                   |           |           \ G1 d5 A2 f1 A3 a4 G2 f2 G3   [24]
+                   |           |                       \ G2
+                   |           |
+                   |           \ G1 c5 C6 a2 G2
+                   |                       \ E3 e4 E5 e6 G2 d2 G3 g4 D3   [25]
+                   |                                   \ A3  \ D3
+                   |
+                   \ E2 b3 B4 a2 C2
+                      |     \ c2 A2
+                      |     \ d2 D3
+                      |     \ e3 B3
+                      |
+                      \ c2 A2 b3 B4
+</PRE>
+
+	Another important Joseki begins with the moves
+<PRE>
+		1 D1 e1 B1 b2
+</PRE>
+This opening is played so strongly by both players that we shall consider it
+in some detail.  1 .. e1 is probably Knott's best chance, since otherwise
+Eques can win by memorizing the key Joseki [7] - [12].  Similarly the
+play 2 .. b2 is strong since it takes the powerful A1-E5 diagonal.
+Eventually Eques will take A1 or C1 and Knott will get the other point.
+Even though Knott owns the A1-E5 diagonal now, a diagonal pointing at
+the key central cell D4 is worth far more than the diagonal pointing
+at B4.  In fact Eques must seize A1 at once.  For example in Joseki [23]:
+<PRE>
+		3 A1 c1 C2 c3 C4 e2 C5
+
+				. . . . . . .
+				. . X . . . .
+				. . X . . . .
+				. . O . . . .
+				. O X . O . .
+				X X O X O . .
+</PRE>
+
+(Eques can substitute E2 as her 5th or 4th stone.)  Since Knott must not
+let Eques get E4, Eques effectively has E3 and E5 "in the bag" already.
+Although the rightside of the board is barren, Eques has established
+a winning configuration with the possibilities of C5-D5-E5-F5,
+D3-E3-F3-G3, C5-D4-E3-F2 and B1-C2-D3-E4.  Eventually Knott will be in
+Zugzwang and forced to give Eques D3 or F2 as well as E4 or E5. <P>
+	If Eques omits 3 A1, a possible continuation is 3 B3 d2 D3 a1
+with Knott winning. <P>
+
+Another variation is Joseki [25]
+<PRE>
+		3 A1 c1 C2 c3 E2 c4 G1 c5 C6 a2 E3 e4 E5 e6 G2 b3 B4
+
+				. . X . O . .
+				. . O . X . .
+				. X O . O . .
+				. O O . X . .
+				O O X . X . X
+				X X O X O . X
+</PRE>
+
+(Eques can substitute 10 A3, 8 G2, 6 C5, 5 C4 or 4 E2.)  Since this is
+such a stout defense by Knott, eleven stones are not enough for Eques to
+establish an obvious triple threat, but her victory is inevitable, despite
+Knott's counterthreat at d5, due to Zugzwang.  Knott cannot try f1 and let
+Eques get a quick win with the forcing moves D2-G3-D3-F3.  Eventually
+Knott will play at d2 for lack of anything better but his punishment
+won't stop: if he takes d4 he loses his counterthreat and temporizing at
+f1 fails because of Eques's tactical threat along the D4-G1 diagonal. <P>
+
+Eques can also win this opening by playing her fourth stone at E2
+instead of C2.  This may be an interesting study.  The Joseki chart
+above gives some of Eques's forced continuations.
+
+<H2> Comments on the openings </H2>
+
+	"Joseki" means "expert opening" in Japanese.  All the Eques
+(upper-case) moves win, and only these moves win. <P>
+
+	You may wonder how I chose which openings to give in the Opening
+Game Tree.  Strong Knott moves have been chosen, although space considerations
+permit only a very small sample of the possibilities.  But given the chosen
+Knott defense every possible winning Eques move is shown.  This is rather
+remarkable and means that Eques just barely has a won game. <P>
+
+	Joseki [12] is the "most forced" game in Connect-Four since Eques's
+first thirteen plays are all uniquely forced.  Even if Eques is content to
+Draw, the only permitted deviations are  13) anywhere; 10) F2; 8) E5; 5) B2;
+4) B1 (or F1); 1) C1. <P>
+
+	While most of the Joseki were discovered by computer search,
+the moves in Joseki 1, 2 and 3 are a common human opening (the "5-4"
+Opening): if Knott allows Eques 8 B5, Eques has an easy win on the leftside.
+Similarly Knott has no chance without 5) ... b1, but Eques cannot play
+5) B1? e4 and give up the rightside.  I spent several hours manually
+confirming that Eques 9 B6 is required in the very frequently encountered
+Joseki 2; this study prompted the design of the search software. <P>
+
+	In Joseki 4 (another "5-4" Opening) Eques wins with a spectacular
+endgame race: she must play A1 before Knott plays f1.  There are many other
+Knott defenses possible in the "5-4" Opening.  After practicing this opening
+to gain an appreciation of Eques's and Knott's objectives, you will do well
+to play as in Joseki 7 or 8, where Eques wins with relative ease. <P>
+	We cannot cover positional theory here.  Briefly Eques needs Threat(s)
+on the 3rd or 5th rows.  Without a Major Threat, she needs three threat cells;
+even-row threats are useful if there is an odd-row threat in the same column.
+<P>
+	In Joseki 5, 7, 8 and 9 Eques wins with typical threat configurations
+as shown in the diagrams.  In Joseki 7, Knott takes Two Stones on the Second
+Row, but Eques doesn't need the G-column so Knott threat F2 becomes worthless.
+In Joseki 8 Knott has Counterthreat C3 so Eques requires four threat cells
+instead of three.  Eventually Knott will be in Zugzwang, forced to allow Eques
+to play F3 or G3 with a winning double-threat or C3 with an easy win.
+
+<PRE>
+	.X*XX..       .......       ...X...       .......       .......
+	.O*XO..	      ..XX**.       .O.XX..       .O*X*X*       ......*
+	.X.OXX.	      ..XO*..       .X.OO**       .X.O.X.       ...O**.
+	*O.XOO.	      ..OX...       OO*XX**       .O.X.O.       .OOX***
+	.X.OXX.	      .OXOO..       XO.OX..       .X.O.X.       OXXXO..
+	.O.XOOO	      XXOXO..       OX.XO..       .O.X.O.       XXOXO..
+      (Joseki 5)    (Joseki 7)    (Joseki 8)    (Joseki 9)    (Joseki 18)
+</PRE>
+
+	The cells B1 and F1 generally have more value than C1 or E1.
+(If Knott does not have D4, the cells A1 and G1 also have good value.)
+Hence Knott 3) ... b1 as in Joseki 9 and 10 may be a better try than 3) ... e1.
+But best for Knott is to try 3) ... d6! C1 b1! as in Joseki 12.  This play
+may appear unnatural since D6 is a remote cell of relatively small value,
+but here there is a mild Zugzwang operating in the first row. <P>
+
+	Joseki 12 is played with utter precision and is a good study to
+see the cells taken in the correct sequence.  Eques never even gets a
+"winning endgame" -- Eques Threat F5 is undercut by the Knott d6-e5-f4-g3
+diagonal -- but she gets "Super-sente" and in the end wins with
+a rare triple atari! <P>
+	Joseki 13 (a "3-4" Opening) is also played with utter precision
+and is rather subtle.  Neither player wants to take D4 and give up D5
+to the enemy.  After 7) C5, Eques's stones dominate the board and with an
+eventual stone at E5, Eques gets a win similar to that shown in Joseki 6. <P>
+
+	Joseki 15 is interesting because Eques never actually establishes a
+winning endgame; instead she uses "Super-sente" to execute a rare combination
+and in the diagram can play E3 and announce "mate in two" with her two
+double-atari threats. <P>
+	In Joseki 16 - 26, Knott disdains an early d2.  In Joseki 18, Eques
+can hold off Knott's plurality in the upper left and will eventually win on
+the barren rightside with Major Threat E4 and a plethora of minor threats. <P>
+	Many other variations are possible after Knott 1 ... e1 or b1.
+Analysis is more difficult than after 1 ... d2 since the players jockey for
+position in the corners before it is known who will get the commanding
+central cells D3, D4 and D5.
+
+<H2>The games of a real match </H2>
+
+	Most of the example games were constructed by the author,
+but here are the six games of a real match between the author and
+John Tromp, another Connect-Four programmer.  The author played first
+in Games 1, 5 and 6.  To add interest we agreed to start Games 3, 4,
+5 and 6 with the non-standard openings B1-b2-E1 or C1-b1-B2, openings
+which the computer search had revealed to result in Draws with optimal
+play. <P>
+	The match was tied: 3 wins to John, 3 wins to the author and
+no Draws.  To conform with our usual convention the First and Second
+players will be called Eques and Knott. <P>
+	Here are the moves of the games up to the resignations.  The
+second line shows what the result would have been with perfect play
+after each move.  The third line gives the optimal play(s) when an
+error was made (including the opening "errors" agreed to).
+
+<PRE>
+	 --1-- --2-- --3-- --4-- --5-- --6-- --7-- --8-- --9-- -10--
+Game 1
+	 D1 c1 G1 d2 D3 d4 F1 e1 E2 e3 C2 e4 D5 e5 E6 b1 D6
+	 +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  
+
+Game 2
+	 D1 e1 B1 e2 B2 b3 D2 e3 E4 a1 D3 d4 B4 a2 D5 a3 A4 a5 E5
+	 +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  +  
+
+Game 3
+	 B1 b2 E1 d1 D2 d3 D4 d5 D6 e2 E3 f1
+	 -  =  =  =  =  =  =  =  =  =  -  -
+	(D1 c1)                        F1
+
+Game 4
+	 C1 b1 B2 b3 D1 d2 B4 e1 E2 d3 D4 c2 C3 a1 D5 d6 B5 g1 B6
+	 =  +  =  =  -  -  -  =  -  -  -  +  +  +  +  +  +  +  +
+	(D1 d1 F1)   E1       d3 D3       d5
+	          or B4
+
+Game 5
+	 B1 b2 E1 d1 E2 e3 D2 e4 E5 a1 G1 d3 D4 b3 B4 g2
+	 -  =  =  =  -  =  =  =  =  =  -  -  -  -  -  -
+	(D1 c1)      D2 b3             B3
+
+Game 6
+	 C1 b1 B2 f1 B3 b4 F2 f3 F4 e1 F5
+	 =  +  =  +  -  +  +  +  +  +  +
+	(D1 d1 F1)b3 F2 f2
+</PRE>
+
+<H3>Comments on the Games.</H3>
+
+<DL>
+<LT>	Game 1 <DD> was another of the many variations where Eques
+constructs a "J configuration" but Knott "caps it" with a fourth-row
+horizontal threat.  Knott plays 8 .. b1 in an effort to take b3
+before Eques can take A3; this is the usual defense to the "J."
+But Eques finds the only winning response at D6: if Knott takes
+b3 later, Eques can grab B4 and get odd threats on the A3-C5 diagonal. <P>
+
+<DT>Game 2<DD> demonstrates that 2 .. e2 is a weak play in
+this opening; Eques cannot be allowed to build up the leftside
+unmolested.  With 7 B4, Eques establishes a threat configuration
+at A5-C3-C2.  Knott destroys this threat by pushing up the A-column,
+but while he's spending tempi doing this Eques seizes D5 and E5.
+The Eques stones at D3-D5-E4-E5 are equivalent to a "J" and give
+Eques a win at F5.  Knott resigns: he could take g1 and undercut the
+F5 threat but Eques would then simply take B5. <P>
+
+<DT>Game 3<DD> became drawish when neither player got two vertically
+adjacent stones.  Eques of course was wrong to allow 6 .. f1: a
+diagonals rooted on the first row can never be undercut. <P>
+
+	In the opening diagonals which point towards central cells
+like D4, D3 or even D2 are more valuable than the peripheral diagonals
+which D1 controls.  Thus in <P>
+
+<DT>Game 4<DD> Eques 3 D1 was a mistake, and B4 or
+E1 was preferred.  (Knott can answer 3 F1 with e1 and win.)  In this
+game each player was at first reluctant to take D3 -- it seemed like D4
+was the essential cell.  But post-game analysis revealed that this
+position was no exception to the rule that D3 is the best cell (he
+who gets D3 may get D5 as well) and both 4 .. e1 and 5 E2 were errors. <P>
+	An interesting position developed after 6 D4.  Knott was afraid
+that Eques would play A1 and establish an Odd Major Threat so 6 .. c2
+looked right -- it defended the leftside and established an Even
+Major Threat on the rightside.  But, although Eques could no longer
+establish an ordinary-looking "triple threat", her huge plurality in
+the upper leftside meant she could win easily as long she dropped a stone
+at A2 or A3.  (For example , 10 B6 a2 A3 g2 C4 a4 C5 a5 C6.) <P>
+	Proper play for Knott would have been 6 D4 d5 A1 d6.  Now
+Knott will presumably get e3 and e5 eventually and the equivalent of
+a "J configuration" on the rightside: he already has the Odd Major
+Threat C3 and either f3 or f4 gives him a Major Threat at G3. <P>
+
+<DT>In Game 5<DD> Eques was unhappy with her play 4 D2 since Knott then
+took adjacent stones at e3-e4, but a Draw could still have been salvaged.
+After 5 E5 the players exchanged weak-looking moves in the corners,
+but a1 was a subtle and cunning play, while G1 was a blunder. <P>
+	This was a game the author lost, but with hindsight the best
+plays should be clear with a little study.  C1 and F1 are worse than
+useless for either player.  E6 is also almost worthless: it doesn't
+even work towards a Knott Even Threat at C4 because of b3-B4.  G1 is
+also of minimal value.  B3 and D3 are the "prime real estate" available
+but they give up B4 and D4 which are even better.  After the exchange
+b3-B4, B3-b4, d3-D4 or D3-d4 there will be strong plays available, so
+each player wants to time these plays for best effect. <P>
+	If Knott answers 5 E5 with d3-D4-d5 it will be fairly clear
+to Eques to play to Draw.  5 .. b3 is also bad since B4 is such a
+better cell.  By process of elimination Knott should play a1 as he did;
+note that he's threatening to follow with b3 and establish a certain
+Major Threat at C3.  He's also threatening a2, after which either
+B3-a3-A4-b4 or A3-b3-B4-a4 give Knott a very comfortable left side. <P>
+	By a similar process of elimination, 6 G1 is only the "best"
+of six poor plays; Eques must answer a1 at B3, again with a drawish
+result.  Perhaps she was thinking to pick up G1-G2 with some rightside
+strength, but she should know from her own studies that she cannot
+survive such a dreadful "double Gote" sequence. <P>
+	Knott announced victory immediately when Eques blundered and
+made the precise forcing moves d3-D4-b3-B4-g2.  (Here only d5 for b3
+and a2 for d3 can be substituted.)  Knott gets another Major Threat at
+F3, but doesn't really need it: the triple threat c2-c3-f5 might be
+good enough.  Eques would have liked to have grabbed G2 for herself, but
+after 8 G2 b4 B5 d5 C6 a2, Knott has a Double Major Threat. <P>
+	Eques did make an error in the opening of Game 5 but it was not
+4 D2; it was 3 E2.  A stone at D2 is preferred since it makes b3
+"off-limits" to Knott.  Eques may have trouble winning if Knott grabs
+d3, but so will Knott and that is the important thing.  Knott failed to
+take advantage: he should grab b3 in response to 3 E2, and if Eques then
+takes B4, grab d2. <P>
+
+<DT>In Game 6<DD> Knott resigned after playing only five stones.  He
+has little influence on either the 2nd or 3rd rows.  Eventually the
+play will be d2-D3-e3-E4-c2-C3 with Eques getting an Odd Major Threat
+no matter how Knott plays.  The computer search to find Knott's error
+is not complete.  My guess is that 2 .. b3 was appropriate: Eques
+is always very happy to get the first stone on the third row. <P>
+	Consider the line
+<PRE>
+	1 C1 b1 B2 f1 B3 f2 B4 b5 F3 g1 G2 c2 C3 e1 D1 e2 D2 d3 B4 e3 D4 e4
+</PRE>
+
+	Almost all of the results given have been established with exhaustive
+computer search.  There are two exceptions, where a simple manual analysis
+will suffice.
+</DL>
+
+<H3>	---  Knott wins after 1 A1 ------ </H3>
+
+	Adopt the following strategy: Answer A1 at d1, A2 at a3, B1 or B3
+at b2 or b4, C1 at c2, E1 at e2, F1 or F3 at f2 or f4.  Answer any other
+move in the D-column.  But if D6 is already occupied answer at F1 or F5 if
+possible, or in the B-column if c2 is occupied; F3 works if c2 is not
+occupied. <P>
+	Following these rules you will eventually place a stone at an even-row
+cell in the D-column or at an odd-row cell in the B- or F-column.  At that
+point you will have a relatively straightforward win and should "switch off
+the autopilot." <P>
+	Another way to look at this strategy is that Eques will eventually
+take her choice of A4, B5, C3, D6, E3, F5 or G1 and then you strike
+back.  Of these D6 and F5 are Eques's most promising plays.  If she takes F5
+and gives you d6, she will follow with F6 in an effort to establish
+a threat:
+<PRE>
+			...O.X.
+			...O.X.
+			.?.X.O.
+			??.O.X.
+			???X?O.
+			X??O?X.
+</PRE>
+
+	Here Knott will eventually win at A6-B6-C6-D6.  (Uncontested Even
+Threats are so good for Knott that he prevails easily even though his threats
+do not fulfill the definition of even "minor" threats.) The only possible
+Eques counterthreat is on the diagonal C3-D4-E5-F6.  But if C1 c2 have already
+been played, Knott can play c3 and kill this diagonal at once, and if not,
+Knott simply avoids the plays c2 and e4, taking an odd-row cell in one of
+these columns instead. <P>
+
+	Eques may decide to take D6 and give you f3:
+
+<PRE>
+			...X...
+			...O...
+			.?.X...
+			??.O.O.
+			??.X?O.
+			X?.O?X.
+</PRE>
+
+	Knott takes F3 and wins eventually on the D1-E2-F3-G4 diagonal.
+The only possible Eques counterthreat, the C1-D2-E3-F4 diagonal, is neutralized
+since Knott answers F4 at c1, or vice versa.  If Eques had played C1 c2 before
+D6, Knott would answer in the B-column and not at f3.
+
+<H3>---  Knott draws after 1 C1 ------</H3>
+
+	Victor Allis established with a simple argument that Knott can guarantee
+at least a Draw after 1. C1 d1.  (He has a similar argument for 1. A1 d1
+and 1. B1 c1.)  Knott simply plays above each Eques stone, playing in the
+C-column when Eques plays D6 or in the D-column when Eques plays C6.  Sooner
+or later Eques must take D2-D4-D6 to block.  The forced configuration is thus
+
+<PRE>
+			OO?XOOO
+			XX?OXXX
+			OO?XOOO
+			XX?OXXX
+			OO?XOOO
+			XXXOXXX
+</PRE>
+
+which is obviously a draw. <P>
+	To Draw when Eques opens at B1, answer B1 at c1, F1 at g1 or vice
+versa; play at any even-row cell when Eques plays in the sixth row and
+otherwise play above Eques's last play. <P>
+	With either of these strategies do not be content with a Draw:
+look for an opportunity to grab a winning threat and "switch off the
+autopilot."
+
+<H2>	Glossary  </H2>
+
+<DL>
+<DT>Aji<DD>	 a move which will eventually have Sente value.
+			Consider the Eques stone at A1 in Joseki [17] which
+			eventually allows A2.
+<DT>Atari<DD>	 a move which threatens to build Four-in-a-Row on the
+			next move.  Double Atari guarantees victory on the
+			next move.
+<DT>Cell<DD>	 one of the 42 locations on the board where stones can
+			eventually be placed.
+<DT>Counterthreat<DD> a threat which neutralizes an enemy threat which would
+			otherwise win.
+<DT>Eques<DD>	 first player to move.  Denoted by upper-case or "X".
+<DT>Error<DD> 	 a move which is not Joseki.  Denoted "?" in the game diagram.
+<DT>Even Threat<DD> a major or minor threat cell which is on the 2nd, 4th
+			or 6th row.
+<DT>Four-in-a-Row<DD> four stones of the same color in a continuous line
+			horizontally, vertically or diagonally.  The object
+			of the game.
+<DT>Gote<DD>  a move which does not force the opponent's reply.
+<DT>J Configuration<DD>  the common winning Eques configuration comprising
+			D1-D3-E2-E3 or its mirror image.
+<DT>Joseki<DD>  (proper play, an expert opening or sequence).  Moves which
+			are at least tied for best assuming both players
+			continue to play optimally.
+<DT>Knott<DD>  second player to move.  Denoted by lower-case or "O".
+<DT>Major Threat<DD>  the empty cell of an almost completed Four-in-a-Row.
+			Unlike with Atari, the cell is not yet available
+			for play.  Vertical threats are not considered
+			Major or Minor -- they can only become Atari.
+<DT>Miai<DD>  two valuable cells one of which will be taken at once by
+			Eques, the other by Knott or vice versa.
+<DT>Minor Threat<DD>  one of two empty cells in a half-completed Four-in-a-Row.
+<DT>Mixed Threat<DD>  one of a pair of minor threats of which one is Odd and one
+			is Even.  This can occur only along a diagonal.
+<DT>Odd Threat<DD>  a major or minor threat cell which is on the 3rd or 5th row.
+<DT>Pushup Play<DD>  a tactic where a player occupies cells like C1-C2-C3 to
+			force his occupation of C5 (see Joseki [3]).
+<DT>Sente<DD>  a move which forces the opponent's reply.
+<DT>Stone<DD>  the colored marker which a player places at his turn.
+<DT>Tenuki<DD>  a move which ignores the opponent's Gote move and plays in
+			another quadrant.  In Joseki [13] Eques 8 G4 appears
+			to be Tenuki but is actually a necessary response as
+			explained in the text.
+<DT>Tesuji<DD>  a particularly fine move.  Denoted "!" in the game diagram.
+<DT>Threat<DD>  a cell a player hopes to occupy eventually as part of a
+			Four-in-a-Row.
+<DT>Triple Odd Threat<DD>  an eventual Eques victory provided by odd minor threats in
+			three separate columns.  This can arise in many ways.
+			Odd threats in two columns are good enough if one
+			is accompanied by a Mixed or Major Even Threat in
+			the same column.  (Exception: a threat pair using the
+			3rd and 6th rows has no value to Eques.)
+<DT>Undercut<DD>  a threat which neutralizes an enemy threat above it.
+<DT>Zugzwang<DD>  a move made when pass would be preferable.  Most games
+			are won in the ending after such a move by the loser.
+			Zugzwang cannot occur in most games of the Tictactoe
+			family, but the "gravity rule" makes Connect-Four an
+			exception.
+</DL>
+
+<HR>
+Back to my <A HREF="http://www.cwi.nl/~tromp/">home page</A>. <BR>
+<a href="mailto:tromp@cwi.nl">tromp@cwi.nl</a>
+</BODY>
+</HTML>
