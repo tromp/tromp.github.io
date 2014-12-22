@@ -1,0 +1,152 @@
+%!PS-Adobe-1.0
+% hexpaper.ps - Version 1.0 : Hexagon mapping paper in PostScript
+%
+% Copyright 1994 by Daniel C. Nygren 
+% Current e-mail: nygren@tecnet1.jcte.jcs.mil
+%
+% Permission to use and modify this software for any purpose other than
+% commercial use or its incorporation into a commercial product is
+% hereby granted without fee. Permission to copy and distribute this software
+% only for non-commercial use is also granted without fee, provided that
+% the above copyright notice and this entire permission notice appear in
+% all copies, and any supporting documentation. The author makes no
+% representations about the suitability of this software for any purpose.
+% It is provided "as is" without express or implied warranty.
+
+% This program prints out hexagon mapping paper on a PostScript printer.
+% The size of the hexes is adjustable via the side_size variable. The darkness
+% of the lines can be changed with the setgray operator and the line thickness
+% can also be set differently with the setlinewidth operator.
+
+% --- Defines ---
+
+/#copies 2 def	%Enter number of copies to print out
+
+/side_size {0.48} def	%Enter length of a hexagon side in inches
+
+/paper_width {8.5} def	%Enter paper width in inches
+/paper_height {11} def	%Enter paper height in inches
+/margin {0.16} def	%Enter paper margin in inches
+
+% Calculate a hexagon's height and width given a side's size
+/hex_height {2 side_size mul 60 sin mul} bind def
+/hex_width {2 side_size mul 60 cos mul side_size add} bind def
+
+% Calculate how many hexes will fit across the paper's width
+% Subtract a hex_width from the available space because we need to
+% add one last_hex_bottom at the end of each row of hex_bottoms
+/this_many_hexes_wide {paper_width margin 2 mul sub hex_width sub hex_width side_size add div floor} bind def
+
+% Calculate how many hexes will fit across the paper's height
+/this_many_hexes_high {paper_height margin 2 mul sub hex_height div floor} bind def
+
+/inch {72 mul} bind def
+
+% --- Lines ---
+/line {side_size inch 0 inch rlineto} def
+/no_line {side_size inch 0 inch rmoveto} def
+
+/hex_bottom {		%	 %%%%%%
+	-60 rotate	 %	%
+	line		  %%%%%%
+	60 rotate
+	line
+	60 rotate
+	line
+	-60 rotate
+	line
+} bind def
+
+/last_hex_bottom {	%	 %
+	-60 rotate	 %	%
+	line		  %%%%%%
+	60 rotate
+	line
+	60 rotate
+	line
+	-60 rotate
+} bind def
+
+/hex_top {		  %%%%%%
+	60 rotate	 %	%
+	line		%	 %------
+	-60 rotate
+	line
+	-60 rotate
+	line
+	60 rotate
+	no_line
+} bind def
+
+% --- Start program ---
+
+newpath	%Start with a clean slate
+
+0.2 setgray		%Play with this to change darkness of lines
+0.2 setlinewidth	%Play with this to change line thickness 
+
+% --- Calculate where to start printing so the hexes are centered ---
+
+% Find out how many hex_bottoms will fit across the paper's width.
+this_many_hexes_wide
+
+% Then see how much room they will take up (Don't forget the last hex bottom!)
+hex_width side_size add mul hex_width add
+
+% Then subtract from paper width and divide by two to find out where to start 
+% printing. This x coordinate is left on the stack.
+paper_width exch sub 2 div inch
+
+% Find out how many hexes will fit across the paper's height
+this_many_hexes_high
+
+% Then see how much room they will take up
+hex_height mul
+
+% Then subtract from paper height and divide by two and add hex_height divided
+% by two (because we start drawing at the middle of the hex) to find out where
+% to start printing This y coordinate is left on the stack.
+paper_height exch sub 2 div hex_height 2 div add inch
+
+% Start printing at the calculated spot
+moveto
+
+% Construct the rows of hexes by printing a row of hex bottoms
+% followed by a row of hex tops. Loop counts must be integers, so 
+% cvi is used to convert the numbers to integers.
+
+this_many_hexes_high cvi{
+
+	currentpoint	%Save currentpoint on stack twice:
+	currentpoint	%once for getting back to print the hex tops,
+			%once for returning to move up one row.
+	
+	%Make a row of hex_bottoms
+	this_many_hexes_wide cvi{
+
+		hex_bottom
+
+	}repeat
+
+	last_hex_bottom	%Last hex bottom doesn't have a tail sticking out
+
+	moveto	%Go back to point saved on stack to print hex tops
+
+	%Make a row of hex tops
+	this_many_hexes_wide cvi{
+
+		hex_top
+
+	}repeat
+
+	hex_top	%Last hex top to match last hex bottom
+
+	moveto	%Go back to point saved on stack so we can move up to next row
+
+	0 inch hex_height inch rmoveto	%Move up to next row
+
+}repeat
+
+stroke
+
+showpage
