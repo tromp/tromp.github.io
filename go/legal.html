@@ -4,7 +4,7 @@
 </HEAD>
 <BODY>
 
-<h1>Number of legal 18x18 Go positions determined</h1>
+<h1>Number of legal 18x18 Go positions</h1>
 
 Following 9 months of computation and 4 petabyte of disk IO on a Dell PowerEdge R280 server, generously provided by
 <a href="https://www.ids.ias.edu/~piet/">Piet Hut</a>,
@@ -15,8 +15,13 @@ in Princeton, we determined
 L(18,18) = 669723114288829212892740188841706543509937780640178732810318337696945624428547218105214326012774371397184848890970111836283470468812827907149926502347633 
 which factorizes as 7176527950749135946361 * 93321327372370764890001511447003537297637977042784059156126983293481833335226774708913094831974704397065455646983337368444156410553
 <p>
-The computation uses dynamic programming to count the number of paths through a graph consisting of 18^2=324 layers with up to 81 billion nodes each. Each node corresponds to a set of partial board (e.g. the top 7 rows plus 6 points on the 8th row) positions that are equivalent in their set of valid completions.
-Our <a href="gostate.ps">paper</a> explains the algorithm in detail, and also explains how the resulting exact counts allow derivation of the approximation formula
+The computation uses dynamic programming to count the number of paths through a
+graph consisting of 18^2=324 layers with up to 81 billion nodes each. Each node
+corresponds to a set of partial board (e.g. the top 7 rows plus 6 points on the
+8th row) positions that are equivalent in their set of valid completions.  Our
+<a href="gostate.ps">paper</a> explains the algorithm in detail, and also
+explains how the resulting exact counts allow derivation of the approximation
+formula
 <p>
 L(m,n) ~ 0.850639925845714538 * 0.96553505933837387^{m+n} * 2.97573419204335724938^{m*n}
 <p>
@@ -42,13 +47,24 @@ My goal is to obtain the exact count, a feat previously accomplished for puzzles
 </tr>
 </table>
 <p>
-and sadly unattainable for Chess, where determining if a given position is legal is the essence of a class problems known as <a href="http://en.wikipedia.org/wiki/Retrograde_analysis">Retrograde analysis</a>.
+and sadly unattainable for Chess, where determining if a given position is
+legal is the essence of a class problems known as <a
+href="http://en.wikipedia.org/wiki/Retrograde_analysis">Retrograde
+analysis</a>.
 
-<h1>Call for computing power</h1>
-Thanks to the <a href="http://en.wikipedia.org/wiki/Chinese_remainder_theorem">Chinese Remainder Theorem</a>, the work can be split up into 9 jobs that each compute 64 bits of the 566-bit result. Allowing for some redundancy, we would need from 10 to 13 servers, each with at least 8 cores, 512GB RAM, and ample disk space (10-15TB), running for about 5-9 months.
+<h1>19x19 Call for computing power</h1>
+Thanks to the <a
+href="http://en.wikipedia.org/wiki/Chinese_remainder_theorem">Chinese Remainder
+Theorem</a>, the work of computing L(19,19) can be split up into 9 jobs that
+each compute 64 bits of the 566-bit result.
+Allowing for some redundancy, we need from 10 to 13 servers, each with at least
+8 cores, 512GB RAM, and ample disk space (10-15TB), running for about 5-9
+months.
 <p>
-If you can contribute such computing power, please contact me at <a href="mailto:john.tromp@gmail.com">john.tromp@gmail.com</a>,
-and we'll get the computation going. The following list shows contributing servers and their progress.
+If you can contribute such computing power, please contact me at <a
+href="mailto:john.tromp@gmail.com">john.tromp@gmail.com</a>, and we'll get the
+computation going.
+The following list shows contributing servers and their progress.
 <p>
 <table border>
 <tr><td>Index</td><td>Location</td><td>Server</td><td>CPU</td><td>RAM</td><td>modulus</td><td>progress</td>
