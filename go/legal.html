@@ -4,6 +4,76 @@
 </HEAD>
 <BODY>
 
+<h1>Number of legal 18x18 Go positions determined.<br>Volunteers needed for 19x19.</h1>
+
+Following 9 months of computation and 4 petabyte of disk IO on a Dell PowerEdge R280 server (4x4 core Xeon, 512GB RAM), generously provided by
+<a href="https://www.ids.ias.edu/~piet/">Piet Hut</a>,
+and administered by Lee Colbert, at the
+<a href="http://www.sns.ias.edu/computing">IAS School of Natural Sciences</a>
+in Princeton, we determined
+<p>
+L(18,18) = 669723114288829212892740188841706543509937780640178732810318337696945624428547218105214326012774371397184848890970111836283470468812827907149926502347633 
+which factorizes as 7176527950749135946361 * 93321327372370764890001511447003537297637977042784059156126983293481833335226774708913094831974704397065455646983337368444156410553
+<p>
+The computation uses dynamic programming to count the number of paths through a graph consisting of 18^2=324 layers with up to 81 billion nodes each. Each node corresponds to a set of partial board (e.g. the top 7 rows plus 6 points on the 8th row) positions that are equivalent in their set of valid completions.
+Our <a href="gostate.ps">paper</a> explains the algorithm in detail, and also explains how the resulting exact counts allow derivation of the approximation formula
+<p>
+L(m,n) ~ 0.8506399258457126 * 0.96553505933837393^{m+n} * 2.97573419204335724938^{m*n}
+<p>
+which gives us
+<p>
+L(19,19) ~ 2.0816819938198*10^170
+<p>
+It would be awesome to get the exact count for the standard Go board size,
+a feat previously accomplished for 
+<p>
+<table border>
+<tr>
+<td>1974</td>
+<td><a href="http://en.wikipedia.org/wiki/Rubik%27s_Cube#Mathematics">Rubik's cube configurations</a></td>
+<td>43,252,003,274,489,856,000</td>
+</tr> <tr>
+<td>2003</td>
+<td><a href="http://en.wikipedia.org/wiki/Mathematics_of_Sudoku#Enumerating_Sudoku_solutions">Sudoku solutions</a></td>
+<td>6,670,903,752,021,072,936,960</td>
+</tr> <tr>
+<td>2008</td>
+<td><a href="http://tromp.github.io/c4/c4.html">Connect-4 positions</a></td>
+<td>4,531,985,219,092</td>
+</tr>
+</table>
+<p>
+and unattainable for Chess, where determining if a given position is legal is the essence of a class problems known as <a href="http://en.wikipedia.org/wiki/Retrograde_analysis">Retrograde analysis</a>.
+<p>
+Thanks to the <a href="http://en.wikipedia.org/wiki/Chinese_remainder_theorem">Chinese Remainder Theorem</a>, the work can be split up into 9 jobs that each compute 64 bits of the 566-bit result. Allowing for some redundancy, we would need from 10 to 13 contributors each with at least 8 cores, 512GB RAM, and ample disk space (10-15TB), running for about 5-9 months.
+<p>
+If you can donate such computing power, please contact me at
+<a href="mailto:john.tromp@gmail.com">john.tromp@gmail.com</a>,
+and I will update the following list.
+<p>
+<table border>
+<tr><td>Index</td><td>Institute</td><td>Server</td><td>CPU</td><td>RAM</td><td>modulus</td>
+<tr>
+<td>0</td>
+<td>IAS, Princeton, US</td>
+<td>Dell PowerEdge R280</td>
+<td>2.2Ghz Intel Xeon</td>
+<td>512GB</td>
+<td>2^64-0</td>
+</tr>
+<tr><td>1</td> <td></td> <td></td> <td></td> <td></td> <td>2^64-3</td> </tr>
+<tr><td>2</td> <td></td> <td></td> <td></td> <td></td> <td>2^64-7</td> </tr>
+<tr><td>3</td> <td></td> <td></td> <td></td> <td></td> <td>2^64-9</td> </tr>
+<tr><td>4</td> <td></td> <td></td> <td></td> <td></td> <td>2^64-11</td> </tr>
+<tr><td>5</td> <td></td> <td></td> <td></td> <td></td> <td>2^64-15</td> </tr>
+<tr><td>6</td> <td></td> <td></td> <td></td> <td></td> <td>2^64-17</td> </tr>
+<tr><td>7</td> <td></td> <td></td> <td></td> <td></td> <td>2^64-33</td> </tr>
+<tr><td>8</td> <td></td> <td></td> <td></td> <td></td> <td>2^64-35</td> </tr>
+<tr><td>9</td> <td></td> <td></td> <td></td> <td></td> <td>2^64-39</td> </tr>
+</tr>
+</table>
+<p>
+
 <h1> <img alt="[pic of L10 board]" align=bot src="../img/go/legal10.gif"> Number of legal Go positions </h1>
 
 This is sequence <a href = "http://oeis.org/A094777">A094777</a> in the fabulous
@@ -37,25 +107,15 @@ Click on the left links to find tables for L(m,n).
 <tr><td><a href=L15.html>15</a></td> <td>10751464308361383118768413754866123809733788820327844402764601662870883601711298309339239868998337801509491</td> </tr>
 <tr><td><a href=L16.html>16</a></td> <td>4813066963822755416429056022484299646486874100967249263944719599975607459850502222039591149331431805524655467453067042377</td> </tr>
 <tr><td><a href=L17.html>17</a></td> <td>19079388919628199204605726181850465220151058338147922243967269231944059187214767997105992341735209230667288462179090073659712583262087437</td> </tr>
-<tr><td><a href=L18.html>18</a></td> <td>~0.017322427762 * 3^324 ~ 6.697231143 * 10^152 </td> </tr>
+<tr><td><a href=L18.html>18</a></td> <td>669723114288829212892740188841706543509937780640178732810318337696945624428547218105214326012774371397184848890970111836283470468812827907149926502347633</td> </tr>
 <tr><td><a href=L19.html>19</a></td> <td>~0.011957528698 * 3^361 ~ 2.081681994 * 10^170 </td> </tr>
 </table>
 
 <p>
 The results for n=14,15,16 and 17 were obtained in a joint effort between
 <a href="http://iuuk.mff.cuni.cz/~koucky/">Michal Kouck&yacute;</a> and John Tromp.
-
-<!--We are now verifying the n=17 result.
-All eight partial results are in:
-<p> legal(17x17) % 18446744073709551616 =  7133925477256079629 <p>
-<p> legal(17x17) % 18446744073709551613 =  1897129492139602218 <p>
-<p> legal(17x17) % 18446744073709551611 =  1406730347805751613 <p>
-<p> legal(17x17) % 18446744073709551609 = 16845858969464128427 <p>
-<p> legal(17x17) % 18446744073709551607 =  7175283057132860288 <p>
-<p> legal(17x17) % 18446744073709551605 = 17572984714135843242 <p>
-<p> legal(17x17) % 18446744073709551601 = 14697903872394913189 <p>
-<p> legal(17x17) % 18446744073709551577 =  9895749638558742166 <p> -->
 <p>
+
 A <a href="gostate.ps">preliminary version</a> of our paper
 ``Combinatorics of Go'' that contains these and many other results.
 <p>
