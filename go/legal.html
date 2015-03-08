@@ -18,11 +18,11 @@ which factorizes as 7176527950749135946361 * 93321327372370764890001511447003537
 The computation uses dynamic programming to count the number of paths through a graph consisting of 18^2=324 layers with up to 81 billion nodes each. Each node corresponds to a set of partial board (e.g. the top 7 rows plus 6 points on the 8th row) positions that are equivalent in their set of valid completions.
 Our <a href="gostate.ps">paper</a> explains the algorithm in detail, and also explains how the resulting exact counts allow derivation of the approximation formula
 <p>
-L(m,n) ~ 0.8506399258457126 * 0.96553505933837393^{m+n} * 2.97573419204335724938^{m*n}
+L(m,n) ~ 0.850639925845714538 * 0.96553505933837387^{m+n} * 2.97573419204335724938^{m*n}
 <p>
 which gives us the approximate number of legal positions on a standard board size
 <p>
-L(19,19) ~ 2.0816819938198*10^170
+L(19,19) ~ 2.08168199381982*10^170
 <p>
 My goal is to obtain the exact count, a feat previously accomplished for puzzles and games such as
 <p>
