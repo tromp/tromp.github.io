@@ -57,8 +57,9 @@ Thanks to the <a
 href="http://en.wikipedia.org/wiki/Chinese_remainder_theorem">Chinese Remainder
 Theorem</a>, the work of computing L(19,19) can be split up into 9 jobs that
 each compute 64 bits of the 566-bit result.
-Allowing for some redundancy, we need from 10 to 13 servers, each with at least
-32 cores, 512GB RAM, and ample disk space (10-15TB), running for about 3-5
+Allowing for some redundancy, we need about 10 servers, each with at least
+16 cores, 128GB RAM, ample disk space (10-15TB), and high disk IO throughput (300MB/s),
+running for about 3-5
 months.
 <p>
 If you can contribute such computing power, please contact me at <a
@@ -77,7 +78,7 @@ courtesy of <a href="https://www.linkedin.com/in/emooreatx">Eric Moore</a>.
 <table border>
 <tr><td>Index</td><td>Location</td><td>Server</td><td>CPU</td><td>RAM</td><td>modulus</td><td>progress</td>
 <tr><td>0</td><td>IAS, Princeton, US</td><td>Dell PowerEdge R820</td><td>2.2Ghz Intel Xeon</td><td>512GB</td><td>2^64-0</td>
-<td>(9,12)</td></tr>
+<td>(10,3)</td></tr>
 <tr><td>1</td><td>IDA, Princeton, US</td><td>HP DL580 G7</td> <td>2.4Ghz Intel Xeon</td> <td>512GB</td> <td>2^64-3</td>
 <td>(3,9)</td> </tr>
 <tr><td>2</td><td>IDA, Princeton, US</td><td>HP DL580 G7</td> <td>2.4Ghz Intel Xeon</td> <td>512GB</td> <td>2^64-7</td>
@@ -93,7 +94,7 @@ courtesy of <a href="https://www.linkedin.com/in/emooreatx">Eric Moore</a>.
 <tr><td>10</td><td>HP Helion Cloud</td> <td>cloud</td> <td>HP</td> <td>2.4Ghz Intel Core 2 Duo</td> <td>2^64-45</td>
 <td>(5,1)</td> </tr>
 <tr><td>19</td><td>IAS, Princeton, US</td><td>Dell PowerEdge R820</td><td>3.3Ghz Intel Xeon</td><td>128GB</td><td>2^64-83</td>
-<td>(3,9)</td></tr>
+<td>(5,6)</td></tr>
 </table>
 <p>
 
