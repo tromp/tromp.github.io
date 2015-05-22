@@ -57,8 +57,9 @@ Thanks to the <a
 href="http://en.wikipedia.org/wiki/Chinese_remainder_theorem">Chinese Remainder
 Theorem</a>, the work of computing L(19,19) can be split up into 9 jobs that
 each compute 64 bits of the 566-bit result.
-Allowing for some redundancy, we need from 10 to 13 servers, each with at least
-32 cores, 512GB RAM, and ample disk space (10-15TB), running for about 3-5
+Allowing for some redundancy, we need about 10 servers, each with at least
+16 cores, 128GB RAM, ample disk space (10-15TB), and high disk IO throughput (300MB/s),
+running for about 3-5
 months.
 <p>
 If you can contribute such computing power, please contact me at <a
@@ -67,7 +68,7 @@ computation going.
 The following list shows contributing servers and their progress,
 updated at least once a week.
 
-Access to the IDA computing cluster and computing/scripting support is generously provided by MdD.
+Access to the IDA computing cluster and computing/scripting support is generously provided by <a href="http://www.linkedin.com/pub/michael-di-domenico/0/8b9/930/en">Michael Di Domenico</a>.
 
 Access to the <a href="http://www8.hp.com/us/en/cloud/helion-overview.html">HP Helion Cloud</a>
 is generously provided by HP,
@@ -76,29 +77,24 @@ courtesy of <a href="https://www.linkedin.com/in/emooreatx">Eric Moore</a>.
 <p>
 <table border>
 <tr><td>Index</td><td>Location</td><td>Server</td><td>CPU</td><td>RAM</td><td>modulus</td><td>progress</td>
-<tr>
-<td>0</td>
-<td>IAS, Princeton, US</td>
-<td>Dell PowerEdge R820</td>
-<td>2.2Ghz Intel Xeon</td>
-<td>512GB</td>
-<td>2^64-0</td>
-<td>(7,13)</td>
-</tr>
-<tr><td>1</td><td>IDA, Princeton, US</td><td>HP DL580 G7</td> <td>2.4Ghz Intel Xeon</td> <td>512GB</td> <td>2^64-3</td> <td>(2,11)</td> </tr>
-<tr><td>2</td><td>IDA, Princeton, US</td><td>HP DL580 G7</td> <td>2.4Ghz Intel Xeon</td> <td>512GB</td> <td>2^64-7</td> <td>(2,3)</td> </tr>
-<tr><td>3</td><td>IDA, Princeton, US</td>TBA<td>TBA</td> <td>TBA</td> <td>TBA</td> <td>2^64-9</td> <td>(2,6)</td> </tr>
-<tr><td>4</td><td>IDA, Princeton, US</td> <td>TBA</td> <td>TBA</td> <td>TBA</td> <td>2^64-11</td> <td>(2,6)</td> </tr>
-<tr><td>5</td><td>IDA, Princeton, US</td> <td>TBA</td> <td>TBA</td> <td>TBA</td> <td>2^64-15</td> <td>(2,6)</td> </tr>
-<tr><td>6</td><td>IDA, Princeton, US</td> <td>TBA</td> <td>TBA</td> <td>TBA</td> <td>2^64-17</td> <td>(2,6)</td> </tr>
-<!--
-<tr><td>7</td><td>Undisclosed</td> <td>TBA</td> <td>TBA</td> <td>TBA</td> <td>2^64-33</td> <td>(0,0)</td> </tr>
-<tr><td>8</td><td>Undisclosed</td> <td>TBA</td> <td>TBA</td> <td>TBA</td> <td>2^64-35</td> <td>(0,0)</td> </tr>
-<tr><td>9</td><td>Undisclosed</td> <td>TBA</td> <td>TBA</td> <td>TBA</td> <td>2^64-39</td> <td>(0,0)</td> </tr>
--->
+<tr><td>0</td><td>IAS, Princeton, US</td><td>Dell PowerEdge R820</td><td>2.2Ghz Intel Xeon</td><td>512GB</td><td>2^64-0</td>
+<td>(15,8)</td></tr>
+<tr><td>1</td><td>IDA, Princeton, US</td><td>HP DL580 G7</td> <td>2.4Ghz Intel Xeon</td> <td>512GB</td> <td>2^64-3</td>
+<td>(6,9)</td> </tr>
+<tr><td>2</td><td>IDA, Princeton, US</td><td>HP DL580 G7</td> <td>2.4Ghz Intel Xeon</td> <td>512GB</td> <td>2^64-7</td>
+<td>(6,10)</td> </tr>
+<tr><td>3</td><td>IDA, Princeton, US</td>TBA<td>TBA</td> <td>TBA</td> <td>TBA</td> <td>2^64-9</td>
+<td>(6,9)</td> </tr>
+<tr><td>4</td><td>IDA, Princeton, US</td> <td>TBA</td> <td>TBA</td> <td>TBA</td> <td>2^64-11</td>
+<td>(4,7)</td> </tr>
+<tr><td>5</td><td>IDA, Princeton, US</td> <td>TBA</td> <td>TBA</td> <td>TBA</td> <td>2^64-15</td>
+<td>(4,10)</td> </tr>
+<tr><td>6</td><td>IDA, Princeton, US</td> <td>TBA</td> <td>TBA</td> <td>TBA</td> <td>2^64-17</td>
+<td>(4,14)</td> </tr>
 <tr><td>10</td><td>HP Helion Cloud</td> <td>cloud</td> <td>HP</td> <td>2.4Ghz Intel Core 2 Duo</td> <td>2^64-45</td>
-<td>(4,2)</td> </tr>
-</tr>
+<td>(6,9)</td> </tr>
+<tr><td>19</td><td>IAS, Princeton, US</td><td>Dell PowerEdge R820</td><td>3.3Ghz Intel Xeon</td><td>128GB</td><td>2^64-83</td>
+<td>(7,6)</td></tr>
 </table>
 <p>
 
