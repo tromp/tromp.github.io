@@ -41,6 +41,9 @@ some Church numerals, the predecessor function on Church numerals, and Omega.
 <tr> <td>pred</td> <td> &lambda;n.&lambda;f.&lambda;x.n(&lambda;g.&lambda;h.h(g f))(&lambda;u.x)(&lambda;u.u)</td>
   <td><IMG SRC="../img/cl/pred.gif"></td>
   <td><IMG SRC="../img/cl/pred.alt.gif"></td> </tr>
+<tr> <td>fac</td> <td> &lambda;n &lambda;f.n(&lambda;f.&lambda;n.n(f(&lambda;f.&lambda;x.n f(f x))))(&lambda;x.f)(&lambda;x.x)</td>
+  <td><IMG SRC="../img/cl/fac.gif"></td>
+  <td><IMG SRC="../img/cl/fac.alt.gif"></td> </tr>
 <tr> <td>&Omega;</td> <td> (&lambda;x.x x)(&lambda;x.x x)</td>
   <td><IMG SRC="../img/cl/Omega.gif"></td>
   <td><IMG SRC="../img/cl/Omega.alt.gif"></td> </tr>
