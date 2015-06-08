@@ -38,22 +38,22 @@ The software used for these computations is now available at my
 <a href="https://github.com/tromp/golegal">github repository</a>.
 Running "make" will compute L(3,3) in under a second.
 The main loop looks like:
-<pre>
-    for (; (mb = minstream(gin))->state != FINALSTATE; nin++,deletemin(gin)) {
-      sn.cnt = mb->cnt;
-      // printf("expanding %llo\n", mb->state);
-      nnew = expandstate(mb->state, x, newstates);
-      for (i=0; i<nnew; i++) {
+<pre><code>
+    for (; (mb = minstream(gin))-&gt;state != FINALSTATE; nin++,deletemin(gin)) {
+      sn.cnt = mb-&gt;cnt;
+      // printf("expanding %llo\n", mb-&gt;state);
+      nnew = expandstate(mb-&gt;state, x, newstates);
+      for (i=0; i&lt;nnew; i++) {
         sn.state = newstates[i];
         //printf("inserting %llo\n", sn.state);
         jtinsert(jts, &sn);
       }
-      if (nnew < 3) // nnew == 2
-        modadd(modulus, &nnewillcnt, mb->cnt);
+      if (nnew &lt; 3) // nnew == 2
+        modadd(modulus, &nnewillcnt, mb-&gt;cnt);
       if (jtfull(jts))
-        dumpstates(go, jts, noutfiles++, mb->state);
+        dumpstates(go, jts, noutfiles++, mb-&gt;state);
     }
-</pre>
+</code></pre>
 
 This could make a decent server benchmark:
 <ul>
