@@ -1,1 +1,151 @@
-go/legal.html
+<HTML>
+<HEAD>
+<title>Counting Legal Positions in Go</title>
+</HEAD>
+<BODY>
+
+<h1> <img alt="[pic of L10 board]" align=bot src="../img/go/legal10.gif"> Number of legal Go positions</h1>
+
+on 19x19 is 3728b7cd14exxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx70484829318e1ae7
+<p>
+in hexadecimal. That is, we know the most significant 11 hex digits and the least significant 16.
+<p>
+The former follow from an approximation formula for the number of legal m*n boards
+<p>
+L(m,n) ~ 0.8506399258457 * 0.965535059338374^{m+n} * 2.9757341920433572493^{m*n}
+<p>
+that has been known for nearly a decade and is based on a mathematical study of its asymptotics as well as exact counts for boards up to 17x17.
+<p>
+The latter is the result of an 89 day, 16 core x 20GB computation that finished yesterday,
+after applying 361 rounds of linearly transforming a 360 billion element vector of counts modulo 2^64.
+Each vector takes about 4TB of disk space spread over thousands of files, and is indexed by a so called
+border state, which describes all pertinent information about a 19 point cross section of the board,
+such as the presence of stones still needing liberties and how they are connected.
+The correspondence between a legal position and a sequence of border states (ending in one without libertyless stones) can be illustrated on a 3x3 board as
+<p>
+<img src="../img/go/Bpath.gif">
+<p>
+Please read our paper <a href="gostate.pdf">Combinatorics of Go</a> for all details.
+<p>
+The unknown middle 115 hex digits, shown as x's above, will (hopefully) be determined in the next 4 to 6 months,
+as another 8 of these computations determine counts modulo various relatively prime numbers of the form 2^64-d,
+which can then be combined according to the
+<a href="http://en.wikipedia.org/wiki/Chinese_remainder_theorem">Chinese Remainder Theorem</a>.
+Please contact me if you have a server with 240+GB memory, 15TB scratch disk space and plenty of IO bandwidth,
+and want to help shave a month or two off this schedule.
+<p>
+The software used for these computations is now available at my
+<a href="https://github.com/tromp/golegal">github repository</a>.
+Running "make" will compute L(3,3) in under a second.
+The main loop looks like:
+<pre>
+    for (; (mb = minstream(gin))->state != FINALSTATE; nin++,deletemin(gin)) {
+      sn.cnt = mb->cnt;
+      // printf("expanding %llo\n", mb->state);
+      nnew = expandstate(mb->state, x, newstates);
+      for (i=0; i<nnew; i++) {
+        sn.state = newstates[i];
+        //printf("inserting %llo\n", sn.state);
+        jtinsert(jts, &sn);
+      }
+      if (nnew < 3) // nnew == 2
+        modadd(modulus, &nnewillcnt, mb->cnt);
+      if (jtfull(jts))
+        dumpstates(go, jts, noutfiles++, mb->state);
+    }
+</pre>
+
+This could make a decent server benchmark:
+<ul>
+<li> The task is well defined, easily understood, and non-artificial.
+<li> The program code is small and self-contained.
+<li> The generated data sets are huge.
+<li> The problem is a typical instance of map-reduce, and thus representative
+of a wide class of popular problems.
+<li> The computation requires a good balance of multi-core processing power,
+memory for sorting, and disk-IO.
+<li> The board size parameter gives an entire family of benchmarks,
+where each increment corresponds to a factor of about 5 in effort.
+</ul>
+
+<h1>Contributors</h1>
+
+Computation time on a Dell PowerEdge R820 server is generously provided by
+<a href="https://www.ids.ias.edu/~piet/">Piet Hut</a>,
+and administered by Lee Colbert, at the
+<a href="http://www.sns.ias.edu/computing">IAS School of Natural Sciences</a>
+in Princeton.
+Access to the IDA computing cluster and computing/scripting support is generously provided by
+<a href="http://www.linkedin.com/pub/michael-di-domenico/0/8b9/930/en">Michael Di Domenico</a>.
+Access to the <a href="http://www8.hp.com/us/en/cloud/helion-overview.html">HP Helion Cloud</a>
+is generously provided by HP,
+courtesy of <a href="https://www.linkedin.com/in/emooreatx">Eric Moore</a>.
+
+<h1>Results for smaller boards</h1>
+
+This is sequence <a href = "http://oeis.org/A094777">A094777</a> in the fabulous
+<a href="http://oeis.org/">On-Line Encyclopedia of Integer Sequences</a>.
+<p>
+
+L10=L(10,10) is <a href="ternary.html">represented in ternary</a> in the 10x10 position on top of this page,
+with empty representing 0, and black and white stones representing 1 and 2 respectively.
+The trits are in row-major order,
+with the most significant trit in the top-left. Of the 18 values below, only L2, L3, L7 and L10
+can be represented as legal positions themselves. Here's hoping that L19 can be as well...
+<p>
+Click on the left links to find tables for L(m,n).
+<p>
+
+<table border>
+<tr><td> n</td> <td> number of legal n*n positions</td> </tr>
+<tr><td><a href=L1.html>1</a></td> <td>1</td> </tr>
+<tr><td><a href=L2.html>2</a></td> <td>57</td> </tr>
+<tr><td><a href=L3.html>3</a></td> <td>12675</td> </tr>
+<tr><td><a href=L4.html>4</a></td> <td>24318165</td> </tr>
+<tr><td><a href=L5.html>5</a></td> <td>414295148741</td> </tr>
+<tr><td><a href=L6.html>6</a></td> <td>62567386502084877</td> </tr>
+<tr><td><a href=L7.html>7</a></td> <td>83677847847984287628595</td> </tr>
+<tr><td><a href=L8.html>8</a></td> <td>990966953618170260281935463385</td> </tr>
+<tr><td><a href=L9.html>9</a></td> <td>103919148791293834318983090438798793469</td> </tr>
+<tr><td><a href=L10.html>10</a></td> <td>96498428501909654589630887978835098088148177857</td> </tr>
+<tr><td><a href=L11.html>11</a></td> <td>793474866816582266820936671790189132321673383112185151899</td> </tr>
+<tr><td><a href=L12.html>12</a></td> <td>57774258489513238998237970307483999327287210756991189655942651331169</td> </tr>
+<tr><td><a href=L13.html>13</a></td> <td>37249792307686396442294904767024517674249157948208717533254799550970595875237705</td> </tr>
+<tr><td><a href=L14.html>14</a></td> <td>212667732900366224249789357650440598098805861083269127196623872213228196352455447575029701325</td> </tr>
+<tr><td><a href=L15.html>15</a></td> <td>10751464308361383118768413754866123809733788820327844402764601662870883601711298309339239868998337801509491</td> </tr>
+<tr><td><a href=L16.html>16</a></td> <td>4813066963822755416429056022484299646486874100967249263944719599975607459850502222039591149331431805524655467453067042377</td> </tr>
+<tr><td><a href=L17.html>17</a></td> <td>19079388919628199204605726181850465220151058338147922243967269231944059187214767997105992341735209230667288462179090073659712583262087437</td> </tr>
+<tr><td><a href=L18.html>18</a></td> <td>669723114288829212892740188841706543509937780640178732810318337696945624428547218105214326012774371397184848890970111836283470468812827907149926502347633</td> </tr>
+<tr><td><a href=L19.html>19</a></td> <td>~0.011957528698 * 3^361 ~ 2.081681994 * 10^170 </td> </tr>
+</table>
+
+<p>
+The results for n=14,15,16 and 17 were obtained in a joint effort between
+<a href="http://iuuk.mff.cuni.cz/~koucky/">Michal Kouck&yacute;</a> and John Tromp.
+THe recent n=18 result was performed on the above-mentioned Dell R820.
+<p>
+
+<!--
+A <a href="gostate.ps">preliminary version</a> of our paper
+``Combinatorics of Go'' that contains these and many other results.
+<p>
+This <a href="legal.tgz">gzipped tar</a> contains various programs
+used to compute the exact numbers.
+-->
+Many thanks to
+<a href="http://www.isy.liu.se/~gf/">Gunnar Farneb&auml;ck</a> and
+<a href="http://iuuk.mff.cuni.cz/~koucky/">Michal Kouck&yacute;</a>
+for their contributions. Gunnar wrote a
+<a href="http://www.lysator.liu.se/~gunnar/legal.pike.txt">legal counting
+program</a> in pike, while Michal suggested the use of Chinese Remaindering
+and implemented a file based program.
+<p>
+This <a href="approx.c">small program</a> approximates the probability
+of a random n*n position being legal.
+<p>
+Additions and corrections are welcome.
+
+<a href="mailto:john.tromp@gmail.com">john.tromp@gmail.com</a>
+</body>
+
+</HTML>
