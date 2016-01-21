@@ -1,14 +1,17 @@
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+
 int ht,wd,l[99],r[99],cl[99];
 
-int legal()			/* legality of random (ht,wd) go board */
-{
+int legal() {		/* legality of random (ht,wd) go board */
   int c,y,x;
 
   for (x=0; x<=wd; x++)
     cl[l[x] = r[x] = x] = 3;
   for (y=ht; y--;) {
     for (x=1; x<=wd; x++) {
-      if (c = random() % 3) {
+      if ((c = random() % 3)) {
         if (cl[x] == 3-c) {
           if (r[x] == x) return 0;
           l[r[l[x]] = r[x]] = l[x];
@@ -30,10 +33,7 @@ int legal()			/* legality of random (ht,wd) go board */
   return 1;
 }
 
-main(argc,argv)
-int argc;
-char *argv[];
-{
+int main(int argc,char *argv[]) {
   int tr,sc,t;
 
   if (argc==1) {
@@ -46,4 +46,5 @@ char *argv[];
   srandom(getpid());
   for (sc=t=0; t++<tr; sc += legal()) ;
   printf("%.6f\n",sc/(float)tr);
+  return 0;
 }
