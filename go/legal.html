@@ -4,58 +4,170 @@
 </HEAD>
 <BODY>
 
-<h1> <img alt="[pic of L10 board]" align=bot src="../img/go/legal10.gif"> Number of legal Go positions</h1>
+<img alt="[pic of L19 board]" align=bot src="../img/go/legal19.gif">
+<h1>Number of legal Go positions</h1>
 
-on 19x19 is 3728b7cd14exxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx70484829318e1ae7
+The 361 points on a 19x19 Go board can be colored empty, black, or white.
+Only some of the 3^361 possible positions are legal, namely those where
+every group of connected stones of the same color has an empty point adjacent to it.
+In the position above, black stones at E18 and N9 lack such ``liberties'',
+making the position illegal. Due to its capture rule, the positions that can
+arise in a game of Go are exactly the legal positions.
+
+On Jan 20, 2016, the number of legal positions on a standard size Go board was determined to be
 <p>
-in hexadecimal. That is, we know the most significant 11 hex digits and the least significant 16.
+L19 = 208168199381979984699478633344862770286522453884530548425639456820927419612738015378525648451698519643907259916015628128546089888314427129715319317557736620397247064840935
+<p> or in more compact form
+<pre>
+2081681993819799846
+9947863334486277028
+6522453884530548425
+6394568209274196127
+3801537852564845169
+8519643907259916015
+6281285460898883144
+2712971531931755773
+6620397247064840935
+</pre>
+weighing in at 9*19=171 digits. We can write this more naturally in base 3 as the 19*19 ternary digits
+<pre>
+0 0 0 0 2 2 2 0 1 1 0 0 2 0 1 1 1 0 1
+2 1 1 2 1 2 0 0 2 1 2 1 0 0 0 2 2 0 2
+2 1 0 0 2 1 0 1 1 1 1 1 0 1 1 1 1 1 2
+0 0 2 2 0 1 1 0 2 0 0 1 2 1 0 2 0 1 0
+1 0 2 0 2 0 1 2 0 1 1 2 2 1 0 0 1 2 1
+1 0 0 0 1 1 1 2 0 2 2 0 0 0 2 0 1 2 2
+0 0 2 1 2 0 0 2 0 0 1 1 1 0 2 0 2 0 0
+0 0 2 2 0 2 2 2 0 0 0 2 1 0 1 0 0 0 2
+2 1 0 0 2 0 2 2 2 2 1 0 0 2 1 1 1 2 1
+2 0 0 1 0 2 2 1 2 1 1 2 2 0 2 0 1 2 0
+2 1 1 1 0 0 2 1 0 0 2 2 1 2 2 2 0 1 1
+2 2 1 2 0 1 1 1 0 2 0 1 2 0 2 2 2 0 2
+2 0 1 0 1 2 1 1 0 1 1 0 2 1 2 0 0 2 1
+2 0 0 0 1 2 2 1 1 2 0 2 2 0 0 1 0 1 0
+1 1 2 2 0 0 1 2 2 0 2 0 2 0 1 2 2 1 0
+2 0 1 0 0 1 1 0 2 1 2 1 2 1 1 0 2 2 0
+2 2 1 1 2 0 1 0 2 0 1 2 0 2 1 2 1 0 0
+0 0 0 1 1 2 2 1 0 2 1 0 1 0 2 1 1 2 0
+2 2 0 2 1 0 2 2 0 0 2 1 1 1 1 1 2 2 2
+</pre>
+which bears a striking resemblance to the image above.
 <p>
-The former follow from an approximation formula for the number of legal m*n boards
+It should come as no surprise that L19, viewed as a position, is itself illegal.
+The initial ternary digits show that the probability of a random position
+being legal is about 0.0000222 in ternary, close to 3^-4, or 1 in 81.
+This 1.2% chance was already computed by random sampling back in 1992.
+The approximation
+<p>L19 ~ 2.081681994 * 10^170<p> has been known since 2006.
+So what took us 10 years to nail it down to the last digit?
+
+<h2>A Computational Challenge</h2>
+Consider the problem of factoring. How do we find the prime factors of L19?
+Repeated trial division, the dumbest possible approach, takes time exponential in the
+number of digits, so it's utterly infeasible. Instead one should use
+an advanced algorithm, like the
+<a href="https://en.wikipedia.org/wiki/General_number_field_sieve">
+General Number Field Sieve</a>, or the
+<a href="https://en.wikipedia.org/wiki/Lenstra_elliptic_curve_factorization">
+Elliptic Curve Method</a> (ECM).
+These still take exponential time, but not in the number
+of digits itself, but rather (roughly) in the cube root or square root thereof,
+thereby vastly extending the range of inputs on which they're feasible in practice.
+<p>
+Using an <a href="http://www.alpertron.com.ar/ECM.HTM">ECM implementation</a> courtesy of Dario Alejandro Alpern,
+I was able to factorize L19 in mere hours on my laptop, yielding 8 prime factors:
+<pre>
+5 *
+401 *
+4821637 *
+964261621 *
+2824211368611548437 *
+2198466965002376001759613307922757 *
+65948646836807567941440434317404197 *
+54536540603346595211722061421378072820459376985314707345317470047
+</pre>
+of 1,3,7,9,19,34,35, and 65 digits respectively.
+
+The challenge of constructing (rather than deconstructing) L19 is surprisingly similar.
+Individually testing 3^361 positions for legality is as insane as doing trial divisions.
+Detecting illegalities early during position generation,
+as this <a href="approx.c">small program</a> for legal probability approximation
+does, offers only the slightest improvement.
+Just as with factoring, we need an advanced algorithm
+that is exponential not in the number of points,
+but rather in the square root thereof, the board dimension.
+<p>
+Such an algorithm was developed in the early 2000s, and is described in detail in
+our paper <a href="gostate.pdf">Combinatorics of Go</a>.
+It essentially reduces computing L19 to taking the 361st power of a
+very sparse matrix of 363 billion rows and columns.
+The computational power required for this only became available to me last year.
+
+<h2>363 billion what?</h2>
+The matrix rows and columns represent so called border states,
+which describe all pertinent information about a cross section of the board,
+such as the presence of stones still needing liberties and how they are connected.
+Matrix powers represent counts of the number of paths from one border state to
+another. Each legal position uniquely corresponds to a path from the edge border state to one without libertyless stones, as illustrated for this 3x3 position:
+<p>
+<img src="../img/go/Bpath.gif">
+
+<h2>Chinese jobs</h2>
+Clever use of the <a href="http://en.wikipedia.org/wiki/Chinese_remainder_theorem">Chinese Remainder Theorem</a>
+allows for splitting the computation into 9 independent parts,
+each computing L19 modulo 2^64 minus some small number, contributing 64 bits of the 566 bit result.
+Starting from March 6 2015, running on big servers at
+<ul>
+<li> the
+  <a href="http://www.sns.ias.edu/computing">IAS School of Natural Sciences</a>
+  in Princeton, where the L18 computation was recently performed, generously provided by
+  <a href="https://www.ids.ias.edu/~piet/">Piet Hut</a> and administered by Lee Colbert,
+<li> the
+<a href="http://www.idaccr.org/">IDA Center for Communications Research</a>,
+   on the other side of Princeton, generously offered by
+<a href="http://www.linkedin.com/pub/michael-di-domenico/0/8b9/930/en">Michael Di Domenico</a>, who spent many hours setting up, monitoring, streamlining, and patching the jobs, as well as helping improve the jobflowjobflow  scripts,
+<li> and the
+<a href="http://www8.hp.com/us/en/cloud/helion-overview.html">HP Helion Cloud</a>,
+   generously provided by HP courtesy of
+   <a href="https://www.linkedin.com/in/emooreatx">Eric Moore</a>,
+</ul>
+suffering many hiccups and a few catastrophes,
+after generating an estimated 30 petabyes of disk IO,
+the last of these jobs finished on December 26, 2015.
+A huge thanks to all these people who made the computation possible!
+
+<h2>Verifiability</h2>
+The software used for these computations is available at my
+<a href="https://github.com/tromp/golegal">github repository</a>.
+Running "make" should compute L(3,3) in about a second.
+For running an L19 job, a beefy server with 15TB of fast
+scratch diskspace, 8 to 16 cores, and 192GB of RAM, is recommended.
+Expect a few months of running time. Please use a modulus index outside the set
+{0,1,2,3,4,5,6,11,19} that we used.
+
+The computation has many built-in checks to guard against memory and disk
+corruption. Values L(m,n) where n&lt;m, are checked for matching L(n,m)
+(computed in a very different way), while all values L(m,n) have
+to closely match the approximation formula
 <p>
 L(m,n) ~ 0.8506399258457 * 0.965535059338374^{m+n} * 2.9757341920433572493^{m*n}
 <p>
-that has been known for nearly a decade and is based on a mathematical study of its asymptotics as well as exact counts for boards up to 17x17.
-<p>
-The latter is the result of an 89 day, 16 core x 20GB computation that ran from March 6 through June 5,
-after applying 361 rounds of linearly transforming a 360 billion element vector of counts modulo 2^64.
-Each vector takes about 4TB of disk space spread over thousands of files, and is indexed by a so called
-border state, which describes all pertinent information about a 19 point cross section of the board,
-such as the presence of stones still needing liberties and how they are connected.
-The correspondence between a legal position and a sequence of border states (ending in one without libertyless stones) can be illustrated on a 3x3 board as
-<p>
-<img src="../img/go/Bpath.gif">
-<p>
-Please read our paper <a href="gostate.pdf">Combinatorics of Go</a> for all details.
-<p>
-The unknown middle 115 hex digits, shown as x's above, will (hopefully) be determined in the next 4 to 6 months,
-as another 8 of these computations determine counts modulo various relatively prime numbers of the form 2^64-d,
-which can then be combined according to the
-<a href="http://en.wikipedia.org/wiki/Chinese_remainder_theorem">Chinese Remainder Theorem</a>.
-Please contact me if you have a server with 240+GB memory, 15TB scratch disk space and plenty of IO bandwidth,
-and want to help shave a month or two off this schedule.
-<p>
-The software used for these computations is now available at my
-<a href="https://github.com/tromp/golegal">github repository</a>.
-Running "make" will compute L(3,3) in under a second.
-The main loop looks like:
-<pre><code>
-    for (; (mb = minstream(gin))-&gt;state != FINALSTATE; nin++,deletemin(gin)) {
-      sn.cnt = mb-&gt;cnt;
-      // printf("expanding %llo\n", mb-&gt;state);
-      nnew = expandstate(mb-&gt;state, x, newstates);
-      for (i=0; i&lt;nnew; i++) {
-        sn.state = newstates[i];
-        //printf("inserting %llo\n", sn.state);
-        jtinsert(jts, &sn);
-      }
-      if (nnew &lt; 3) // nnew == 2
-        modadd(modulus, &nnewillcnt, mb-&gt;cnt);
-      if (jtfull(jts))
-        dumpstates(go, jts, noutfiles++, mb-&gt;state);
-    }
-</code></pre>
+derived from earlier results.
+Finally, application of the Chinese Remainder Theorem provide an important safeguard
+in that a tiny change in any of the inputs results in a huge change of output.
 
-This could make a decent server benchmark:
+<h2>A big number game</h2>
+Large numbers have a way of popping up in the game of Go.
+Few people believe that a tiny 2x2 Go board allows for more than a few hundred games.
+Yet 2x2 games number not in the hundreds, nor in the thousands, nor even in the millions.
+They number in the hundreds of billions! 386356909593 to be precise.
+Things only get crazier as you go up in boardsize. A lower bound of 10^{10^48} on the number
+of 19x19 games, as proved our paper, was recently improved to
+<a href="http://matthieuw.github.io/go-games-number/GoGamesNumber.pdf">a googolplex</a>.
+
+<h2>Server benchmark, anyone?</h2>
+
+Go counting could make a decent server benchmark:
 <ul>
 <li> The task is well defined, easily understood, and non-artificial.
 <li> The program code is small and self-contained.
@@ -68,32 +180,12 @@ memory for sorting, and disk-IO.
 where each increment corresponds to a factor of about 5 in effort.
 </ul>
 
-<h1>Contributors</h1>
-
-Computation time on a Dell PowerEdge R820 server is generously provided by
-<a href="https://www.ids.ias.edu/~piet/">Piet Hut</a>,
-and administered by Lee Colbert, at the
-<a href="http://www.sns.ias.edu/computing">IAS School of Natural Sciences</a>
-in Princeton.
-Access to the IDA computing cluster and computing/scripting support is generously provided by
-<a href="http://www.linkedin.com/pub/michael-di-domenico/0/8b9/930/en">Michael Di Domenico</a>.
-Access to the <a href="http://www8.hp.com/us/en/cloud/helion-overview.html">HP Helion Cloud</a>
-is generously provided by HP,
-courtesy of <a href="https://www.linkedin.com/in/emooreatx">Eric Moore</a>.
-
-<h1>Results for smaller boards</h1>
+<h1>Legal counts for all boardsizes</h1>
 
 This is sequence <a href = "http://oeis.org/A094777">A094777</a> in the fabulous
 <a href="http://oeis.org/">On-Line Encyclopedia of Integer Sequences</a>.
 <p>
-
-L10=L(10,10) is <a href="ternary.html">represented in ternary</a> in the 10x10 position on top of this page,
-with empty representing 0, and black and white stones representing 1 and 2 respectively.
-The trits are in row-major order,
-with the most significant trit in the top-left. Of the 18 values below, only L2, L3, L7 and L10
-can be represented as legal positions themselves. Here's hoping that L19 can be as well...
-<p>
-Click on the left links to find tables for L(m,n).
+Click on the left links to find tables for m by n boards.
 <p>
 
 <table border>
@@ -116,22 +208,14 @@ Click on the left links to find tables for L(m,n).
 <tr><td><a href=L16.html>16</a></td> <td>4813066963822755416429056022484299646486874100967249263944719599975607459850502222039591149331431805524655467453067042377</td> </tr>
 <tr><td><a href=L17.html>17</a></td> <td>19079388919628199204605726181850465220151058338147922243967269231944059187214767997105992341735209230667288462179090073659712583262087437</td> </tr>
 <tr><td><a href=L18.html>18</a></td> <td>669723114288829212892740188841706543509937780640178732810318337696945624428547218105214326012774371397184848890970111836283470468812827907149926502347633</td> </tr>
-<tr><td><a href=L19.html>19</a></td> <td>~0.011957528698 * 3^361 ~ 2.081681994 * 10^170 </td> </tr>
+<tr><td><a href=L19.html>19</a></td> <td>208168199381979984699478633344862770286522453884530548425639456820927419612738015378525648451698519643907259916015628128546089888314427129715319317557736620397247064840935</td> </tr>
 </table>
 
 <p>
 The results for n=14,15,16 and 17 were obtained in a joint effort between
 <a href="http://iuuk.mff.cuni.cz/~koucky/">Michal Kouck&yacute;</a> and John Tromp.
-THe recent n=18 result was performed on the above-mentioned Dell R820.
 <p>
 
-<!--
-A <a href="gostate.ps">preliminary version</a> of our paper
-``Combinatorics of Go'' that contains these and many other results.
-<p>
-This <a href="legal.tgz">gzipped tar</a> contains various programs
-used to compute the exact numbers.
--->
 Many thanks to
 <a href="http://www.isy.liu.se/~gf/">Gunnar Farneb&auml;ck</a> and
 <a href="http://iuuk.mff.cuni.cz/~koucky/">Michal Kouck&yacute;</a>
@@ -140,12 +224,11 @@ for their contributions. Gunnar wrote a
 program</a> in pike, while Michal suggested the use of Chinese Remaindering
 and implemented a file based program.
 <p>
-This <a href="approx.c">small program</a> approximates the probability
-of a random n*n position being legal.
 <p>
-Additions and corrections are welcome.
 
 <a href="mailto:john.tromp@gmail.com">john.tromp@gmail.com</a>
+<br>
+<a href="../index.html">Back to my homepage</a>.
 </body>
 
 </HTML>
