@@ -3,13 +3,14 @@
 /* trying moves before passes slows search dramatically */
 
 #include <stdio.h>
-#define NSHOW 4
+#define NSHOW 8
 #define NMOVES 4
-#define CUT 1   /* 0 for plain minimax */
+#define CUT 0   /* 0 for plain minimax */
 
 char h[256];   /* bitmap of positions in game history */
-int nodes[99]; /* number of nodes visited at each depth */
+int nodes[100]; /* number of nodes visited at each depth */
 long ngames;
+long ngamesatdepth[100];
 
 void show(int n, int black, int white, int alpha, int beta, int passed)
 	/* print 2-line ascii representation of position */
@@ -45,9 +46,10 @@ int owns(int bb)
 
 int popcnt[16] = {0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4}; /* number of 1 bits */
 
-int score(int black, int white)
+int score(int depth, int black, int white)
 {
   ngames++;
+  ngamesatdepth[depth]++;
   if (black==0)
     return white ? -4 : 0;
   if (white==0)
@@ -84,7 +86,7 @@ int xab(int n, int black, int white, int alpha, int beta, int passed)
   if (n<NSHOW)
     show(n,black,white,alpha,beta,passed);
 
-  s = passed ? score(black, white) : oab(n+1,black,white,alpha,beta,1);
+  s = passed ? score(n, black, white) : oab(n+1,black,white,alpha,beta,1);
   if (s > alpha && (alpha=s) >= beta && CUT) return alpha;
 
   for (i=0; i<NMOVES; i++) {
@@ -107,7 +109,7 @@ int oab(int n, int black, int white, int alpha, int beta, int passed)
   if (n<NSHOW)
     show(n,black,white,alpha,beta,passed);
 
-  s = passed ? score(black, white) : xab(n+1,black,white,alpha,beta,1);
+  s = passed ? score(n, black, white) : xab(n+1,black,white,alpha,beta,1);
   if (s < beta && (beta=s) <= alpha && CUT) return beta;
 
   for (i=0; i<NMOVES; i++) {
@@ -130,6 +132,8 @@ int main()
     s += nodes[i];
     printf("%d: %d\n", i, nodes[i]);
   }
+  for (i=0; i<100; i++)
+    printf("%2d: nodes %ld games %ld\n", i, nodes[i], ngamesatdepth[i]);
   printf("total: %d\nngames: %ld\nx wins by %d\n", s, ngames, c);
   return 0;
 }
