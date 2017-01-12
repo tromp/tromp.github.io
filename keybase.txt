@@ -1,0 +1,73 @@
+==================================================================
+https://keybase.io/tromp
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://tromp.github.io
+  * I am tromp (https://keybase.io/tromp) on keybase.
+  * I have a public key with fingerprint 8CC0 CEF5 924F B634 C669  8AFC B7A2 C0F0 E0D4 468A
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101294e7fe77726b4dd5b2e4dcf25d9b066e0d734254530b33f4eb23b02e1dfa3f50a",
+            "fingerprint": "8cc0cef5924fb634c6698afcb7a2c0f0e0d4468a",
+            "host": "keybase.io",
+            "key_id": "b7a2c0f0e0d4468a",
+            "kid": "0101294e7fe77726b4dd5b2e4dcf25d9b066e0d734254530b33f4eb23b02e1dfa3f50a",
+            "uid": "edb506af4e0b9084484d283a59bb9a19",
+            "username": "tromp"
+        },
+        "service": {
+            "hostname": "tromp.github.io",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1475205180,
+    "expire_in": 157680000,
+    "prev": "b46f267a0eebf0791ba4eb1c1894802b14e3f43e91dcd954251b5f345362a9e7",
+    "seqno": 5,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1
+
+owGtUm1MU1cYbos4wJU2M2NkaGIvWSJZx+7HuV9VUJm6kYjIptEwRnPPveeWi9Bb
+2tKOKTjQGJExl9aFZHH4iV8TcSwyskVhsGQ42BI2J2wolo/JlKB1CnPi4u5lW7If
++7nz5+S87/M8532evO+ZYwwm46dHOqORy2v3GntvQsPmqcHcbRhUpQrMsQ3biuYu
+VCIhn9+5VZEwB4YTOEHyALEyYlmWZCCQJBqSCEiiTNISD3GGQbjEUoCkAU3hkKJk
+gCBJQZxEhCQLlEzjAmbHZMXtQl6PV3H7NVlOFHERyTRPAhkyFBAZhucEWYSsQIq4
+jGuSADCcTixSfTpDGw4KPpSuqFpNezjnxvsP/P88d/mcHJIgjTOCBsEhj3MAcEAi
+OUqgeQh5geB1oA953UIp0tB+r1rqwSrtmFYKKCLSU9Vt/Lud7lL8ReXwLz8er+pX
+RbVEaxb5/R6fQyf7Kzw6Ooig828dJ1Tckpajxgggr09R3ZiD0JCiX9GFCcDSJE4T
+HG7H0JsexYucio6gWYbDtaP/gwJ6aoCRSYbdIuAIQRlneQIKmnlCJDgecDgJCYC0
+OCjEE5Io8bSWEQFpmdKCYkiBRyymWytzq5iD1uYUXJqmT3G5BX+5F2GVCbWmRfMM
+RpNhfqxJ3zBDQrz1n7WLTbYaaq5XpRDP37l2hjQTkYnkxzvkvm8Ox8XN1J+qo5pb
+gw9e+iDS1fDU0+h+51R5ylsR7mZBpenKSNVtV9vUw+aGjz+brRtKXvn7XewIvj2+
+xrd6JHXxk3sdXzaaPzrXobaoa8aa4bq7S+FQa+Pnj/vHbbszCwZWIX550VXbqUvt
+9X/kGfNHGbw1OyPjTKblZMZzy44Vd0y3NIhGOXNd9NsllkojvN8XKtxVOL0+Zf/Y
+pqsF1knutv0sokIF8VWpTF8oWhRJA+dTi5dUj3SbLAeeSQ/srmjJj/x4obGr90Ax
+dGf+cvG7/lCSw/1r7EqHOQeNb9k/Y3o/v+xoY1Z0nAj3j46Yrg02JfZsqN3QanUu
+WMV279o30X7SNhBaz3E/nKb67GByLPJ9y73ErImO344vDPFffJJtLeGjT+zxLGrL
+efGV42drry/MzTEkhZ+12uoefWguVS6e27nxwsDovEH7g9dnXg4cygzucG6sDV7+
+anImy/ECMXtjUCqYyVhw8HwP9WpwsbhitaWZAYxNrf7p4GEseTyvdPu92rYVhfXt
+m8MNCWlNx0wl4U3Onrez88Dw0Vsx8bllQ73vDlvyByx3Cl3Bpp3Uo3cedrs5j6l+
+1nxjeXXSifzEtDXLkosvmb++lR1T81qYP9QVF5i2hdUTXa1vzL8yMVD68x7m9NpO
+53DJUsuf
+=af5X
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/tromp
+
+==================================================================

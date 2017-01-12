@@ -3,7 +3,7 @@
 /* trying moves before passes slows search dramatically */
 
 #include <stdio.h>
-#define NSHOW 8
+#define NSHOW 4
 #define NMOVES 4
 #define CUT 0   /* 0 for plain minimax */
 
@@ -86,7 +86,7 @@ int xab(int n, int black, int white, int alpha, int beta, int passed)
   if (n<NSHOW)
     show(n,black,white,alpha,beta,passed);
 
-  s = passed ? score(n, black, white) : oab(n+1,black,white,alpha,beta,1);
+  s = passed ? score(n, black, white) : oab(n,black,white,alpha,beta,1);
   if (s > alpha && (alpha=s) >= beta && CUT) return alpha;
 
   for (i=0; i<NMOVES; i++) {
@@ -109,7 +109,7 @@ int oab(int n, int black, int white, int alpha, int beta, int passed)
   if (n<NSHOW)
     show(n,black,white,alpha,beta,passed);
 
-  s = passed ? score(n, black, white) : xab(n+1,black,white,alpha,beta,1);
+  s = passed ? score(n, black, white) : xab(n,black,white,alpha,beta,1);
   if (s < beta && (beta=s) <= alpha && CUT) return beta;
 
   for (i=0; i<NMOVES; i++) {
