@@ -1,0 +1,136 @@
+{!--Source: http://en.wikipedia.org/wiki/Binary_lambda_calculus
+Updated: 2016-12-29T22:49Z
+This article is being considered for deletion in accordance with Wikipedia's deletion policy.
+Please share your thoughts on the matter at this article's entry on the Articles for deletion page.
+Feel free to edit the article, but the article must not be blanked, and this notice must not be removed, until the discussion is closed. For more information, particularly on merging or moving the article during the discussion, read the guide to deletion.
+Steps to list an article for deletion:
+{{subst:Article for deletion}}
+Preloaded debate OR {{subst:afd2|pg=Binary lambda calculus|cat=|text=}} ~~~~ (categories)
+}
+{{subst:afd3|pg=Binary lambda calculus}} (add to top of list)
+Please consider notifying the author(s) by placing {{subst:Afd-notice|Binary lambda calculus}} ~~~~ on their talk page(s).
+Unregistered users placing this tag on an article cannot complete the deletion nomination and should leave detailed reasons for deletion on Talk:Binary lambda calculus. If the nomination is not completed and no message is left on the talkpage, this tag may be removed.
+
+This article has multiple issues. Please help improve it or discuss these issues on the talk page. (Learn how and when to remove these template messages)
+This article possibly contains original research. (September 2010)
+A major contributor to this article appears to have a close connection with its subject. (November 2015)
+This article's tone or style may not reflect the encyclopedic tone used on Wikipedia. (February 2016)
+The topic of this article may not meet Wikipedia's general notability guideline. (June 2016)
+Binary lambda calculus (BLC) is a minimal, purely functional programming language invented by John Tromp in 2004,[1] based on a binary encoding of the untyped lambda calculus in De Bruijn index notation.
+Contents
+1 Background
+2 Binary strings in BLC
+3 Delimited versus undelimited
+4 Universality
+5 Lambda encoding
+6 BLC Complexity
+7 Basic Theorems
+8 Halting probability
+9 BLC8: byte sized I/O
+10 BLC in the IOCCC 2012
+11 References
+12 External links
+Background
+
+BLC is designed to provide a very simple and elegant concrete definition of descriptional complexity (Kolmogorov complexity), where the complexity of an object is the length of its shortest description.
+This is made precise by identifying a description method with a computable function that transforms bitstrings (descriptions) into objects. Objects are usually also just bitstrings, but can have additional structure as well, e.g., pairs of strings.
+Originally, Turing machines, the most well known formalism for computation, were used for this purpose. But they are somewhat lacking in ease of construction and composability. Another classical computational formalism, the Lambda calculus, offers distinct advantages in ease of use. BLC is the result of incorporating a notion of binary I/O into lambda calculus, so as to turn it into an effective description method.
+Binary strings in BLC
+
+BLC represents bits 0 and 1 are as the standard lambda booleans B0 = True and B1 = False:
+True = \lambda x\, \lambda y.\, x
+False = \lambda x\, \lambda y.\, y
+which can be seen to directly implement the if-then-else operator.
+The standard pairing function
+\langle,\rangle = \lambda x \,\lambda y \,\lambda z.\, z x y
+applied to two terms M and N
+\langle M, N \rangle = \lambda z.\, z M N
+can be applied to a boolean to yield the desired component of choice.
+BLC represents a string s = b0b1…bn−1 by repeated pairing as
+\langle B_{b_0}, \langle B_{b_1} \ldots \langle B_{b_{n-1}}, z\rangle \ldots \rangle \rangle  which is denoted as s:z\ .
+The z works as a list continuation, that could be a nil list (to end the string) or another string (that would be appended to the original string).
+Delimited versus undelimited
+
+Descriptional complexity comes in two distinct flavors, depending on whether the input is considered to be delimited.
+Knowing the end of your input makes it easier to describe objects. For instance, you can just copy the whole input to output. This flavor is called plain or simple complexity.
+But in a sense it is additional information. A file system for instance needs to separately store the length of files. The C language uses the null character to denote the end of a string, but this comes at the cost of not having that character available within strings.
+The other flavor is called prefix complexity, named after prefix codes, where the machine needs to figure out, from the input read so far, whether it needs to read more bits. We say that the input is self-delimiting. This works better for communication channels, since one can send multiple descriptions, one after the other, and still tell them apart.
+In the I/O model of BLC, the flavor is dictated by the choice of z. When kept as a free variable, and required to appear as part of the output, then the machine must be working in a self-delimiting manner. If on the other hand z is a lambda term specifically designed to be easy to distinguish from any pairing, then the input becomes delimited. BLC chooses False for this purpose but gives it the more descriptive alternative name of Nil. Dealing with lists that may be Nil is straightforward: since
+\langle x, y \rangle\ M\ N = M\ x\ y\ N, and
+Nil\ M\ N = N
+one can write functions M and N to deal with the two cases, the only caveat being that N will be passed to M as its third argument.
+Universality
+
+One can find a description method U such that for any other description method D, there is a constant c (depending only on D) such that no object takes more than c extra bits to describe with method U than with method D. BLC is designed to make these constants relatively small. In fact the constant will be the length of a binary encoding of a D-interpreter written in BLC, and U will be a lambda term that parses this encoding and runs this decoded interpreter on the rest of the input. U won't even have to know whether the description is delimited or not; it works the same either way.
+BLC not only represents bitstrings as lambda calculus terms, but the other way around as well.
+Lambda encoding
+
+First, lambda terms are written in a particular notation using what is known as De Bruijn indices. The encoding is then defined recursively as follows
+\widehat{\lambda M}= 00\widehat{M}
+\widehat{M\ N}=01\widehat{M}\widehat{N}
+\widehat{i}=1^i0
+For instance, the pairing function \lambda x\lambda y\lambda z.xzy is written \lambda \lambda \lambda. 1 3 2 in De Bruijn format, which has encoding 00\ 00\ 00\ 01\ 01\ 10\ 1110\ 110.
+A closed lambda term is one in which all variables are bound, i.e. without any free variables. In De Bruijn format, this means that an index i can only appear within at least i nested lambdas. The number of closed terms of size n bits is given by sequence OEIS A114852 of the On-Line Encyclopedia of Integer Sequences.
+The shortest possible closed term is the identity function \widehat{\lambda 1} = 0010. In delimited mode, this machine just copies its input to its output.
+The universal machine U in BLC is then, in De Bruijn format (all indices are single digit):
+(\lambda 1 1) (\lambda \lambda \lambda 1 (\lambda \lambda \lambda \lambda 3 (\lambda 5 (3 (\lambda 2 (3 (\lambda \lambda 3 (\lambda 1 2 3))) (4 (\lambda 4 (\lambda 3 1 (2 1))))))
+(1 (2 (\lambda 1 2)) (\lambda 4 (\lambda 4 (\lambda 2 (1 4))) 5)))) (3 3) 2) (\lambda 1 ((\lambda 1 1) (\lambda 1 1)))
+This is in binary:
+0101000110100000000101011000000000011110000101111110011110
+0001011100111100000011110000101101101110011111000011111000
+0101111010011101001011001110000110110000101111100001111100
+0011100110111101111100111101110110000110010001101000011010
+(only 232 bits (29 bytes) long)
+A detailed analysis of machine U may be found in.[1]
+BLC Complexity
+
+In general, complexity of an object can be conditional on several other objects that are provided as additional argument to the universal machine. BLC defines Plain (or simple) complexity KS and prefix complexity KP by
+\begin{align}KS(x|y_1,\ldots,y_{k}) &= \min \{ \ell(p)\ |\ U\ (p:Nil)\ y_1\ \ldots\ y_{k} = \ \,x\ \ \ \  \}\\KP(x|y_1,\ldots,y_{k}) &= \min \{ \ell(p)\ |\ U\ (p:\ z\ \ )\   y_1\ \ldots\ y_{k} = \langle x,z \rangle \}\end{align}
+Basic Theorems
+
+The identity program \lambda 1 proves that
+KS(x) \leq \ell(x) + 4
+The program \lambda \lambda 1 ((\lambda 1 1) (\lambda \lambda \lambda \lambda 2 (4 4) (\lambda \lambda 3 2 (3 2 (2 (5 1 (2 1))))))) (\lambda \lambda 1) (\lambda \lambda \lambda 1 (\lambda 4 (\lambda 4 (\lambda 1 3 2)))) (\lambda \lambda \lambda 1 (3 (\lambda \lambda 1)) 2) (\lambda 1) 2 proves that
+KP(x|\ell(x)) \leq \ell(x)+188
+The program
+(\lambda 1 1) (\lambda \lambda \lambda 1 (\lambda 1 (3 (\lambda \lambda 1)) (4 4 (\lambda 1 (\lambda \lambda \lambda 1 (\lambda 4 (\lambda \lambda 5 2 (5 2 (3 1 (2 1)))))) 4 (\lambda 1))))) (\lambda \lambda \lambda 1 (3 ((\lambda 1 1) (\lambda \lambda \lambda \lambda 1 (\lambda 5 5 (\lambda \lambda 3 5 6 (\lambda 1 (\lambda \lambda 6 1 2) 3)) (\lambda \lambda 5 (\lambda 1 4 3))) (3 1)) (\lambda \lambda 1 (\lambda \lambda 2) 2) (\lambda 1)) (\lambda \lambda 1)) 2)
+proves that
+KP(x) \leq \ell(\overline{x})+338
+where \overline{x} is the Levenstein code for x defined by
+\begin{array}{ll}\overline{0} & = 0 \\\overline{n+1} & = 1\ \overline{\ell(n)}\ n\\\end{array}
+in which we identify numbers and bitstrings according to lexicographic order. This code has the nice property that for all k,
+\ell(\overline{n}) \leq \ell(n)+\ell(\ell(n))+\cdots+ \ell^{k-1}(n) + O(\ell^k(n))
+Furthermore, it makes lexicographic order of delimited numbers coincide with numeric order.
+Number	String	Delimited
+0		0
+1	0	10
+2	1	110 0
+3	00	110 1
+4	01	1110 0 00
+5	10	1110 0 01
+6	11	1110 0 10
+7	000	1110 0 11
+8	001	1110 1 000
+9	010	1110 1 001
+Halting probability
+
+The halting probability of the prefix universal machine is defined as the probability it will output any term that has a closed normal form (this includes all translated strings):
+\Omega_{\lambda} = \sum_{\stackrel{U (p:z) = \langle x,z \rangle}{x\in NF}} 2^{-\ell(p)}
+With some effort, we can determine the first 4 bits of this particular number of wisdom:
+\Omega_{\lambda} = .0001\ldots_2
+where probability .00012 = 2−4 is already contributed by programs 00100 and 00101 for terms True and False.
+BLC8: byte sized I/O
+
+While bit streams are nice in theory, they fare poorly in interfacing with the real world. The language BLC8 is a more practical variation on BLC in which programs operate on a stream of bytes, where each byte is represented as a delimited list of 8 bits in big-endian order.
+BLC in the IOCCC 2012
+
+An implementation of both BLC and BLC8 in the C programming language won the "Most Functional" award in the 2012 edition of the International Obfuscated C Code Contest.
+References
+
+^ a b John Tromp, Binary Lambda Calculus and Combinatory Logic, in Randomness And Complexity, from Leibniz To Chaitin, ed. Cristian S. Calude, World Scientific Publishing Company, October 2008. (The last reference, to an initial Haskell implementation, is dated 2004) (pdf version) Archived March 4, 2016, at the Wayback Machine.
+External links
+
+John's Lambda Calculus and Combinatory Logic Playground
+A Binary Lambda Calculus interpreter in C for the IOCCC
+Counting Terms in the Binary Lambda Calculus
+Text is available under the Creative Commons Attribution-ShareAlike License; additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. � Wikipedia is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
