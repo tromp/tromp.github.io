@@ -1,0 +1,2730 @@
+<p><b>Binary lambda calculus</b> (<b>BLC</b>) is a minimal, <a href="https://en.wikipedia.org/wiki/Purely_functional" class="mw-disambig" title="Purely functional">pure</a> <a href="https://en.wikipedia.org/wiki/Functional_programming_language" class="mw-redirect" title="Functional programming language">functional programming language</a> invented by John Tromp in 2004,<sup id="cite_ref-RAC_1-0" class="reference"><a href="#cite_note-RAC-1">[1]</a></sup> based on a <a href="https://en.wikipedia.org/wiki/Binary_encoding" class="mw-redirect" title="Binary encoding">binary encoding</a> of the <a href="https://en.wikipedia.org/wiki/Untyped_lambda_calculus" class="mw-redirect" title="Untyped lambda calculus">untyped lambda calculus</a> in <a href="https://en.wikipedia.org/wiki/De_Bruijn_index" title="De Bruijn index">De Bruijn index</a> notation.</p>
+<p></p>
+<div id="toc" class="toc">
+<div id="toctitle">
+<h2>Contents</h2>
+</div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Background"><span class="tocnumber">1</span> <span class="toctext">Background</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Binary_I.2FO"><span class="tocnumber">2</span> <span class="toctext">Binary I/O</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Delimited_versus_undelimited"><span class="tocnumber">3</span> <span class="toctext">Delimited versus undelimited</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Universality"><span class="tocnumber">4</span> <span class="toctext">Universality</span></a></li>
+<li class="toclevel-1 tocsection-5"><a href="#Lambda_encoding"><span class="tocnumber">5</span> <span class="toctext">Lambda encoding</span></a></li>
+<li class="toclevel-1 tocsection-6"><a href="#Complexity.2C_concretely"><span class="tocnumber">6</span> <span class="toctext">Complexity, concretely</span></a></li>
+<li class="toclevel-1 tocsection-7"><a href="#Theorems.2C_concretely"><span class="tocnumber">7</span> <span class="toctext">Theorems, concretely</span></a></li>
+<li class="toclevel-1 tocsection-8"><a href="#Complexity_of_Sets"><span class="tocnumber">8</span> <span class="toctext">Complexity of Sets</span></a></li>
+<li class="toclevel-1 tocsection-9"><a href="#Symmetry_of_information"><span class="tocnumber">9</span> <span class="toctext">Symmetry of information</span></a></li>
+<li class="toclevel-1 tocsection-10"><a href="#A_quine"><span class="tocnumber">10</span> <span class="toctext">A quine</span></a></li>
+<li class="toclevel-1 tocsection-11"><a href="#Compression"><span class="tocnumber">11</span> <span class="toctext">Compression</span></a></li>
+<li class="toclevel-1 tocsection-12"><a href="#Halting_probability"><span class="tocnumber">12</span> <span class="toctext">Halting probability</span></a></li>
+<li class="toclevel-1 tocsection-13"><a href="#BLC8:_byte_sized_I.2FO"><span class="tocnumber">13</span> <span class="toctext">BLC8: byte sized I/O</span></a></li>
+<li class="toclevel-1 tocsection-14"><a href="#Brainfuck"><span class="tocnumber">14</span> <span class="toctext">Brainfuck</span></a></li>
+<li class="toclevel-1 tocsection-15"><a href="#See_also"><span class="tocnumber">15</span> <span class="toctext">See also</span></a></li>
+<li class="toclevel-1 tocsection-16"><a href="#References"><span class="tocnumber">16</span> <span class="toctext">References</span></a></li>
+<li class="toclevel-1 tocsection-17"><a href="#External_links"><span class="tocnumber">17</span> <span class="toctext">External links</span></a></li>
+</ul>
+</div>
+<p></p>
+<h2><span class="mw-headline" id="Background">Background</span></h2>
+<p>BLC is designed to provide a very simple and elegant concrete definition of descriptional complexity (<a href="https://en.wikipedia.org/wiki/Kolmogorov_complexity" title="Kolmogorov complexity">Kolmogorov complexity</a>).</p>
+<p>Roughly speaking, the complexity of an object is the length of its shortest description.</p>
+<p>To make this precise, we take descriptions to be bitstrings, and identify a description method with some computational device, or machine, that transforms descriptions into objects. Objects are usually also just bitstrings, but can have additional structure as well, e.g., pairs of strings.</p>
+<p>Originally, <a href="https://en.wikipedia.org/wiki/Turing_machine" title="Turing machine">Turing machines</a>, the most well known formalism for computation, were used for this purpose. But they are somewhat lacking in ease of construction and composability. Another classical computational formalism, the <a href="https://en.wikipedia.org/wiki/Lambda_calculus" title="Lambda calculus">Lambda calculus</a>, offers distinct advantages in ease of use. The lambda calculus doesn't incorporate any notion of I/O though, so one needs to be designed.</p>
+<h2><span class="mw-headline" id="Binary_I.2FO">Binary I/O</span></h2>
+<p>Adding a readbit primitive function to lambda calculus, as <a href="https://en.wikipedia.org/wiki/Chaitin" class="mw-redirect" title="Chaitin">Chaitin</a> did for <a href="https://en.wikipedia.org/wiki/LISP" class="mw-redirect" title="LISP">LISP</a>, would destroy its <a href="https://en.wikipedia.org/wiki/Referential_transparency_(computer_science)" class="mw-redirect" title="Referential transparency (computer science)">referential transparency</a>, unless one distinguishes between an I/O action and its result, as <a href="https://en.wikipedia.org/wiki/Haskell_(programming_language)" title="Haskell (programming language)">Haskell</a> does with its <a href="https://en.wikipedia.org/wiki/Monad_(functional_programming)" title="Monad (functional programming)">monadic</a> I/O. But that requires a type system, an unnecessary complication.</p>
+<p>Instead, BLC requires translating bitstrings into lambda terms, to which the machine (itself a lambda term) can be readily applied.</p>
+<p>Bits 0 and 1 are translated into the standard <a href="https://en.wikipedia.org/wiki/Lambda_calculus#Logic_and_predicates" title="Lambda calculus">lambda booleans</a> <i>B</i><sub>0</sub>&#160;= True and <i>B</i><sub>1</sub>&#160;= False:</p>
+<dl>
+<dd>True = <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>x</mi>
+        <mspace width="thinmathspace" />
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>y</mi>
+        <mo>.</mo>
+        <mspace width="thinmathspace" />
+        <mi>x</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \lambda x\,\lambda y.\,x}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e904473ba5603fd08011cd515a3c56733a53506d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:8.396ex; height:2.509ex;" alt="\lambda x\,\lambda y.\,x" /></span></dd>
+<dd>False = <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>x</mi>
+        <mspace width="thinmathspace" />
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>y</mi>
+        <mo>.</mo>
+        <mspace width="thinmathspace" />
+        <mi>y</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \lambda x\,\lambda y.\,y}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/8db801cd132b44f13593aa9bfa31430d74d6eb46" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:8.222ex; height:2.509ex;" alt="\lambda x\,\lambda y.\,y" /></span></dd>
+</dl>
+<p>which can be seen to directly implement the <a href="https://en.wikipedia.org/wiki/If-then-else" class="mw-redirect" title="If-then-else">if-then-else</a> operator.</p>
+<p>Now consider the pairing function</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo fence="false" stretchy="false">&#x27E8;<!-- ⟨ --></mo>
+        <mo>,</mo>
+        <mo fence="false" stretchy="false">&#x27E9;<!-- ⟩ --></mo>
+        <mo>=</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>x</mi>
+        <mspace width="thinmathspace" />
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>y</mi>
+        <mspace width="thinmathspace" />
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>z</mi>
+        <mo>.</mo>
+        <mspace width="thinmathspace" />
+        <mi>z</mi>
+        <mi>x</mi>
+        <mi>y</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \langle ,\rangle =\lambda x\,\lambda y\,\lambda z.\,zxy}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e59733a3540c0bd9cb17ff7589d06af33afb185d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:19.496ex; height:2.843ex;" alt="\langle ,\rangle =\lambda x\,\lambda y\,\lambda z.\,zxy" /></span></dd>
+</dl>
+<p>applied to two terms <i>M</i> and <i>N</i></p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo fence="false" stretchy="false">&#x27E8;<!-- ⟨ --></mo>
+        <mi>M</mi>
+        <mo>,</mo>
+        <mi>N</mi>
+        <mo fence="false" stretchy="false">&#x27E9;<!-- ⟩ --></mo>
+        <mo>=</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>z</mi>
+        <mo>.</mo>
+        <mspace width="thinmathspace" />
+        <mi>z</mi>
+        <mi>M</mi>
+        <mi>N</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \langle M,N\rangle =\lambda z.\,zMN}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9ce5370191ae131a7071a2e7fe3a1862846ae1ed" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:20.031ex; height:2.843ex;" alt="\langle M,N\rangle =\lambda z.\,zMN" /></span>.</dd>
+</dl>
+<p>Applying this to a boolean yields the desired component of choice.</p>
+<p>A string <i>s</i>&#160;= <i>b</i><sub>0</sub><i>b</i><sub>1</sub>…<i>b</i><sub>n−1</sub> is represented by repeated pairing as</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo fence="false" stretchy="false">&#x27E8;<!-- ⟨ --></mo>
+        <msub>
+          <mi>B</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <msub>
+              <mi>b</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mn>0</mn>
+              </mrow>
+            </msub>
+          </mrow>
+        </msub>
+        <mo>,</mo>
+        <mo fence="false" stretchy="false">&#x27E8;<!-- ⟨ --></mo>
+        <msub>
+          <mi>B</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <msub>
+              <mi>b</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mn>1</mn>
+              </mrow>
+            </msub>
+          </mrow>
+        </msub>
+        <mo>&#x2026;<!-- … --></mo>
+        <mo fence="false" stretchy="false">&#x27E8;<!-- ⟨ --></mo>
+        <msub>
+          <mi>B</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <msub>
+              <mi>b</mi>
+              <mrow class="MJX-TeXAtom-ORD">
+                <mi>n</mi>
+                <mo>&#x2212;<!-- − --></mo>
+                <mn>1</mn>
+              </mrow>
+            </msub>
+          </mrow>
+        </msub>
+        <mo>,</mo>
+        <mi>z</mi>
+        <mo fence="false" stretchy="false">&#x27E9;<!-- ⟩ --></mo>
+        <mo>&#x2026;<!-- … --></mo>
+        <mo fence="false" stretchy="false">&#x27E9;<!-- ⟩ --></mo>
+        <mo fence="false" stretchy="false">&#x27E9;<!-- ⟩ --></mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \langle B_{b_{0}},\langle B_{b_{1}}\ldots \langle B_{b_{n-1}},z\rangle \ldots \rangle \rangle }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/7ddd436696b04abc20035b936b8cc9e7fc9f461f" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -1.005ex; width:27.828ex; height:3.009ex;" alt="\langle B_{b_{0}},\langle B_{b_{1}}\ldots \langle B_{b_{n-1}},z\rangle \ldots \rangle \rangle " /></span> which is denoted as <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>s</mi>
+        <mo>:</mo>
+        <mi>z</mi>
+        <mtext>&#xA0;</mtext>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle s:z\ }</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/8635239c26e66623954d0113313ed3d5833cd98b" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:4.728ex; height:1.676ex;" alt="s:z\ " /></span>.</dd>
+</dl>
+<p>The <i>z</i> works as a list continuation, that could be a nil list (to end the string) or another string (that would be appended to the original string).</p>
+<h2><span class="mw-headline" id="Delimited_versus_undelimited">Delimited versus undelimited</span></h2>
+<p>Descriptional complexity actually comes in two distinct flavors, depending on whether the input is considered to be delimited.</p>
+<p>Knowing the end of your input makes it easier to describe objects. For instance, you can just copy the whole input to output. This flavor is called <i>plain</i> or <i>simple</i> complexity.</p>
+<p>But in a sense it is additional information. A file system for instance needs to separately store the length of files. The <a href="https://en.wikipedia.org/wiki/C_(programming_language)" title="C (programming language)">C language</a> uses the <a href="https://en.wikipedia.org/wiki/Null_character" title="Null character">null character</a> to denote the end of a string, but this comes at the cost of not having that character available within strings.</p>
+<p>The other flavor is called <i>prefix</i> complexity, named after <a href="https://en.wikipedia.org/wiki/Prefix_code" title="Prefix code">prefix codes</a>, where the machine needs to figure out, from the input read so far, whether it needs to read more bits. We say that the input is self-delimiting. This works better for communication channels, since one can send multiple descriptions, one after the other, and still tell them apart.</p>
+<p>In the I/O model of BLC, the flavor is dictated by the choice of <i>z</i>. If we keep it as a free variable, and demand that it appears as part of the output, then the machine must be working in a self-delimiting manner. If on the other hand we use a lambda term specifically designed to be easy to distinguish from any pairing, then the input becomes delimited. BLC chooses <i>False</i> for this purpose but gives it the more descriptive alternative name of <i>Nil</i>. Dealing with lists that may be Nil is straightforward: since</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo fence="false" stretchy="false">&#x27E8;<!-- ⟨ --></mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo fence="false" stretchy="false">&#x27E9;<!-- ⟩ --></mo>
+        <mtext>&#xA0;</mtext>
+        <mi>M</mi>
+        <mtext>&#xA0;</mtext>
+        <mi>N</mi>
+        <mo>=</mo>
+        <mi>M</mi>
+        <mtext>&#xA0;</mtext>
+        <mi>x</mi>
+        <mtext>&#xA0;</mtext>
+        <mi>y</mi>
+        <mtext>&#xA0;</mtext>
+        <mi>N</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \langle x,y\rangle \ M\ N=M\ x\ y\ N}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/2b01685bd7ef3fc410e9e0d5a68aeb16a06d8fab" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:22.952ex; height:2.843ex;" alt="\langle x,y\rangle \ M\ N=M\ x\ y\ N" /></span>, and</dd>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>N</mi>
+        <mi>i</mi>
+        <mi>l</mi>
+        <mtext>&#xA0;</mtext>
+        <mi>M</mi>
+        <mtext>&#xA0;</mtext>
+        <mi>N</mi>
+        <mo>=</mo>
+        <mi>N</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle Nil\ M\ N=N}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/02982c5e2a23630da30f2d0c7a2f3375627c3d6c" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:14.462ex; height:2.176ex;" alt="Nil\ M\ N=N" /></span></dd>
+</dl>
+<p>one can write functions <i>M</i> and <i>N</i> to deal with the two cases, the only caveat being that <i>N</i> will be passed to <i>M</i> as its third argument.</p>
+<h2><span class="mw-headline" id="Universality">Universality</span></h2>
+<p>We can find a description method <i>U</i> such that for any other description method <i>D</i>, there is a constant <i>c</i> (depending only on <i>D</i>) such that no object takes more than <i>c</i> extra bits to describe with method <i>U</i> than with method <i>D</i>. And BLC is designed to make these constants relatively small. In fact the constant will be the length of a binary encoding of a <i>D</i>-interpreter written in BLC, and <i>U</i> will be a lambda term that parses this encoding and runs this decoded interpreter on the rest of the input. <i>U</i> won't even have to know whether the description is delimited or not; it works the same either way.</p>
+<p>Having already solved the problem of translating bitstrings into lambda calculus, we now face the opposite problem: how to encode lambda terms into bitstrings?</p>
+<h2><span class="mw-headline" id="Lambda_encoding">Lambda encoding</span></h2>
+<p>First we need to write our lambda terms in a particular notation using what is known as <a href="https://en.wikipedia.org/wiki/De_Bruijn_indices" class="mw-redirect" title="De Bruijn indices">De Bruijn indices</a>. Our encoding is then defined recursively as follows</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mrow>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>M</mi>
+              </mrow>
+              <mo>&#x005E;<!-- ^ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+        <mo>=</mo>
+        <mn>00</mn>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mi>M</mi>
+              <mo>&#x005E;<!-- ^ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\widehat {\lambda M}}=00{\widehat {M}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/bcac5e01b71560a0da7bd8c5b93e5ff80fddd8f9" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; margin-right: -0.009ex; width:11.992ex; height:3.009ex;" alt="{\widehat {\lambda M}}=00{\widehat {M}}" /></span></dd>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mrow>
+                <mi>M</mi>
+                <mtext>&#xA0;</mtext>
+                <mi>N</mi>
+              </mrow>
+              <mo>&#x005E;<!-- ^ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+        <mo>=</mo>
+        <mn>01</mn>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mi>M</mi>
+              <mo>&#x005E;<!-- ^ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mi>N</mi>
+              <mo>&#x005E;<!-- ^ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\widehat {M\ N}}=01{\widehat {M}}{\widehat {N}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/09e957e8cd9d6806506652a62991f68ad08775ad" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; margin-right: -0.009ex; width:15.937ex; height:3.176ex;" alt="{\widehat {M\ N}}=01{\widehat {M}}{\widehat {N}}" /></span></dd>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mi>i</mi>
+              <mo>&#x005E;<!-- ^ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+        <mo>=</mo>
+        <msup>
+          <mn>1</mn>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>i</mi>
+          </mrow>
+        </msup>
+        <mn>0</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\widehat {i}}=1^{i}0}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/011a1bec684cefd8d93e5fa552ee506a342a4a43" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:7.435ex; height:2.843ex;" alt="{\widehat {i}}=1^{i}0" /></span></dd>
+</dl>
+<p>For instance, the pairing function <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>x</mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>y</mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>z</mi>
+        <mo>.</mo>
+        <mi>z</mi>
+        <mi>x</mi>
+        <mi>y</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \lambda x\lambda y\lambda z.zxy}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/dcc6e5cac9877be5171e9b78d2de3ec5af814c4f" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:12.351ex; height:2.509ex;" alt="\lambda x\lambda y\lambda z.zxy" /></span> is written <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>.132</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \lambda \lambda \lambda .132}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/566f6997861de3c447c9feebef15cf22525fa4f8" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:8.273ex; height:2.176ex;" alt="\lambda \lambda \lambda .132" /></span> in De Bruijn format, which has encoding <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mn>00</mn>
+        <mtext>&#xA0;</mtext>
+        <mn>00</mn>
+        <mtext>&#xA0;</mtext>
+        <mn>00</mn>
+        <mtext>&#xA0;</mtext>
+        <mn>01</mn>
+        <mtext>&#xA0;</mtext>
+        <mn>01</mn>
+        <mtext>&#xA0;</mtext>
+        <mn>10</mn>
+        <mtext>&#xA0;</mtext>
+        <mn>1110</mn>
+        <mtext>&#xA0;</mtext>
+        <mn>110</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle 00\ 00\ 00\ 01\ 01\ 10\ 1110\ 110}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/de52f110cb7d6e027572943339b28921f5635586" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:26.35ex; height:2.176ex;" alt="00\ 00\ 00\ 01\ 01\ 10\ 1110\ 110" /></span>.</p>
+<p>A <b>closed</b> lambda term is one in which all variables are bound, i.e. without any free variables. In De Bruijn format, this means that an index <i>i</i> can only appear within at least <i>i</i> nested lambdas. The number of closed terms of size <i>n</i> bits is given by sequence <span class="nowrap"><a href="https://en.wikipedia.org/wiki/On-Line_Encyclopedia_of_Integer_Sequences" title="OEIS"><img alt="OEIS" src="//upload.wikimedia.org/wikipedia/commons/thumb/d/d8/OEISicon_light.svg/11px-OEISicon_light.svg.png" width="11" height="15" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/d/d8/OEISicon_light.svg/17px-OEISicon_light.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/d/d8/OEISicon_light.svg/22px-OEISicon_light.svg.png 2x" data-file-width="409" data-file-height="556" /></a> <a href="//oeis.org/A114852" class="extiw" title="oeis:A114852">A114852</a></span> of the <a href="https://en.wikipedia.org/wiki/On-Line_Encyclopedia_of_Integer_Sequences" title="On-Line Encyclopedia of Integer Sequences">On-Line Encyclopedia of Integer Sequences</a>.</p>
+<p>The shortest possible closed term is the identity function <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mrow>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+              </mrow>
+              <mo>&#x005E;<!-- ^ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+        <mo>=</mo>
+        <mn>0010</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\widehat {\lambda 1}}=0010}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/3e4f17f0e170c0d2a8c76f3ea848db000eacf3d3" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:10.339ex; height:3.009ex;" alt="{\widehat {\lambda 1}}=0010" /></span>. In delimited mode, this machine just copies its input to its output.</p>
+<p>So what is this <a href="https://en.wikipedia.org/wiki/Universal_machine" class="mw-redirect" title="Universal machine">universal machine</a> <i>U</i>? Here it is, in De Bruijn format (all indices are single digit):</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>11</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>3</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>5</mn>
+        <mo stretchy="false">(</mo>
+        <mn>3</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>2</mn>
+        <mo stretchy="false">(</mo>
+        <mn>3</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>3</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>123</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>31</mn>
+        <mo stretchy="false">(</mo>
+        <mn>21</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle (\lambda 11)(\lambda \lambda \lambda 1(\lambda \lambda \lambda \lambda 3(\lambda 5(3(\lambda 2(3(\lambda \lambda 3(\lambda 123)))(4(\lambda 4(\lambda 31(21))))))}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/82373c4c8c75c689e4bb239264f73db45dfa5bd1" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:62.645ex; height:2.843ex;" alt="(\lambda 11)(\lambda \lambda \lambda 1(\lambda \lambda \lambda \lambda 3(\lambda 5(3(\lambda 2(3(\lambda \lambda 3(\lambda 123)))(4(\lambda 4(\lambda 31(21))))))" /></span></dd>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo stretchy="false">(</mo>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mn>2</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>12</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>2</mn>
+        <mo stretchy="false">(</mo>
+        <mn>14</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mn>5</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mn>33</mn>
+        <mo stretchy="false">)</mo>
+        <mn>2</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>11</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>11</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle (1(2(\lambda 12))(\lambda 4(\lambda 4(\lambda 2(14)))5))))(33)2)(\lambda 1((\lambda 11)(\lambda 11)))}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/2a49c5aaae14fea7de71f26106eadf4a47cff328" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:55.38ex; height:2.843ex;" alt="(1(2(\lambda 12))(\lambda 4(\lambda 4(\lambda 2(14)))5))))(33)2)(\lambda 1((\lambda 11)(\lambda 11)))" /></span></dd>
+</dl>
+<p>This is in binary:</p>
+<dl>
+<dd>0101000110100000000101011000000000011110000101111110011110</dd>
+<dd>0001011100111100000011110000101101101110011111000011111000</dd>
+<dd>0101111010011101001011001110000110110000101111100001111100</dd>
+<dd>0011100110111101111100111101110110000110010001101000011010</dd>
+<dd>(only 232 bits (29 bytes) long)</dd>
+</dl>
+<p>A detailed analysis of machine <i>U</i> may be found in.<sup id="cite_ref-RAC_1-1" class="reference"><a href="#cite_note-RAC-1">[1]</a></sup></p>
+<h2><span class="mw-headline" id="Complexity.2C_concretely">Complexity, concretely</span></h2>
+<p>In general, we can make complexity of an object conditional on several other objects that are provided as additional argument to the universal machine. Plain (or simple) complexity <i>KS</i> and prefix complexity <i>KP</i> are defined by</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mtable columnalign="right left right left right left right left right left right left" rowspacing="3pt" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" displaystyle="true">
+            <mtr>
+              <mtd>
+                <mi>K</mi>
+                <mi>S</mi>
+                <mo stretchy="false">(</mo>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mo stretchy="false">|</mo>
+                </mrow>
+                <msub>
+                  <mi>y</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>1</mn>
+                  </mrow>
+                </msub>
+                <mo>,</mo>
+                <mo>&#x2026;<!-- … --></mo>
+                <mo>,</mo>
+                <msub>
+                  <mi>y</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>k</mi>
+                  </mrow>
+                </msub>
+                <mo stretchy="false">)</mo>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mo>=</mo>
+                <mo movablelimits="true" form="prefix">min</mo>
+                <mo fence="false" stretchy="false">{</mo>
+                <mi>&#x2113;<!-- ℓ --></mi>
+                <mo stretchy="false">(</mo>
+                <mi>p</mi>
+                <mo stretchy="false">)</mo>
+                <mtext>&#xA0;</mtext>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mo stretchy="false">|</mo>
+                </mrow>
+                <mtext>&#xA0;</mtext>
+                <mi>U</mi>
+                <mtext>&#xA0;</mtext>
+                <mo stretchy="false">(</mo>
+                <mi>p</mi>
+                <mo>:</mo>
+                <mi>N</mi>
+                <mi>i</mi>
+                <mi>l</mi>
+                <mo stretchy="false">)</mo>
+                <mtext>&#xA0;</mtext>
+                <msub>
+                  <mi>y</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>1</mn>
+                  </mrow>
+                </msub>
+                <mtext>&#xA0;</mtext>
+                <mo>&#x2026;<!-- … --></mo>
+                <mtext>&#xA0;</mtext>
+                <msub>
+                  <mi>y</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>k</mi>
+                  </mrow>
+                </msub>
+                <mo>=</mo>
+                <mtext>&#xA0;</mtext>
+                <mspace width="thinmathspace" />
+                <mi>x</mi>
+                <mtext>&#xA0;</mtext>
+                <mtext>&#xA0;</mtext>
+                <mtext>&#xA0;</mtext>
+                <mtext>&#xA0;</mtext>
+                <mo fence="false" stretchy="false">}</mo>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd>
+                <mi>K</mi>
+                <mi>P</mi>
+                <mo stretchy="false">(</mo>
+                <mi>x</mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mo stretchy="false">|</mo>
+                </mrow>
+                <msub>
+                  <mi>y</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>1</mn>
+                  </mrow>
+                </msub>
+                <mo>,</mo>
+                <mo>&#x2026;<!-- … --></mo>
+                <mo>,</mo>
+                <msub>
+                  <mi>y</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>k</mi>
+                  </mrow>
+                </msub>
+                <mo stretchy="false">)</mo>
+              </mtd>
+              <mtd>
+                <mi></mi>
+                <mo>=</mo>
+                <mo movablelimits="true" form="prefix">min</mo>
+                <mo fence="false" stretchy="false">{</mo>
+                <mi>&#x2113;<!-- ℓ --></mi>
+                <mo stretchy="false">(</mo>
+                <mi>p</mi>
+                <mo stretchy="false">)</mo>
+                <mtext>&#xA0;</mtext>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mo stretchy="false">|</mo>
+                </mrow>
+                <mtext>&#xA0;</mtext>
+                <mi>U</mi>
+                <mtext>&#xA0;</mtext>
+                <mo stretchy="false">(</mo>
+                <mi>p</mi>
+                <mo>:</mo>
+                <mtext>&#xA0;</mtext>
+                <mi>z</mi>
+                <mtext>&#xA0;</mtext>
+                <mtext>&#xA0;</mtext>
+                <mo stretchy="false">)</mo>
+                <mtext>&#xA0;</mtext>
+                <msub>
+                  <mi>y</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>1</mn>
+                  </mrow>
+                </msub>
+                <mtext>&#xA0;</mtext>
+                <mo>&#x2026;<!-- … --></mo>
+                <mtext>&#xA0;</mtext>
+                <msub>
+                  <mi>y</mi>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mi>k</mi>
+                  </mrow>
+                </msub>
+                <mo>=</mo>
+                <mo fence="false" stretchy="false">&#x27E8;<!-- ⟨ --></mo>
+                <mi>x</mi>
+                <mo>,</mo>
+                <mi>z</mi>
+                <mo fence="false" stretchy="false">&#x27E9;<!-- ⟩ --></mo>
+                <mo fence="false" stretchy="false">}</mo>
+              </mtd>
+            </mtr>
+          </mtable>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\begin{aligned}KS(x|y_{1},\ldots ,y_{k})&amp;=\min\{\ell (p)\ |\ U\ (p:Nil)\ y_{1}\ \ldots \ y_{k}=\ \,x\ \ \ \ \}\\KP(x|y_{1},\ldots ,y_{k})&amp;=\min\{\ell (p)\ |\ U\ (p:\ z\ \ )\ y_{1}\ \ldots \ y_{k}=\langle x,z\rangle \}\end{aligned}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/3bce26b9774eb79c4c02d846a688959dba94af17" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -2.505ex; width:61.617ex; height:6.176ex;" alt="{\displaystyle {\begin{aligned}KS(x|y_{1},\ldots ,y_{k})&amp;=\min\{\ell (p)\ |\ U\ (p:Nil)\ y_{1}\ \ldots \ y_{k}=\ \,x\ \ \ \ \}\\KP(x|y_{1},\ldots ,y_{k})&amp;=\min\{\ell (p)\ |\ U\ (p:\ z\ \ )\ y_{1}\ \ldots \ y_{k}=\langle x,z\rangle \}\end{aligned}}}" /></span></dd>
+</dl>
+<h2><span class="mw-headline" id="Theorems.2C_concretely">Theorems, concretely</span></h2>
+<p>The identity program <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \lambda 1}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/45271abc2cd44634709de2a39b4df28afea9d867" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:2.539ex; height:2.176ex;" alt="\lambda 1" /></span> proves that</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>K</mi>
+        <mi>S</mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+        <mo>&#x2264;<!-- ≤ --></mo>
+        <mi>&#x2113;<!-- ℓ --></mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+        <mo>+</mo>
+        <mn>4</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle KS(x)\leq \ell (x)+4}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0d5fa50dc8fccc4150ddcdc8b7e53c6af0e4537c" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:18.04ex; height:2.843ex;" alt="KS(x)\leq \ell (x)+4" /></span></dd>
+</dl>
+<p>The program <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>11</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>2</mn>
+        <mo stretchy="false">(</mo>
+        <mn>44</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>32</mn>
+        <mo stretchy="false">(</mo>
+        <mn>32</mn>
+        <mo stretchy="false">(</mo>
+        <mn>2</mn>
+        <mo stretchy="false">(</mo>
+        <mn>51</mn>
+        <mo stretchy="false">(</mo>
+        <mn>21</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>132</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mn>3</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mn>2</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mn>2</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \lambda \lambda 1((\lambda 11)(\lambda \lambda \lambda \lambda 2(44)(\lambda \lambda 32(32(2(51(21)))))))(\lambda \lambda 1)(\lambda \lambda \lambda 1(\lambda 4(\lambda 4(\lambda 132))))(\lambda \lambda \lambda 1(3(\lambda \lambda 1))2)(\lambda 1)2}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/174b492e4b7731ee51f011985676ae4c52398efd" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:97.196ex; height:2.843ex;" alt="\lambda \lambda 1((\lambda 11)(\lambda \lambda \lambda \lambda 2(44)(\lambda \lambda 32(32(2(51(21)))))))(\lambda \lambda 1)(\lambda \lambda \lambda 1(\lambda 4(\lambda 4(\lambda 132))))(\lambda \lambda \lambda 1(3(\lambda \lambda 1))2)(\lambda 1)2" /></span> proves that</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>K</mi>
+        <mi>P</mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mo stretchy="false">|</mo>
+        </mrow>
+        <mi>&#x2113;<!-- ℓ --></mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo>&#x2264;<!-- ≤ --></mo>
+        <mi>&#x2113;<!-- ℓ --></mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+        <mo>+</mo>
+        <mn>188</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle KP(x|\ell (x))\leq \ell (x)+188}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/bcfff287574577579004471fcfb3ae451dbade50" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:25.439ex; height:2.843ex;" alt="KP(x|\ell (x))\leq \ell (x)+188" /></span></dd>
+</dl>
+<p>The program</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>11</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mn>3</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mn>44</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>52</mn>
+        <mo stretchy="false">(</mo>
+        <mn>52</mn>
+        <mo stretchy="false">(</mo>
+        <mn>31</mn>
+        <mo stretchy="false">(</mo>
+        <mn>21</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mn>3</mn>
+        <mo stretchy="false">(</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>11</mn>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle (\lambda 11)(\lambda \lambda \lambda 1(\lambda 1(3(\lambda \lambda 1))(44(\lambda 1(\lambda \lambda \lambda 1(\lambda 4(\lambda \lambda 52(52(31(21))))))4(\lambda 1)))))(\lambda \lambda \lambda 1(3((\lambda 11)}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/3ffcda65f8dd73381dbe50f3348caf5d56c2e768" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:85.469ex; height:2.843ex;" alt="(\lambda 11)(\lambda \lambda \lambda 1(\lambda 1(3(\lambda \lambda 1))(44(\lambda 1(\lambda \lambda \lambda 1(\lambda 4(\lambda \lambda 52(52(31(21))))))4(\lambda 1)))))(\lambda \lambda \lambda 1(3((\lambda 11)" /></span> <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>55</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>356</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>612</mn>
+        <mo stretchy="false">)</mo>
+        <mn>3</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>5</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>143</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mn>31</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>2</mn>
+        <mo stretchy="false">)</mo>
+        <mn>2</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mn>2</mn>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle (\lambda \lambda \lambda \lambda 1(\lambda 55(\lambda \lambda 356(\lambda 1(\lambda \lambda 612)3))(\lambda \lambda 5(\lambda 143)))(31))(\lambda \lambda 1(\lambda \lambda 2)2)(\lambda 1))(\lambda \lambda 1))2)}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0fb398d0c4ffa9bf36b994ea0e011030b21aefc8" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:78.998ex; height:2.843ex;" alt="(\lambda \lambda \lambda \lambda 1(\lambda 55(\lambda \lambda 356(\lambda 1(\lambda \lambda 612)3))(\lambda \lambda 5(\lambda 143)))(31))(\lambda \lambda 1(\lambda \lambda 2)2)(\lambda 1))(\lambda \lambda 1))2)" /></span></dd>
+</dl>
+<p>proves that</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>K</mi>
+        <mi>P</mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+        <mo>&#x2264;<!-- ≤ --></mo>
+        <mi>&#x2113;<!-- ℓ --></mi>
+        <mo stretchy="false">(</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mover>
+            <mi>x</mi>
+            <mo accent="false">&#x00AF;<!-- ¯ --></mo>
+          </mover>
+        </mrow>
+        <mo stretchy="false">)</mo>
+        <mo>+</mo>
+        <mn>338</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle KP(x)\leq \ell ({\overline {x}})+338}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d3c8dbbf9c12dfa3100a9144df7833f156de69e6" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:20.747ex; height:3.009ex;" alt="KP(x)\leq \ell ({\overline {x}})+338" /></span></dd>
+</dl>
+<p>where <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mover>
+            <mi>x</mi>
+            <mo accent="false">&#x00AF;<!-- ¯ --></mo>
+          </mover>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\overline {x}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9fa4039bbc2a0048c3a3c02e5fd24390cab0dc97" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:1.455ex; height:2.509ex;" alt="{\overline {x}}" /></span> is the <a href="https://en.wikipedia.org/wiki/Levenstein_coding" class="mw-redirect" title="Levenstein coding">Levenstein code</a> for <i>x</i> defined by</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mtable columnalign="left left" rowspacing="4pt" columnspacing="1em">
+            <mtr>
+              <mtd>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mover>
+                    <mn>0</mn>
+                    <mo accent="false">&#x00AF;<!-- ¯ --></mo>
+                  </mover>
+                </mrow>
+              </mtd>
+              <mtd>
+                <mo>=</mo>
+                <mn>0</mn>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mover>
+                    <mrow>
+                      <mi>n</mi>
+                      <mo>+</mo>
+                      <mn>1</mn>
+                    </mrow>
+                    <mo accent="false">&#x00AF;<!-- ¯ --></mo>
+                  </mover>
+                </mrow>
+              </mtd>
+              <mtd>
+                <mo>=</mo>
+                <mn>1</mn>
+                <mtext>&#xA0;</mtext>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mover>
+                    <mrow>
+                      <mi>&#x2113;<!-- ℓ --></mi>
+                      <mo stretchy="false">(</mo>
+                      <mi>n</mi>
+                      <mo stretchy="false">)</mo>
+                    </mrow>
+                    <mo accent="false">&#x00AF;<!-- ¯ --></mo>
+                  </mover>
+                </mrow>
+                <mtext>&#xA0;</mtext>
+                <mi>n</mi>
+              </mtd>
+            </mtr>
+          </mtable>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\begin{array}{ll}{\overline {0}}&amp;=0\\{\overline {n+1}}&amp;=1\ {\overline {\ell (n)}}\ n\\\end{array}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/efe8d19a6acc57a7f10b66109617cdb4811b76c2" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -3.171ex; width:19.152ex; height:7.509ex;" alt="{\begin{array}{ll}{\overline {0}}&amp;=0\\{\overline {n+1}}&amp;=1\ {\overline {\ell (n)}}\ n\\\end{array}}" /></span></dd>
+</dl>
+<p>in which we identify numbers and bitstrings according to lexicographic order. This code has the nice property that for all <i>k</i>,</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x2113;<!-- ℓ --></mi>
+        <mo stretchy="false">(</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mover>
+            <mi>n</mi>
+            <mo accent="false">&#x00AF;<!-- ¯ --></mo>
+          </mover>
+        </mrow>
+        <mo stretchy="false">)</mo>
+        <mo>&#x2264;<!-- ≤ --></mo>
+        <mi>&#x2113;<!-- ℓ --></mi>
+        <mo stretchy="false">(</mo>
+        <mi>n</mi>
+        <mo stretchy="false">)</mo>
+        <mo>+</mo>
+        <mi>&#x2113;<!-- ℓ --></mi>
+        <mo stretchy="false">(</mo>
+        <mi>&#x2113;<!-- ℓ --></mi>
+        <mo stretchy="false">(</mo>
+        <mi>n</mi>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo>+</mo>
+        <mo>&#x22EF;<!-- ⋯ --></mo>
+        <mo>+</mo>
+        <msup>
+          <mi>&#x2113;<!-- ℓ --></mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>k</mi>
+            <mo>&#x2212;<!-- − --></mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+        <mo stretchy="false">(</mo>
+        <mi>n</mi>
+        <mo stretchy="false">)</mo>
+        <mo>+</mo>
+        <mi>O</mi>
+        <mo stretchy="false">(</mo>
+        <msup>
+          <mi>&#x2113;<!-- ℓ --></mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>k</mi>
+          </mrow>
+        </msup>
+        <mo stretchy="false">(</mo>
+        <mi>n</mi>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \ell ({\overline {n}})\leq \ell (n)+\ell (\ell (n))+\cdots +\ell ^{k-1}(n)+O(\ell ^{k}(n))}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/3addd75b9b29dcb791cd2a70aafa5e47dc06b416" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:49.17ex; height:3.176ex;" alt="\ell ({\overline {n}})\leq \ell (n)+\ell (\ell (n))+\cdots +\ell ^{k-1}(n)+O(\ell ^{k}(n))" /></span></dd>
+</dl>
+<p>Furthermore, it makes lexicographic order of delimited numbers coincide with numeric order.</p>
+<table class="wikitable" border="1">
+<tr>
+<th>Number</th>
+<th>String</th>
+<th>Delimited</th>
+</tr>
+<tr>
+<td>0</td>
+<td></td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>110 0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>00</td>
+<td>110 1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>01</td>
+<td>1110 0 00</td>
+</tr>
+<tr>
+<td>5</td>
+<td>10</td>
+<td>1110 0 01</td>
+</tr>
+<tr>
+<td>6</td>
+<td>11</td>
+<td>1110 0 10</td>
+</tr>
+<tr>
+<td>7</td>
+<td>000</td>
+<td>1110 0 11</td>
+</tr>
+<tr>
+<td>8</td>
+<td>001</td>
+<td>1110 1 000</td>
+</tr>
+<tr>
+<td>9</td>
+<td>010</td>
+<td>1110 1 001</td>
+</tr>
+</table>
+<h2><span class="mw-headline" id="Complexity_of_Sets">Complexity of Sets</span></h2>
+<p>The complexity of a set of natural numbers is the complexity of its characteristic sequence, an infinite lambda term in the <a href="/w/index.php?title=Infinitary_Lambda_Calculus&amp;action=edit&amp;redlink=1" class="new" title="Infinitary Lambda Calculus (page does not exist)">Infinitary Lambda Calculus</a>.</p>
+<p>The program</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>11</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>441</mn>
+        <mo stretchy="false">(</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>11</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>2</mn>
+        <mo stretchy="false">(</mo>
+        <mn>11</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>13</mn>
+        <mo stretchy="false">(</mo>
+        <mn>2</mn>
+        <mo stretchy="false">(</mo>
+        <mn>64</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mn>13</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>2</mn>
+        <mo stretchy="false">)</mo>
+        <mn>2</mn>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \lambda (\lambda 1(1((\lambda 11)(\lambda \lambda \lambda 1(\lambda \lambda 1)((\lambda 441((\lambda 11)(\lambda 2(11))))(\lambda \lambda \lambda \lambda 13(2(64)))))(\lambda \lambda \lambda 4(13)))))(\lambda \lambda 1(\lambda \lambda 2)2)}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c57e7d50fdd46aa6447eb6e0b5ac8bbf1f5a4c34" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:94.142ex; height:2.843ex;" alt="\lambda (\lambda 1(1((\lambda 11)(\lambda \lambda \lambda 1(\lambda \lambda 1)((\lambda 441((\lambda 11)(\lambda 2(11))))(\lambda \lambda \lambda \lambda 13(2(64)))))(\lambda \lambda \lambda 4(13)))))(\lambda \lambda 1(\lambda \lambda 2)2)" /></span></dd>
+</dl>
+<p>whose first 100 bits of output are</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mn>0011010100010100010100010000010100000100010100010000010000010100000100010100000100010000010000000100</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle 0011010100010100010100010000010100000100010100010000010000010100000100010100000100010000010000000100}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a5c65ba3ef891676bc9b3d4fb81faceeb3f88820" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:117.291ex; height:2.176ex;" alt="0011010100010100010100010000010100000100010100010000010000010100000100010100000100010000010000000100" /></span></dd>
+</dl>
+<p>proves that</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi class="MJX-tex-mathit" mathvariant="italic">K</mi>
+            <mi class="MJX-tex-mathit" mathvariant="italic">S</mi>
+          </mrow>
+        </mrow>
+        <mo stretchy="false">(</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi class="MJX-tex-mathit" mathvariant="italic">P</mi>
+            <mi class="MJX-tex-mathit" mathvariant="italic">R</mi>
+            <mi class="MJX-tex-mathit" mathvariant="italic">I</mi>
+            <mi class="MJX-tex-mathit" mathvariant="italic">M</mi>
+            <mi class="MJX-tex-mathit" mathvariant="italic">E</mi>
+            <mi class="MJX-tex-mathit" mathvariant="italic">S</mi>
+          </mrow>
+        </mrow>
+        <mo stretchy="false">)</mo>
+        <mo>&#x2264;<!-- ≤ --></mo>
+        <mn>167</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\mathit {KS}}({\mathit {PRIMES}})\leq 167}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0036dcb35dff29a8a8abbdb6a2c2d43cb4a347d9" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:20.77ex; height:2.843ex;" alt="{\mathit {KS}}({\mathit {PRIMES}})\leq 167" /></span> (a prime)</dd>
+</dl>
+<p>while a simple variation proves</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi class="MJX-tex-mathit" mathvariant="italic">K</mi>
+            <mi class="MJX-tex-mathit" mathvariant="italic">P</mi>
+          </mrow>
+        </mrow>
+        <mo stretchy="false">(</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi class="MJX-tex-mathit" mathvariant="italic">P</mi>
+            <mi class="MJX-tex-mathit" mathvariant="italic">R</mi>
+            <mi class="MJX-tex-mathit" mathvariant="italic">I</mi>
+            <mi class="MJX-tex-mathit" mathvariant="italic">M</mi>
+            <mi class="MJX-tex-mathit" mathvariant="italic">E</mi>
+            <mi class="MJX-tex-mathit" mathvariant="italic">S</mi>
+          </mrow>
+        </mrow>
+        <mo stretchy="false">)</mo>
+        <mo>&#x2264;<!-- ≤ --></mo>
+        <mn>176</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\mathit {KP}}({\mathit {PRIMES}})\leq 176}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b9dedb0a082fc9e6d4a32e5afba88f998b20b781" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:21.039ex; height:2.843ex;" alt="{\mathit {KP}}({\mathit {PRIMES}})\leq 176" /></span></dd>
+</dl>
+<p>This is even shorter than Haskell's 23 byte long</p>
+<div class="mw-highlight mw-content-ltr" dir="ltr">
+<pre>
+ <span class="n">nubBy</span><span class="p">(((</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="p">)</span><span class="o">.</span><span class="n">gcd</span><span class="p">)[</span><span class="mi">2</span><span class="o">..</span><span class="p">]</span>
+</pre></div>
+<h2><span class="mw-headline" id="Symmetry_of_information">Symmetry of information</span></h2>
+<p>The program</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>2</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mn>32</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>31</mn>
+        <mo stretchy="false">(</mo>
+        <mn>611</mn>
+        <mo stretchy="false">(</mo>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>11</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>12</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>82</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mn>66</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>172</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mn>5</mn>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle (\lambda 1(\lambda \lambda 2)(\lambda 1(\lambda \lambda 1))(\lambda \lambda \lambda (\lambda 1(32)(\lambda \lambda 31(611(4((\lambda 11)(\lambda \lambda \lambda \lambda \lambda 12(\lambda 1(\lambda \lambda 1)(\lambda \lambda \lambda 82)(\lambda \lambda 1)(4(66)(\lambda 4(\lambda 172))))))5)}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/dc4b261a0c13944d30b9fcf53557df203518eb0f" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:107.285ex; height:2.843ex;" alt="(\lambda 1(\lambda \lambda 2)(\lambda 1(\lambda \lambda 1))(\lambda \lambda \lambda (\lambda 1(32)(\lambda \lambda 31(611(4((\lambda 11)(\lambda \lambda \lambda \lambda \lambda 12(\lambda 1(\lambda \lambda 1)(\lambda \lambda \lambda 82)(\lambda \lambda 1)(4(66)(\lambda 4(\lambda 172))))))5)" /></span> <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>2</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>164</mn>
+        <mo stretchy="false">)</mo>
+        <mn>2</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>11</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>3</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>6</mn>
+        <mo stretchy="false">(</mo>
+        <mn>3</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>2</mn>
+        <mo stretchy="false">(</mo>
+        <mn>3</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle (\lambda \lambda 1)(\lambda \lambda \lambda \lambda 1)(\lambda \lambda 2)(\lambda \lambda 1))(\lambda \lambda \lambda 1(\lambda 164)2)))(4(\lambda 1)(\lambda 1)(\lambda 1)1))(\lambda 1))(\lambda \lambda (\lambda 11)(\lambda \lambda \lambda \lambda 1(\lambda (\lambda \lambda \lambda \lambda 3(\lambda 6(3(\lambda 2(3}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/12f13d0eac6b975ec2ad8ebd4e74e8cc09fe7ecb" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:104.537ex; height:2.843ex;" alt="(\lambda \lambda 1)(\lambda \lambda \lambda \lambda 1)(\lambda \lambda 2)(\lambda \lambda 1))(\lambda \lambda \lambda 1(\lambda 164)2)))(4(\lambda 1)(\lambda 1)(\lambda 1)1))(\lambda 1))(\lambda \lambda (\lambda 11)(\lambda \lambda \lambda \lambda 1(\lambda (\lambda \lambda \lambda \lambda 3(\lambda 6(3(\lambda 2(3" /></span> <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>14</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>3</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>123</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>14</mn>
+        <mo stretchy="false">(</mo>
+        <mn>31</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mn>21</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mn>2</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>12</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>5</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>5</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>2</mn>
+        <mo stretchy="false">(</mo>
+        <mn>15</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mn>76</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>6</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>132</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>4</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>132</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mn>44</mn>
+        <mo stretchy="false">)</mo>
+        <mn>3</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle (\lambda 14(\lambda 3(\lambda 123))))(4(\lambda 4(\lambda 14(31)(21))))))(1(2(\lambda 12))(\lambda \lambda 5(\lambda 5(\lambda 2(15)))76))(\lambda 6(\lambda 132))))(\lambda 4(\lambda 132)))(44)3))}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/5db1e6fa3e66753058bb6d8c5f696c4b1f1bb1c3" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:105.269ex; height:2.843ex;" alt="(\lambda 14(\lambda 3(\lambda 123))))(4(\lambda 4(\lambda 14(31)(21))))))(1(2(\lambda 12))(\lambda \lambda 5(\lambda 5(\lambda 2(15)))76))(\lambda 6(\lambda 132))))(\lambda 4(\lambda 132)))(44)3))" /></span></dd>
+</dl>
+<p>proves that</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>K</mi>
+        <mi>P</mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+        <mo>&#x2264;<!-- ≤ --></mo>
+        <mi>K</mi>
+        <mi>P</mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+        <mo>+</mo>
+        <mi>K</mi>
+        <mi>P</mi>
+        <mo stretchy="false">(</mo>
+        <mi>y</mi>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mo stretchy="false">|</mo>
+        </mrow>
+        <msup>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mo>&#x2217;<!-- ∗ --></mo>
+          </mrow>
+        </msup>
+        <mo stretchy="false">)</mo>
+        <mo>+</mo>
+        <mn>657</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle KP(x,y)\leq KP(x)+KP(y|x^{\ast })+657}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/97f9b4da196a708ffb3f6b3a1fc31e98f649824b" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:38.432ex; height:2.843ex;" alt="KP(x,y)\leq KP(x)+KP(y|x^{\ast })+657" /></span></dd>
+</dl>
+<p>where <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msup>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mo>&#x2217;<!-- ∗ --></mo>
+          </mrow>
+        </msup>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle x^{\ast }}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/1014a2a78617b486da94e1f90294dd4dbdb03b54" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:2.402ex; height:2.343ex;" alt="x^{\ast }" /></span> is a shortest program for <i>x</i>.</p>
+<p>This inequality is the easy half of an equality (up to a constant) known as <b>Symmetry of information</b>. Proving the converse</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>K</mi>
+        <mi>P</mi>
+        <mo stretchy="false">(</mo>
+        <mi>y</mi>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mo stretchy="false">|</mo>
+        </mrow>
+        <msup>
+          <mi>x</mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mo>&#x2217;<!-- ∗ --></mo>
+          </mrow>
+        </msup>
+        <mo stretchy="false">)</mo>
+        <mo>&#x2264;<!-- ≤ --></mo>
+        <mi>K</mi>
+        <mi>P</mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo>,</mo>
+        <mi>y</mi>
+        <mo stretchy="false">)</mo>
+        <mo>&#x2212;<!-- − --></mo>
+        <mi>K</mi>
+        <mi>P</mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+        <mo>+</mo>
+        <mi>O</mi>
+        <mo stretchy="false">(</mo>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle KP(y|x^{\ast })\leq KP(x,y)-KP(x)+O(1)}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/34907d570252bcd7c0e70bd9497a13076e0d7319" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:39.7ex; height:2.843ex;" alt="KP(y|x^{\ast })\leq KP(x,y)-KP(x)+O(1)" /></span></dd>
+</dl>
+<p>involves simulating infinitely many programs in <a href="https://en.wikipedia.org/wiki/Dovetailing_(computer_science)" title="Dovetailing (computer science)">dovetailing</a> fashion, seeing which ones halt and output the pair of <i>x</i> (for which a shortest program is given) and any <i>y</i>, and for each such program <i>p</i>, requesting a new codeword for <i>y</i> of length <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x2113;<!-- ℓ --></mi>
+        <mo stretchy="false">(</mo>
+        <mi>p</mi>
+        <mo stretchy="false">)</mo>
+        <mo>&#x2212;<!-- − --></mo>
+        <mi>K</mi>
+        <mi>P</mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \ell (p)-KP(x)}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/08adbba93b2454a428f3b5d718485a2f8966c5c4" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:13.844ex; height:2.843ex;" alt="\ell (p)-KP(x)" /></span>. The <a href="https://en.wikipedia.org/wiki/Kraft_inequality" class="mw-redirect" title="Kraft inequality">Kraft inequality</a> ensures that this infinite enumeration of requests can be fulfilled, and in fact codewords for <i>y</i> can be decoded on the fly, in tandem with the above enumeration. Details of this fundamental result by Chaitin can be found in.<sup id="cite_ref-2" class="reference"><a href="#cite_note-2">[2]</a></sup></p>
+<h2><span class="mw-headline" id="A_quine">A quine</span></h2>
+<p>The term <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>Q</mi>
+        <mo>=</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>11</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>14</mn>
+        <mo stretchy="false">(</mo>
+        <mn>3</mn>
+        <mo stretchy="false">(</mo>
+        <mn>55</mn>
+        <mo stretchy="false">)</mo>
+        <mn>2</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mn>1</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle Q=\lambda 1((\lambda 11)(\lambda \lambda \lambda \lambda \lambda 14(3(55)2)))1}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b65e65242c0d243eed3fe7587aea044ee6d91c81" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:35.398ex; height:2.843ex;" alt="Q=\lambda 1((\lambda 11)(\lambda \lambda \lambda \lambda \lambda 14(3(55)2)))1" /></span> concatenates two copies of its input, proving that</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>K</mi>
+        <mi>S</mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+        <mo>&#x2264;<!-- ≤ --></mo>
+        <mi>&#x2113;<!-- ℓ --></mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+        <mo>+</mo>
+        <mn>66</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle KS(xx)\leq \ell (x)+66}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9d52dfd3ae024a9ffc369f43666ba6fca4488089" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:20.553ex; height:2.843ex;" alt="KS(xx)\leq \ell (x)+66" /></span></dd>
+</dl>
+<p>Applying it to its own encoding gives a 132 bit <a href="https://en.wikipedia.org/wiki/Quine_(computing)" title="Quine (computing)">quine</a>:</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>U</mi>
+        <mo stretchy="false">(</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mi>Q</mi>
+              <mo>&#x005E;<!-- ^ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mi>Q</mi>
+              <mo>&#x005E;<!-- ^ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+        <mo>:</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mi mathvariant="normal">N</mi>
+          <mi mathvariant="normal">i</mi>
+          <mi mathvariant="normal">l</mi>
+        </mrow>
+        <mo stretchy="false">)</mo>
+        <mo>=</mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mi>Q</mi>
+              <mo>&#x005E;<!-- ^ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mrow class="MJX-TeXAtom-ORD">
+            <mover>
+              <mi>Q</mi>
+              <mo>&#x005E;<!-- ^ --></mo>
+            </mover>
+          </mrow>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle U({\widehat {Q}}{\widehat {Q}}:\mathrm {Nil} )={\widehat {Q}}{\widehat {Q}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/95c2edf4bf70ec8e775a78b0481d94003ab151d7" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:19.143ex; height:3.509ex;" alt="{\displaystyle U({\widehat {Q}}{\widehat {Q}}:\mathrm {Nil} )={\widehat {Q}}{\widehat {Q}}}" /></span></dd>
+</dl>
+<h2><span class="mw-headline" id="Compression">Compression</span></h2>
+<p>So far, we've seen surprisingly little in the way of actually compressing an object into a shorter description; in the last example, we were only breaking even. For <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x2113;<!-- ℓ --></mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+        <mo>&gt;</mo>
+        <mn>66</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \ell (x)&gt;66}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/314b3d5d2d3f61e556424a98f219b7e71e41be8d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:9.605ex; height:2.843ex;" alt="\ell (x)&gt;66" /></span> though, we do actually compress <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>x</mi>
+        <mi>x</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle xx}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/01942dcb4131a025f2584b13809d039803492ffd" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:2.68ex; height:1.676ex;" alt="xx" /></span> by <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x2113;<!-- ℓ --></mi>
+        <mo stretchy="false">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false">)</mo>
+        <mo>&#x2212;<!-- − --></mo>
+        <mn>66</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \ell (x)-66}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6dde5ba4e0952c58c39080addef8a278b1e36b32" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:9.347ex; height:2.843ex;" alt="\ell (x)-66" /></span> bits.</p>
+<p>What could be the shortest program that produces a larger output? The following is a good candidate: the program <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1111</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>1</mn>
+        <mo stretchy="false">)</mo>
+        <mn>2</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">(</mo>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mn>2</mn>
+        <mo stretchy="false">(</mo>
+        <mn>21</mn>
+        <mo stretchy="false">)</mo>
+        <mo stretchy="false">)</mo>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle (\lambda 1111(\lambda \lambda 1(\lambda \lambda 1)2))(\lambda \lambda 2(21))}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/1fc6345d4e12c64b19fd8d356829b3fa10728770" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.838ex; width:30.44ex; height:2.843ex;" alt="(\lambda 1111(\lambda \lambda 1(\lambda \lambda 1)2))(\lambda \lambda 2(21))" /></span>, of size 55 bits, uses <a href="https://en.wikipedia.org/wiki/Church_numerals" class="mw-redirect" title="Church numerals">Church numerals</a> to output exactly <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msup>
+          <mn>2</mn>
+          <mrow class="MJX-TeXAtom-ORD">
+            <msup>
+              <mn>2</mn>
+              <mrow class="MJX-TeXAtom-ORD">
+                <msup>
+                  <mn>2</mn>
+                  <mrow class="MJX-TeXAtom-ORD">
+                    <mn>2</mn>
+                  </mrow>
+                </msup>
+              </mrow>
+            </msup>
+          </mrow>
+        </msup>
+        <mo>=</mo>
+        <mn>65536</mn>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle 2^{2^{2^{2}}}=65536}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6f454f5df196e1924e22ac7e4d9da439bd17a4c3" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:12.852ex; height:3.509ex;" alt="2^{2^{2^{2}}}=65536" /></span> ones. That beats both <a href="https://en.wikipedia.org/wiki/Gzip" title="Gzip">gzip</a> and <a href="https://en.wikipedia.org/wiki/Bzip2" title="Bzip2">bzip2</a>, compressors that need 344 and 352 bits respectively, to describe the same output (as an 8192 byte file with a single letter name).</p>
+<h2><span class="mw-headline" id="Halting_probability">Halting probability</span></h2>
+<p>The <a href="https://en.wikipedia.org/wiki/Halting_probability" class="mw-redirect" title="Halting probability">halting probability</a> of the prefix universal machine is defined as the probability it will output any term that has a closed normal form (this includes all translated strings):</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi mathvariant="normal">&#x03A9;<!-- Ω --></mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>&#x03BB;<!-- λ --></mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <munder>
+          <mo>&#x2211;<!-- ∑ --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mrow class="MJX-TeXAtom-REL">
+              <mover>
+                <mrow class="MJX-TeXAtom-OP">
+                  <mi>x</mi>
+                  <mo>&#x2208;<!-- ∈ --></mo>
+                  <mi>N</mi>
+                  <mi>F</mi>
+                </mrow>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <mi>U</mi>
+                  <mo stretchy="false">(</mo>
+                  <mi>p</mi>
+                  <mo>:</mo>
+                  <mi>z</mi>
+                  <mo stretchy="false">)</mo>
+                  <mo>=</mo>
+                  <mo fence="false" stretchy="false">&#x27E8;<!-- ⟨ --></mo>
+                  <mi>x</mi>
+                  <mo>,</mo>
+                  <mi>z</mi>
+                  <mo fence="false" stretchy="false">&#x27E9;<!-- ⟩ --></mo>
+                </mrow>
+              </mover>
+            </mrow>
+          </mrow>
+        </munder>
+        <msup>
+          <mn>2</mn>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mo>&#x2212;<!-- − --></mo>
+            <mi>&#x2113;<!-- ℓ --></mi>
+            <mo stretchy="false">(</mo>
+            <mi>p</mi>
+            <mo stretchy="false">)</mo>
+          </mrow>
+        </msup>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \Omega _{\lambda }=\sum _{\stackrel {U(p:z)=\langle x,z\rangle }{x\in NF}}2^{-\ell (p)}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b2cb890c0c968100ad837e718657ef13d7f5deda" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -5.005ex; width:19.646ex; height:7.509ex;" alt="{\displaystyle \Omega _{\lambda }=\sum _{\stackrel {U(p:z)=\langle x,z\rangle }{x\in NF}}2^{-\ell (p)}}" /></span></dd>
+</dl>
+<p>With some effort, we can determine the first 4 bits of this particular number of wisdom:</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <msub>
+          <mi mathvariant="normal">&#x03A9;<!-- Ω --></mi>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mi>&#x03BB;<!-- λ --></mi>
+          </mrow>
+        </msub>
+        <mo>=</mo>
+        <mn>.0001</mn>
+        <msub>
+          <mo>&#x2026;<!-- … --></mo>
+          <mrow class="MJX-TeXAtom-ORD">
+            <mn>2</mn>
+          </mrow>
+        </msub>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \Omega _{\lambda }=.0001\ldots _{2}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d57520587781f96f451a2f64ff44fe17cc53f89d" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.671ex; width:15.527ex; height:2.509ex;" alt="\Omega _{\lambda }=.0001\ldots _{2}" /></span></dd>
+</dl>
+<p>where probability <span class="texhtml">.0001<sub>2</sub>&#160;= 2<sup>−4</sup></span> is already contributed by programs <span style="font-family: monospace, monospace;">00100</span> and <span style="font-family: monospace, monospace;">00101</span> for terms True and False.</p>
+<h2><span class="mw-headline" id="BLC8:_byte_sized_I.2FO">BLC8: byte sized I/O</span></h2>
+<p>While bit streams are nice in theory, they fare poorly in interfacing with the real world. The language BLC8 is a more practical variation on BLC in which programs operate on a stream of bytes, where each byte is represented as a delimited list of 8 bits in <a href="https://en.wikipedia.org/wiki/Big-endian" class="mw-redirect" title="Big-endian">big-endian</a> order.</p>
+<p>BLC8 requires a more complicated universal machine:</p>
+<p><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mtable columnalign="right left right left right left right left right left right left" rowspacing="3pt" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" displaystyle="true">
+            <mtr>
+              <mtd>
+                <mi>U</mi>
+                <mn>8</mn>
+                <mo>=</mo>
+                <mspace width="thinmathspace" />
+              </mtd>
+              <mtd>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>11</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>2</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>7</mn>
+                <mo stretchy="false">(</mo>
+                <mn>10</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>5</mn>
+                <mo stretchy="false">(</mo>
+                <mn>2</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>3</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>123</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mn>11</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>3</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>31</mn>
+                <mo stretchy="false">(</mo>
+                <mn>21</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mn>3</mn>
+                <mo stretchy="false">)</mo>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd />
+              <mtd>
+                <mi></mi>
+                <mo stretchy="false">(</mo>
+                <mn>4</mn>
+                <mo stretchy="false">(</mo>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>15</mn>
+                <mo stretchy="false">)</mo>
+                <mn>3</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mn>10</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>2</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>2</mn>
+                <mo stretchy="false">(</mo>
+                <mn>16</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mn>6</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mn>8</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>87</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>162</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mn>43</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mn>11</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>2</mn>
+                <mo stretchy="false">(</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>11</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>11</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+              </mtd>
+            </mtr>
+          </mtable>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\begin{aligned}U8=\,&amp;\lambda 1((\lambda 11)(\lambda (\lambda \lambda \lambda 1(\lambda \lambda \lambda 2(\lambda \lambda \lambda (\lambda 7(10(\lambda 5(2(\lambda \lambda 3(\lambda 123)))(11(\lambda 3(\lambda 31(21)))))3)\\&amp;(4(1(\lambda 15)3)(10(\lambda 2(\lambda 2(16)))6)))8)(\lambda 1(\lambda 87(\lambda 162))))(\lambda 1(43)))(11))(\lambda \lambda 2((\lambda 11)(\lambda 11))))\end{aligned}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9e0110e0a62772b331f4f99383a900e1a77fdad9" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -2.505ex; width:92.209ex; height:6.176ex;" alt="{\displaystyle {\begin{aligned}U8=\,&amp;\lambda 1((\lambda 11)(\lambda (\lambda \lambda \lambda 1(\lambda \lambda \lambda 2(\lambda \lambda \lambda (\lambda 7(10(\lambda 5(2(\lambda \lambda 3(\lambda 123)))(11(\lambda 3(\lambda 31(21)))))3)\\&amp;(4(1(\lambda 15)3)(10(\lambda 2(\lambda 2(16)))6)))8)(\lambda 1(\lambda 87(\lambda 162))))(\lambda 1(43)))(11))(\lambda \lambda 2((\lambda 11)(\lambda 11))))\end{aligned}}}" /></span></p>
+<p>The parser in U8 keeps track of both remaining bytes, and remaining bits in the current byte, discarding the latter when parsing is completed. Thus the size of U8, which is 355 bits as a BLC program, is 45 bytes in BLC8.</p>
+<h2><span class="mw-headline" id="Brainfuck">Brainfuck</span></h2>
+<p>The following BLC8 program</p>
+<dl>
+<dd><span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mrow class="MJX-TeXAtom-ORD">
+          <mtable columnalign="left" rowspacing="4pt" columnspacing="1em">
+            <mtr>
+              <mtd>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>11</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>2111</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>133</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>7</mn>
+                <mo stretchy="false">(</mo>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mn>3</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <munder>
+                    <mn>10</mn>
+                    <mo>&#x005F;<!-- _ --></mo>
+                  </munder>
+                </mrow>
+                <mo stretchy="false">(</mo>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>6143</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>15</mn>
+                <mo stretchy="false">(</mo>
+                <mn>65432</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>2</mn>
+                <mo stretchy="false">(</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>11</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>2</mn>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>662</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>6</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mn>26</mn>
+                <mo stretchy="false">)</mo>
+                <mn>3</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <munder>
+                    <mn>15</mn>
+                    <mo>&#x005F;<!-- _ --></mo>
+                  </munder>
+                </mrow>
+                <mo stretchy="false">(</mo>
+                <mn>51</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mn>5</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">)</mo>
+                <mn>1</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mn>12</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>312</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>2</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mn>3</mn>
+                <mo stretchy="false">(</mo>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>9</mn>
+                <mo stretchy="false">(</mo>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>51</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>154</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd>
+                <mo stretchy="false">(</mo>
+                <mn>24</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>142</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mn>5</mn>
+                <mo stretchy="false">(</mo>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <munder>
+                    <mn>11</mn>
+                    <mo>&#x005F;<!-- _ --></mo>
+                  </munder>
+                </mrow>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <munder>
+                    <mn>12</mn>
+                    <mo>&#x005F;<!-- _ --></mo>
+                  </munder>
+                </mrow>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>2</mn>
+                <mo stretchy="false">(</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>11</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>11</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>2</mn>
+                <mo stretchy="false">(</mo>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mn>33</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>8</mn>
+                <mo stretchy="false">(</mo>
+                <mn>771</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mn>21</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <munder>
+                    <mn>12</mn>
+                    <mo>&#x005F;<!-- _ --></mo>
+                  </munder>
+                </mrow>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mrow class="MJX-TeXAtom-ORD">
+                  <munder>
+                    <mn>12</mn>
+                    <mo>&#x005F;<!-- _ --></mo>
+                  </munder>
+                </mrow>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>3</mn>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd>
+                <mo stretchy="false">(</mo>
+                <mn>21</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mn>11</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>11</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>2</mn>
+                <mo stretchy="false">)</mo>
+                <mn>2</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>2</mn>
+                <mo stretchy="false">(</mo>
+                <mn>21</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mn>22</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">(</mo>
+                <mn>1</mn>
+                <mo stretchy="false">(</mo>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mi>&#x03BB;<!-- λ --></mi>
+                <mn>1</mn>
+                <mo stretchy="false">)</mo>
+                <mo stretchy="false">)</mo>
+                <mn>1</mn>
+                <mo stretchy="false">)</mo>
+              </mtd>
+            </mtr>
+          </mtable>
+        </mrow>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle {\begin{array}{l}(\lambda 11)(\lambda (\lambda \lambda \lambda 1(\lambda (\lambda 2111(\lambda \lambda 133(\lambda \lambda 1(\lambda \lambda (\lambda 7(1(3(\lambda \lambda \lambda \lambda \lambda {\underline {10}}(1(\lambda 6143))(\lambda 15(65432)))(\lambda \lambda 2((\lambda 11)(\lambda \lambda \lambda 2\\(\lambda \lambda \lambda 662(\lambda \lambda 6(\lambda 1(26)3)({\underline {15}}(51(\lambda 1))(5(\lambda 1)1))))(12(\lambda \lambda \lambda 312)))1(\lambda \lambda 2)))))(3(1(\lambda \lambda \lambda \lambda 9(1(\lambda 51(\lambda 154)))\\(24(\lambda 142))))(5({\underline {11}}(\lambda 1))({\underline {12}}(\lambda 2((\lambda 11)(\lambda \lambda \lambda 1((\lambda 11)(\lambda \lambda \lambda 2(1(33))(\lambda 8(771))))21)))))))(\lambda {\underline {12}}(\lambda {\underline {12}}(\lambda 3\\(21))))))))(\lambda \lambda 1)))(11))(\lambda (\lambda 11)(\lambda \lambda 1((\lambda 1(1(1(\lambda \lambda 1(\lambda \lambda 2)2))))(\lambda \lambda 2(21))(\lambda \lambda 1))(22))(1(\lambda \lambda \lambda \lambda \lambda \lambda 1))1)\end{array}}}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/193b01cd8359fd220ec8ba8e0d2994a0937dae95" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -6.005ex; width:100.061ex; height:13.176ex;" alt="{\displaystyle {\begin{array}{l}(\lambda 11)(\lambda (\lambda \lambda \lambda 1(\lambda (\lambda 2111(\lambda \lambda 133(\lambda \lambda 1(\lambda \lambda (\lambda 7(1(3(\lambda \lambda \lambda \lambda \lambda {\underline {10}}(1(\lambda 6143))(\lambda 15(65432)))(\lambda \lambda 2((\lambda 11)(\lambda \lambda \lambda 2\\(\lambda \lambda \lambda 662(\lambda \lambda 6(\lambda 1(26)3)({\underline {15}}(51(\lambda 1))(5(\lambda 1)1))))(12(\lambda \lambda \lambda 312)))1(\lambda \lambda 2)))))(3(1(\lambda \lambda \lambda \lambda 9(1(\lambda 51(\lambda 154)))\\(24(\lambda 142))))(5({\underline {11}}(\lambda 1))({\underline {12}}(\lambda 2((\lambda 11)(\lambda \lambda \lambda 1((\lambda 11)(\lambda \lambda \lambda 2(1(33))(\lambda 8(771))))21)))))))(\lambda {\underline {12}}(\lambda {\underline {12}}(\lambda 3\\(21))))))))(\lambda \lambda 1)))(11))(\lambda (\lambda 11)(\lambda \lambda 1((\lambda 1(1(1(\lambda \lambda 1(\lambda \lambda 2)2))))(\lambda \lambda 2(21))(\lambda \lambda 1))(22))(1(\lambda \lambda \lambda \lambda \lambda \lambda 1))1)\end{array}}}" /></span></dd>
+</dl>
+<p>is an unbounded tape <a href="https://en.wikipedia.org/wiki/Brainfuck" title="Brainfuck">Brainfuck</a> interpreter in 829 bits (under 104 bytes). The formatting obscures the occurrence of double digit indices: a 10 on line 1, a 15 on line 2, and an 11 and three 12s on line 3. These indices are marked with underlines to distinguish them from single digit indices.</p>
+<p>This provides a nice example of the property that universal description methods differ by at most a constant in complexity. Writing a BLC8 interpreter in Brainfuck, which would provide a matching upper bound in the other direction, is left as an exercise for die-hard Brainfuck programmers.</p>
+<p>The interpreter expects its input to consist of a Brainfuck program followed by a <code>]</code> followed by the input for the Brainfuck program. The interpreter only looks at bits 0,1,4 of each character to determine which of <code>,-.+&lt;&gt;][</code> it is, so any characters other than those 8 should be stripped from a Brainfuck program. Consuming more input than is available results in an error (the non-list result <span class="mwe-math-element"><span class="mwe-math-mathml-inline mwe-math-mathml-a11y" style="display: none;"><math xmlns="http://www.w3.org/1998/Math/MathML" >
+  <semantics>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mstyle displaystyle="true" scriptlevel="0">
+        <mi>&#x03BB;<!-- λ --></mi>
+        <mi>x</mi>
+        <mo>.</mo>
+        <mi>x</mi>
+      </mstyle>
+    </mrow>
+    <annotation encoding="application/x-tex">{\displaystyle \lambda x.x}</annotation>
+  </semantics>
+</math></span><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/537ec33b43915b93dec1c98e433ec7a68bcab6a3" class="mwe-math-fallback-image-inline" aria-hidden="true" style="vertical-align: -0.338ex; width:5.09ex; height:2.176ex;" alt="\lambda x.x" /></span>).</p>
+<p>This interpreter is a rough translation of the following version written in <a href="https://en.wikipedia.org/wiki/Haskell_(programming_language)" title="Haskell (programming language)">Haskell</a></p>
+<div class="mw-highlight mw-content-ltr" dir="ltr">
+<pre>
+<span class="kr">import</span> <span class="nn">System.Environment</span><span class="p">(</span><span class="n">getArgs</span><span class="p">)</span>
+<span class="kr">import</span> <span class="nn">Control.Monad.State</span>
+<span class="kr">import</span> <span class="nn">Control.Monad.Writer</span>
+<span class="kr">import</span> <span class="nn">Control.Applicative</span> <span class="k">hiding</span> <span class="p">((</span><span class="o">&lt;|&gt;</span><span class="p">),</span><span class="nf">many</span><span class="p">)</span>
+<span class="kr">import</span> <span class="nn">Text.ParserCombinators.Parsec</span>
+
+<span class="nf">putc</span> <span class="ow">=</span> <span class="kr">do</span> <span class="p">(</span>     <span class="kr">_</span><span class="p">,</span>      <span class="kr">_</span><span class="p">,</span><span class="n">b</span><span class="p">,</span>      <span class="kr">_</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">get</span><span class="p">;</span> <span class="n">tell</span> <span class="p">[</span><span class="n">b</span><span class="p">]</span>
+<span class="nf">getc</span> <span class="ow">=</span> <span class="kr">do</span> <span class="p">(</span>  <span class="n">left</span><span class="p">,</span>  <span class="n">right</span><span class="p">,</span><span class="kr">_</span><span class="p">,</span><span class="n">b</span><span class="kt">:</span><span class="n">input</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">get</span><span class="p">;</span> <span class="n">put</span> <span class="p">(</span>  <span class="n">left</span><span class="p">,</span>  <span class="n">right</span><span class="p">,</span>     <span class="n">b</span><span class="p">,</span><span class="n">input</span><span class="p">)</span>
+<span class="nf">prev</span> <span class="ow">=</span> <span class="kr">do</span> <span class="p">(</span><span class="n">l</span><span class="kt">:</span><span class="n">left</span><span class="p">,</span>  <span class="n">right</span><span class="p">,</span><span class="n">b</span><span class="p">,</span>  <span class="n">input</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">get</span><span class="p">;</span> <span class="n">put</span> <span class="p">(</span>  <span class="n">left</span><span class="p">,</span><span class="n">b</span><span class="kt">:</span><span class="n">right</span><span class="p">,</span>     <span class="n">l</span><span class="p">,</span><span class="n">input</span><span class="p">)</span>
+<span class="nf">next</span> <span class="ow">=</span> <span class="kr">do</span> <span class="p">(</span>  <span class="n">left</span><span class="p">,</span><span class="n">r</span><span class="kt">:</span><span class="n">right</span><span class="p">,</span><span class="n">b</span><span class="p">,</span>  <span class="n">input</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">get</span><span class="p">;</span> <span class="n">put</span> <span class="p">(</span><span class="n">b</span><span class="kt">:</span><span class="n">left</span><span class="p">,</span>  <span class="n">right</span><span class="p">,</span>     <span class="n">r</span><span class="p">,</span><span class="n">input</span><span class="p">)</span>
+<span class="nf">decr</span> <span class="ow">=</span> <span class="kr">do</span> <span class="p">(</span>  <span class="n">left</span><span class="p">,</span>  <span class="n">right</span><span class="p">,</span><span class="n">b</span><span class="p">,</span>  <span class="n">input</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">get</span><span class="p">;</span> <span class="n">put</span> <span class="p">(</span>  <span class="n">left</span><span class="p">,</span>  <span class="n">right</span><span class="p">,</span><span class="n">pred</span> <span class="n">b</span><span class="p">,</span><span class="n">input</span><span class="p">)</span>
+<span class="nf">incr</span> <span class="ow">=</span> <span class="kr">do</span> <span class="p">(</span>  <span class="n">left</span><span class="p">,</span>  <span class="n">right</span><span class="p">,</span><span class="n">b</span><span class="p">,</span>  <span class="n">input</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">get</span><span class="p">;</span> <span class="n">put</span> <span class="p">(</span>  <span class="n">left</span><span class="p">,</span>  <span class="n">right</span><span class="p">,</span><span class="n">succ</span> <span class="n">b</span><span class="p">,</span><span class="n">input</span><span class="p">)</span>
+<span class="nf">loop</span> <span class="n">body</span> <span class="ow">=</span> <span class="kr">do</span> <span class="p">(</span><span class="kr">_</span><span class="p">,</span><span class="kr">_</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="kr">_</span><span class="p">)</span> <span class="ow">&lt;-</span> <span class="n">get</span><span class="p">;</span> <span class="n">when</span> <span class="p">(</span><span class="n">b</span> <span class="o">/=</span> <span class="sc">'</span><span class="se">\0</span><span class="sc">'</span><span class="p">)</span> <span class="p">(</span><span class="n">body</span> <span class="o">&gt;&gt;</span> <span class="n">loop</span> <span class="n">body</span><span class="p">)</span>
+<span class="nf">parseInstr</span> <span class="ow">=</span> <span class="n">liftM</span> <span class="n">loop</span> <span class="p">(</span><span class="n">between</span> <span class="p">(</span><span class="n">char</span> <span class="sc">'['</span><span class="p">)</span> <span class="p">(</span><span class="n">char</span> <span class="sc">']'</span><span class="p">)</span> <span class="n">parseInstrs</span><span class="p">)</span>
+             <span class="o">&lt;|&gt;</span> <span class="n">prev</span> <span class="o">&lt;$</span> <span class="n">char</span> <span class="sc">'&lt;'</span>
+             <span class="o">&lt;|&gt;</span> <span class="n">next</span> <span class="o">&lt;$</span> <span class="n">char</span> <span class="sc">'&gt;'</span>
+             <span class="o">&lt;|&gt;</span> <span class="n">decr</span> <span class="o">&lt;$</span> <span class="n">char</span> <span class="sc">'-'</span>
+             <span class="o">&lt;|&gt;</span> <span class="n">incr</span> <span class="o">&lt;$</span> <span class="n">char</span> <span class="sc">'+'</span>
+             <span class="o">&lt;|&gt;</span> <span class="n">putc</span> <span class="o">&lt;$</span> <span class="n">char</span> <span class="sc">'.'</span>
+             <span class="o">&lt;|&gt;</span> <span class="n">getc</span> <span class="o">&lt;$</span> <span class="n">char</span> <span class="sc">','</span>
+             <span class="o">&lt;|&gt;</span> <span class="n">return</span> <span class="nb">()</span> <span class="o">&lt;$</span> <span class="n">noneOf</span> <span class="s">"]"</span>
+<span class="nf">parseInstrs</span> <span class="ow">=</span> <span class="n">liftM</span> <span class="n">sequence_</span> <span class="p">(</span><span class="n">many</span> <span class="n">parseInstr</span><span class="p">)</span>
+<span class="nf">main</span> <span class="ow">=</span> <span class="kr">do</span> <span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="ow">&lt;-</span> <span class="n">getArgs</span>
+          <span class="n">source</span> <span class="ow">&lt;-</span> <span class="n">readFile</span> <span class="n">name</span>
+          <span class="n">input</span> <span class="ow">&lt;-</span> <span class="n">getContents</span>
+          <span class="kr">let</span> <span class="n">init</span> <span class="ow">=</span> <span class="p">(</span><span class="s">""</span><span class="p">,</span> <span class="n">repeat</span> <span class="sc">'</span><span class="se">\0</span><span class="sc">'</span><span class="p">,</span> <span class="sc">'</span><span class="se">\0</span><span class="sc">'</span><span class="p">,</span> <span class="n">input</span><span class="p">)</span>
+          <span class="n">putStrLn</span> <span class="o">$</span> <span class="n">either</span> <span class="n">show</span> <span class="p">(</span><span class="n">execWriter</span> <span class="o">.</span> <span class="p">(`</span><span class="n">evalStateT</span><span class="p">`</span> <span class="n">init</span><span class="p">))</span> <span class="p">(</span><span class="n">parse</span> <span class="n">parseInstrs</span> <span class="n">name</span> <span class="n">source</span><span class="p">)</span>
+</pre></div>
+<h2><span class="mw-headline" id="See_also">See also</span></h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Binary_combinatory_logic" title="Binary combinatory logic">Binary combinatory logic</a></li>
+</ul>
+<h2><span class="mw-headline" id="References">References</span></h2>
+<ol class="references">
+<li id="cite_note-RAC-1"><span class="mw-cite-backlink">^ <a href="#cite_ref-RAC_1-0"><sup><i><b>a</b></i></sup></a> <a href="#cite_ref-RAC_1-1"><sup><i><b>b</b></i></sup></a></span> <span class="reference-text">John Tromp, Binary Lambda Calculus and Combinatory Logic, in <i>Randomness And Complexity, from Leibniz To Chaitin</i>, ed. Cristian S. Calude, World Scientific Publishing Company, October 2008. (The last reference, to an initial Haskell implementation, is dated 2004) <a rel="nofollow" class="external text" href="http://tromp.github.io/cl/LC.pdf">(pdf version)</a></span></li>
+<li id="cite_note-2"><span class="mw-cite-backlink"><b><a href="#cite_ref-2">^</a></b></span> <span class="reference-text">G J Chaitin, <i>Algorithmic information theory</i>, Volume I in Cambridge Tracts in Theoretical Computer Science, Cambridge University Press, October 1987, <a rel="nofollow" class="external text" href="http://www.cs.auckland.ac.nz/~chaitin/cup.pdf">(pdf version)</a></span></li>
+</ol>
+<h2><span class="mw-headline" id="External_links">External links</span></h2>
+<ul>
+<li><a rel="nofollow" class="external text" href="http://tromp.github.io/cl/cl.html">John's Lambda Calculus and Combinatory Logic Playground</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.ioccc.org/2012/tromp/hint.html">A Binary Lambda Calculus interpreter in C for the IOCCC</a></li>
+<li><a rel="nofollow" class="external text" href="http://arxiv.org/abs/1401.0379">Counting Terms in the Binary Lambda Calculus</a></li>
+</ul>
+
