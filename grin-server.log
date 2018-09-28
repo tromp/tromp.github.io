@@ -1,959 +1,841 @@
-Sep 14 13:05:14.821 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (9 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:05:14.822 DEBG clean_peers V4(108.196.200.233:13414), not connected
-Sep 14 13:05:34.899 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (9 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:05:54.973 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (9 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:05:54.973 DEBG monitor_peers: updating expired dandelion relay
-Sep 14 13:05:54.973 DEBG Successfully updated Dandelion relay to: 89.221.215.219:13414
-Sep 14 13:06:15.057 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (9 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:06:22.695 DEBG Received block header 098c6edf at 94983 from 52.23.180.2:13414, going to process.
-Sep 14 13:06:22.695 DEBG pipe: process_block_header at 94983 [098c6edf]
-Sep 14 13:06:22.696 DEBG Requesting compact block 098c6edf from 52.23.180.2:13414
-Sep 14 13:06:22.702 DEBG Received block header 098c6edf at 94983 from 73.149.55.243:13414, going to process.
-Sep 14 13:06:22.702 DEBG pipe: process_block_header at 94983 [098c6edf]
-Sep 14 13:06:22.702 DEBG Requesting compact block 098c6edf from 73.149.55.243:13414
-Sep 14 13:06:22.763 DEBG Received block header 098c6edf at 94983 from 52.203.10.175:13414, going to process.
-Sep 14 13:06:22.763 DEBG pipe: process_block_header at 94983 [098c6edf]
-Sep 14 13:06:22.763 DEBG Requesting compact block 098c6edf from 52.203.10.175:13414
-Sep 14 13:06:22.828 DEBG handle_payload: received block: msg_len: 1252
-Sep 14 13:06:22.828 DEBG Received block 098c6edf at 94983 from 52.23.180.2:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
-Sep 14 13:06:22.828 DEBG pipe: process_block 098c6edf at 94983 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:06:22.828 DEBG lru_verifier_cache: rangeproofs: 1, not cached (must verify): 1
-Sep 14 13:06:22.833 DEBG lru_verifier_cache: kernel sigs: 1, not cached (must verify): 1
-Sep 14 13:06:22.840 DEBG pipe: chain head 098c6edf @ 94983
-Sep 14 13:06:22.841 DEBG adapter: block_accepted: 098c6edf
-Sep 14 13:06:22.841 DEBG Send header 098c6edf to 95.216.163.175:13414
-Sep 14 13:06:22.841 DEBG Send header 098c6edf to 51.15.219.12:13414
-Sep 14 13:06:22.841 DEBG Send header 098c6edf to 185.53.158.12:13414
-Sep 14 13:06:22.842 DEBG Send header 098c6edf to 54.198.222.93:13414
-Sep 14 13:06:22.842 DEBG Send header 098c6edf to 204.48.26.36:13414
-Sep 14 13:06:22.851 DEBG handle_payload: received block: msg_len: 1252
-Sep 14 13:06:22.851 DEBG Received block 098c6edf at 94983 from 73.149.55.243:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
-Sep 14 13:06:22.852 DEBG pipe: process_block 098c6edf at 94983 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:06:22.852 DEBG Block 098c6edf at 94983 is unfit at this time: already known in head
-Sep 14 13:06:22.852 DEBG adapter: process_block: block 098c6edf refused by chain: Block is unfit: already known in head
-Sep 14 13:06:22.888 DEBG handle_payload: received block: msg_len: 1252
-Sep 14 13:06:22.888 DEBG Received block 098c6edf at 94983 from 52.203.10.175:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
-Sep 14 13:06:22.888 DEBG pipe: process_block 098c6edf at 94983 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:06:22.888 DEBG Block 098c6edf at 94983 is unfit at this time: already known in head
-Sep 14 13:06:22.888 DEBG adapter: process_block: block 098c6edf refused by chain: Block is unfit: already known in head
-Sep 14 13:06:35.123 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (9 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:06:42.251 DEBG Received block header 09bf5a7d at 94984 from 89.221.215.219:13414, going to process.
-Sep 14 13:06:42.251 DEBG pipe: process_block_header at 94984 [09bf5a7d]
-Sep 14 13:06:42.251 DEBG Requesting compact block 09bf5a7d from 89.221.215.219:13414
-Sep 14 13:06:42.288 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:06:42.288 DEBG Received compact_block 09bf5a7d at 94984 from 89.221.215.219:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:06:42.288 DEBG pipe: process_block 09bf5a7d at 94984 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:06:42.288 DEBG lru_verifier_cache: rangeproofs: 1, not cached (must verify): 1
-Sep 14 13:06:42.293 DEBG Received block header 09bf5a7d at 94984 from 167.99.53.226:13414, going to process.
-Sep 14 13:06:42.293 DEBG pipe: process_block_header at 94984 [09bf5a7d]
-Sep 14 13:06:42.293 DEBG Requesting compact block 09bf5a7d from 167.99.53.226:13414
-Sep 14 13:06:42.293 DEBG lru_verifier_cache: kernel sigs: 1, not cached (must verify): 1
-Sep 14 13:06:42.298 DEBG pipe: chain head 09bf5a7d @ 94984
-Sep 14 13:06:42.298 DEBG adapter: block_accepted: 09bf5a7d
-Sep 14 13:06:42.299 DEBG Send header 09bf5a7d to 73.149.55.243:13414
-Sep 14 13:06:42.299 DEBG Send header 09bf5a7d to 52.23.180.2:13414
-Sep 14 13:06:42.299 DEBG Send header 09bf5a7d to 204.48.26.36:13414
-Sep 14 13:06:42.299 DEBG Send header 09bf5a7d to 52.203.10.175:13414
-Sep 14 13:06:42.299 DEBG Send header 09bf5a7d to 54.198.222.93:13414
-Sep 14 13:06:42.299 DEBG Send header 09bf5a7d to 51.15.219.12:13414
-Sep 14 13:06:42.310 DEBG Received block header 09bf5a7d at 94984 from 52.203.10.175:13414, going to process.
-Sep 14 13:06:42.310 DEBG pipe: process_block_header at 94984 [09bf5a7d]
-Sep 14 13:06:42.310 DEBG Block header 09bf5a7d refused by chain: Unfit("already known")
-Sep 14 13:06:42.406 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:06:42.407 DEBG Received compact_block 09bf5a7d at 94984 from 167.99.53.226:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:06:42.407 DEBG pipe: process_block 09bf5a7d at 94984 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:06:42.407 DEBG Block 09bf5a7d at 94984 is unfit at this time: already known in head
-Sep 14 13:06:42.407 DEBG adapter: process_block: block 09bf5a7d refused by chain: Block is unfit: already known in head
-Sep 14 13:06:55.196 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (9 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:07:15.281 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (9 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:07:22.698 DEBG handle_payload: received block: msg_len: 1252
-Sep 14 13:07:22.698 DEBG Received block 008d39e4 at 94985 from 185.53.158.12:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
-Sep 14 13:07:22.698 DEBG pipe: process_block 008d39e4 at 94985 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:07:22.699 DEBG lru_verifier_cache: rangeproofs: 1, not cached (must verify): 1
-Sep 14 13:07:22.703 DEBG lru_verifier_cache: kernel sigs: 1, not cached (must verify): 1
-Sep 14 13:07:22.708 DEBG pipe: chain head 008d39e4 @ 94985
-Sep 14 13:07:22.709 DEBG adapter: block_accepted: 008d39e4
-Sep 14 13:07:22.709 DEBG Suppress compact block send 008d39e4 to 185.53.158.12:13414 (already seen)
-Sep 14 13:07:22.709 DEBG broadcast_compact_block: 008d39e4, 40596384 at 94985, to 8 peers, done.
-Sep 14 13:07:35.365 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (9 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:07:55.438 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (9 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:08:02.639 DEBG Received block header 00ea2f75 at 94986 from 73.149.55.243:13414, going to process.
-Sep 14 13:08:02.639 DEBG pipe: process_block_header at 94986 [00ea2f75]
-Sep 14 13:08:02.639 DEBG Requesting compact block 00ea2f75 from 73.149.55.243:13414
-Sep 14 13:08:02.786 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:08:02.786 DEBG Received compact_block 00ea2f75 at 94986 from 73.149.55.243:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:08:02.786 DEBG pipe: process_block 00ea2f75 at 94986 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:08:02.786 DEBG lru_verifier_cache: rangeproofs: 1, not cached (must verify): 1
-Sep 14 13:08:02.791 DEBG lru_verifier_cache: kernel sigs: 1, not cached (must verify): 1
-Sep 14 13:08:02.796 DEBG pipe: chain head 00ea2f75 @ 94986
-Sep 14 13:08:02.796 DEBG adapter: block_accepted: 00ea2f75
-Sep 14 13:08:02.797 DEBG Suppress compact block send 00ea2f75 to 73.149.55.243:13414 (already seen)
-Sep 14 13:08:02.797 DEBG broadcast_compact_block: 00ea2f75, 40597030 at 94986, to 8 peers, done.
-Sep 14 13:08:02.854 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:08:02.854 DEBG Received compact_block 00ea2f75 at 94986 from 89.221.215.219:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:08:02.854 DEBG pipe: process_block 00ea2f75 at 94986 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:08:02.854 DEBG Block 00ea2f75 at 94986 is unfit at this time: already known in head
-Sep 14 13:08:02.854 DEBG adapter: process_block: block 00ea2f75 refused by chain: Block is unfit: already known in head
-Sep 14 13:08:15.511 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (9 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:08:35.595 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (9 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:08:55.676 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (9 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:09:11.270 DEBG Received block header 00b3ca12 at 94987 from 185.53.158.12:13414, going to process.
-Sep 14 13:09:11.270 DEBG Received block header 00b3ca12 at 94987 from 52.23.180.2:13414, going to process.
-Sep 14 13:09:11.271 DEBG pipe: process_block_header at 94987 [00b3ca12]
-Sep 14 13:09:11.271 DEBG pipe: process_block_header at 94987 [00b3ca12]
-Sep 14 13:09:11.271 DEBG Requesting compact block 00b3ca12 from 185.53.158.12:13414
-Sep 14 13:09:11.271 DEBG Requesting compact block 00b3ca12 from 52.23.180.2:13414
-Sep 14 13:09:11.303 DEBG Received block header 00b3ca12 at 94987 from 73.149.55.243:13414, going to process.
-Sep 14 13:09:11.303 DEBG pipe: process_block_header at 94987 [00b3ca12]
-Sep 14 13:09:11.315 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:09:11.316 DEBG Received compact_block 00b3ca12 at 94987 from 185.53.158.12:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:09:11.316 DEBG pipe: process_block 00b3ca12 at 94987 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:09:11.316 DEBG lru_verifier_cache: rangeproofs: 1, not cached (must verify): 1
-Sep 14 13:09:11.321 DEBG lru_verifier_cache: kernel sigs: 1, not cached (must verify): 1
-Sep 14 13:09:11.324 DEBG pipe: chain head 00b3ca12 @ 94987
-Sep 14 13:09:11.326 DEBG adapter: block_accepted: 00b3ca12
-Sep 14 13:09:11.326 DEBG Suppress compact block send 00b3ca12 to 73.149.55.243:13414 (already seen)
-Sep 14 13:09:11.326 DEBG Suppress compact block send 00b3ca12 to 185.53.158.12:13414 (already seen)
-Sep 14 13:09:11.326 DEBG Suppress compact block send 00b3ca12 to 52.23.180.2:13414 (already seen)
-Sep 14 13:09:11.326 DEBG broadcast_compact_block: 00b3ca12, 40597675 at 94987, to 8 peers, done.
-Sep 14 13:09:11.396 DEBG handle_payload: received block: msg_len: 1252
-Sep 14 13:09:11.396 DEBG Received block 00b3ca12 at 94987 from 52.23.180.2:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
-Sep 14 13:09:11.396 DEBG pipe: process_block 00b3ca12 at 94987 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:09:11.396 DEBG Block 00b3ca12 at 94987 is unfit at this time: already known in head
-Sep 14 13:09:11.397 DEBG adapter: process_block: block 00b3ca12 refused by chain: Block is unfit: already known in head
-Sep 14 13:09:11.540 ERRO 
-thread 'peer' panicked at 'already mutably borrowed: BorrowError': libcore/result.rs:945stack backtrace:
-   0:        0x106b648de - backtrace::backtrace::trace::hf0972b1240b13329
-   1:        0x106b6565c - <backtrace::capture::Backtrace as core::default::Default>::default::hfb69118f36ffb6e5
-   2:        0x106b656dd - backtrace::capture::Backtrace::new::h5d088dac718e3ca8
-   3:        0x106af42f1 - grin_util::logger::send_panic_to_log::{{closure}}::hc8d92e803b9f7be9
-   4:        0x106c7dc08 - std::panicking::rust_panic_with_hook::h28749c6c929f49fc
-   5:        0x106c7d75c - std::panicking::continue_panic_fmt::h2b83096170ce8c01
-   6:        0x106c7d648 - _rust_begin_unwind
-   7:        0x106cc0191 - core::panicking::panic_fmt::h014200104cad7730
-   8:        0x10673914b - core::result::unwrap_failed::h86ccf565f609bb9e
-   9:        0x106700458 - <grin_servers::common::adapters::NetToChainAdapter as grin_p2p::types::ChainAdapter>::header_received::h2257ed279df9715a
-  10:        0x1069a832f - <grin_p2p::peers::Peers as grin_p2p::types::ChainAdapter>::header_received::h7966aaf73ad287c1
-  11:        0x1069b733c - <grin_p2p::peer::TrackingAdapter as grin_p2p::types::ChainAdapter>::header_received::h9ed614cdc2b918eb
-  12:        0x1069b0bad - <grin_p2p::protocol::Protocol as grin_p2p::conn::MessageHandler>::consume::hfe60991356b11abe
-  13:        0x1069c018a - std::sys_common::backtrace::__rust_begin_short_backtrace::h364579895d6adf03
-  14:        0x1069c1934 - std::panicking::try::do_call::h3ae1ba413197819a
-  15:        0x106c8950e - ___rust_maybe_catch_panic
-  16:        0x1069cf942 - <F as alloc::boxed::FnBox<A>>::call_box::h3627fd7a719d6018
-  17:        0x106c7cba7 - std::sys_common::thread::start_thread::hffea5e9f9f11b206
-  18:        0x106c61518 - std::sys::unix::thread::Thread::new::thread_start::hce603054d9b5b6fc
-  19:     0x7fff7ec95660 - __pthread_body
-  20:     0x7fff7ec9550c - __pthread_start
+Sep 28 16:19:31.383 INFO Using configuration file at /Users/tromp/grin/testnet3/grin-server.toml
+Sep 28 16:19:31.384 INFO This is Grin version 0.3.0 (git 0.0.0-pre.0.3.0-7-ge64f4fb), built for x86_64-apple-darwin by rustc 1.29.1 (b801ae664 2018-09-20).
+Sep 28 16:19:31.384 DEBG Built with profile "release", features "" on Fri, 28 Sep 2018 12:56:50 GMT.
+Sep 28 16:19:31.384 WARN Starting GRIN in UI mode...
+Sep 28 16:19:31.384 INFO Starting server, genesis block: 006642e0
+Sep 28 16:19:31.489 DEBG prune_list: bitmap 18076 pos (22210 bytes), pruned_cache 64386 pos (26472 bytes), shift_cache 18076, leaf_shift_cache 18076
+Sep 28 16:19:31.592 DEBG prune_list: bitmap 18076 pos (22210 bytes), pruned_cache 64386 pos (26472 bytes), shift_cache 18076, leaf_shift_cache 18076
+Sep 28 16:19:31.593 DEBG chain: init: rewinding and validating before we start... 00eb8ae8 at 95045
+Sep 28 16:19:31.599 DEBG Chain init: 40635775 @ 95045 [00eb8ae8]
+Sep 28 16:19:31.599 INFO Starting rest apis at: 127.0.0.1:13413
+Sep 28 16:19:31.599 INFO Starting HTTP API server at 127.0.0.1:13413.
+Sep 28 16:19:31.599 INFO Starting dandelion monitor: 127.0.0.1:13413
+Sep 28 16:19:31.600 DEBG Started Dandelion transaction monitor.
+Sep 28 16:19:31.600 DEBG No preferred peers
+Sep 28 16:19:31.600 WARN Grin server started.
+Sep 28 16:19:31.600 INFO (Server ID: StratumServer) Starting stratum server with cuckoo_size = 30, proof_size = 42
+Sep 28 16:19:31.600 WARN Stratum server started on 127.0.0.1:13416
+Sep 28 16:19:31.601 DEBG monitor_peers: on 0.0.0.0:13414, 0 connected (0 most_work). all 402 = 39 healthy + 0 banned + 363 defunct
+Sep 28 16:19:31.602 DEBG monitor_peers: no preferred peers
+Sep 28 16:19:31.602 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 92.27.121.131:13414
+Sep 28 16:19:31.602 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 45.61.156.122:13414
+Sep 28 16:19:31.602 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 173.230.154.243:13414
+Sep 28 16:19:31.602 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 88.202.177.242:13414
+Sep 28 16:19:31.602 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 198.245.50.26:13414
+Sep 28 16:19:31.602 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 108.196.200.233:13414
+Sep 28 16:19:31.602 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 174.95.238.206:13414
+Sep 28 16:19:31.603 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 51.15.236.54:13414
+Sep 28 16:19:31.603 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 8.6.8.66:13414
+Sep 28 16:19:31.603 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 109.250.103.78:13414
+Sep 28 16:19:31.603 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 54.90.220.136:13414
+Sep 28 16:19:31.603 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 167.99.87.54:13414
+Sep 28 16:19:31.603 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 204.48.26.36:13414
+Sep 28 16:19:31.603 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 185.53.158.12:13414
+Sep 28 16:19:31.603 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 93.136.85.114:13414
+Sep 28 16:19:31.603 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 67.83.171.170:13414
+Sep 28 16:19:31.603 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 45.77.252.195:13414
+Sep 28 16:19:31.603 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 79.173.134.26:13414
+Sep 28 16:19:31.603 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 198.245.106.58:13414
+Sep 28 16:19:31.603 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 175.137.182.97:13414
+Sep 28 16:19:31.604 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 91.193.129.182:10000
+Sep 28 16:19:31.604 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 192.168.122.1:13414
+Sep 28 16:19:31.604 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 46.109.194.85:13414
+Sep 28 16:19:31.604 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 75.176.81.232:13414
+Sep 28 16:19:31.604 DEBG monitor_peers: on 0.0.0.0:13414, queue to soon try 50.232.212.155:13414
+Sep 28 16:19:31.604 DEBG monitor_peers: no dandelion relay updating
+Sep 28 16:19:31.604 DEBG Could not update dandelion relay
+Sep 28 16:19:31.656 DEBG Connected! Cumulative 48638110 offered from V4(167.99.87.54:13414) "MW/Grin 0.3.0" FULL_HIST | TXHASHSET_HIST | PEER_LIST | FAST_SYNC_NODE | FULL_NODE
+Sep 28 16:19:31.656 DEBG Saving newly connected peer 167.99.87.54:13414.
+Sep 28 16:19:31.656 DEBG save_peer: V4(167.99.87.54:13414) marked Healthy
+Sep 28 16:19:31.657 DEBG Asking 167.99.87.54:13414 for more peers.
+Sep 28 16:19:31.660 DEBG Connected! Cumulative 48638110 offered from V4(139.162.168.18:13414) "MW/Grin 0.3.0" FULL_HIST | TXHASHSET_HIST | PEER_LIST | FAST_SYNC_NODE | FULL_NODE
+Sep 28 16:19:31.660 DEBG Saving newly connected peer 139.162.168.18:13414.
+Sep 28 16:19:31.660 DEBG save_peer: V4(139.162.168.18:13414) marked Healthy
+Sep 28 16:19:31.660 DEBG Asking 139.162.168.18:13414 for more peers.
+Sep 28 16:19:31.693 DEBG Connected! Cumulative 48283777 offered from V4(51.15.219.12:13414) "MW/Grin 0.3.0" FULL_HIST | TXHASHSET_HIST | PEER_LIST | FAST_SYNC_NODE | FULL_NODE
+Sep 28 16:19:31.693 DEBG Saving newly connected peer 51.15.219.12:13414.
+Sep 28 16:19:31.694 DEBG save_peer: V4(51.15.219.12:13414) marked Healthy
+Sep 28 16:19:31.694 DEBG Asking 51.15.219.12:13414 for more peers.
+Sep 28 16:19:31.811 DEBG Connected! Cumulative 48269394 offered from V4(198.245.50.26:13414) "MW/Grin 0.3.0" FULL_HIST | TXHASHSET_HIST | PEER_LIST | FAST_SYNC_NODE | FULL_NODE
+Sep 28 16:19:31.811 DEBG Saving newly connected peer 198.245.50.26:13414.
+Sep 28 16:19:31.811 DEBG save_peer: V4(198.245.50.26:13414) marked Healthy
+Sep 28 16:19:31.811 DEBG Asking 198.245.50.26:13414 for more peers.
+Sep 28 16:19:31.842 DEBG Connected! Cumulative 48638110 offered from V4(204.48.26.36:13414) "MW/Grin 0.3.0" FULL_HIST | TXHASHSET_HIST | PEER_LIST | FAST_SYNC_NODE | FULL_NODE
+Sep 28 16:19:31.842 DEBG Saving newly connected peer 204.48.26.36:13414.
+Sep 28 16:19:31.842 DEBG save_peer: V4(204.48.26.36:13414) marked Healthy
+Sep 28 16:19:31.843 DEBG Asking 204.48.26.36:13414 for more peers.
+Sep 28 16:19:31.843 DEBG Connected! Cumulative 48638110 offered from V4(167.99.53.226:13414) "MW/Grin 0.3.0" FULL_HIST | TXHASHSET_HIST | PEER_LIST | FAST_SYNC_NODE | FULL_NODE
+Sep 28 16:19:31.843 DEBG Saving newly connected peer 167.99.53.226:13414.
+Sep 28 16:19:31.844 DEBG save_peer: V4(167.99.53.226:13414) marked Healthy
+Sep 28 16:19:31.844 DEBG Asking 167.99.53.226:13414 for more peers.
+Sep 28 16:19:31.912 DEBG save_peer: V4(182.72.112.18:13414) marked Healthy
+Sep 28 16:19:31.944 DEBG Connected! Cumulative 48638110 offered from V4(8.6.8.66:13414) "MW/Grin 0.3.0" FULL_HIST | TXHASHSET_HIST | PEER_LIST | FAST_SYNC_NODE | FULL_NODE
+Sep 28 16:19:31.945 DEBG Saving newly connected peer 8.6.8.66:13414.
+Sep 28 16:19:31.945 DEBG save_peer: V4(8.6.8.66:13414) marked Healthy
+Sep 28 16:19:31.945 DEBG Asking 8.6.8.66:13414 for more peers.
+Sep 28 16:19:31.959 DEBG Connected! Cumulative 48638110 offered from V4(45.61.156.122:13414) "MW/Grin 0.3.0" FULL_HIST | TXHASHSET_HIST | PEER_LIST | FAST_SYNC_NODE | FULL_NODE
+Sep 28 16:19:31.960 DEBG Saving newly connected peer 45.61.156.122:13414.
+Sep 28 16:19:31.960 DEBG save_peer: V4(45.61.156.122:13414) marked Healthy
+Sep 28 16:19:31.960 DEBG Asking 45.61.156.122:13414 for more peers.
+Sep 28 16:19:31.963 DEBG Connected! Cumulative 48638110 offered from V4(173.230.154.243:13414) "MW/Grin 0.3.0" FULL_HIST | TXHASHSET_HIST | PEER_LIST | FAST_SYNC_NODE | FULL_NODE
+Sep 28 16:19:31.964 DEBG Saving newly connected peer 173.230.154.243:13414.
+Sep 28 16:19:31.964 DEBG save_peer: V4(173.230.154.243:13414) marked Healthy
+Sep 28 16:19:31.964 DEBG Asking 173.230.154.243:13414 for more peers.
+Sep 28 16:19:31.981 DEBG Connected! Cumulative 48341745 offered from V4(108.196.200.233:13414) "MW/Grin 0.3.0" FULL_HIST | TXHASHSET_HIST | PEER_LIST | FAST_SYNC_NODE | FULL_NODE
+Sep 28 16:19:31.981 DEBG Saving newly connected peer 108.196.200.233:13414.
+Sep 28 16:19:31.981 DEBG save_peer: V4(108.196.200.233:13414) marked Healthy
+Sep 28 16:19:31.982 DEBG Asking 108.196.200.233:13414 for more peers.
+Sep 28 16:19:32.617 DEBG sync: initial transition to HeaderSync. sync_head: 102ccc52 at 114933, reset to: 102ccc52 at 114933
+Sep 28 16:19:32.618 DEBG sync_state: sync_status: Initial -> HeaderSync { current_height: 114933, highest_height: 0 }
+Sep 28 16:19:32.618 DEBG sync: locator heights : [114933, 114931, 114927, 114919, 114903, 114871, 114807, 114679, 114423, 113911, 112887, 110839, 106743, 98551, 82167, 49399, 0]
+Sep 28 16:19:33.608 DEBG Asking 45.61.156.122:13414 for more peers.
+Sep 28 16:19:33.608 DEBG Asking 173.230.154.243:13414 for more peers.
+Sep 28 16:19:33.608 DEBG Asking 198.245.50.26:13414 for more peers.
+Sep 28 16:19:33.608 DEBG Asking 108.196.200.233:13414 for more peers.
+Sep 28 16:19:33.608 DEBG Asking 8.6.8.66:13414 for more peers.
+Sep 28 16:19:33.609 DEBG Asking 167.99.87.54:13414 for more peers.
+Sep 28 16:19:33.609 DEBG Asking 204.48.26.36:13414 for more peers.
+Sep 28 16:19:33.610 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (7 most_work). all 403 = 40 healthy + 0 banned + 363 defunct
+Sep 28 16:19:33.610 DEBG monitor_peers: no dandelion relay updating
+Sep 28 16:19:33.610 DEBG Successfully updated Dandelion relay to: 173.230.154.243:13414
+Sep 28 16:19:33.640 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 88.202.177.242:13414: Os { code: 61, kind: ConnectionRefused, message: "Connection refused" }
+Sep 28 16:19:33.647 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 51.15.236.54:13414: Os { code: 61, kind: ConnectionRefused, message: "Connection refused" }
+Sep 28 16:19:33.715 DEBG Connected! Cumulative 48638110 offered from V4(185.53.158.12:13414) "MW/Grin 0.3.0" TXHASHSET_HIST | PEER_LIST | FAST_SYNC_NODE
+Sep 28 16:19:33.715 DEBG Saving newly connected peer 185.53.158.12:13414.
+Sep 28 16:19:33.715 DEBG save_peer: V4(185.53.158.12:13414) marked Healthy
+Sep 28 16:19:33.715 DEBG Asking 185.53.158.12:13414 for more peers.
+Sep 28 16:19:33.805 DEBG sync: locator heights': [114933, 114931, 114927, 114919, 114903, 114871, 114807, 114679, 114423, 113911, 112887, 110839, 106743, 98551, 82167, 49399, 0]
+Sep 28 16:19:33.805 DEBG sync: history locators: len=17, shrunk=0
+Sep 28 16:19:33.805 DEBG sync: locator: [1565bb79, 0b2f6993, 003bf7b2, 1b2baff6, 1307214d, 146a3b5b, 01ee971c, 014943cd, 16e831ff, 0bc2d232, 054c04c0, 0c5fe84f, 18ad2f4b, 0202197f, 15f93d7c, 0246c64f, 006642e0]
+Sep 28 16:19:33.805 DEBG sync: request_headers: asking 204.48.26.36:13414 for headers, [1565bb79, 0b2f6993, 003bf7b2, 1b2baff6, 1307214d, 146a3b5b, 01ee971c, 014943cd, 16e831ff, 0bc2d232, 054c04c0, 0c5fe84f, 18ad2f4b, 0202197f, 15f93d7c, 0246c64f, 006642e0]
+Sep 28 16:19:33.805 DEBG body_sync: body_head - 00eb8ae8, 95045, header_head - 1565bb79, 114933, sync_head - 1565bb79, 114933
+Sep 28 16:19:33.858 DEBG Connected! Cumulative 48638110 offered from V4(54.90.220.136:13414) "MW/Grin 0.3.0" TXHASHSET_HIST | PEER_LIST | FAST_SYNC_NODE
+Sep 28 16:19:33.858 DEBG Saving newly connected peer 54.90.220.136:13414.
+Sep 28 16:19:33.858 DEBG save_peer: V4(54.90.220.136:13414) marked Healthy
+Sep 28 16:19:33.859 DEBG Asking 54.90.220.136:13414 for more peers.
+Sep 28 16:19:33.915 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 45.77.252.195:13414: Os { code: 61, kind: ConnectionRefused, message: "Connection refused" }
+Sep 28 16:19:33.919 INFO Received block headers [15ac3976, 0a01c54a, 1510f1f7, 057d860c, 10645f56, 03cf7abc, 036b8e61, 0da827d7] from 204.48.26.36:13414
+Sep 28 16:19:33.919 DEBG pipe: sync_block_headers: 8 headers from 15ac3976 at 114934
+Sep 28 16:19:33.920 DEBG header head 15ac3976 @ 114934
+Sep 28 16:19:33.920 DEBG sync head 15ac3976 @ 114934
+Sep 28 16:19:33.921 DEBG header head 0a01c54a @ 114935
+Sep 28 16:19:33.921 DEBG sync head 0a01c54a @ 114935
+Sep 28 16:19:33.921 DEBG header head 1510f1f7 @ 114936
+Sep 28 16:19:33.922 DEBG sync head 1510f1f7 @ 114936
+Sep 28 16:19:33.922 DEBG header head 057d860c @ 114937
+Sep 28 16:19:33.922 DEBG sync head 057d860c @ 114937
+Sep 28 16:19:33.923 DEBG header head 10645f56 @ 114938
+Sep 28 16:19:33.923 DEBG sync head 10645f56 @ 114938
+Sep 28 16:19:33.924 DEBG header head 03cf7abc @ 114939
+Sep 28 16:19:33.924 DEBG sync head 03cf7abc @ 114939
+Sep 28 16:19:33.925 DEBG header head 036b8e61 @ 114940
+Sep 28 16:19:33.925 DEBG sync head 036b8e61 @ 114940
+Sep 28 16:19:33.925 DEBG header head 0da827d7 @ 114941
+Sep 28 16:19:33.925 DEBG sync head 0da827d7 @ 114941
+Sep 28 16:19:33.927 INFO Received block headers [0ffb67d3, 0444944a, 0a896460, 01095637, 0d9b870a, 09ed625e, 11b44270, 1750c96f] from 204.48.26.36:13414
+Sep 28 16:19:33.927 DEBG pipe: sync_block_headers: 8 headers from 0ffb67d3 at 114942
+Sep 28 16:19:33.928 DEBG header head 0ffb67d3 @ 114942
+Sep 28 16:19:33.928 DEBG sync head 0ffb67d3 @ 114942
+Sep 28 16:19:33.929 DEBG header head 0444944a @ 114943
+Sep 28 16:19:33.929 DEBG sync head 0444944a @ 114943
+Sep 28 16:19:33.930 DEBG header head 0a896460 @ 114944
+Sep 28 16:19:33.930 DEBG sync head 0a896460 @ 114944
+Sep 28 16:19:33.931 DEBG header head 01095637 @ 114945
+Sep 28 16:19:33.931 DEBG sync head 01095637 @ 114945
+Sep 28 16:19:33.931 DEBG header head 0d9b870a @ 114946
+Sep 28 16:19:33.931 DEBG sync head 0d9b870a @ 114946
+Sep 28 16:19:33.932 DEBG header head 09ed625e @ 114947
+Sep 28 16:19:33.932 DEBG sync head 09ed625e @ 114947
+Sep 28 16:19:33.933 DEBG header head 11b44270 @ 114948
+Sep 28 16:19:33.933 DEBG sync head 11b44270 @ 114948
+Sep 28 16:19:33.934 DEBG header head 1750c96f @ 114949
+Sep 28 16:19:33.934 DEBG sync head 1750c96f @ 114949
+Sep 28 16:19:33.935 INFO Received block headers [0b37afdc, 16939874, 130b9e0c, 0d64f821, 0119832a, 05b6c9ed, 1a4e44a7, 159cabef] from 204.48.26.36:13414
+Sep 28 16:19:33.935 DEBG pipe: sync_block_headers: 8 headers from 0b37afdc at 114950
+Sep 28 16:19:33.936 DEBG header head 0b37afdc @ 114950
+Sep 28 16:19:33.936 DEBG sync head 0b37afdc @ 114950
+Sep 28 16:19:33.937 DEBG header head 16939874 @ 114951
+Sep 28 16:19:33.937 DEBG sync head 16939874 @ 114951
+Sep 28 16:19:33.938 DEBG header head 130b9e0c @ 114952
+Sep 28 16:19:33.938 DEBG sync head 130b9e0c @ 114952
+Sep 28 16:19:33.938 DEBG header head 0d64f821 @ 114953
+Sep 28 16:19:33.939 DEBG sync head 0d64f821 @ 114953
+Sep 28 16:19:33.939 DEBG header head 0119832a @ 114954
+Sep 28 16:19:33.939 DEBG sync head 0119832a @ 114954
+Sep 28 16:19:33.940 DEBG header head 05b6c9ed @ 114955
+Sep 28 16:19:33.940 DEBG sync head 05b6c9ed @ 114955
+Sep 28 16:19:33.941 DEBG header head 1a4e44a7 @ 114956
+Sep 28 16:19:33.941 DEBG sync head 1a4e44a7 @ 114956
+Sep 28 16:19:33.942 DEBG header head 159cabef @ 114957
+Sep 28 16:19:33.942 DEBG sync head 159cabef @ 114957
+Sep 28 16:19:33.943 INFO Received block headers [0e928051, 084ff81b, 16f4d691, 01598c0f, 0efcedc4, 01a04616, 075d9ee0, 1c0c6555] from 204.48.26.36:13414
+Sep 28 16:19:33.943 DEBG pipe: sync_block_headers: 8 headers from 0e928051 at 114958
+Sep 28 16:19:33.944 DEBG header head 0e928051 @ 114958
+Sep 28 16:19:33.944 DEBG sync head 0e928051 @ 114958
+Sep 28 16:19:33.945 DEBG header head 084ff81b @ 114959
+Sep 28 16:19:33.945 DEBG sync head 084ff81b @ 114959
+Sep 28 16:19:33.946 DEBG header head 16f4d691 @ 114960
+Sep 28 16:19:33.946 DEBG sync head 16f4d691 @ 114960
+Sep 28 16:19:33.946 DEBG header head 01598c0f @ 114961
+Sep 28 16:19:33.947 DEBG sync head 01598c0f @ 114961
+Sep 28 16:19:33.947 DEBG header head 0efcedc4 @ 114962
+Sep 28 16:19:33.947 DEBG sync head 0efcedc4 @ 114962
+Sep 28 16:19:33.948 DEBG header head 01a04616 @ 114963
+Sep 28 16:19:33.948 DEBG sync head 01a04616 @ 114963
+Sep 28 16:19:33.949 DEBG header head 075d9ee0 @ 114964
+Sep 28 16:19:33.949 DEBG sync head 075d9ee0 @ 114964
+Sep 28 16:19:33.949 DEBG header head 1c0c6555 @ 114965
+Sep 28 16:19:33.949 DEBG sync head 1c0c6555 @ 114965
+Sep 28 16:19:34.020 INFO Received block headers [177607e0, 02cf9481, 067f63f3, 0999e528, 1becdeab, 0ebf0b00, 10bb8d7a, 08f31d76] from 204.48.26.36:13414
+Sep 28 16:19:34.020 DEBG pipe: sync_block_headers: 8 headers from 177607e0 at 114966
+Sep 28 16:19:34.021 DEBG header head 177607e0 @ 114966
+Sep 28 16:19:34.021 DEBG sync head 177607e0 @ 114966
+Sep 28 16:19:34.022 DEBG header head 02cf9481 @ 114967
+Sep 28 16:19:34.022 DEBG sync head 02cf9481 @ 114967
+Sep 28 16:19:34.023 DEBG header head 067f63f3 @ 114968
+Sep 28 16:19:34.023 DEBG sync head 067f63f3 @ 114968
+Sep 28 16:19:34.023 DEBG header head 0999e528 @ 114969
+Sep 28 16:19:34.024 DEBG sync head 0999e528 @ 114969
+Sep 28 16:19:34.024 DEBG header head 1becdeab @ 114970
+Sep 28 16:19:34.025 DEBG sync head 1becdeab @ 114970
+Sep 28 16:19:34.025 DEBG header head 0ebf0b00 @ 114971
+Sep 28 16:19:34.026 DEBG sync head 0ebf0b00 @ 114971
+Sep 28 16:19:34.026 DEBG header head 10bb8d7a @ 114972
+Sep 28 16:19:34.026 DEBG sync head 10bb8d7a @ 114972
+Sep 28 16:19:34.027 DEBG header head 08f31d76 @ 114973
+Sep 28 16:19:34.027 DEBG sync head 08f31d76 @ 114973
+Sep 28 16:19:34.029 INFO Received block headers [0292c386, 16fef8a7, 0be23dbd, 041f2b2c, 0a448ad4, 1a2d00f1, 1bb2a8e1, 0e861fb0] from 204.48.26.36:13414
+Sep 28 16:19:34.029 DEBG pipe: sync_block_headers: 8 headers from 0292c386 at 114974
+Sep 28 16:19:34.030 DEBG header head 0292c386 @ 114974
+Sep 28 16:19:34.030 DEBG sync head 0292c386 @ 114974
+Sep 28 16:19:34.030 DEBG header head 16fef8a7 @ 114975
+Sep 28 16:19:34.031 DEBG sync head 16fef8a7 @ 114975
+Sep 28 16:19:34.031 DEBG header head 0be23dbd @ 114976
+Sep 28 16:19:34.031 DEBG sync head 0be23dbd @ 114976
+Sep 28 16:19:34.032 DEBG header head 041f2b2c @ 114977
+Sep 28 16:19:34.032 DEBG sync head 041f2b2c @ 114977
+Sep 28 16:19:34.033 DEBG header head 0a448ad4 @ 114978
+Sep 28 16:19:34.033 DEBG sync head 0a448ad4 @ 114978
+Sep 28 16:19:34.034 DEBG header head 1a2d00f1 @ 114979
+Sep 28 16:19:34.034 DEBG sync head 1a2d00f1 @ 114979
+Sep 28 16:19:34.034 DEBG header head 1bb2a8e1 @ 114980
+Sep 28 16:19:34.034 DEBG sync head 1bb2a8e1 @ 114980
+Sep 28 16:19:34.035 DEBG header head 0e861fb0 @ 114981
+Sep 28 16:19:34.035 DEBG sync head 0e861fb0 @ 114981
+Sep 28 16:19:34.037 INFO Received block headers [059341a5, 0718bb49, 132655d0, 00287579, 0ae60750, 0c698d8c, 03678579, 0c478918] from 204.48.26.36:13414
+Sep 28 16:19:34.037 DEBG pipe: sync_block_headers: 8 headers from 059341a5 at 114982
+Sep 28 16:19:34.038 DEBG header head 059341a5 @ 114982
+Sep 28 16:19:34.038 DEBG sync head 059341a5 @ 114982
+Sep 28 16:19:34.039 DEBG header head 0718bb49 @ 114983
+Sep 28 16:19:34.039 DEBG sync head 0718bb49 @ 114983
+Sep 28 16:19:34.039 DEBG header head 132655d0 @ 114984
+Sep 28 16:19:34.039 DEBG sync head 132655d0 @ 114984
+Sep 28 16:19:34.040 DEBG header head 00287579 @ 114985
+Sep 28 16:19:34.040 DEBG sync head 00287579 @ 114985
+Sep 28 16:19:34.041 DEBG header head 0ae60750 @ 114986
+Sep 28 16:19:34.041 DEBG sync head 0ae60750 @ 114986
+Sep 28 16:19:34.042 DEBG header head 0c698d8c @ 114987
+Sep 28 16:19:34.042 DEBG sync head 0c698d8c @ 114987
+Sep 28 16:19:34.042 DEBG header head 03678579 @ 114988
+Sep 28 16:19:34.043 DEBG sync head 03678579 @ 114988
+Sep 28 16:19:34.043 DEBG header head 0c478918 @ 114989
+Sep 28 16:19:34.043 DEBG sync head 0c478918 @ 114989
+Sep 28 16:19:34.045 INFO Received block headers [11c97793, 10a918fc, 073c8809, 0e088ef8, 1bdafe1e, 0b52e31b, 020bbc08, 0c25541c] from 204.48.26.36:13414
+Sep 28 16:19:34.045 DEBG pipe: sync_block_headers: 8 headers from 11c97793 at 114990
+Sep 28 16:19:34.046 DEBG header head 11c97793 @ 114990
+Sep 28 16:19:34.046 DEBG sync head 11c97793 @ 114990
+Sep 28 16:19:34.047 DEBG header head 10a918fc @ 114991
+Sep 28 16:19:34.047 DEBG sync head 10a918fc @ 114991
+Sep 28 16:19:34.047 DEBG header head 073c8809 @ 114992
+Sep 28 16:19:34.047 DEBG sync head 073c8809 @ 114992
+Sep 28 16:19:34.048 DEBG header head 0e088ef8 @ 114993
+Sep 28 16:19:34.048 DEBG sync head 0e088ef8 @ 114993
+Sep 28 16:19:34.049 DEBG header head 1bdafe1e @ 114994
+Sep 28 16:19:34.049 DEBG sync head 1bdafe1e @ 114994
+Sep 28 16:19:34.050 DEBG header head 0b52e31b @ 114995
+Sep 28 16:19:34.050 DEBG sync head 0b52e31b @ 114995
+Sep 28 16:19:34.050 DEBG header head 020bbc08 @ 114996
+Sep 28 16:19:34.050 DEBG sync head 020bbc08 @ 114996
+Sep 28 16:19:34.051 DEBG header head 0c25541c @ 114997
+Sep 28 16:19:34.051 DEBG sync head 0c25541c @ 114997
+Sep 28 16:19:34.053 INFO Received block headers [17627a17, 187c33fd, 11d5cf0b, 1733822a, 0a960bad, 17a3c576, 1a0f26b0] from 204.48.26.36:13414
+Sep 28 16:19:34.053 DEBG pipe: sync_block_headers: 7 headers from 17627a17 at 114998
+Sep 28 16:19:34.054 DEBG header head 17627a17 @ 114998
+Sep 28 16:19:34.054 DEBG sync head 17627a17 @ 114998
+Sep 28 16:19:34.054 DEBG header head 187c33fd @ 114999
+Sep 28 16:19:34.055 DEBG sync head 187c33fd @ 114999
+Sep 28 16:19:34.055 DEBG header head 11d5cf0b @ 115000
+Sep 28 16:19:34.055 DEBG sync head 11d5cf0b @ 115000
+Sep 28 16:19:34.056 DEBG header head 1733822a @ 115001
+Sep 28 16:19:34.056 DEBG sync head 1733822a @ 115001
+Sep 28 16:19:34.057 DEBG header head 0a960bad @ 115002
+Sep 28 16:19:34.057 DEBG sync head 0a960bad @ 115002
+Sep 28 16:19:34.058 DEBG header head 17a3c576 @ 115003
+Sep 28 16:19:34.058 DEBG sync head 17a3c576 @ 115003
+Sep 28 16:19:34.058 DEBG header head 1a0f26b0 @ 115004
+Sep 28 16:19:34.058 DEBG sync head 1a0f26b0 @ 115004
+Sep 28 16:19:34.060 INFO Received block headers [0a9700b2] from 204.48.26.36:13414
+Sep 28 16:19:34.060 DEBG pipe: sync_block_headers: 1 headers from 0a9700b2 at 115005
+Sep 28 16:19:34.061 DEBG header head 0a9700b2 @ 115005
+Sep 28 16:19:34.061 DEBG sync head 0a9700b2 @ 115005
+Sep 28 16:19:34.313 DEBG block_sync: 95045/114933 requesting blocks [0507ed31, 0a7c34a1, 007b212e, 09dfb91a, 0aab4dbe, 05710cd0, 084bb5fa, 029c0e8a, 011db7cf, 098bcc73, 01511e3d, 00e003aa, 0471ae18, 035a086e, 05f85a1c, 049af6bf, 092cc5ab, 06bf19dc, 0bf06795, 07efe0a9, 0ba53174, 01f3cec8, 05a4438e, 0269e890, 0b1ca440, 0414a8ad, 08ca0890, 0821c1ad, 049b1839, 03e71353, 07d36b43, 00faf70c, 067ea891, 01295b9a, 042f0b49, 042b0026, 00a5bbba, 05486187, 067d9f56, 03dafe53, 041e0d2a, 0d21b3c0, 055a8069, 08588e60, 06e2e142, 0378f471, 0220fd69, 08cb9c5d, 0aefce4f, 01291f53, 000b30c7, 036c34b8, 059b7202, 017a01a8, 069ecf1e, 0c2e543d, 0dedc364, 0c8b737f, 09431d4a, 0162ba19, 0109757b, 07fda532, 0a712a70, 08209a53, 0bc20692, 0307b4d9, 0c7b2910, 0a458f86, 052b24fc, 055f63c5, 04808d1c, 041b9991, 0a9dcd5f, 0bfcbfa3, 0756a73b, 0922cf95, 064b4de1, 074e8a6f, 0d485cc5, 09c22deb, 067ee1b9, 00832cd5, 08455760, 034e0829, 0cf3f114, 0e30f163, 0427bc03, 09334bb9, 0ade4c1a, 04553e04, 07b7aa4d, 04d2e14b, 0c27dcd6, 0c0c722b, 00b18bd8, 0c4bdab4, 003473a6, 0c6be845, 01efbd08, 04110f5b] from 12 peers
+Sep 28 16:19:34.313 DEBG Requesting block 0507ed31 from peer 204.48.26.36:13414.
+Sep 28 16:19:34.313 DEBG Requesting block 0a7c34a1 from peer 204.48.26.36:13414.
+Sep 28 16:19:34.313 DEBG Requesting block 007b212e from peer 167.99.53.226:13414.
+Sep 28 16:19:34.313 DEBG Requesting block 09dfb91a from peer 173.230.154.243:13414.
+Sep 28 16:19:34.313 DEBG Requesting block 0aab4dbe from peer 167.99.53.226:13414.
+Sep 28 16:19:34.314 DEBG Requesting block 05710cd0 from peer 167.99.87.54:13414.
+Sep 28 16:19:34.314 DEBG Requesting block 084bb5fa from peer 198.245.50.26:13414.
+Sep 28 16:19:34.314 DEBG Requesting block 029c0e8a from peer 8.6.8.66:13414.
+Sep 28 16:19:34.314 DEBG Requesting block 011db7cf from peer 8.6.8.66:13414.
+Sep 28 16:19:34.314 DEBG Requesting block 098bcc73 from peer 139.162.168.18:13414.
+Sep 28 16:19:34.314 DEBG Requesting block 01511e3d from peer 108.196.200.233:13414.
+Sep 28 16:19:34.314 DEBG Requesting block 00e003aa from peer 139.162.168.18:13414.
+Sep 28 16:19:34.314 DEBG Requesting block 0471ae18 from peer 198.245.50.26:13414.
+Sep 28 16:19:34.314 DEBG Requesting block 035a086e from peer 167.99.53.226:13414.
+Sep 28 16:19:34.314 DEBG Requesting block 05f85a1c from peer 108.196.200.233:13414.
+Sep 28 16:19:34.315 DEBG Requesting block 049af6bf from peer 108.196.200.233:13414.
+Sep 28 16:19:34.315 DEBG Requesting block 092cc5ab from peer 8.6.8.66:13414.
+Sep 28 16:19:34.315 DEBG Requesting block 06bf19dc from peer 139.162.168.18:13414.
+Sep 28 16:19:34.315 DEBG Requesting block 0bf06795 from peer 108.196.200.233:13414.
+Sep 28 16:19:34.315 DEBG Requesting block 07efe0a9 from peer 198.245.50.26:13414.
+Sep 28 16:19:34.315 DEBG Requesting block 0ba53174 from peer 167.99.53.226:13414.
+Sep 28 16:19:34.315 DEBG Requesting block 01f3cec8 from peer 108.196.200.233:13414.
+Sep 28 16:19:34.315 DEBG Requesting block 05a4438e from peer 108.196.200.233:13414.
+Sep 28 16:19:34.315 DEBG Requesting block 0269e890 from peer 45.61.156.122:13414.
+Sep 28 16:19:34.315 DEBG Requesting block 0b1ca440 from peer 45.61.156.122:13414.
+Sep 28 16:19:34.316 DEBG Requesting block 0414a8ad from peer 167.99.87.54:13414.
+Sep 28 16:19:34.316 DEBG Requesting block 08ca0890 from peer 204.48.26.36:13414.
+Sep 28 16:19:34.316 DEBG Requesting block 0821c1ad from peer 167.99.53.226:13414.
+Sep 28 16:19:34.316 DEBG Requesting block 049b1839 from peer 167.99.87.54:13414.
+Sep 28 16:19:34.316 DEBG Requesting block 03e71353 from peer 173.230.154.243:13414.
+Sep 28 16:19:34.316 DEBG Requesting block 07d36b43 from peer 139.162.168.18:13414.
+Sep 28 16:19:34.316 DEBG Requesting block 00faf70c from peer 204.48.26.36:13414.
+Sep 28 16:19:34.316 DEBG Requesting block 067ea891 from peer 167.99.87.54:13414.
+Sep 28 16:19:34.316 DEBG Requesting block 01295b9a from peer 108.196.200.233:13414.
+Sep 28 16:19:34.316 DEBG Requesting block 042f0b49 from peer 8.6.8.66:13414.
+Sep 28 16:19:34.317 DEBG Requesting block 042b0026 from peer 204.48.26.36:13414.
+Sep 28 16:19:34.317 DEBG Requesting block 00a5bbba from peer 45.61.156.122:13414.
+Sep 28 16:19:34.317 DEBG Requesting block 05486187 from peer 45.61.156.122:13414.
+Sep 28 16:19:34.317 DEBG Requesting block 067d9f56 from peer 51.15.219.12:13414.
+Sep 28 16:19:34.317 DEBG Requesting block 03dafe53 from peer 139.162.168.18:13414.
+Sep 28 16:19:34.317 DEBG Requesting block 041e0d2a from peer 167.99.53.226:13414.
+Sep 28 16:19:34.317 DEBG Requesting block 0d21b3c0 from peer 198.245.50.26:13414.
+Sep 28 16:19:34.317 DEBG Requesting block 055a8069 from peer 173.230.154.243:13414.
+Sep 28 16:19:34.317 DEBG Requesting block 08588e60 from peer 51.15.219.12:13414.
+Sep 28 16:19:34.317 DEBG Requesting block 06e2e142 from peer 8.6.8.66:13414.
+Sep 28 16:19:34.317 DEBG Requesting block 0378f471 from peer 8.6.8.66:13414.
+Sep 28 16:19:34.317 DEBG Requesting block 0220fd69 from peer 8.6.8.66:13414.
+Sep 28 16:19:34.318 DEBG Requesting block 08cb9c5d from peer 204.48.26.36:13414.
+Sep 28 16:19:34.318 DEBG Requesting block 0aefce4f from peer 204.48.26.36:13414.
+Sep 28 16:19:34.318 DEBG Requesting block 01291f53 from peer 51.15.219.12:13414.
+Sep 28 16:19:34.318 DEBG Requesting block 000b30c7 from peer 51.15.219.12:13414.
+Sep 28 16:19:34.318 DEBG Requesting block 036c34b8 from peer 139.162.168.18:13414.
+Sep 28 16:19:34.318 DEBG Requesting block 059b7202 from peer 45.61.156.122:13414.
+Sep 28 16:19:34.318 DEBG Requesting block 017a01a8 from peer 8.6.8.66:13414.
+Sep 28 16:19:34.318 DEBG Requesting block 069ecf1e from peer 139.162.168.18:13414.
+Sep 28 16:19:34.318 DEBG Requesting block 0c2e543d from peer 167.99.53.226:13414.
+Sep 28 16:19:34.318 DEBG Requesting block 0dedc364 from peer 8.6.8.66:13414.
+Sep 28 16:19:34.318 DEBG Requesting block 0c8b737f from peer 173.230.154.243:13414.
+Sep 28 16:19:34.318 DEBG Requesting block 09431d4a from peer 198.245.50.26:13414.
+Sep 28 16:19:34.319 DEBG Requesting block 0162ba19 from peer 8.6.8.66:13414.
+Sep 28 16:19:34.319 DEBG Requesting block 0109757b from peer 167.99.87.54:13414.
+Sep 28 16:19:34.319 DEBG Requesting block 07fda532 from peer 45.61.156.122:13414.
+Sep 28 16:19:34.319 DEBG Requesting block 0a712a70 from peer 51.15.219.12:13414.
+Sep 28 16:19:34.319 DEBG Requesting block 08209a53 from peer 167.99.87.54:13414.
+Sep 28 16:19:34.319 DEBG Requesting block 0bc20692 from peer 167.99.87.54:13414.
+Sep 28 16:19:34.319 DEBG Requesting block 0307b4d9 from peer 45.61.156.122:13414.
+Sep 28 16:19:34.319 DEBG Requesting block 0c7b2910 from peer 139.162.168.18:13414.
+Sep 28 16:19:34.319 DEBG Requesting block 0a458f86 from peer 108.196.200.233:13414.
+Sep 28 16:19:34.319 DEBG Requesting block 052b24fc from peer 108.196.200.233:13414.
+Sep 28 16:19:34.319 DEBG Requesting block 055f63c5 from peer 167.99.53.226:13414.
+Sep 28 16:19:34.320 DEBG Requesting block 04808d1c from peer 45.61.156.122:13414.
+Sep 28 16:19:34.320 DEBG Requesting block 041b9991 from peer 204.48.26.36:13414.
+Sep 28 16:19:34.320 DEBG Requesting block 0a9dcd5f from peer 51.15.219.12:13414.
+Sep 28 16:19:34.320 DEBG Requesting block 0bfcbfa3 from peer 51.15.219.12:13414.
+Sep 28 16:19:34.320 DEBG Requesting block 0756a73b from peer 51.15.219.12:13414.
+Sep 28 16:19:34.320 DEBG Requesting block 0922cf95 from peer 45.61.156.122:13414.
+Sep 28 16:19:34.320 DEBG Requesting block 064b4de1 from peer 8.6.8.66:13414.
+Sep 28 16:19:34.320 DEBG Requesting block 074e8a6f from peer 139.162.168.18:13414.
+Sep 28 16:19:34.320 DEBG Requesting block 0d485cc5 from peer 139.162.168.18:13414.
+Sep 28 16:19:34.320 DEBG Requesting block 09c22deb from peer 204.48.26.36:13414.
+Sep 28 16:19:34.320 DEBG Requesting block 067ee1b9 from peer 167.99.53.226:13414.
+Sep 28 16:19:34.321 DEBG Requesting block 00832cd5 from peer 139.162.168.18:13414.
+Sep 28 16:19:34.321 DEBG Requesting block 08455760 from peer 173.230.154.243:13414.
+Sep 28 16:19:34.321 DEBG Requesting block 034e0829 from peer 173.230.154.243:13414.
+Sep 28 16:19:34.321 DEBG Requesting block 0cf3f114 from peer 167.99.87.54:13414.
+Sep 28 16:19:34.321 DEBG Requesting block 0e30f163 from peer 198.245.50.26:13414.
+Sep 28 16:19:34.321 DEBG Requesting block 0427bc03 from peer 108.196.200.233:13414.
+Sep 28 16:19:34.321 DEBG Requesting block 09334bb9 from peer 167.99.87.54:13414.
+Sep 28 16:19:34.321 DEBG Requesting block 0ade4c1a from peer 108.196.200.233:13414.
+Sep 28 16:19:34.321 DEBG Requesting block 04553e04 from peer 108.196.200.233:13414.
+Sep 28 16:19:34.321 DEBG Skipped request to 108.196.200.233:13414: Send("sending on a full channel")
+Sep 28 16:19:34.321 DEBG Requesting block 07b7aa4d from peer 139.162.168.18:13414.
+Sep 28 16:19:34.321 DEBG Skipped request to 139.162.168.18:13414: Send("sending on a full channel")
+Sep 28 16:19:34.321 DEBG Requesting block 04d2e14b from peer 51.15.219.12:13414.
+Sep 28 16:19:34.322 DEBG Requesting block 0c27dcd6 from peer 204.48.26.36:13414.
+Sep 28 16:19:34.322 DEBG Requesting block 0c0c722b from peer 204.48.26.36:13414.
+Sep 28 16:19:34.322 DEBG Requesting block 00b18bd8 from peer 8.6.8.66:13414.
+Sep 28 16:19:34.322 DEBG Skipped request to 8.6.8.66:13414: Send("sending on a full channel")
+Sep 28 16:19:34.322 DEBG Requesting block 0c4bdab4 from peer 173.230.154.243:13414.
+Sep 28 16:19:34.322 DEBG Requesting block 003473a6 from peer 204.48.26.36:13414.
+Sep 28 16:19:34.322 DEBG Skipped request to 204.48.26.36:13414: Send("sending on a full channel")
+Sep 28 16:19:34.322 DEBG Requesting block 0c6be845 from peer 139.162.168.18:13414.
+Sep 28 16:19:34.322 DEBG Skipped request to 139.162.168.18:13414: Send("sending on a full channel")
+Sep 28 16:19:34.322 DEBG Requesting block 01efbd08 from peer 108.196.200.233:13414.
+Sep 28 16:19:34.323 DEBG Skipped request to 108.196.200.233:13414: Send("sending on a full channel")
+Sep 28 16:19:34.323 DEBG Requesting block 04110f5b from peer 204.48.26.36:13414.
+Sep 28 16:19:34.323 DEBG Skipped request to 204.48.26.36:13414: Send("sending on a full channel")
+Sep 28 16:19:34.323 DEBG sync_state: sync_status: HeaderSync { current_height: 114933, highest_height: 0 } -> BodySync { current_height: 95045, highest_height: 0 }
+Sep 28 16:19:34.345 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.345 DEBG Received block 098bcc73 at 95055 from 139.162.168.18:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.345 DEBG pipe: process_block 098bcc73 at 95055 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.346 DEBG process_block: orphan: 098bcc73, # orphans 1
+Sep 28 16:19:34.372 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.372 DEBG Received block 00e003aa at 95057 from 139.162.168.18:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.373 DEBG pipe: process_block 00e003aa at 95057 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.373 DEBG process_block: orphan: 00e003aa, # orphans 2
+Sep 28 16:19:34.375 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.375 DEBG Received block 06bf19dc at 95063 from 139.162.168.18:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.375 DEBG pipe: process_block 06bf19dc at 95063 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.376 DEBG process_block: orphan: 06bf19dc, # orphans 3
+Sep 28 16:19:34.377 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.377 DEBG Received block 07d36b43 at 95076 from 139.162.168.18:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.377 DEBG pipe: process_block 07d36b43 at 95076 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.378 DEBG process_block: orphan: 07d36b43, # orphans 4
+Sep 28 16:19:34.379 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.379 DEBG Received block 03dafe53 at 95085 from 139.162.168.18:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.379 DEBG pipe: process_block 03dafe53 at 95085 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.380 DEBG process_block: orphan: 03dafe53, # orphans 5
+Sep 28 16:19:34.382 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.382 DEBG Received block 036c34b8 at 95097 from 139.162.168.18:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.382 DEBG pipe: process_block 036c34b8 at 95097 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.383 DEBG process_block: orphan: 036c34b8, # orphans 6
+Sep 28 16:19:34.384 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.384 DEBG Received block 069ecf1e at 95100 from 139.162.168.18:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.384 DEBG pipe: process_block 069ecf1e at 95100 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.385 DEBG process_block: orphan: 069ecf1e, # orphans 7
+Sep 28 16:19:34.387 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.387 DEBG Received block 0c7b2910 at 95112 from 139.162.168.18:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.387 DEBG pipe: process_block 0c7b2910 at 95112 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.387 DEBG process_block: orphan: 0c7b2910, # orphans 8
+Sep 28 16:19:34.389 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.389 DEBG Received block 074e8a6f at 95123 from 139.162.168.18:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.389 DEBG pipe: process_block 074e8a6f at 95123 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.390 DEBG process_block: orphan: 074e8a6f, # orphans 9
+Sep 28 16:19:34.391 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.391 DEBG Received block 0d485cc5 at 95124 from 139.162.168.18:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.391 DEBG pipe: process_block 0d485cc5 at 95124 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.392 DEBG process_block: orphan: 0d485cc5, # orphans 10
+Sep 28 16:19:34.393 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.399 DEBG Received block 00832cd5 at 95127 from 139.162.168.18:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.399 DEBG pipe: process_block 00832cd5 at 95127 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.400 DEBG process_block: orphan: 00832cd5, # orphans 11
+Sep 28 16:19:34.413 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.413 DEBG Received block 084bb5fa at 95052 from 198.245.50.26:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.413 DEBG pipe: process_block 084bb5fa at 95052 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.414 DEBG process_block: orphan: 084bb5fa, # orphans 12
+Sep 28 16:19:34.430 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.430 DEBG Received block 007b212e at 95048 from 167.99.53.226:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.430 DEBG pipe: process_block 007b212e at 95048 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.431 DEBG process_block: orphan: 007b212e, # orphans 13
+Sep 28 16:19:34.493 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.494 DEBG Received block 0269e890 at 95069 from 45.61.156.122:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.494 DEBG pipe: process_block 0269e890 at 95069 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.494 DEBG process_block: orphan: 0269e890, # orphans 14
+Sep 28 16:19:34.498 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.498 DEBG Received block 09dfb91a at 95049 from 173.230.154.243:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.498 DEBG pipe: process_block 09dfb91a at 95049 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.499 DEBG process_block: orphan: 09dfb91a, # orphans 15
+Sep 28 16:19:34.499 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.500 DEBG Received block 01511e3d at 95056 from 108.196.200.233:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.500 DEBG pipe: process_block 01511e3d at 95056 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.500 DEBG process_block: orphan: 01511e3d, # orphans 16
+Sep 28 16:19:34.509 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.509 DEBG Received block 0471ae18 at 95058 from 198.245.50.26:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.509 DEBG pipe: process_block 0471ae18 at 95058 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.510 DEBG process_block: orphan: 0471ae18, # orphans 17
+Sep 28 16:19:34.511 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.511 DEBG Received block 07efe0a9 at 95065 from 198.245.50.26:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.511 DEBG pipe: process_block 07efe0a9 at 95065 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.512 DEBG process_block: orphan: 07efe0a9, # orphans 18
+Sep 28 16:19:34.513 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.513 DEBG Received block 0d21b3c0 at 95087 from 198.245.50.26:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.514 DEBG pipe: process_block 0d21b3c0 at 95087 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.514 DEBG process_block: orphan: 0d21b3c0, # orphans 19
+Sep 28 16:19:34.516 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.516 DEBG Received block 09431d4a at 95104 from 198.245.50.26:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.516 DEBG pipe: process_block 09431d4a at 95104 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.516 DEBG process_block: orphan: 09431d4a, # orphans 20
+Sep 28 16:19:34.518 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.540 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.540 DEBG Received block 0aab4dbe at 95050 from 167.99.53.226:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.540 DEBG pipe: process_block 0aab4dbe at 95050 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.541 DEBG process_block: orphan: 0aab4dbe, # orphans 21
+Sep 28 16:19:34.542 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.542 DEBG Received block 035a086e at 95059 from 167.99.53.226:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.543 DEBG pipe: process_block 035a086e at 95059 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.543 DEBG process_block: orphan: 035a086e, # orphans 22
+Sep 28 16:19:34.545 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.545 DEBG Received block 0ba53174 at 95066 from 167.99.53.226:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.545 DEBG pipe: process_block 0ba53174 at 95066 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.546 DEBG process_block: orphan: 0ba53174, # orphans 23
+Sep 28 16:19:34.547 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.547 DEBG Received block 0821c1ad at 95073 from 167.99.53.226:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.547 DEBG pipe: process_block 0821c1ad at 95073 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.548 DEBG process_block: orphan: 0821c1ad, # orphans 24
+Sep 28 16:19:34.549 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.549 DEBG Received block 041e0d2a at 95086 from 167.99.53.226:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.549 DEBG pipe: process_block 041e0d2a at 95086 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.549 DEBG process_block: orphan: 041e0d2a, # orphans 25
+Sep 28 16:19:34.551 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.551 DEBG Received block 0c2e543d at 95101 from 167.99.53.226:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.551 DEBG pipe: process_block 0c2e543d at 95101 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.552 DEBG process_block: orphan: 0c2e543d, # orphans 26
+Sep 28 16:19:34.553 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.553 DEBG Received block 055f63c5 at 95115 from 167.99.53.226:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.553 DEBG pipe: process_block 055f63c5 at 95115 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.554 DEBG process_block: orphan: 055f63c5, # orphans 27
+Sep 28 16:19:34.555 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.603 DEBG Received block 0e30f163 at 95131 from 198.245.50.26:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.603 DEBG pipe: process_block 0e30f163 at 95131 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.604 DEBG process_block: orphan: 0e30f163, # orphans 28
+Sep 28 16:19:34.642 DEBG Received block 067ee1b9 at 95126 from 167.99.53.226:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.642 DEBG pipe: process_block 067ee1b9 at 95126 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.643 DEBG process_block: orphan: 067ee1b9, # orphans 29
+Sep 28 16:19:34.676 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.676 DEBG Received block 03e71353 at 95075 from 173.230.154.243:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.676 DEBG pipe: process_block 03e71353 at 95075 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.677 DEBG process_block: orphan: 03e71353, # orphans 30
+Sep 28 16:19:34.678 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.679 DEBG Received block 0b1ca440 at 95070 from 45.61.156.122:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.679 DEBG pipe: process_block 0b1ca440 at 95070 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.679 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.679 DEBG Received block 055a8069 at 95088 from 173.230.154.243:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.679 DEBG process_block: orphan: 0b1ca440, # orphans 31
+Sep 28 16:19:34.680 DEBG pipe: process_block 055a8069 at 95088 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.680 DEBG process_block: orphan: 055a8069, # orphans 32
+Sep 28 16:19:34.682 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.682 DEBG Received block 0c8b737f at 95103 from 173.230.154.243:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.682 DEBG pipe: process_block 0c8b737f at 95103 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.683 DEBG process_block: orphan: 0c8b737f, # orphans 33
+Sep 28 16:19:34.684 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.686 DEBG Received block 08455760 at 95128 from 173.230.154.243:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.686 DEBG pipe: process_block 08455760 at 95128 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.686 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.686 DEBG Received block 00a5bbba at 95082 from 45.61.156.122:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.686 DEBG process_block: orphan: 08455760, # orphans 34
+Sep 28 16:19:34.686 DEBG pipe: process_block 00a5bbba at 95082 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.687 DEBG process_block: orphan: 00a5bbba, # orphans 35
+Sep 28 16:19:34.688 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.688 DEBG Received block 05f85a1c at 95060 from 108.196.200.233:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.688 DEBG pipe: process_block 05f85a1c at 95060 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.688 DEBG process_block: orphan: 05f85a1c, # orphans 36
+Sep 28 16:19:34.688 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.688 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.689 DEBG Received block 034e0829 at 95129 from 173.230.154.243:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.689 DEBG pipe: process_block 034e0829 at 95129 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.689 DEBG process_block: orphan: 034e0829, # orphans 37
+Sep 28 16:19:34.690 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.692 DEBG Received block 05486187 at 95083 from 45.61.156.122:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.692 DEBG pipe: process_block 05486187 at 95083 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.693 DEBG process_block: orphan: 05486187, # orphans 38
+Sep 28 16:19:34.694 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.696 DEBG Received block 059b7202 at 95098 from 45.61.156.122:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.696 DEBG pipe: process_block 059b7202 at 95098 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.696 DEBG process_block: orphan: 059b7202, # orphans 39
+Sep 28 16:19:34.698 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.698 DEBG Received block 07fda532 at 95107 from 45.61.156.122:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.698 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.698 DEBG pipe: process_block 07fda532 at 95107 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.698 DEBG Received block 049af6bf at 95061 from 108.196.200.233:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.698 DEBG process_block: orphan: 07fda532, # orphans 40
+Sep 28 16:19:34.699 DEBG pipe: process_block 049af6bf at 95061 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.699 DEBG process_block: orphan: 049af6bf, # orphans 41
+Sep 28 16:19:34.700 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.701 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.701 DEBG Received block 0bf06795 at 95064 from 108.196.200.233:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.701 DEBG pipe: process_block 0bf06795 at 95064 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.701 DEBG process_block: orphan: 0bf06795, # orphans 42
+Sep 28 16:19:34.703 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.703 DEBG Received block 01f3cec8 at 95067 from 108.196.200.233:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.703 DEBG pipe: process_block 01f3cec8 at 95067 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.704 DEBG process_block: orphan: 01f3cec8, # orphans 43
+Sep 28 16:19:34.705 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.705 DEBG Received block 05a4438e at 95068 from 108.196.200.233:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.705 DEBG pipe: process_block 05a4438e at 95068 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.706 DEBG process_block: orphan: 05a4438e, # orphans 44
+Sep 28 16:19:34.707 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.707 DEBG Received block 01295b9a at 95079 from 108.196.200.233:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.707 DEBG pipe: process_block 01295b9a at 95079 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.708 DEBG process_block: orphan: 01295b9a, # orphans 45
+Sep 28 16:19:34.709 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.709 DEBG Received block 0a458f86 at 95113 from 108.196.200.233:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.709 DEBG pipe: process_block 0a458f86 at 95113 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.710 DEBG process_block: orphan: 0a458f86, # orphans 46
+Sep 28 16:19:34.711 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.711 DEBG Received block 052b24fc at 95114 from 108.196.200.233:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.711 DEBG pipe: process_block 052b24fc at 95114 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.712 DEBG process_block: orphan: 052b24fc, # orphans 47
+Sep 28 16:19:34.712 DEBG Received block 0307b4d9 at 95111 from 45.61.156.122:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.712 DEBG pipe: process_block 0307b4d9 at 95111 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.713 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.713 DEBG Received block 0427bc03 at 95132 from 108.196.200.233:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.713 DEBG process_block: orphan: 0307b4d9, # orphans 48
+Sep 28 16:19:34.713 DEBG pipe: process_block 0427bc03 at 95132 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.714 DEBG process_block: orphan: 0427bc03, # orphans 49
+Sep 28 16:19:34.714 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.714 DEBG Received block 04808d1c at 95116 from 45.61.156.122:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.715 DEBG pipe: process_block 04808d1c at 95116 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.715 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.715 DEBG process_block: orphan: 04808d1c, # orphans 50
+Sep 28 16:19:34.716 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:19:34.773 DEBG fast_sync: before txhashset request, header head: 115005 / 0a9700b2, txhashset_head: 112412 / 096ff1a4
+Sep 28 16:19:34.773 DEBG Asking 173.230.154.243:13414 for txhashset archive at 112412 096ff1a4.
+Sep 28 16:19:34.773 DEBG sync_state: sync_status: BodySync { current_height: 95045, highest_height: 0 } -> TxHashsetDownload
+Sep 28 16:19:34.848 DEBG Received block 0922cf95 at 95121 from 45.61.156.122:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.848 DEBG pipe: process_block 0922cf95 at 95121 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.849 DEBG process_block: orphan: 0922cf95, # orphans 51
+Sep 28 16:19:34.855 DEBG Received block 0c4bdab4 at 95141 from 173.230.154.243:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.855 DEBG pipe: process_block 0c4bdab4 at 95141 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.856 DEBG process_block: orphan: 0c4bdab4, # orphans 52
+Sep 28 16:19:34.869 DEBG Received block 0ade4c1a at 95134 from 108.196.200.233:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:19:34.869 DEBG pipe: process_block 0ade4c1a at 95134 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:34.870 DEBG process_block: orphan: 0ade4c1a, # orphans 53
+Sep 28 16:19:37.625 DEBG monitor_peers: on 0.0.0.0:13414, 12 connected (9 most_work). all 403 = 37 healthy + 0 banned + 366 defunct
+Sep 28 16:19:40.180 DEBG Received block header 148e3fbb at 115006 from 54.90.220.136:13414, going to process.
+Sep 28 16:19:40.180 DEBG pipe: process_block_header at 115006 [148e3fbb]
+Sep 28 16:19:40.181 DEBG Requesting compact block 148e3fbb from 54.90.220.136:13414
+Sep 28 16:19:40.303 DEBG handle_payload: received compact block: msg_len: 1268
+Sep 28 16:19:40.303 DEBG Received compact_block 148e3fbb at 115006 from 54.90.220.136:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
+Sep 28 16:19:40.303 DEBG pipe: process_block 148e3fbb at 115006 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:19:40.304 DEBG header head 148e3fbb @ 115006
+Sep 28 16:19:40.304 DEBG process_block: orphan: 148e3fbb, # orphans 54
+Sep 28 16:19:43.611 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 92.27.121.131:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:43.612 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 174.95.238.206:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:43.612 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 109.250.103.78:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:43.612 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 93.136.85.114:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:43.612 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 67.83.171.170:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:43.612 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 79.173.134.26:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:43.613 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 175.137.182.97:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:43.613 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 198.245.106.58:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:43.613 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 91.193.129.182:10000: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:43.613 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 192.168.122.1:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:43.613 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 46.109.194.85:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:43.613 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 75.176.81.232:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:43.613 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 50.232.212.155:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:45.657 DEBG monitor_peers: on 0.0.0.0:13414, 12 connected (8 most_work). all 403 = 24 healthy + 0 banned + 379 defunct
+Sep 28 16:19:46.330 DEBG sync: locator heights : [115005, 115003, 114999, 114991, 114975, 114943, 114879, 114751, 114495, 113983, 112959, 110911, 106815, 98623, 82239, 49471, 0]
+Sep 28 16:19:46.335 DEBG sync: locator heights': [115005, 115003, 114999, 114991, 114975, 114943, 114879, 114751, 114495, 113911, 112887, 110839, 106743, 98551, 82167, 49399, 0]
+Sep 28 16:19:46.335 DEBG sync: history locators: len=26, shrunk=0
+Sep 28 16:19:46.335 DEBG sync: locator: [0a9700b2, 17a3c576, 187c33fd, 10a918fc, 16fef8a7, 0444944a, 1040b871, 1210f560, 16551a04, 0bc2d232, 054c04c0, 0c5fe84f, 18ad2f4b, 0202197f, 15f93d7c, 0246c64f, 0a9700b2]
+Sep 28 16:19:46.335 DEBG sync: request_headers: asking 167.99.53.226:13414 for headers, [0a9700b2, 17a3c576, 187c33fd, 10a918fc, 16fef8a7, 0444944a, 1040b871, 1210f560, 16551a04, 0bc2d232, 054c04c0, 0c5fe84f, 18ad2f4b, 0202197f, 15f93d7c, 0246c64f, 0a9700b2]
+Sep 28 16:19:46.441 INFO Received block headers [148e3fbb] from 167.99.53.226:13414
+Sep 28 16:19:46.441 DEBG pipe: sync_block_headers: 1 headers from 148e3fbb at 115006
+Sep 28 16:19:46.442 DEBG header head 148e3fbb @ 115006
+Sep 28 16:19:46.442 DEBG sync head 148e3fbb @ 115006
+Sep 28 16:19:54.618 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 92.27.121.131:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:54.620 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 109.250.103.78:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:54.620 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 174.95.238.206:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:54.621 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 67.83.171.170:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:54.621 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 93.136.85.114:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:54.624 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 79.173.134.26:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:54.624 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 175.137.182.97:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:54.624 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 198.245.106.58:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:54.624 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 91.193.129.182:10000: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:54.624 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 192.168.122.1:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:54.624 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 75.176.81.232:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:54.624 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 50.232.212.155:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:19:54.624 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 46.109.194.85:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:20:01.722 DEBG monitor_peers: on 0.0.0.0:13414, 12 connected (8 most_work). all 403 = 24 healthy + 0 banned + 379 defunct
+Sep 28 16:20:02.323 DEBG handle_payload: txhashset archive for 096ff1a4 at 112412. size=128117707
+Sep 28 16:20:05.625 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 92.27.121.131:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:20:05.627 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 109.250.103.78:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:20:05.627 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 174.95.238.206:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:20:05.627 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 67.83.171.170:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:20:05.627 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 93.136.85.114:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:20:05.627 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 79.173.134.26:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:20:05.627 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 175.137.182.97:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:20:05.628 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 198.245.106.58:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:20:05.628 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 91.193.129.182:10000: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:20:05.628 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 192.168.122.1:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:20:05.628 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 75.176.81.232:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:20:05.628 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 46.109.194.85:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:20:05.628 DEBG connect_peer: on 0.0.0.0:13414. Could not connect to 50.232.212.155:13414: Custom { kind: TimedOut, error: StringError("connection timed out") }
+Sep 28 16:20:21.807 DEBG monitor_peers: on 0.0.0.0:13414, 12 connected (8 most_work). all 403 = 24 healthy + 0 banned + 379 defunct
+Sep 28 16:20:41.891 DEBG monitor_peers: on 0.0.0.0:13414, 12 connected (8 most_work). all 403 = 24 healthy + 0 banned + 379 defunct
+Sep 28 16:20:55.025 DEBG sync_state: sync_status: TxHashsetDownload -> TxHashsetSetup
+Sep 28 16:20:58.487 DEBG sync_state: sync_status: TxHashsetSetup -> HeaderSync { current_height: 115006, highest_height: 115006 }
+Sep 28 16:21:01.966 DEBG monitor_peers: on 0.0.0.0:13414, 12 connected (8 most_work). all 403 = 24 healthy + 0 banned + 379 defunct
+Sep 28 16:21:04.240 DEBG Unexpected file(s) found in txhashset subfolder "/Users/tromp/grin/testnet3/chain_data/txhashset/output", removing.
+Sep 28 16:21:04.241 DEBG Unexpected file(s) found in txhashset subfolder "/Users/tromp/grin/testnet3/chain_data/txhashset/rangeproof", removing.
+Sep 28 16:21:04.241 DEBG Unexpected file(s) found in txhashset subfolder "/Users/tromp/grin/testnet3/chain_data/txhashset/kernel", removing.
+Sep 28 16:21:04.241 DEBG leaf_set: copying rewound file /Users/tromp/grin/testnet3/chain_data/txhashset/output/pmmr_leaf.bin.096ff1a4 to /Users/tromp/grin/testnet3/chain_data/txhashset/output/pmmr_leaf.bin
+Sep 28 16:21:04.349 DEBG prune_list: bitmap 18076 pos (22210 bytes), pruned_cache 64386 pos (26472 bytes), shift_cache 18076, leaf_shift_cache 18076
+Sep 28 16:21:04.350 DEBG leaf_set: copying rewound file /Users/tromp/grin/testnet3/chain_data/txhashset/rangeproof/pmmr_leaf.bin.096ff1a4 to /Users/tromp/grin/testnet3/chain_data/txhashset/rangeproof/pmmr_leaf.bin
+Sep 28 16:21:04.458 DEBG prune_list: bitmap 18076 pos (22210 bytes), pruned_cache 64386 pos (26472 bytes), shift_cache 18076, leaf_shift_cache 18076
+Sep 28 16:21:04.458 DEBG chain: validate_kernel_history: rewinding and validating kernel history (readonly)
+Sep 28 16:21:05.833 DEBG chain: validate_kernel_history: validated kernel root on 112412 headers
+Sep 28 16:21:05.833 DEBG chain: txhashset_write: rewinding a 2nd time (writeable)
+Sep 28 16:21:05.834 DEBG input_pos_to_rewind: 95045 < 112412, nothing to rewind
+Sep 28 16:21:05.834 DEBG Error returned, discarding txhashset extension: Invalid TxHashSet: Invalid MMR, hash of parent at 13 does not match children. 
+ Cause: Unknown 
+ Backtrace: 
+Sep 28 16:21:05.834 ERRO Failed to save txhashset archive: Invalid TxHashSet: Invalid MMR, hash of parent at 13 does not match children. 
+ Cause: Unknown 
+ Backtrace: 
+Sep 28 16:21:05.834 DEBG Received a bad txhashset data from 173.230.154.243:13414, the peer will be banned
+Sep 28 16:21:05.835 DEBG Banning peer 173.230.154.243:13414
+Sep 28 16:21:05.835 DEBG Sent ban reason BadTxHashSet to 173.230.154.243:13414
+Sep 28 16:21:05.835 DEBG handle_payload: txhashset archive for 096ff1a4 at 112412, DONE. Data Ok: false
+Sep 28 16:21:05.835 DEBG Connection close with 173.230.154.243:13414 initiated by us
+Sep 28 16:21:05.844 ERRO fast_sync: error = Chain(Error { inner: 
 
-
-Sep 14 13:09:15.757 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (3 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:09:21.452 DEBG Received block header 01997fc6 at 94988 from 51.15.219.12:13414, going to process.
-Sep 14 13:09:21.452 DEBG pipe: process_block_header at 94988 [01997fc6]
-Sep 14 13:09:21.481 ERRO 
-thread 'peer' panicked at 'already mutably borrowed: BorrowError': libcore/result.rs:945stack backtrace:
-   0:        0x106b648de - backtrace::backtrace::trace::hf0972b1240b13329
-   1:        0x106b6565c - <backtrace::capture::Backtrace as core::default::Default>::default::hfb69118f36ffb6e5
-   2:        0x106b656dd - backtrace::capture::Backtrace::new::h5d088dac718e3ca8
-   3:        0x106af42f1 - grin_util::logger::send_panic_to_log::{{closure}}::hc8d92e803b9f7be9
-   4:        0x106c7dc08 - std::panicking::rust_panic_with_hook::h28749c6c929f49fc
-   5:        0x106c7d75c - std::panicking::continue_panic_fmt::h2b83096170ce8c01
-   6:        0x106c7d648 - _rust_begin_unwind
-   7:        0x106cc0191 - core::panicking::panic_fmt::h014200104cad7730
-   8:        0x10673914b - core::result::unwrap_failed::h86ccf565f609bb9e
-   9:        0x106700458 - <grin_servers::common::adapters::NetToChainAdapter as grin_p2p::types::ChainAdapter>::header_received::h2257ed279df9715a
-  10:        0x1069a832f - <grin_p2p::peers::Peers as grin_p2p::types::ChainAdapter>::header_received::h7966aaf73ad287c1
-  11:        0x1069b733c - <grin_p2p::peer::TrackingAdapter as grin_p2p::types::ChainAdapter>::header_received::h9ed614cdc2b918eb
-  12:        0x1069b0bad - <grin_p2p::protocol::Protocol as grin_p2p::conn::MessageHandler>::consume::hfe60991356b11abe
-  13:        0x1069c018a - std::sys_common::backtrace::__rust_begin_short_backtrace::h364579895d6adf03
-  14:        0x1069c1934 - std::panicking::try::do_call::h3ae1ba413197819a
-  15:        0x106c8950e - ___rust_maybe_catch_panic
-  16:        0x1069cf942 - <F as alloc::boxed::FnBox<A>>::call_box::h3627fd7a719d6018
-  17:        0x106c7cba7 - std::sys_common::thread::start_thread::hffea5e9f9f11b206
-  18:        0x106c61518 - std::sys::unix::thread::Thread::new::thread_start::hce603054d9b5b6fc
-  19:     0x7fff7ec95660 - __pthread_body
-  20:     0x7fff7ec9550c - __pthread_start
-
-
-Sep 14 13:09:29.703 DEBG Received block header 0668ecf3 at 94989 from 52.23.180.2:13414, going to process.
-Sep 14 13:09:29.703 DEBG pipe: process_block_header at 94989 [0668ecf3]
-Sep 14 13:09:29.703 DEBG Block header 0668ecf3 refused by chain: Orphan
-Sep 14 13:09:35.825 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (7 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:09:50.376 DEBG Received block header 01c46dc8 at 94988 from 89.221.215.219:13414, going to process.
-Sep 14 13:09:50.376 DEBG pipe: process_block_header at 94988 [01c46dc8]
-Sep 14 13:09:50.383 DEBG Received block header 01c46dc8 at 94988 from 185.53.158.12:13414, going to process.
-Sep 14 13:09:50.383 DEBG pipe: process_block_header at 94988 [01c46dc8]
-Sep 14 13:09:50.407 ERRO 
-thread 'peer' panicked at 'already mutably borrowed: BorrowError': libcore/result.rs:945stack backtrace:
-   0:        0x106b648de - backtrace::backtrace::trace::hf0972b1240b13329
-   1:        0x106b6565c - <backtrace::capture::Backtrace as core::default::Default>::default::hfb69118f36ffb6e5
-   2:        0x106b656dd - backtrace::capture::Backtrace::new::h5d088dac718e3ca8
-   3:        0x106af42f1 - grin_util::logger::send_panic_to_log::{{closure}}::hc8d92e803b9f7be9
-   4:        0x106c7dc08 - std::panicking::rust_panic_with_hook::h28749c6c929f49fc
-   5:        0x106c7d75c - std::panicking::continue_panic_fmt::h2b83096170ce8c01
-   6:        0x106c7d648 - _rust_begin_unwind
-   7:        0x106cc0191 - core::panicking::panic_fmt::h014200104cad7730
-   8:        0x10673914b - core::result::unwrap_failed::h86ccf565f609bb9e
-   9:        0x106700458 - <grin_servers::common::adapters::NetToChainAdapter as grin_p2p::types::ChainAdapter>::header_received::h2257ed279df9715a
-  10:        0x1069a832f - <grin_p2p::peers::Peers as grin_p2p::types::ChainAdapter>::header_received::h7966aaf73ad287c1
-  11:        0x1069b733c - <grin_p2p::peer::TrackingAdapter as grin_p2p::types::ChainAdapter>::header_received::h9ed614cdc2b918eb
-  12:        0x1069b0bad - <grin_p2p::protocol::Protocol as grin_p2p::conn::MessageHandler>::consume::hfe60991356b11abe
-  13:        0x1069c018a - std::sys_common::backtrace::__rust_begin_short_backtrace::h364579895d6adf03
-  14:        0x1069c1934 - std::panicking::try::do_call::h3ae1ba413197819a
-  15:        0x106c8950e - ___rust_maybe_catch_panic
-  16:        0x1069cf942 - <F as alloc::boxed::FnBox<A>>::call_box::h3627fd7a719d6018
-  17:        0x106c7cba7 - std::sys_common::thread::start_thread::hffea5e9f9f11b206
-  18:        0x106c61518 - std::sys::unix::thread::Thread::new::thread_start::hce603054d9b5b6fc
-  19:     0x7fff7ec95660 - __pthread_body
-  20:     0x7fff7ec9550c - __pthread_start
-
-
-Sep 14 13:09:50.408 ERRO 
-thread 'peer' panicked at 'already mutably borrowed: BorrowError': libcore/result.rs:945stack backtrace:
-   0:        0x106b648de - backtrace::backtrace::trace::hf0972b1240b13329
-   1:        0x106b6565c - <backtrace::capture::Backtrace as core::default::Default>::default::hfb69118f36ffb6e5
-   2:        0x106b656dd - backtrace::capture::Backtrace::new::h5d088dac718e3ca8
-   3:        0x106af42f1 - grin_util::logger::send_panic_to_log::{{closure}}::hc8d92e803b9f7be9
-   4:        0x106c7dc08 - std::panicking::rust_panic_with_hook::h28749c6c929f49fc
-   5:        0x106c7d75c - std::panicking::continue_panic_fmt::h2b83096170ce8c01
-   6:        0x106c7d648 - _rust_begin_unwind
-   7:        0x106cc0191 - core::panicking::panic_fmt::h014200104cad7730
-   8:        0x10673914b - core::result::unwrap_failed::h86ccf565f609bb9e
-   9:        0x106700458 - <grin_servers::common::adapters::NetToChainAdapter as grin_p2p::types::ChainAdapter>::header_received::h2257ed279df9715a
-  10:        0x1069a832f - <grin_p2p::peers::Peers as grin_p2p::types::ChainAdapter>::header_received::h7966aaf73ad287c1
-  11:        0x1069b733c - <grin_p2p::peer::TrackingAdapter as grin_p2p::types::ChainAdapter>::header_received::h9ed614cdc2b918eb
-  12:        0x1069b0bad - <grin_p2p::protocol::Protocol as grin_p2p::conn::MessageHandler>::consume::hfe60991356b11abe
-  13:        0x1069c018a - std::sys_common::backtrace::__rust_begin_short_backtrace::h364579895d6adf03
-  14:        0x1069c1934 - std::panicking::try::do_call::h3ae1ba413197819a
-  15:        0x106c8950e - ___rust_maybe_catch_panic
-  16:        0x1069cf942 - <F as alloc::boxed::FnBox<A>>::call_box::h3627fd7a719d6018
-  17:        0x106c7cba7 - std::sys_common::thread::start_thread::hffea5e9f9f11b206
-  18:        0x106c61518 - std::sys::unix::thread::Thread::new::thread_start::hce603054d9b5b6fc
-  19:     0x7fff7ec95660 - __pthread_body
-  20:     0x7fff7ec9550c - __pthread_start
-
-
-Sep 14 13:09:50.486 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:09:50.487 DEBG Received compact_block 01c46dc8 at 94988 from 52.23.180.2:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:09:50.487 DEBG pipe: process_block 01c46dc8 at 94988 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:09:50.487 DEBG lru_verifier_cache: rangeproofs: 1, not cached (must verify): 1
-Sep 14 13:09:50.492 DEBG lru_verifier_cache: kernel sigs: 1, not cached (must verify): 1
-Sep 14 13:09:50.497 DEBG pipe: chain head 01c46dc8 @ 94988
-Sep 14 13:09:50.498 DEBG adapter: block_accepted: 01c46dc8
-Sep 14 13:09:50.498 DEBG Send header 01c46dc8 to 167.99.53.226:13414
-Sep 14 13:09:50.498 DEBG Send header 01c46dc8 to 54.198.222.93:13414
-Sep 14 13:09:50.498 DEBG Send header 01c46dc8 to 51.15.219.12:13414
-Sep 14 13:09:50.498 DEBG Error sending header to peer: Send("sending on a closed channel")
-Sep 14 13:09:50.499 DEBG Send header 01c46dc8 to 52.203.10.175:13414
-Sep 14 13:09:50.499 DEBG Send header 01c46dc8 to 95.216.163.175:13414
-Sep 14 13:09:55.905 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (7 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:10:15.988 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (7 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:10:36.072 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (7 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:10:53.897 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:10:53.898 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:10:53.898 DEBG Received compact_block 00ca28dc at 94990 from 167.99.53.226:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:10:53.898 DEBG Received compact_block 00ca28dc at 94990 from 95.216.163.175:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:10:53.898 DEBG pipe: process_block 00ca28dc at 94990 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:10:53.898 DEBG pipe: process_block 00ca28dc at 94990 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:10:53.899 DEBG process_block: orphan: 00ca28dc, # orphans 1
-Sep 14 13:10:53.899 DEBG adapter: process_block: received an orphan block, checking the parent: 0668ecf3
-Sep 14 13:10:53.899 DEBG Block 00ca28dc at 94990 is unfit at this time: already known in orphans
-Sep 14 13:10:53.899 DEBG adapter: process_block: block 00ca28dc refused by chain: Block is unfit: already known in orphans
-Sep 14 13:10:53.925 ERRO 
-thread 'peer' panicked at 'already mutably borrowed: BorrowError': libcore/result.rs:945stack backtrace:
-   0:        0x106b648de - backtrace::backtrace::trace::hf0972b1240b13329
-   1:        0x106b6565c - <backtrace::capture::Backtrace as core::default::Default>::default::hfb69118f36ffb6e5
-   2:        0x106b656dd - backtrace::capture::Backtrace::new::h5d088dac718e3ca8
-   3:        0x106af42f1 - grin_util::logger::send_panic_to_log::{{closure}}::hc8d92e803b9f7be9
-   4:        0x106c7dc08 - std::panicking::rust_panic_with_hook::h28749c6c929f49fc
-   5:        0x106c7d75c - std::panicking::continue_panic_fmt::h2b83096170ce8c01
-   6:        0x106c7d648 - _rust_begin_unwind
-   7:        0x106cc0191 - core::panicking::panic_fmt::h014200104cad7730
-   8:        0x10673914b - core::result::unwrap_failed::h86ccf565f609bb9e
-   9:        0x1067043bb - grin_servers::common::adapters::NetToChainAdapter::request_block_by_hash::h561c833d7ac7f709
-  10:        0x10670343d - grin_servers::common::adapters::NetToChainAdapter::process_block::haf34bd4d804174d2
-  11:        0x1066fec9b - <grin_servers::common::adapters::NetToChainAdapter as grin_p2p::types::ChainAdapter>::compact_block_received::h66a20a631342a725
-  12:        0x1069a81aa - <grin_p2p::peers::Peers as grin_p2p::types::ChainAdapter>::compact_block_received::hbb78ad6d24c81491
-  13:        0x1069b7202 - <grin_p2p::peer::TrackingAdapter as grin_p2p::types::ChainAdapter>::compact_block_received::h0e9ac7725c53195f
-  14:        0x1069b0eff - <grin_p2p::protocol::Protocol as grin_p2p::conn::MessageHandler>::consume::hfe60991356b11abe
-  15:        0x1069c018a - std::sys_common::backtrace::__rust_begin_short_backtrace::h364579895d6adf03
-  16:        0x1069c1934 - std::panicking::try::do_call::h3ae1ba413197819a
-  17:        0x106c8950e - ___rust_maybe_catch_panic
-  18:        0x1069cf942 - <F as alloc::boxed::FnBox<A>>::call_box::h3627fd7a719d6018
-  19:        0x106c7cba7 - std::sys_common::thread::start_thread::hffea5e9f9f11b206
-  20:        0x106c61518 - std::sys::unix::thread::Thread::new::thread_start::hce603054d9b5b6fc
-  21:     0x7fff7ec95660 - __pthread_body
-  22:     0x7fff7ec9550c - __pthread_start
-
-
-Sep 14 13:10:54.068 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:10:54.068 DEBG Received compact_block 00ca28dc at 94990 from 52.203.10.175:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:10:54.068 DEBG pipe: process_block 00ca28dc at 94990 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:10:54.068 DEBG Block 00ca28dc at 94990 is unfit at this time: already known in orphans
-Sep 14 13:10:54.069 DEBG adapter: process_block: block 00ca28dc refused by chain: Block is unfit: already known in orphans
-Sep 14 13:10:56.139 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (3 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:11:11.696 DEBG Received block header 07e8aefb at 94991 from 204.48.26.36:13414, going to process.
-Sep 14 13:11:11.697 DEBG pipe: process_block_header at 94991 [07e8aefb]
-Sep 14 13:11:11.697 DEBG Block header 07e8aefb refused by chain: Orphan
-Sep 14 13:11:16.224 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (3 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:11:36.296 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (4 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:11:56.369 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (4 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:11:57.287 DEBG Received block header 03b6687e at 94989 from 52.203.10.175:13414, going to process.
-Sep 14 13:11:57.287 DEBG pipe: process_block_header at 94989 [03b6687e]
-Sep 14 13:11:57.314 ERRO 
-thread 'peer' panicked at 'already mutably borrowed: BorrowError': libcore/result.rs:945stack backtrace:
-   0:        0x106b648de - backtrace::backtrace::trace::hf0972b1240b13329
-   1:        0x106b6565c - <backtrace::capture::Backtrace as core::default::Default>::default::hfb69118f36ffb6e5
-   2:        0x106b656dd - backtrace::capture::Backtrace::new::h5d088dac718e3ca8
-   3:        0x106af42f1 - grin_util::logger::send_panic_to_log::{{closure}}::hc8d92e803b9f7be9
-   4:        0x106c7dc08 - std::panicking::rust_panic_with_hook::h28749c6c929f49fc
-   5:        0x106c7d75c - std::panicking::continue_panic_fmt::h2b83096170ce8c01
-   6:        0x106c7d648 - _rust_begin_unwind
-   7:        0x106cc0191 - core::panicking::panic_fmt::h014200104cad7730
-   8:        0x10673914b - core::result::unwrap_failed::h86ccf565f609bb9e
-   9:        0x106700458 - <grin_servers::common::adapters::NetToChainAdapter as grin_p2p::types::ChainAdapter>::header_received::h2257ed279df9715a
-  10:        0x1069a832f - <grin_p2p::peers::Peers as grin_p2p::types::ChainAdapter>::header_received::h7966aaf73ad287c1
-  11:        0x1069b733c - <grin_p2p::peer::TrackingAdapter as grin_p2p::types::ChainAdapter>::header_received::h9ed614cdc2b918eb
-  12:        0x1069b0bad - <grin_p2p::protocol::Protocol as grin_p2p::conn::MessageHandler>::consume::hfe60991356b11abe
-  13:        0x1069c018a - std::sys_common::backtrace::__rust_begin_short_backtrace::h364579895d6adf03
-  14:        0x1069c1934 - std::panicking::try::do_call::h3ae1ba413197819a
-  15:        0x106c8950e - ___rust_maybe_catch_panic
-  16:        0x1069cf942 - <F as alloc::boxed::FnBox<A>>::call_box::h3627fd7a719d6018
-  17:        0x106c7cba7 - std::sys_common::thread::start_thread::hffea5e9f9f11b206
-  18:        0x106c61518 - std::sys::unix::thread::Thread::new::thread_start::hce603054d9b5b6fc
-  19:     0x7fff7ec95660 - __pthread_body
-  20:     0x7fff7ec9550c - __pthread_start
-
-
-Sep 14 13:12:16.442 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (4 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:12:29.399 DEBG Received block header 094aef4e at 94992 from 204.48.26.36:13414, going to process.
-Sep 14 13:12:29.399 DEBG pipe: process_block_header at 94992 [094aef4e]
-Sep 14 13:12:29.399 DEBG Block header 094aef4e refused by chain: Orphan
-Sep 14 13:12:29.526 DEBG Received block header 094aef4e at 94992 from 52.23.180.2:13414, going to process.
-Sep 14 13:12:29.527 DEBG pipe: process_block_header at 94992 [094aef4e]
-Sep 14 13:12:29.527 DEBG Block header 094aef4e refused by chain: Orphan
-Sep 14 13:12:36.520 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (3 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:12:50.531 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:12:50.532 DEBG Received compact_block 0af4690d at 94990 from 95.216.163.175:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:12:50.532 DEBG pipe: process_block 0af4690d at 94990 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:12:50.532 DEBG process_block: orphan: 0af4690d, # orphans 2
-Sep 14 13:12:50.533 DEBG adapter: process_block: received an orphan block, checking the parent: 03b6687e
-Sep 14 13:12:50.559 ERRO 
-thread 'peer' panicked at 'already mutably borrowed: BorrowError': libcore/result.rs:945stack backtrace:
-   0:        0x106b648de - backtrace::backtrace::trace::hf0972b1240b13329
-   1:        0x106b6565c - <backtrace::capture::Backtrace as core::default::Default>::default::hfb69118f36ffb6e5
-   2:        0x106b656dd - backtrace::capture::Backtrace::new::h5d088dac718e3ca8
-   3:        0x106af42f1 - grin_util::logger::send_panic_to_log::{{closure}}::hc8d92e803b9f7be9
-   4:        0x106c7dc08 - std::panicking::rust_panic_with_hook::h28749c6c929f49fc
-   5:        0x106c7d75c - std::panicking::continue_panic_fmt::h2b83096170ce8c01
-   6:        0x106c7d648 - _rust_begin_unwind
-   7:        0x106cc0191 - core::panicking::panic_fmt::h014200104cad7730
-   8:        0x10673914b - core::result::unwrap_failed::h86ccf565f609bb9e
-   9:        0x1067043bb - grin_servers::common::adapters::NetToChainAdapter::request_block_by_hash::h561c833d7ac7f709
-  10:        0x10670343d - grin_servers::common::adapters::NetToChainAdapter::process_block::haf34bd4d804174d2
-  11:        0x1066fec9b - <grin_servers::common::adapters::NetToChainAdapter as grin_p2p::types::ChainAdapter>::compact_block_received::h66a20a631342a725
-  12:        0x1069a81aa - <grin_p2p::peers::Peers as grin_p2p::types::ChainAdapter>::compact_block_received::hbb78ad6d24c81491
-  13:        0x1069b7202 - <grin_p2p::peer::TrackingAdapter as grin_p2p::types::ChainAdapter>::compact_block_received::h0e9ac7725c53195f
-  14:        0x1069b0eff - <grin_p2p::protocol::Protocol as grin_p2p::conn::MessageHandler>::consume::hfe60991356b11abe
-  15:        0x1069c018a - std::sys_common::backtrace::__rust_begin_short_backtrace::h364579895d6adf03
-  16:        0x1069c1934 - std::panicking::try::do_call::h3ae1ba413197819a
-  17:        0x106c8950e - ___rust_maybe_catch_panic
-  18:        0x1069cf942 - <F as alloc::boxed::FnBox<A>>::call_box::h3627fd7a719d6018
-  19:        0x106c7cba7 - std::sys_common::thread::start_thread::hffea5e9f9f11b206
-  20:        0x106c61518 - std::sys::unix::thread::Thread::new::thread_start::hce603054d9b5b6fc
-  21:     0x7fff7ec95660 - __pthread_body
-  22:     0x7fff7ec9550c - __pthread_start
-
-
-Sep 14 13:12:50.626 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:12:50.626 DEBG Received compact_block 0af4690d at 94990 from 52.23.180.2:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:12:50.626 DEBG pipe: process_block 0af4690d at 94990 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:12:50.626 DEBG Block 0af4690d at 94990 is unfit at this time: already known in orphans
-Sep 14 13:12:50.626 DEBG adapter: process_block: block 0af4690d refused by chain: Block is unfit: already known in orphans
-Sep 14 13:12:50.758 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:12:50.758 DEBG Received compact_block 0af4690d at 94990 from 204.48.26.36:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:12:50.758 DEBG pipe: process_block 0af4690d at 94990 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:12:50.758 DEBG Block 0af4690d at 94990 is unfit at this time: already known in orphans
-Sep 14 13:12:50.758 DEBG adapter: process_block: block 0af4690d refused by chain: Block is unfit: already known in orphans
-Sep 14 13:12:56.601 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (3 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:13:16.684 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (3 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:13:36.767 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (3 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:13:56.851 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (3 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:14:16.931 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (3 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:14:24.434 DEBG Received block header 0092a595 at 94993 from 52.23.180.2:13414, going to process.
-Sep 14 13:14:24.434 DEBG pipe: process_block_header at 94993 [0092a595]
-Sep 14 13:14:24.434 DEBG Block header 0092a595 refused by chain: Orphan
-Sep 14 13:14:37.014 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:14:57.093 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:15:17.166 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:15:34.183 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:15:34.184 DEBG Received compact_block 07b0342f at 94991 from 204.48.26.36:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:15:34.184 DEBG pipe: process_block 07b0342f at 94991 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:15:34.184 DEBG process_block: orphan: 07b0342f, # orphans 3
-Sep 14 13:15:37.245 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:15:57.323 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:15:57.324 DEBG monitor_peers: updating expired dandelion relay
-Sep 14 13:15:57.324 DEBG Successfully updated Dandelion relay to: 51.15.219.12:13414
-Sep 14 13:16:00.817 INFO sync: total_difficulty 40598325, peer_difficulty 40602196, threshold 3234 (last 5 blocks), enabling sync
-Sep 14 13:16:00.817 DEBG body_sync: body_head - 01c46dc8, 94988, header_head - 01c46dc8, 94988, sync_head - 0e7e791b, 94795
-Sep 14 13:16:00.817 DEBG sync_state: sync_status: NoSync -> BodySync { current_height: 94988, highest_height: 94994 }
-Sep 14 13:16:02.826 DEBG sync: locator heights : [94795, 94793, 94789, 94781, 94765, 94733, 94669, 94541, 94285, 93773, 92749, 90701, 86605, 78413, 62029, 29261, 0]
-Sep 14 13:16:03.660 DEBG sync: locator heights': [94795, 94793, 94789, 94781, 94765, 94733, 94669, 94541, 94285, 93773, 92749, 90701, 86605, 78413, 62029, 29261, 0]
-Sep 14 13:16:03.660 DEBG sync: history locators: len=17, shrunk=0
-Sep 14 13:16:03.660 DEBG sync: locator: [0e7e791b, 0cec9c29, 08e60b3d, 035797d4, 0ac3b0dc, 0146bfd5, 06803a22, 01fdcca0, 06ba1639, 02092d11, 0045409d, 0671f503, 05f3e0b7, 73cad7b1, 0f37e4ff, 13485714, 006642e0]
-Sep 14 13:16:03.660 DEBG sync: request_headers: asking 52.23.180.2:13414 for headers, [0e7e791b, 0cec9c29, 08e60b3d, 035797d4, 0ac3b0dc, 0146bfd5, 06803a22, 01fdcca0, 06ba1639, 02092d11, 0045409d, 0671f503, 05f3e0b7, 73cad7b1, 0f37e4ff, 13485714, 006642e0]
-Sep 14 13:16:03.660 DEBG sync_state: sync_status: BodySync { current_height: 94988, highest_height: 94994 } -> HeaderSync { current_height: 94988, highest_height: 94994 }
-Sep 14 13:16:03.787 INFO Received block headers [0173972c, 08cbd682, 03e4295a, 02e0ca5a, 02d83d6d, 022f01de, 00183cb4, 02bcf205] from 52.23.180.2:13414
-Sep 14 13:16:03.788 INFO All known, ignoring
-Sep 14 13:16:03.788 INFO Received block headers [088bee8a, 013ffc4a, 07554e2e, 0be68ee9, 030144a2, 0062cd61, 0af44c2d, 0238e979] from 52.23.180.2:13414
-Sep 14 13:16:03.788 INFO All known, ignoring
-Sep 14 13:16:03.788 INFO Received block headers [0de15348, 0d1ca89a, 00e26d2f, 0b0bc7ba, 08f8d134, 070122cc, 0097efd1, 0dae72dd] from 52.23.180.2:13414
-Sep 14 13:16:03.788 INFO All known, ignoring
-Sep 14 13:16:03.789 INFO Received block headers [0721e31c, 0f113429, 03d5890f, 06c90e10, 0607c044, 01960ce7, 0cc56b0c, 0d8b586c] from 52.23.180.2:13414
-Sep 14 13:16:03.789 INFO All known, ignoring
-Sep 14 13:16:03.908 INFO Received block headers [053e07d1, 0155ec67, 02cee4fd, 06f83609, 062e2e34, 08147f62, 0eb07ce0, 044536ac] from 52.23.180.2:13414
-Sep 14 13:16:03.908 INFO All known, ignoring
-Sep 14 13:16:03.908 INFO Received block headers [0b8978fa, 0501d308, 0ac799bf, 0390ba1c, 07f23be7, 0ad4d08f, 0dc29362, 0bf90720] from 52.23.180.2:13414
-Sep 14 13:16:03.909 INFO All known, ignoring
-Sep 14 13:16:03.909 INFO Received block headers [0878dbc7, 072c2b1d, 07d3fff3, 0adb1191, 0000c4f0, 0084dea4, 0cf300d2, 0a0b5775] from 52.23.180.2:13414
-Sep 14 13:16:03.909 INFO All known, ignoring
-Sep 14 13:16:03.909 INFO Received block headers [02a7a79e, 0c366c5c, 0a1df097, 0e2a819b, 046be295, 0051d62a, 05fd72fb, 04c465df] from 52.23.180.2:13414
-Sep 14 13:16:03.909 INFO All known, ignoring
-Sep 14 13:16:03.909 INFO Received block headers [0a1246ec, 01eb5eaf, 0d925a06, 056acc87, 0c0a7b07, 001a7b37, 0ccc25bf, 06f94762] from 52.23.180.2:13414
-Sep 14 13:16:03.909 INFO All known, ignoring
-Sep 14 13:16:03.910 INFO Received block headers [03433e42, 06fdde69, 08c5212a, 0a753707, 0a0f8c39, 09ace3fb, 0406c801, 08b2d549] from 52.23.180.2:13414
-Sep 14 13:16:03.910 INFO All known, ignoring
-Sep 14 13:16:04.171 INFO Received block headers [00e8cd6e, 03467004, 02468501, 02f7094c, 00ca53bf, 0510a049, 00885c92, 087ff14b] from 52.23.180.2:13414
-Sep 14 13:16:04.172 INFO All known, ignoring
-Sep 14 13:16:04.172 INFO Received block headers [06a477a9, 02397178, 0b1b2fd1, 024b1563, 01db8fd1, 073d30a1, 070bf122, 09bf2932] from 52.23.180.2:13414
-Sep 14 13:16:04.172 INFO All known, ignoring
-Sep 14 13:16:04.172 INFO Received block headers [079d737f, 084f3c5e, 0a4d0185, 021b882e, 0928f714, 082ca11c, 058e7e0e, 03f97068] from 52.23.180.2:13414
-Sep 14 13:16:04.172 INFO All known, ignoring
-Sep 14 13:16:04.172 INFO Received block headers [083cce14, 0b6fc737, 092126a7, 02be37d1, 096f819c, 0671e842, 08dc1122, 00f68673] from 52.23.180.2:13414
-Sep 14 13:16:04.172 INFO All known, ignoring
-Sep 14 13:16:04.173 INFO Received block headers [015683b4, 0b7955fa, 03e44599, 01860089, 09055bf1, 009e7165, 0a1426cb, 07d1d68a] from 52.23.180.2:13414
-Sep 14 13:16:04.173 INFO All known, ignoring
-Sep 14 13:16:04.173 INFO Received block headers [07879d14, 05c8d1f0, 0a4025e8, 0a6d048d, 02555aa6, 04f96226, 09b9aab9, 0963348f] from 52.23.180.2:13414
-Sep 14 13:16:04.173 INFO All known, ignoring
-Sep 14 13:16:04.173 INFO Received block headers [00db7c48, 08901da9, 0614ad23, 026c92c3, 08e240f1, 017f4edb, 04850f20, 02436183] from 52.23.180.2:13414
-Sep 14 13:16:04.173 INFO All known, ignoring
-Sep 14 13:16:04.173 INFO Received block headers [049f7ea1, 05c199fc, 01e843d4, 014cb0b6, 024dbd78, 01e54bad, 06a647fd, 0a673c73] from 52.23.180.2:13414
-Sep 14 13:16:04.174 INFO All known, ignoring
-Sep 14 13:16:04.174 INFO Received block headers [0193a4ce, 098cad7f, 0add1cfd, 01e641e2, 0bf5a944, 0626c2de, 054e53c0, 00350a56] from 52.23.180.2:13414
-Sep 14 13:16:04.174 INFO All known, ignoring
-Sep 14 13:16:04.174 INFO Received block headers [04d73d85, 0b2edb7d, 03f24230, 0177e1c8, 039fa531, 05603baf, 0c22d51d, 08591eab] from 52.23.180.2:13414
-Sep 14 13:16:04.174 INFO All known, ignoring
-Sep 14 13:16:04.174 INFO Received block headers [0253b458, 049d531a, 0835b505, 0aae60b4, 0838226f, 0810f281, 0a620211, 020cfae5] from 52.23.180.2:13414
-Sep 14 13:16:04.174 INFO All known, ignoring
-Sep 14 13:16:04.174 INFO Received block headers [02161cc6, 028f1cf8, 056ef48d, 07d24f5d, 0b774536, 01abcd25, 02f72fe3, 0745c927] from 52.23.180.2:13414
-Sep 14 13:16:04.175 INFO All known, ignoring
-Sep 14 13:16:04.175 INFO Received block headers [08d8f92e, 06eef3ba, 097f833e, 030a91a2, 0114fc8c, 02310db2, 086289e7, 02127621] from 52.23.180.2:13414
-Sep 14 13:16:04.175 INFO All known, ignoring
-Sep 14 13:16:04.175 INFO Received block headers [0af0a154, 09910bf1, 05f8f00c, 098c6edf, 09bf5a7d, 008d39e4, 00ea2f75, 00b3ca12] from 52.23.180.2:13414
-Sep 14 13:16:04.175 INFO All known, ignoring
-Sep 14 13:16:04.175 INFO Received block headers [01997fc6, 0668ecf3, 00ca28dc, 07e8aefb, 094aef4e, 0092a595] from 52.23.180.2:13414
-Sep 14 13:16:04.176 DEBG pipe: sync_block_header: 01997fc6 at 94988
-Sep 14 13:16:04.176 DEBG sync head 01997fc6 @ 94988
-Sep 14 13:16:04.176 DEBG pipe: sync_block_header: 0668ecf3 at 94989
-Sep 14 13:16:04.176 DEBG header head 0668ecf3 @ 94989
-Sep 14 13:16:04.176 DEBG sync head 0668ecf3 @ 94989
-Sep 14 13:16:04.176 DEBG pipe: sync_block_header: 00ca28dc at 94990
-Sep 14 13:16:04.177 DEBG header head 00ca28dc @ 94990
-Sep 14 13:16:04.177 DEBG sync head 00ca28dc @ 94990
-Sep 14 13:16:04.177 DEBG pipe: sync_block_header: 07e8aefb at 94991
-Sep 14 13:16:04.178 DEBG header head 07e8aefb @ 94991
-Sep 14 13:16:04.178 DEBG sync head 07e8aefb @ 94991
-Sep 14 13:16:04.178 DEBG pipe: sync_block_header: 094aef4e at 94992
-Sep 14 13:16:04.178 DEBG header head 094aef4e @ 94992
-Sep 14 13:16:04.179 DEBG sync head 094aef4e @ 94992
-Sep 14 13:16:04.179 DEBG pipe: sync_block_header: 0092a595 at 94993
-Sep 14 13:16:04.180 DEBG header head 0092a595 @ 94993
-Sep 14 13:16:04.180 DEBG sync head 0092a595 @ 94993
-Sep 14 13:16:04.180 INFO Received block headers [05917d52] from 52.23.180.2:13414
-Sep 14 13:16:04.181 DEBG pipe: sync_block_header: 05917d52 at 94994
-Sep 14 13:16:04.181 DEBG header head 05917d52 @ 94994
-Sep 14 13:16:04.181 DEBG sync head 05917d52 @ 94994
-Sep 14 13:16:05.826 DEBG body_sync: body_head - 01c46dc8, 94988, header_head - 05917d52, 94994, sync_head - 05917d52, 94994
-Sep 14 13:16:05.826 DEBG block_sync: 94988/94994 requesting blocks [01997fc6, 0668ecf3, 07e8aefb, 094aef4e, 0092a595, 05917d52] from 7 peers
-Sep 14 13:16:05.826 DEBG Requesting block 01997fc6 from peer 52.203.10.175:13414.
-Sep 14 13:16:05.826 DEBG Skipped request to 52.203.10.175:13414: Send("sending on a closed channel")
-Sep 14 13:16:05.826 DEBG Requesting block 0668ecf3 from peer 52.23.180.2:13414.
-Sep 14 13:16:05.827 DEBG Requesting block 07e8aefb from peer 185.53.158.12:13414.
-Sep 14 13:16:05.827 DEBG Skipped request to 185.53.158.12:13414: Send("sending on a closed channel")
-Sep 14 13:16:05.827 DEBG Requesting block 094aef4e from peer 52.203.10.175:13414.
-Sep 14 13:16:05.827 DEBG Skipped request to 52.203.10.175:13414: Send("sending on a closed channel")
-Sep 14 13:16:05.827 DEBG Requesting block 0092a595 from peer 204.48.26.36:13414.
-Sep 14 13:16:05.827 DEBG Requesting block 05917d52 from peer 204.48.26.36:13414.
-Sep 14 13:16:05.827 DEBG sync_state: sync_status: HeaderSync { current_height: 94988, highest_height: 94994 } -> BodySync { current_height: 94988, highest_height: 94994 }
-Sep 14 13:16:06.119 DEBG handle_payload: received block: msg_len: 1252
-Sep 14 13:16:06.119 DEBG Received block 0092a595 at 94993 from 204.48.26.36:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
-Sep 14 13:16:06.119 DEBG pipe: process_block 0092a595 at 94993 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:16:06.119 DEBG process_block: orphan: 0092a595, # orphans 4
-Sep 14 13:16:06.120 DEBG handle_payload: received block: msg_len: 1252
-Sep 14 13:16:06.120 DEBG Received block 0668ecf3 at 94989 from 52.23.180.2:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
-Sep 14 13:16:06.120 DEBG pipe: process_block 0668ecf3 at 94989 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:16:06.121 DEBG process_block: orphan: 0668ecf3, # orphans 5
-Sep 14 13:16:06.199 DEBG sync_state: sync_status: BodySync { current_height: 94988, highest_height: 94994 } -> HeaderSync { current_height: 94994, highest_height: 94994 }
-Sep 14 13:16:06.234 DEBG handle_payload: received block: msg_len: 1252
-Sep 14 13:16:06.234 DEBG Received block 05917d52 at 94994 from 204.48.26.36:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
-Sep 14 13:16:06.234 DEBG pipe: process_block 05917d52 at 94994 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:16:06.234 DEBG process_block: orphan: 05917d52, # orphans 6
-Sep 14 13:16:06.454 DEBG body_sync: 3/3 blocks received, and no more in 200ms
-Sep 14 13:16:06.454 DEBG body_sync: body_head - 01c46dc8, 94988, header_head - 05917d52, 94994, sync_head - 05917d52, 94994
-Sep 14 13:16:06.454 DEBG block_sync: 94988/94994 requesting blocks [01997fc6, 07e8aefb, 094aef4e] from 7 peers
-Sep 14 13:16:06.455 DEBG Requesting block 01997fc6 from peer 95.216.163.175:13414.
-Sep 14 13:16:06.455 DEBG Skipped request to 95.216.163.175:13414: Send("sending on a closed channel")
-Sep 14 13:16:06.455 DEBG Requesting block 07e8aefb from peer 167.99.53.226:13414.
-Sep 14 13:16:06.455 DEBG Skipped request to 167.99.53.226:13414: Send("sending on a closed channel")
-Sep 14 13:16:06.455 DEBG Requesting block 094aef4e from peer 52.23.180.2:13414.
-Sep 14 13:16:06.455 DEBG sync_state: sync_status: HeaderSync { current_height: 94994, highest_height: 94994 } -> BodySync { current_height: 94988, highest_height: 94994 }
-Sep 14 13:16:06.583 DEBG handle_payload: received block: msg_len: 1252
-Sep 14 13:16:06.583 DEBG Received block 094aef4e at 94992 from 52.23.180.2:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
-Sep 14 13:16:06.583 DEBG pipe: process_block 094aef4e at 94992 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:16:06.583 DEBG process_block: orphan: 094aef4e, # orphans 7
-Sep 14 13:16:06.797 DEBG body_sync: 1/1 blocks received, and no more in 200ms
-Sep 14 13:16:06.797 DEBG body_sync: body_head - 01c46dc8, 94988, header_head - 05917d52, 94994, sync_head - 05917d52, 94994
-Sep 14 13:16:06.797 DEBG block_sync: 94988/94994 requesting blocks [01997fc6, 07e8aefb] from 7 peers
-Sep 14 13:16:06.797 DEBG Requesting block 01997fc6 from peer 52.203.10.175:13414.
-Sep 14 13:16:06.798 DEBG Skipped request to 52.203.10.175:13414: Send("sending on a closed channel")
-Sep 14 13:16:06.798 DEBG Requesting block 07e8aefb from peer 185.53.158.12:13414.
-Sep 14 13:16:06.798 DEBG Skipped request to 185.53.158.12:13414: Send("sending on a closed channel")
-Sep 14 13:16:11.800 DEBG body_sync: body_head - 01c46dc8, 94988, header_head - 05917d52, 94994, sync_head - 05917d52, 94994
-Sep 14 13:16:11.801 DEBG block_sync: 94988/94994 requesting blocks [01997fc6, 07e8aefb] from 7 peers
-Sep 14 13:16:11.801 DEBG Requesting block 01997fc6 from peer 52.23.180.2:13414.
-Sep 14 13:16:11.801 DEBG Requesting block 07e8aefb from peer 95.216.163.175:13414.
-Sep 14 13:16:11.801 DEBG Skipped request to 95.216.163.175:13414: Send("sending on a closed channel")
-Sep 14 13:16:11.943 DEBG handle_payload: received block: msg_len: 1252
-Sep 14 13:16:11.943 DEBG Received block 01997fc6 at 94988 from 52.23.180.2:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
-Sep 14 13:16:11.943 DEBG pipe: process_block 01997fc6 at 94988 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:16:11.943 DEBG lru_verifier_cache: rangeproofs: 1, not cached (must verify): 1
-Sep 14 13:16:11.948 DEBG lru_verifier_cache: kernel sigs: 1, not cached (must verify): 1
-Sep 14 13:16:11.951 DEBG check_orphans: get block 0668ecf3 at 94989
-Sep 14 13:16:11.952 DEBG pipe: process_block 0668ecf3 at 94989 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:16:11.952 DEBG lru_verifier_cache: rangeproofs: 1, not cached (must verify): 1
-Sep 14 13:16:11.957 DEBG lru_verifier_cache: kernel sigs: 1, not cached (must verify): 1
-Sep 14 13:16:11.962 DEBG pipe: chain head 0668ecf3 @ 94989
-Sep 14 13:16:11.963 DEBG check_orphans: get block 00ca28dc at 94990, no.0 of 2 orphans
-Sep 14 13:16:11.963 DEBG pipe: process_block 00ca28dc at 94990 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:16:11.963 DEBG lru_verifier_cache: rangeproofs: 1, not cached (must verify): 1
-Sep 14 13:16:11.968 DEBG lru_verifier_cache: kernel sigs: 1, not cached (must verify): 1
-Sep 14 13:16:11.971 DEBG pipe: chain head 00ca28dc @ 94990
-Sep 14 13:16:11.972 DEBG check_orphans: get block 0af4690d at 94990, no.1 of 2 orphans
-Sep 14 13:16:11.973 DEBG pipe: process_block 0af4690d at 94990 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:16:11.973 DEBG process_block: orphan: 0af4690d, # orphans 5
-Sep 14 13:16:11.973 DEBG check_orphans: get block 07b0342f at 94991
-Sep 14 13:16:11.973 DEBG pipe: process_block 07b0342f at 94991 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:16:11.973 DEBG process_block: orphan: 07b0342f, # orphans 5
-Sep 14 13:16:11.973 DEBG check_orphans: 2 blocks accepted since height 94989, remaining # orphans 5
-Sep 14 13:16:12.184 DEBG body_sync: 1/1 blocks received, and no more in 200ms
-Sep 14 13:16:12.184 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:16:12.184 DEBG sync_state: sync_status: BodySync { current_height: 94988, highest_height: 94994 } -> BodySync { current_height: 94990, highest_height: 94994 }
-Sep 14 13:16:17.193 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:16:17.392 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:16:22.196 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:16:27.199 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:16:32.204 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:16:37.206 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:16:37.439 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:16:42.211 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:16:47.215 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:16:52.219 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:16:56.909 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:16:56.909 DEBG Received compact_block 00b77e7a at 94992 from 52.23.180.2:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:16:56.909 DEBG pipe: process_block 00b77e7a at 94992 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:16:56.910 DEBG process_block: orphan: 00b77e7a, # orphans 6
-Sep 14 13:16:57.129 DEBG body_sync: 0/0 blocks received, and no more in 200ms
-Sep 14 13:16:57.129 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:16:57.525 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:17:02.138 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:17:07.142 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:17:12.146 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:17:12.333 DEBG Received block header 0512d7ff at 94993 from 204.48.26.36:13414, going to process.
-Sep 14 13:17:12.334 DEBG pipe: process_block_header at 94993 [0512d7ff]
-Sep 14 13:17:12.334 DEBG Block header 0512d7ff refused by chain: Orphan
-Sep 14 13:17:12.474 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:17:12.474 DEBG Received compact_block 0512d7ff at 94993 from 52.23.180.2:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:17:12.474 DEBG pipe: process_block 0512d7ff at 94993 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:17:12.474 DEBG process_block: orphan: 0512d7ff, # orphans 7
-Sep 14 13:17:12.693 DEBG body_sync: 0/0 blocks received, and no more in 200ms
-Sep 14 13:17:12.693 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:17:17.602 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:17:17.697 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:17:22.705 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:17:27.708 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:17:32.711 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:17:32.711 DEBG sync_state: sync_status: BodySync { current_height: 94990, highest_height: 94994 } -> BodySync { current_height: 94990, highest_height: 94995 }
-Sep 14 13:17:37.676 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:17:37.717 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:17:42.719 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:17:47.721 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:17:52.725 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:17:57.720 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:17:57.730 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:18:02.735 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:18:07.738 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:18:12.742 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:18:17.745 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:18:17.792 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:18:22.750 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:18:27.759 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:18:32.769 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:18:36.621 DEBG Received block header 094f5da5 at 94994 from 52.23.180.2:13414, going to process.
-Sep 14 13:18:36.621 DEBG pipe: process_block_header at 94994 [094f5da5]
-Sep 14 13:18:36.621 DEBG Block header 094f5da5 refused by chain: Orphan
-Sep 14 13:18:37.777 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:18:37.865 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:18:42.782 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:18:47.786 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:18:52.798 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:18:57.799 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:18:57.935 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:19:02.803 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:19:07.810 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:19:12.821 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:19:17.824 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:19:18.007 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:19:22.828 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:19:27.838 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:19:32.841 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:19:33.118 DEBG Received block header 0046765f at 94996 from 204.48.26.36:13414, going to process.
-Sep 14 13:19:33.118 DEBG pipe: process_block_header at 94996 [0046765f]
-Sep 14 13:19:33.118 DEBG Block header 0046765f refused by chain: Orphan
-Sep 14 13:19:33.224 DEBG Received block header 0046765f at 94996 from 52.23.180.2:13414, going to process.
-Sep 14 13:19:33.224 DEBG pipe: process_block_header at 94996 [0046765f]
-Sep 14 13:19:33.224 DEBG Block header 0046765f refused by chain: Orphan
-Sep 14 13:19:37.844 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:19:37.844 DEBG sync_state: sync_status: BodySync { current_height: 94990, highest_height: 94995 } -> BodySync { current_height: 94990, highest_height: 94996 }
-Sep 14 13:19:38.078 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:19:42.848 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:19:47.858 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:19:52.867 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:19:57.876 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:19:58.156 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:20:02.886 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:20:07.890 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:20:12.264 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:20:12.264 DEBG Received compact_block 08aa3058 at 94996 from 52.23.180.2:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:20:12.265 DEBG pipe: process_block 08aa3058 at 94996 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:20:12.265 DEBG process_block: orphan: 08aa3058, # orphans 8
-Sep 14 13:20:12.274 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:20:12.274 DEBG Received compact_block 08aa3058 at 94996 from 204.48.26.36:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:20:12.274 DEBG pipe: process_block 08aa3058 at 94996 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:20:12.274 DEBG Block 08aa3058 at 94996 is unfit at this time: already known in orphans
-Sep 14 13:20:12.274 DEBG adapter: process_block: block 08aa3058 refused by chain: Block is unfit: already known in orphans
-Sep 14 13:20:12.482 DEBG body_sync: 0/0 blocks received, and no more in 200ms
-Sep 14 13:20:12.482 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:20:17.491 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:20:18.228 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:20:22.501 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:20:27.502 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:20:32.508 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:20:33.282 DEBG handle_payload: received compact block: msg_len: 1260
-Sep 14 13:20:33.283 DEBG Received compact_block 0669672f at 94997 from 204.48.26.36:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:20:33.283 DEBG pipe: process_block 0669672f at 94997 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:20:33.283 DEBG process_block: orphan: 0669672f, # orphans 9
-Sep 14 13:20:33.501 DEBG body_sync: 0/0 blocks received, and no more in 200ms
-Sep 14 13:20:33.501 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:20:38.301 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:20:38.511 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:20:38.511 DEBG sync_state: sync_status: BodySync { current_height: 94990, highest_height: 94996 } -> BodySync { current_height: 94990, highest_height: 94997 }
-Sep 14 13:20:43.520 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:20:48.529 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:20:48.642 DEBG Received block header 0a7be34d at 94997 from 52.23.180.2:13414, going to process.
-Sep 14 13:20:48.643 DEBG pipe: process_block_header at 94997 [0a7be34d]
-Sep 14 13:20:48.643 DEBG Block header 0a7be34d refused by chain: Orphan
-Sep 14 13:20:53.539 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:20:58.385 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:20:58.544 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:21:03.544 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:21:08.550 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:21:13.554 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:21:18.459 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:21:18.565 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:21:23.566 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:21:28.576 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:21:33.580 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:21:33.580 DEBG sync_state: sync_status: BodySync { current_height: 94990, highest_height: 94997 } -> BodySync { current_height: 94990, highest_height: 94998 }
-Sep 14 13:21:38.531 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:21:38.586 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:21:43.592 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:21:48.603 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:21:53.612 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:21:58.610 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:21:58.621 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:22:03.630 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:22:08.634 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:22:13.643 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:22:18.647 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:22:18.682 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:22:23.656 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:22:28.663 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:22:33.670 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:22:38.673 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:22:38.761 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:22:43.678 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:22:48.680 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:22:53.685 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:22:58.688 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:22:58.833 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:23:03.697 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:23:08.701 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:23:13.705 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:23:18.709 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:23:18.913 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:23:23.719 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:23:28.727 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:23:33.728 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:23:38.737 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:23:38.985 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:23:43.745 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:23:48.755 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:23:53.758 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:23:58.768 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:23:59.055 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:24:03.777 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:24:08.787 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:24:13.789 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:24:18.792 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:24:19.112 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:24:23.797 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:24:28.800 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:24:33.805 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:24:38.806 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:24:39.162 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:24:43.810 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:24:48.822 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:24:53.832 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:24:58.837 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:24:59.224 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:25:03.845 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:25:08.849 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:25:13.857 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:25:18.867 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:25:19.309 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:25:23.876 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:25:28.880 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:25:33.890 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:25:38.899 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:25:39.389 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:25:43.908 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:25:43.908 DEBG sync_state: sync_status: BodySync { current_height: 94990, highest_height: 94998 } -> BodySync { current_height: 94990, highest_height: 94999 }
-Sep 14 13:25:48.912 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:25:53.919 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:25:58.920 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:25:59.465 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:25:59.465 DEBG monitor_peers: updating expired dandelion relay
-Sep 14 13:25:59.465 DEBG Successfully updated Dandelion relay to: 73.149.55.243:13414
-Sep 14 13:26:03.928 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:26:08.938 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:26:13.943 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:26:18.947 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:26:19.540 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:26:23.950 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:26:28.960 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:26:33.964 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:26:33.965 DEBG sync_state: sync_status: BodySync { current_height: 94990, highest_height: 94999 } -> BodySync { current_height: 94990, highest_height: 95000 }
-Sep 14 13:26:38.968 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:26:39.624 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:26:43.979 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:26:48.987 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:26:53.992 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:26:58.994 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:26:59.697 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:27:03.999 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:27:09.009 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:27:14.011 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:27:18.781 DEBG Received block header 03b26ba2 at 95001 from 52.23.180.2:13414, going to process.
-Sep 14 13:27:18.782 DEBG pipe: process_block_header at 95001 [03b26ba2]
-Sep 14 13:27:18.782 DEBG Block header 03b26ba2 refused by chain: Orphan
-Sep 14 13:27:19.019 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:27:19.772 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:27:24.026 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:27:24.026 DEBG sync_state: sync_status: BodySync { current_height: 94990, highest_height: 95000 } -> BodySync { current_height: 94990, highest_height: 95001 }
-Sep 14 13:27:29.029 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:27:34.035 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:27:39.037 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:27:39.850 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:27:44.040 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:27:49.049 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:27:54.056 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:27:56.388 DEBG handle_payload: received tx: msg_len: 1638
-Sep 14 13:27:59.062 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:27:59.923 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:28:04.073 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:28:09.076 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:28:11.633 DEBG handle_payload: received compact block: msg_len: 1268
-Sep 14 13:28:11.633 DEBG Received compact_block 06eee226 at 95002 from 204.48.26.36:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:28:11.633 DEBG pipe: process_block 06eee226 at 95002 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:28:11.634 DEBG process_block: orphan: 06eee226, # orphans 10
-Sep 14 13:28:11.845 DEBG body_sync: 0/0 blocks received, and no more in 200ms
-Sep 14 13:28:11.845 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:28:16.855 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:28:16.855 DEBG sync_state: sync_status: BodySync { current_height: 94990, highest_height: 95001 } -> BodySync { current_height: 94990, highest_height: 95002 }
-Sep 14 13:28:20.000 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:28:21.858 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:28:26.868 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:28:31.870 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:28:36.881 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:28:36.881 DEBG sync_state: sync_status: BodySync { current_height: 94990, highest_height: 95002 } -> BodySync { current_height: 94990, highest_height: 95003 }
-Sep 14 13:28:40.078 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (1 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:28:41.886 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:28:46.889 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:28:51.892 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:28:56.896 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:29:00.145 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 2 banned + 254 defunct
-Sep 14 13:29:01.896 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:29:01.896 DEBG sync_state: sync_status: BodySync { current_height: 94990, highest_height: 95003 } -> BodySync { current_height: 94990, highest_height: 95004 }
-Sep 14 13:29:06.903 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:29:11.906 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:29:16.910 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:29:20.219 DEBG monitor_peers: unbanned 45.61.156.122:13414 after 10803 seconds
-Sep 14 13:29:20.220 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 50 healthy + 1 banned + 254 defunct
-Sep 14 13:29:21.919 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:29:26.923 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:29:31.928 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:29:36.932 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:29:40.286 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 51 healthy + 1 banned + 254 defunct
-Sep 14 13:29:41.933 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:29:46.936 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:29:51.944 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:29:56.944 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:30:00.324 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 51 healthy + 1 banned + 254 defunct
-Sep 14 13:30:01.950 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:30:05.186 DEBG Received block header 04d83a7c at 95005 from 204.48.26.36:13414, going to process.
-Sep 14 13:30:05.186 DEBG pipe: process_block_header at 95005 [04d83a7c]
-Sep 14 13:30:05.186 DEBG Block header 04d83a7c refused by chain: Orphan
-Sep 14 13:30:05.241 DEBG handle_payload: received compact block: msg_len: 1268
-Sep 14 13:30:05.241 DEBG Received compact_block 04d83a7c at 95005 from 52.23.180.2:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:30:05.241 DEBG pipe: process_block 04d83a7c at 95005 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:30:05.241 DEBG process_block: orphan: 04d83a7c, # orphans 11
-Sep 14 13:30:05.455 DEBG body_sync: 0/0 blocks received, and no more in 200ms
-Sep 14 13:30:05.455 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:30:10.465 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:30:10.465 DEBG sync_state: sync_status: BodySync { current_height: 94990, highest_height: 95004 } -> BodySync { current_height: 94990, highest_height: 95005 }
-Sep 14 13:30:15.473 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:30:20.409 DEBG monitor_peers: unbanned 198.245.50.26:13414 after 10804 seconds
-Sep 14 13:30:20.409 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 51 healthy + 0 banned + 254 defunct
-Sep 14 13:30:20.476 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:30:25.481 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:30:30.490 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:30:35.500 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:30:40.480 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:30:40.503 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:30:45.514 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:30:50.517 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:30:55.521 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:31:00.530 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:31:00.553 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:31:05.539 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:31:10.543 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:31:12.981 DEBG handle_payload: received compact block: msg_len: 1268
-Sep 14 13:31:12.982 DEBG Received compact_block 00fa71bd at 95006 from 52.23.180.2:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:31:12.982 DEBG pipe: process_block 00fa71bd at 95006 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:31:12.982 DEBG process_block: orphan: 00fa71bd, # orphans 12
-Sep 14 13:31:13.202 DEBG body_sync: 0/0 blocks received, and no more in 200ms
-Sep 14 13:31:13.202 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:31:18.205 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:31:18.205 DEBG sync_state: sync_status: BodySync { current_height: 94990, highest_height: 95005 } -> BodySync { current_height: 94990, highest_height: 95006 }
-Sep 14 13:31:20.637 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:31:23.209 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:31:28.219 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:31:33.222 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:31:38.223 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:31:40.722 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:31:43.224 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:31:48.234 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:31:53.237 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:31:58.240 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:32:00.795 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:32:03.244 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:32:08.249 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:32:13.257 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:32:18.268 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:32:20.869 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:32:23.277 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:32:28.287 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:32:33.296 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:32:38.299 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:32:38.299 DEBG sync_state: sync_status: BodySync { current_height: 94990, highest_height: 95006 } -> BodySync { current_height: 94990, highest_height: 95007 }
-Sep 14 13:32:40.953 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:32:43.309 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:32:48.313 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:32:53.322 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:32:58.327 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:33:01.025 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:33:03.335 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:33:08.345 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:33:13.349 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:33:18.351 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:33:21.105 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:33:23.362 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:33:28.371 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:33:33.374 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:33:38.385 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:33:41.188 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:33:43.388 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:33:48.397 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:33:53.406 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:33:58.410 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:34:01.249 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:34:03.414 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:34:08.416 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:34:08.416 DEBG sync_state: sync_status: BodySync { current_height: 94990, highest_height: 95007 } -> BodySync { current_height: 94990, highest_height: 95008 }
-Sep 14 13:34:13.425 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:34:18.425 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:34:21.291 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:34:23.429 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:34:28.432 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:34:33.437 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:34:38.440 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:34:41.342 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:34:43.442 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:34:48.447 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:34:52.533 DEBG handle_payload: received compact block: msg_len: 1268
-Sep 14 13:34:52.534 DEBG Received block header 040c17f6 at 95009 from 204.48.26.36:13414, going to process.
-Sep 14 13:34:52.534 DEBG Received compact_block 040c17f6 at 95009 from 52.23.180.2:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
-Sep 14 13:34:52.534 DEBG pipe: process_block_header at 95009 [040c17f6]
-Sep 14 13:34:52.534 DEBG Block header 040c17f6 refused by chain: Orphan
-Sep 14 13:34:52.534 DEBG pipe: process_block 040c17f6 at 95009 with 0 inputs, 1 outputs, 1 kernels
-Sep 14 13:34:52.534 DEBG process_block: orphan: 040c17f6, # orphans 13
-Sep 14 13:34:52.740 DEBG body_sync: 0/0 blocks received, and no more in 200ms
-Sep 14 13:34:52.740 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:34:57.749 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:34:57.749 DEBG sync_state: sync_status: BodySync { current_height: 94990, highest_height: 95008 } -> BodySync { current_height: 94990, highest_height: 95009 }
-Sep 14 13:35:01.385 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:35:02.752 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:35:07.761 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:35:12.768 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:35:17.769 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:35:21.431 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:35:22.775 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:35:27.780 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:35:32.783 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:35:37.787 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:35:41.484 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:35:42.793 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:35:47.794 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:35:52.804 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:35:57.813 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:36:01.524 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:36:01.524 DEBG monitor_peers: updating expired dandelion relay
-Sep 14 13:36:01.524 DEBG Successfully updated Dandelion relay to: 52.203.10.175:13414
-Sep 14 13:36:02.817 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:36:07.825 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:36:12.835 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:36:17.836 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:36:21.584 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:36:22.838 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:36:27.841 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:36:32.845 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:36:37.855 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:36:41.668 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:36:42.859 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:36:47.863 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:36:52.871 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:36:57.872 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:37:01.747 DEBG monitor_peers: on 0.0.0.0:13414, 10 connected (2 most_work). all 306 = 52 healthy + 0 banned + 254 defunct
-Sep 14 13:37:02.880 DEBG body_sync: body_head - 00ca28dc, 94990, header_head - 00ca28dc, 94990, sync_head - 05917d52, 94994
-Sep 14 13:37:05.704 DEBG Connection close with 54.198.222.93:13414 initiated by us
-Sep 14 13:37:05.704 DEBG Connection close with 52.23.180.2:13414 initiated by us
-Sep 14 13:37:05.704 DEBG Connection close with 204.48.26.36:13414 initiated by us
+Invalid TxHashSet: Invalid MMR, hash of parent at 13 does not match children. }). restart fast sync
+Sep 28 16:21:05.863 DEBG fast_sync: before txhashset request, header head: 115006 / 148e3fbb, txhashset_head: 112413 / 0433ccd8
+Sep 28 16:21:05.863 DEBG Asking 8.6.8.66:13414 for txhashset archive at 112413 0433ccd8.
+Sep 28 16:21:05.863 DEBG sync_state: sync_status: HeaderSync { current_height: 115006, highest_height: 115006 } -> TxHashsetDownload
+Sep 28 16:21:22.034 DEBG monitor_peers: on 0.0.0.0:13414, 11 connected (8 most_work). all 403 = 23 healthy + 1 banned + 379 defunct
+Sep 28 16:21:22.036 DEBG clean_peers V4(173.230.154.243:13414), peer banned
+Sep 28 16:21:42.109 DEBG monitor_peers: on 0.0.0.0:13414, 11 connected (8 most_work). all 403 = 23 healthy + 1 banned + 379 defunct
+Sep 28 16:21:42.253 DEBG Received block header 1c9d1386 at 115006 from 185.53.158.12:13414, going to process.
+Sep 28 16:21:42.253 DEBG pipe: process_block_header at 115006 [1c9d1386]
+Sep 28 16:21:42.254 DEBG Requesting compact block 1c9d1386 from 185.53.158.12:13414
+Sep 28 16:21:42.290 DEBG Received block header 1c9d1386 at 115006 from 139.162.168.18:13414, going to process.
+Sep 28 16:21:42.290 DEBG pipe: process_block_header at 115006 [1c9d1386]
+Sep 28 16:21:42.291 DEBG Requesting compact block 1c9d1386 from 139.162.168.18:13414
+Sep 28 16:21:42.299 DEBG handle_payload: received compact block: msg_len: 1268
+Sep 28 16:21:42.299 DEBG Received compact_block 1c9d1386 at 115006 from 185.53.158.12:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
+Sep 28 16:21:42.299 DEBG pipe: process_block 1c9d1386 at 115006 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:21:42.300 DEBG process_block: orphan: 1c9d1386, # orphans 55
+Sep 28 16:21:42.310 DEBG handle_payload: received compact block: msg_len: 1268
+Sep 28 16:21:42.310 DEBG Received compact_block 1c9d1386 at 115006 from 204.48.26.36:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
+Sep 28 16:21:42.310 DEBG pipe: process_block 1c9d1386 at 115006 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:21:42.310 DEBG Block 1c9d1386 at 115006 is unfit at this time: already known in orphans
+Sep 28 16:21:42.311 DEBG adapter: process_block: block 1c9d1386 refused by chain: Block is unfit: already known in orphans
+Sep 28 16:21:42.318 DEBG handle_payload: received block: msg_len: 1260
+Sep 28 16:21:42.318 DEBG Received block 1c9d1386 at 115006 from 139.162.168.18:13414, inputs: 0, outputs: 1, kernels: 1, going to process.
+Sep 28 16:21:42.318 DEBG pipe: process_block 1c9d1386 at 115006 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:21:42.318 DEBG Block 1c9d1386 at 115006 is unfit at this time: already known in orphans
+Sep 28 16:21:42.318 DEBG adapter: process_block: block 1c9d1386 refused by chain: Block is unfit: already known in orphans
+Sep 28 16:21:42.543 DEBG handle_payload: received compact block: msg_len: 1268
+Sep 28 16:21:42.543 DEBG Received compact_block 1c9d1386 at 115006 from 45.61.156.122:13414, outputs: 1, kernels: 1, kern_ids: 0, going to process.
+Sep 28 16:21:42.543 DEBG pipe: process_block 1c9d1386 at 115006 with 0 inputs, 1 outputs, 1 kernels
+Sep 28 16:21:42.543 DEBG Block 1c9d1386 at 115006 is unfit at this time: already known in orphans
+Sep 28 16:21:42.543 DEBG adapter: process_block: block 1c9d1386 refused by chain: Block is unfit: already known in orphans
+Sep 28 16:21:43.676 DEBG handle_payload: txhashset archive for 0433ccd8 at 112413. size=103832977
+Sep 28 16:22:02.192 DEBG monitor_peers: on 0.0.0.0:13414, 11 connected (8 most_work). all 403 = 23 healthy + 1 banned + 379 defunct
+Sep 28 16:22:19.248 DEBG sync_state: sync_status: TxHashsetDownload -> TxHashsetSetup
+Sep 28 16:22:22.276 DEBG monitor_peers: on 0.0.0.0:13414, 11 connected (8 most_work). all 403 = 23 healthy + 1 banned + 379 defunct
+Sep 28 16:22:27.015 DEBG Unexpected file(s) found in txhashset subfolder "/Users/tromp/grin/testnet3/chain_data/txhashset/output", removing.
+Sep 28 16:22:27.015 DEBG Unexpected file(s) found in txhashset subfolder "/Users/tromp/grin/testnet3/chain_data/txhashset/rangeproof", removing.
+Sep 28 16:22:27.016 DEBG leaf_set: copying rewound file /Users/tromp/grin/testnet3/chain_data/txhashset/output/pmmr_leaf.bin.0433ccd8 to /Users/tromp/grin/testnet3/chain_data/txhashset/output/pmmr_leaf.bin
+Sep 28 16:22:27.125 DEBG prune_list: bitmap 18076 pos (22210 bytes), pruned_cache 64386 pos (26472 bytes), shift_cache 18076, leaf_shift_cache 18076
+Sep 28 16:22:27.126 DEBG leaf_set: copying rewound file /Users/tromp/grin/testnet3/chain_data/txhashset/rangeproof/pmmr_leaf.bin.0433ccd8 to /Users/tromp/grin/testnet3/chain_data/txhashset/rangeproof/pmmr_leaf.bin
+Sep 28 16:22:27.235 DEBG prune_list: bitmap 18076 pos (22210 bytes), pruned_cache 64386 pos (26472 bytes), shift_cache 18076, leaf_shift_cache 18076
+Sep 28 16:22:27.236 DEBG chain: validate_kernel_history: rewinding and validating kernel history (readonly)
+Sep 28 16:22:28.529 DEBG sync_state: sync_status: TxHashsetSetup -> HeaderSync { current_height: 115006, highest_height: 115006 }
+Sep 28 16:22:28.631 DEBG chain: validate_kernel_history: validated kernel root on 112413 headers
+Sep 28 16:22:28.631 DEBG chain: txhashset_write: rewinding a 2nd time (writeable)
+Sep 28 16:22:28.631 DEBG input_pos_to_rewind: 95045 < 112413, nothing to rewind
+Sep 28 16:22:28.906 DEBG txhashset: validated the output 251821, rproof 251821, kernel 234844 mmrs, took 0s
+Sep 28 16:22:42.362 DEBG monitor_peers: on 0.0.0.0:13414, 11 connected (8 most_work). all 403 = 23 healthy + 1 banned + 379 defunct
+Sep 28 16:22:53.213 DEBG txhashset: verified 117427 kernel signatures, pmmr size 234844, took 22s
+Sep 28 16:22:53.896 DEBG txhashset: verify_rangeproofs: verified 1000 rangeproofs
+Sep 28 16:22:54.539 DEBG txhashset: verify_rangeproofs: verified 2000 rangeproofs
+Sep 28 16:22:55.186 DEBG txhashset: verify_rangeproofs: verified 3000 rangeproofs
+Sep 28 16:22:55.832 DEBG txhashset: verify_rangeproofs: verified 4000 rangeproofs
+Sep 28 16:22:56.478 DEBG txhashset: verify_rangeproofs: verified 5000 rangeproofs
+Sep 28 16:22:57.112 DEBG txhashset: verify_rangeproofs: verified 6000 rangeproofs
+Sep 28 16:22:57.752 DEBG txhashset: verify_rangeproofs: verified 7000 rangeproofs
+Sep 28 16:22:58.395 DEBG txhashset: verify_rangeproofs: verified 8000 rangeproofs
+Sep 28 16:22:59.041 DEBG txhashset: verify_rangeproofs: verified 9000 rangeproofs
+Sep 28 16:22:59.690 DEBG txhashset: verify_rangeproofs: verified 10000 rangeproofs
+Sep 28 16:23:00.327 DEBG txhashset: verify_rangeproofs: verified 11000 rangeproofs
+Sep 28 16:23:00.969 DEBG txhashset: verify_rangeproofs: verified 12000 rangeproofs
+Sep 28 16:23:01.620 DEBG txhashset: verify_rangeproofs: verified 13000 rangeproofs
+Sep 28 16:23:02.289 DEBG txhashset: verify_rangeproofs: verified 14000 rangeproofs
+Sep 28 16:23:02.438 DEBG monitor_peers: on 0.0.0.0:13414, 11 connected (8 most_work). all 403 = 23 healthy + 1 banned + 379 defunct
+Sep 28 16:23:03.075 DEBG txhashset: verify_rangeproofs: verified 15000 rangeproofs
+Sep 28 16:23:03.810 DEBG txhashset: verify_rangeproofs: verified 16000 rangeproofs
+Sep 28 16:23:04.400 DEBG Received block header 1cecc114 at 115007 from 54.90.220.136:13414, going to process.
+Sep 28 16:23:04.497 DEBG txhashset: verify_rangeproofs: verified 17000 rangeproofs
+Sep 28 16:23:05.190 DEBG txhashset: verify_rangeproofs: verified 18000 rangeproofs
+Sep 28 16:23:05.881 DEBG txhashset: verify_rangeproofs: verified 19000 rangeproofs
+Sep 28 16:23:06.564 DEBG txhashset: verify_rangeproofs: verified 20000 rangeproofs
+Sep 28 16:23:07.248 DEBG txhashset: verify_rangeproofs: verified 21000 rangeproofs
+Sep 28 16:23:07.899 DEBG txhashset: verify_rangeproofs: verified 22000 rangeproofs
+Sep 28 16:23:08.534 DEBG txhashset: verify_rangeproofs: verified 23000 rangeproofs
+Sep 28 16:23:09.165 DEBG txhashset: verify_rangeproofs: verified 24000 rangeproofs
+Sep 28 16:23:09.848 DEBG txhashset: verify_rangeproofs: verified 25000 rangeproofs
+Sep 28 16:23:10.479 DEBG txhashset: verify_rangeproofs: verified 26000 rangeproofs
+Sep 28 16:23:11.114 DEBG txhashset: verify_rangeproofs: verified 27000 rangeproofs
+Sep 28 16:23:11.766 DEBG txhashset: verify_rangeproofs: verified 28000 rangeproofs
+Sep 28 16:23:12.416 DEBG txhashset: verify_rangeproofs: verified 29000 rangeproofs
+Sep 28 16:23:13.059 DEBG txhashset: verify_rangeproofs: verified 30000 rangeproofs
+Sep 28 16:23:13.711 DEBG txhashset: verify_rangeproofs: verified 31000 rangeproofs
+Sep 28 16:23:14.343 DEBG txhashset: verify_rangeproofs: verified 32000 rangeproofs
+Sep 28 16:23:14.970 DEBG txhashset: verify_rangeproofs: verified 33000 rangeproofs
+Sep 28 16:23:15.586 DEBG txhashset: verify_rangeproofs: verified 34000 rangeproofs
+Sep 28 16:23:16.201 DEBG txhashset: verify_rangeproofs: verified 35000 rangeproofs
+Sep 28 16:23:16.822 DEBG txhashset: verify_rangeproofs: verified 36000 rangeproofs
+Sep 28 16:23:17.446 DEBG txhashset: verify_rangeproofs: verified 37000 rangeproofs
+Sep 28 16:23:18.060 DEBG txhashset: verify_rangeproofs: verified 38000 rangeproofs
+Sep 28 16:23:18.678 DEBG txhashset: verify_rangeproofs: verified 39000 rangeproofs
+Sep 28 16:23:19.296 DEBG txhashset: verify_rangeproofs: verified 40000 rangeproofs
+Sep 28 16:23:19.928 DEBG txhashset: verify_rangeproofs: verified 41000 rangeproofs
+Sep 28 16:23:20.556 DEBG txhashset: verify_rangeproofs: verified 42000 rangeproofs
+Sep 28 16:23:21.179 DEBG txhashset: verify_rangeproofs: verified 43000 rangeproofs
+Sep 28 16:23:21.804 DEBG txhashset: verify_rangeproofs: verified 44000 rangeproofs
+Sep 28 16:23:22.424 DEBG txhashset: verify_rangeproofs: verified 45000 rangeproofs
+Sep 28 16:23:22.507 DEBG monitor_peers: on 0.0.0.0:13414, 11 connected (8 most_work). all 403 = 23 healthy + 1 banned + 379 defunct
+Sep 28 16:23:23.048 DEBG txhashset: verify_rangeproofs: verified 46000 rangeproofs
+Sep 28 16:23:23.663 DEBG txhashset: verify_rangeproofs: verified 47000 rangeproofs
+Sep 28 16:23:24.278 DEBG txhashset: verify_rangeproofs: verified 48000 rangeproofs
+Sep 28 16:23:24.897 DEBG txhashset: verify_rangeproofs: verified 49000 rangeproofs
+Sep 28 16:23:25.514 DEBG txhashset: verify_rangeproofs: verified 50000 rangeproofs
+Sep 28 16:23:26.143 DEBG txhashset: verify_rangeproofs: verified 51000 rangeproofs
+Sep 28 16:23:26.779 DEBG txhashset: verify_rangeproofs: verified 52000 rangeproofs
+Sep 28 16:23:27.407 DEBG txhashset: verify_rangeproofs: verified 53000 rangeproofs
+Sep 28 16:23:28.036 DEBG txhashset: verify_rangeproofs: verified 54000 rangeproofs
+Sep 28 16:23:28.671 DEBG txhashset: verify_rangeproofs: verified 55000 rangeproofs
+Sep 28 16:23:29.304 DEBG txhashset: verify_rangeproofs: verified 56000 rangeproofs
+Sep 28 16:23:29.938 DEBG txhashset: verify_rangeproofs: verified 57000 rangeproofs
+Sep 28 16:23:30.571 DEBG txhashset: verify_rangeproofs: verified 58000 rangeproofs
+Sep 28 16:23:31.203 DEBG txhashset: verify_rangeproofs: verified 59000 rangeproofs
+Sep 28 16:23:31.833 DEBG txhashset: verify_rangeproofs: verified 60000 rangeproofs
+Sep 28 16:23:32.461 DEBG txhashset: verify_rangeproofs: verified 61000 rangeproofs
+Sep 28 16:23:33.086 DEBG txhashset: verify_rangeproofs: verified 62000 rangeproofs
+Sep 28 16:23:33.715 DEBG txhashset: verify_rangeproofs: verified 63000 rangeproofs
+Sep 28 16:23:34.343 DEBG txhashset: verify_rangeproofs: verified 64000 rangeproofs
+Sep 28 16:23:34.976 DEBG txhashset: verify_rangeproofs: verified 65000 rangeproofs
+Sep 28 16:23:35.606 DEBG txhashset: verify_rangeproofs: verified 66000 rangeproofs
+Sep 28 16:23:36.234 DEBG txhashset: verify_rangeproofs: verified 67000 rangeproofs
+Sep 28 16:23:36.863 DEBG txhashset: verify_rangeproofs: verified 68000 rangeproofs
+Sep 28 16:23:37.493 DEBG txhashset: verify_rangeproofs: verified 69000 rangeproofs
+Sep 28 16:23:38.134 DEBG txhashset: verify_rangeproofs: verified 70000 rangeproofs
+Sep 28 16:23:38.769 DEBG txhashset: verify_rangeproofs: verified 71000 rangeproofs
+Sep 28 16:23:39.402 DEBG txhashset: verify_rangeproofs: verified 72000 rangeproofs
+Sep 28 16:23:40.032 DEBG txhashset: verify_rangeproofs: verified 73000 rangeproofs
+Sep 28 16:23:40.661 DEBG txhashset: verify_rangeproofs: verified 74000 rangeproofs
+Sep 28 16:23:41.290 DEBG txhashset: verify_rangeproofs: verified 75000 rangeproofs
+Sep 28 16:23:41.920 DEBG txhashset: verify_rangeproofs: verified 76000 rangeproofs
+Sep 28 16:23:42.554 DEBG txhashset: verify_rangeproofs: verified 77000 rangeproofs
+Sep 28 16:23:42.591 DEBG monitor_peers: on 0.0.0.0:13414, 11 connected (8 most_work). all 403 = 23 healthy + 1 banned + 379 defunct
+Sep 28 16:23:43.184 DEBG txhashset: verify_rangeproofs: verified 78000 rangeproofs
+Sep 28 16:23:43.817 DEBG txhashset: verify_rangeproofs: verified 79000 rangeproofs
+Sep 28 16:23:44.444 DEBG txhashset: verify_rangeproofs: verified 80000 rangeproofs
+Sep 28 16:23:45.079 DEBG txhashset: verify_rangeproofs: verified 81000 rangeproofs
+Sep 28 16:23:45.718 DEBG txhashset: verify_rangeproofs: verified 82000 rangeproofs
+Sep 28 16:23:46.346 DEBG txhashset: verify_rangeproofs: verified 83000 rangeproofs
+Sep 28 16:23:46.975 DEBG txhashset: verify_rangeproofs: verified 84000 rangeproofs
+Sep 28 16:23:47.414 DEBG txhashset: verify_rangeproofs: verified 84684 rangeproofs
+Sep 28 16:23:47.414 DEBG txhashset: verified 84684 rangeproofs, pmmr size 251821, took 54s
+Sep 28 16:23:47.586 DEBG chain: txhashset_write: finished validating and rebuilding
+Sep 28 16:23:47.586 DEBG sync_state: sync_status: TxHashsetValidation { kernels: 117424, kernel_total: 117427, rproofs: 84683, rproof_total: 125917 } -> TxHashsetSave
+Sep 28 16:24:02.664 DEBG monitor_peers: on 0.0.0.0:13414, 11 connected (8 most_work). all 403 = 23 healthy + 1 banned + 379 defunct
+Sep 28 16:24:22.741 DEBG monitor_peers: on 0.0.0.0:13414, 11 connected (8 most_work). all 403 = 23 healthy + 1 banned + 379 defunct
+Sep 28 16:24:42.827 DEBG monitor_peers: on 0.0.0.0:13414, 11 connected (8 most_work). all 403 = 23 healthy + 1 banned + 379 defunct
+Sep 28 16:25:02.889 DEBG monitor_peers: on 0.0.0.0:13414, 11 connected (8 most_work). all 403 = 23 healthy + 1 banned + 379 defunct
+Sep 28 16:25:22.965 DEBG monitor_peers: on 0.0.0.0:13414, 11 connected (8 most_work). all 403 = 23 healthy + 1 banned + 379 defunct
+Sep 28 16:25:43.044 DEBG monitor_peers: on 0.0.0.0:13414, 11 connected (8 most_work). all 403 = 23 healthy + 1 banned + 379 defunct
