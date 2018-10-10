@@ -1,0 +1,503 @@
+Process 20414 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = signal SIGSTOP
+    frame #0: 0x00007fff7eacdd82 libsystem_kernel.dylib`__semwait_signal + 10
+libsystem_kernel.dylib`__semwait_signal:
+->  0x7fff7eacdd82 <+10>: jae    0x7fff7eacdd8c            ; <+20>
+    0x7fff7eacdd84 <+12>: movq   %rax, %rdi
+    0x7fff7eacdd87 <+15>: jmp    0x7fff7eac4b0e            ; cerror
+    0x7fff7eacdd8c <+20>: retq
+Target 0: (grin) stopped.
+
+Executable module set to "/Users/tromp/grin/target/release/grin".
+Architecture set to: x86_64h-apple-macosx.
+(lldb) thread backtrace all
+* thread #1, queue = 'com.apple.main-thread', stop reason = signal SIGSTOP
+  * frame #0: 0x00007fff7eacdd82 libsystem_kernel.dylib`__semwait_signal + 10
+    frame #1: 0x00007fff7ea48724 libsystem_c.dylib`nanosleep + 199
+    frame #2: 0x000000010d352cd0 grin`std::sys::unix::thread::Thread::sleep::hd4df4d722df2c1ef at thread.rs:163 [opt]
+    frame #3: 0x000000010cc3566c grin`grin_servers::grin::server::Server::start::he256da770d992f19 + 1692
+    frame #4: 0x000000010cc06419 grin`grin::cmd::server::start_server::h6cd3b425397cd1d0 + 265
+    frame #5: 0x000000010cc06ba0 grin`grin::cmd::server::server_command::ha0fe3392dfbc9652 + 1344
+    frame #6: 0x000000010cc5410e grin`grin::main::h348c10794ababb53 + 13998
+    frame #7: 0x000000010cbc7a46 grin`std::rt::lang_start::_$u7b$$u7b$closure$u7d$$u7d$::h45ac0c726dee8c58 + 6
+    frame #8: 0x000000010d36ed58 grin`std::panicking::try::do_call::h075d1fe7e0e0cdba [inlined] std::rt::lang_start_internal::_$u7b$$u7b$closure$u7d$$u7d$::h439a19377ca2bed9 at rt.rs:59 [opt]
+    frame #9: 0x000000010d36ed4c grin`std::panicking::try::do_call::h075d1fe7e0e0cdba at panicking.rs:310 [opt]
+    frame #10: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #11: 0x000000010d35db8d grin`std::rt::lang_start_internal::h59f4ab4861dc5e32 [inlined] std::panicking::try::hf90c1dc7f1861737 at panicking.rs:289 [opt]
+    frame #12: 0x000000010d35db5a grin`std::rt::lang_start_internal::h59f4ab4861dc5e32 [inlined] std::panic::catch_unwind::h26a9f7216a140f23 at panic.rs:392 [opt]
+    frame #13: 0x000000010d35db5a grin`std::rt::lang_start_internal::h59f4ab4861dc5e32 at rt.rs:58 [opt]
+    frame #14: 0x000000010cc5591c grin`main + 44
+    frame #15: 0x00007fff7e97d015 libdyld.dylib`start + 1
+  thread #2
+    frame #0: 0x00007fff7eacda16 libsystem_kernel.dylib`__psynch_cvwait + 10
+    frame #1: 0x00007fff7ec96589 libsystem_pthread.dylib`_pthread_cond_wait + 732
+    frame #2: 0x000000010d367722 grin`std::thread::park::h5e35fb23d278218e [inlined] std::sys::unix::condvar::Condvar::wait::hf9af69bacda32c8d at condvar.rs:78 [opt]
+    frame #3: 0x000000010d36771d grin`std::thread::park::h5e35fb23d278218e [inlined] std::sys_common::condvar::Condvar::wait::h17524182ce30e38b at condvar.rs:51 [opt]
+    frame #4: 0x000000010d36771d grin`std::thread::park::h5e35fb23d278218e [inlined] std::sync::condvar::Condvar::wait::h5d208fd8bbfea4db at condvar.rs:214 [opt]
+    frame #5: 0x000000010d367703 grin`std::thread::park::h5e35fb23d278218e at mod.rs:806 [opt]
+    frame #6: 0x000000010d357f30 grin`std::sync::mpsc::blocking::WaitToken::wait::hca4109aa6875e6e9 at blocking.rs:81 [opt]
+    frame #7: 0x000000010d1cfd2f grin`_$LT$std..sync..mpsc..sync..Packet$LT$T$GT$$GT$::recv::hf6bf7ee66a84d21a + 1087
+    frame #8: 0x000000010d1dc691 grin`_$LT$std..sync..mpsc..Receiver$LT$T$GT$$GT$::recv::hd53a4d6068690a68 + 417
+    frame #9: 0x000000010d1d252b grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h633d780ad9c640cf + 75
+    frame #10: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #11: 0x000000010d1d7f92 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h8da8018962f41ac5 + 146
+    frame #12: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #13: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #14: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #15: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #16: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #17: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #3
+    frame #0: 0x00007fff7eacda16 libsystem_kernel.dylib`__psynch_cvwait + 10
+    frame #1: 0x00007fff7ec96589 libsystem_pthread.dylib`_pthread_cond_wait + 732
+    frame #2: 0x000000010d367722 grin`std::thread::park::h5e35fb23d278218e [inlined] std::sys::unix::condvar::Condvar::wait::hf9af69bacda32c8d at condvar.rs:78 [opt]
+    frame #3: 0x000000010d36771d grin`std::thread::park::h5e35fb23d278218e [inlined] std::sys_common::condvar::Condvar::wait::h17524182ce30e38b at condvar.rs:51 [opt]
+    frame #4: 0x000000010d36771d grin`std::thread::park::h5e35fb23d278218e [inlined] std::sync::condvar::Condvar::wait::h5d208fd8bbfea4db at condvar.rs:214 [opt]
+    frame #5: 0x000000010d367703 grin`std::thread::park::h5e35fb23d278218e at mod.rs:806 [opt]
+    frame #6: 0x000000010d357f30 grin`std::sync::mpsc::blocking::WaitToken::wait::hca4109aa6875e6e9 at blocking.rs:81 [opt]
+    frame #7: 0x000000010d1cfd2f grin`_$LT$std..sync..mpsc..sync..Packet$LT$T$GT$$GT$::recv::hf6bf7ee66a84d21a + 1087
+    frame #8: 0x000000010d1dc691 grin`_$LT$std..sync..mpsc..Receiver$LT$T$GT$$GT$::recv::hd53a4d6068690a68 + 417
+    frame #9: 0x000000010d1d21ec grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h34f900bd09c6e761 + 140
+    frame #10: 0x000000010d1cf650 grin`std::panicking::try::do_call::h99922bd6812d1c38 (.llvm.6011098082872492893) + 80
+    frame #11: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #12: 0x000000010d1d8186 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::hb058be6cda310961 + 230
+    frame #13: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #14: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #15: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #16: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #17: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #18: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #4, name = 'seed'
+    frame #0: 0x00007fff7eacda8e libsystem_kernel.dylib`__psynch_rw_rdlock + 10
+    frame #1: 0x00007fff7ec9a872 libsystem_pthread.dylib`_pthread_rwlock_lock_wait + 56
+    frame #2: 0x00007fff7ec9a80c libsystem_pthread.dylib`_pthread_rwlock_lock_slow + 523
+    frame #3: 0x000000010d09c2ce grin`grin_p2p::peers::Peers::check_all::h9dae352b8f880dde + 222
+    frame #4: 0x000000010cd24a9c grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h4162fa45689292e4 + 1964
+    frame #5: 0x000000010cd40358 grin`std::panicking::try::do_call::h0bc51fb5d636aa29 + 40
+    frame #6: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #7: 0x000000010cd46935 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::he341fb7116177bc6 + 165
+    frame #8: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #9: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #10: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #11: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #12: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #13: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #5, name = 'sync'
+    frame #0: 0x00007fff7eacf262 libsystem_kernel.dylib`sem_wait + 10
+    frame #1: 0x000000010d251d18 grin`mdb_txn_renew0 + 72
+    frame #2: 0x000000010d252483 grin`mdb_txn_begin + 899
+    frame #3: 0x000000010d11946c grin`lmdb_zero::tx::WriteTransaction::new::h6a4ed8ccfd47a0cb + 140
+    frame #4: 0x000000010d117fef grin`grin_store::lmdb::Store::batch::h478305c588e87b1a + 47
+    frame #5: 0x000000010d103784 grin`grin_chain::chain::Chain::difficulty_iter::h7d274098669b308a + 116
+    frame #6: 0x000000010ccef92e grin`grin_servers::grin::sync::syncer::sync_loop::h622e997c409e1dc6 + 2574
+    frame #7: 0x000000010cd23a0d grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h0a736d61b4b1ffb5 + 61
+    frame #8: 0x000000010cd40450 grin`std::panicking::try::do_call::h2784e9280f069283 + 64
+    frame #9: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #10: 0x000000010cd45f05 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h94fabed72e2d50e0 + 245
+    frame #11: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #12: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #13: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #14: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #15: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #16: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #6, name = 'p2p-server'
+    frame #0: 0x00007fff7eacdd82 libsystem_kernel.dylib`__semwait_signal + 10
+    frame #1: 0x00007fff7ea48724 libsystem_c.dylib`nanosleep + 199
+    frame #2: 0x000000010d352cd0 grin`std::sys::unix::thread::Thread::sleep::hd4df4d722df2c1ef at thread.rs:163 [opt]
+    frame #3: 0x000000010d0ac670 grin`grin_p2p::serv::Server::listen::hf95449e0c2bd701b + 2976
+    frame #4: 0x000000010cd23a36 grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h14c9626adade64aa + 22
+    frame #5: 0x000000010cd404cd grin`std::panicking::try::do_call::h7409ebe4b8616f23 + 29
+    frame #6: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #7: 0x000000010cd456a5 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h17a1bc0ba9d87365 + 165
+    frame #8: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #9: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #10: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #11: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #12: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #13: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #7, name = 'apis'
+    frame #0: 0x00007fff7eacda16 libsystem_kernel.dylib`__psynch_cvwait + 10
+    frame #1: 0x00007fff7ec96589 libsystem_pthread.dylib`_pthread_cond_wait + 732
+    frame #2: 0x000000010d056636 grin`futures::task_impl::std::ThreadNotify::park::hc16bbe7d5e733920 + 182
+    frame #3: 0x000000010ce347ec grin`_$LT$std..thread..local..LocalKey$LT$T$GT$$GT$::with::h8c174419737ef76c + 124
+    frame #4: 0x000000010ce9fa8e grin`futures::future::Future::wait::h1da82a7aace246fa + 126
+    frame #5: 0x000000010ce5c475 grin`tokio::runtime::run::h411864ca48ce517d + 293
+    frame #6: 0x000000010ce6ede4 grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h1f13b585e620622b + 308
+    frame #7: 0x000000010cef8858 grin`std::panicking::try::do_call::hdab680b7a15afbdf (.llvm.2767169435715047770) + 72
+    frame #8: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #9: 0x000000010ce220f5 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h186603eb25f67d7c + 213
+    frame #10: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #11: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #12: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #13: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #14: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #15: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #8, name = 'dandelion'
+    frame #0: 0x00007fff7eacdd82 libsystem_kernel.dylib`__semwait_signal + 10
+    frame #1: 0x00007fff7ea48724 libsystem_c.dylib`nanosleep + 199
+    frame #2: 0x000000010d352cd0 grin`std::sys::unix::thread::Thread::sleep::hd4df4d722df2c1ef at thread.rs:163 [opt]
+    frame #3: 0x000000010cd23aec grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h22b96c56f08a9515 + 124
+    frame #4: 0x000000010cd40495 grin`std::panicking::try::do_call::h5aae11d22a2fe438 + 37
+    frame #5: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #6: 0x000000010cd46783 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::hcf3f7a8ec9bcc90f + 163
+    frame #7: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #8: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #9: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #10: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #11: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #12: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #9
+    frame #0: 0x00007fff7eacebea libsystem_kernel.dylib`kevent + 10
+    frame #1: 0x000000010d01526d grin`mio::sys::unix::kqueue::Selector::select::ha2a474d3805cc07c + 333
+    frame #2: 0x000000010d0120f2 grin`mio::poll::Poll::poll1::h02036223e686d7d7 + 946
+    frame #3: 0x000000010d011d2f grin`mio::poll::Poll::poll::hacb29838fbe149c7 + 47
+    frame #4: 0x000000010cff9a3c grin`tokio_reactor::Reactor::turn::h46f8547762216660 + 92
+    frame #5: 0x000000010d000479 grin`tokio_reactor::background::run::hbf4fd936136a17ab + 217
+    frame #6: 0x000000010cffd78c grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h147adf2be6a6c1cf + 44
+    frame #7: 0x000000010cffd5d5 grin`std::panicking::try::do_call::h7b61f12e2df331df (.llvm.11151417660238672878) + 37
+    frame #8: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #9: 0x000000010cffc103 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::hac663db2ec4b73ce + 163
+    frame #10: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #11: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #12: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #13: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #14: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #15: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #10, name = 'stratum_server'
+    frame #0: 0x00007fff7eacdd82 libsystem_kernel.dylib`__semwait_signal + 10
+    frame #1: 0x00007fff7ea48724 libsystem_c.dylib`nanosleep + 199
+    frame #2: 0x000000010d352cd0 grin`std::sys::unix::thread::Thread::sleep::hd4df4d722df2c1ef at thread.rs:163 [opt]
+    frame #3: 0x000000010cd21a73 grin`grin_servers::mining::stratumserver::StratumServer::run_loop::h323653e8d4940db2 + 8323
+    frame #4: 0x000000010cd2399e grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h077d53506f476f6d + 62
+    frame #5: 0x000000010cd4056e grin`std::panicking::try::do_call::hc8b164a8cf346ccb + 46
+    frame #6: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #7: 0x000000010cd45b37 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h447522746997ca8c + 167
+    frame #8: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #9: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #10: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #11: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #12: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #13: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #11
+    frame #0: 0x00007fff7eaccece libsystem_kernel.dylib`__accept + 10
+    frame #1: 0x000000010d369f41 grin`std::sys::unix::cvt_r::hae296438ff698045 [inlined] std::sys::unix::net::Socket::accept::_$u7b$$u7b$closure$u7d$$u7d$::h55dd671cfc7a889c at net.rs:222 [opt]
+    frame #2: 0x000000010d369f30 grin`std::sys::unix::cvt_r::hae296438ff698045 at mod.rs:150 [opt]
+    frame #3: 0x000000010d36257f grin`std::sys::unix::net::Socket::accept::h35bc4bf37948d4e2 at net.rs:221 [opt]
+    frame #4: 0x000000010d3513c7 grin`std::sys_common::net::TcpListener::accept::hcd513c2e089b34bb at net.rs:355 [opt]
+    frame #5: 0x000000010d366778 grin`_$LT$std..net..tcp..Incoming$LT$$u27$a$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$::next::h701a57c6d5f63370 [inlined] std::net::tcp::TcpListener::accept::hf3a9953a3d105bff at tcp.rs:732 [opt]
+    frame #6: 0x000000010d366773 grin`_$LT$std..net..tcp..Incoming$LT$$u27$a$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$::next::h701a57c6d5f63370 at tcp.rs:894 [opt]
+    frame #7: 0x000000010cd1a222 grin`grin_servers::mining::stratumserver::accept_workers::h3f7f9fc827dace46 + 226
+    frame #8: 0x000000010cd255ec grin`std::sys_common::backtrace::__rust_begin_short_backtrace::hd87c6fb00a530e55 + 156
+    frame #9: 0x000000010cd40400 grin`std::panicking::try::do_call::h20d3ad996bcb30b1 + 80
+    frame #10: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #11: 0x000000010cd460f6 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::haccb505d6564e52e + 230
+    frame #12: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #13: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #14: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #15: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #16: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #17: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #12, name = 'ui'
+    frame #0: 0x00007fff7eacf262 libsystem_kernel.dylib`sem_wait + 10
+    frame #1: 0x000000010d251d18 grin`mdb_txn_renew0 + 72
+    frame #2: 0x000000010d252483 grin`mdb_txn_begin + 899
+    frame #3: 0x000000010d11946c grin`lmdb_zero::tx::WriteTransaction::new::h6a4ed8ccfd47a0cb + 140
+    frame #4: 0x000000010d117fef grin`grin_store::lmdb::Store::batch::h478305c588e87b1a + 47
+    frame #5: 0x000000010d103784 grin`grin_chain::chain::Chain::difficulty_iter::h7d274098669b308a + 116
+    frame #6: 0x000000010cd7bd2e grin`grin_servers::grin::server::Server::get_server_stats::h4309c0f59d30364f + 302
+    frame #7: 0x000000010cc5049b grin`grin::tui::ui::Controller::run::haa8dc6e612abf13a + 1643
+    frame #8: 0x000000010cbc71a1 grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h85a2e49d06478b71 + 113
+    frame #9: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #10: 0x000000010cbcbea2 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h61bedf8911950c1a + 146
+    frame #11: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #12: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #13: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #14: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #15: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #16: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #13
+    frame #0: 0x00007fff7eacebea libsystem_kernel.dylib`kevent + 10
+    frame #1: 0x000000010d01526d grin`mio::sys::unix::kqueue::Selector::select::ha2a474d3805cc07c + 333
+    frame #2: 0x000000010d0120f2 grin`mio::poll::Poll::poll1::h02036223e686d7d7 + 946
+    frame #3: 0x000000010d011d2f grin`mio::poll::Poll::poll::hacb29838fbe149c7 + 47
+    frame #4: 0x000000010cff9a3c grin`tokio_reactor::Reactor::turn::h46f8547762216660 + 92
+    frame #5: 0x000000010d000479 grin`tokio_reactor::background::run::hbf4fd936136a17ab + 217
+    frame #6: 0x000000010cffd78c grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h147adf2be6a6c1cf + 44
+    frame #7: 0x000000010cffd5d5 grin`std::panicking::try::do_call::h7b61f12e2df331df (.llvm.11151417660238672878) + 37
+    frame #8: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #9: 0x000000010cffc103 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::hac663db2ec4b73ce + 163
+    frame #10: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #11: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #12: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #13: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #14: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #15: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #14, name = 'tokio-runtime-worker-0'
+    frame #0: 0x00007fff7eacda16 libsystem_kernel.dylib`__psynch_cvwait + 10
+    frame #1: 0x00007fff7ec96589 libsystem_pthread.dylib`_pthread_cond_wait + 732
+    frame #2: 0x000000010d008b98 grin`tokio_threadpool::park::default_park::Inner::park::hc72e55e7bd611f97 (.llvm.8388521082137247684) + 376
+    frame #3: 0x000000010d0089c0 grin`_$LT$tokio_threadpool..park..default_park..DefaultPark$u20$as$u20$tokio_executor..park..Park$GT$::park::hd7ac2e084cdd4d09 + 32
+    frame #4: 0x000000010cfef1eb grin`_$LT$tokio_timer..timer..Timer$LT$T$C$$u20$N$GT$$u20$as$u20$tokio_executor..park..Park$GT$::park::h83797d298c781ce2 + 139
+    frame #5: 0x000000010cfed41d grin`_$LT$tokio_threadpool..park..boxed..BoxedPark$LT$T$GT$$u20$as$u20$tokio_executor..park..Park$GT$::park::h1a289a776f0f5ba8 + 13
+    frame #6: 0x000000010d00310a grin`tokio_threadpool::worker::Worker::run::h95dc368bbf16adda + 2570
+    frame #7: 0x000000010cff0458 grin`_$LT$std..thread..local..LocalKey$LT$T$GT$$GT$::with::h62a06714128e540e + 280
+    frame #8: 0x000000010cff019f grin`_$LT$std..thread..local..LocalKey$LT$T$GT$$GT$::with::h1d80ae33bf6f5f03 + 159
+    frame #9: 0x000000010cff0636 grin`_$LT$std..thread..local..LocalKey$LT$T$GT$$GT$::with::hc7e67ba362283981 + 342
+    frame #10: 0x000000010cfeb30c grin`tokio::runtime::builder::Builder::build::_$u7b$$u7b$closure$u7d$$u7d$::hb4d32dc0979b7360 + 444
+    frame #11: 0x000000010d00a010 grin`_$LT$std..thread..local..LocalKey$LT$T$GT$$GT$::with::h98d11419c6379d20 + 192
+    frame #12: 0x000000010d009dee grin`_$LT$std..thread..local..LocalKey$LT$T$GT$$GT$::with::h84af82aac4a3700e + 206
+    frame #13: 0x000000010d00c21a grin`std::sys_common::backtrace::__rust_begin_short_backtrace::he0829c3b7d489af2 + 218
+    frame #14: 0x000000010d00b9c8 grin`std::panicking::try::do_call::h470f7ae6b0cace87 (.llvm.6848085234080704186) + 40
+    frame #15: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #16: 0x000000010d0074ca grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h8b297dd1d91bd33e + 170
+    frame #17: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #18: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #19: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #20: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #21: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #22: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #15, name = 'tokio-runtime-worker-1'
+    frame #0: 0x00007fff7eacda16 libsystem_kernel.dylib`__psynch_cvwait + 10
+    frame #1: 0x00007fff7ec96589 libsystem_pthread.dylib`_pthread_cond_wait + 732
+    frame #2: 0x000000010d008b98 grin`tokio_threadpool::park::default_park::Inner::park::hc72e55e7bd611f97 (.llvm.8388521082137247684) + 376
+    frame #3: 0x000000010d0089c0 grin`_$LT$tokio_threadpool..park..default_park..DefaultPark$u20$as$u20$tokio_executor..park..Park$GT$::park::hd7ac2e084cdd4d09 + 32
+    frame #4: 0x000000010cfef1eb grin`_$LT$tokio_timer..timer..Timer$LT$T$C$$u20$N$GT$$u20$as$u20$tokio_executor..park..Park$GT$::park::h83797d298c781ce2 + 139
+    frame #5: 0x000000010cfed41d grin`_$LT$tokio_threadpool..park..boxed..BoxedPark$LT$T$GT$$u20$as$u20$tokio_executor..park..Park$GT$::park::h1a289a776f0f5ba8 + 13
+    frame #6: 0x000000010d00310a grin`tokio_threadpool::worker::Worker::run::h95dc368bbf16adda + 2570
+    frame #7: 0x000000010cff0458 grin`_$LT$std..thread..local..LocalKey$LT$T$GT$$GT$::with::h62a06714128e540e + 280
+    frame #8: 0x000000010cff019f grin`_$LT$std..thread..local..LocalKey$LT$T$GT$$GT$::with::h1d80ae33bf6f5f03 + 159
+    frame #9: 0x000000010cff0636 grin`_$LT$std..thread..local..LocalKey$LT$T$GT$$GT$::with::hc7e67ba362283981 + 342
+    frame #10: 0x000000010cfeb30c grin`tokio::runtime::builder::Builder::build::_$u7b$$u7b$closure$u7d$$u7d$::hb4d32dc0979b7360 + 444
+    frame #11: 0x000000010d00a010 grin`_$LT$std..thread..local..LocalKey$LT$T$GT$$GT$::with::h98d11419c6379d20 + 192
+    frame #12: 0x000000010d009dee grin`_$LT$std..thread..local..LocalKey$LT$T$GT$$GT$::with::h84af82aac4a3700e + 206
+    frame #13: 0x000000010d00c21a grin`std::sys_common::backtrace::__rust_begin_short_backtrace::he0829c3b7d489af2 + 218
+    frame #14: 0x000000010d00b9c8 grin`std::panicking::try::do_call::h470f7ae6b0cace87 (.llvm.6848085234080704186) + 40
+    frame #15: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #16: 0x000000010d0074ca grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h8b297dd1d91bd33e + 170
+    frame #17: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #18: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #19: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #20: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #21: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #22: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #16
+    frame #0: 0x00007fff7eacdc32 libsystem_kernel.dylib`__recvfrom + 10
+    frame #1: 0x000000010d2db3fc grin`signal_hook::iterator::Signals::wait::hb28259c3c3a99a41 + 76
+    frame #2: 0x000000010d2c2c8b grin`std::sys_common::backtrace::__rust_begin_short_backtrace::hd972086c84ffa4d8 + 91
+    frame #3: 0x000000010d2abe45 grin`std::panicking::try::do_call::h2e8919478b8bc949 (.llvm.16007410487949524641) + 37
+    frame #4: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #5: 0x000000010d293293 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::heb0aee0803a2be06 + 163
+    frame #6: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #7: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #8: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #9: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #10: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #11: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #17
+    frame #0: 0x00007fff7eacf142 libsystem_kernel.dylib`read + 10
+    frame #1: 0x00007fff7d986c02 libncurses.5.4.dylib`_nc_wgetch + 849
+    frame #2: 0x00007fff7d9871b8 libncurses.5.4.dylib`wgetch + 49
+    frame #3: 0x000000010d2a441c grin`cursive::backend::curses::n::InputParser::parse_next::hd3acae71f6084e07 + 108
+    frame #4: 0x000000010d2c2935 grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h61b96ada9c5b4925 + 245
+    frame #5: 0x000000010d2abe7e grin`std::panicking::try::do_call::h2f938999a0d5e7e7 (.llvm.16007410487949524641) + 46
+    frame #6: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #7: 0x000000010d2930d7 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h214192e31659a4c1 + 167
+    frame #8: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #9: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #10: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #11: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #12: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #13: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #18
+    frame #0: 0x00007fff7eace28a libsystem_kernel.dylib`__workq_kernreturn + 10
+    frame #1: 0x00007fff7ec95009 libsystem_pthread.dylib`_pthread_wqthread + 1035
+    frame #2: 0x00007fff7ec94be9 libsystem_pthread.dylib`start_wqthread + 13
+  thread #19, name = 'peer'
+    frame #0: 0x00007fff7eacdd82 libsystem_kernel.dylib`__semwait_signal + 10
+    frame #1: 0x00007fff7ea48724 libsystem_c.dylib`nanosleep + 199
+    frame #2: 0x000000010d352cd0 grin`std::sys::unix::thread::Thread::sleep::hd4df4d722df2c1ef at thread.rs:163 [opt]
+    frame #3: 0x000000010d07f1bc grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h3c39dca0ef7f5268 (.llvm.3947505605838019694) + 1612
+    frame #4: 0x000000010d0914a5 grin`std::panicking::try::do_call::hfe1eaf9a0f9f7d19 (.llvm.14717098492377848207) + 37
+    frame #5: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #6: 0x000000010d0825d3 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h9c8eb2422ac00a2d + 163
+    frame #7: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #8: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #9: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #10: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #11: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #12: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #20, name = 'peer'
+    frame #0: 0x00007fff7eacdd82 libsystem_kernel.dylib`__semwait_signal + 10
+    frame #1: 0x00007fff7ea48724 libsystem_c.dylib`nanosleep + 199
+    frame #2: 0x000000010d352cd0 grin`std::sys::unix::thread::Thread::sleep::hd4df4d722df2c1ef at thread.rs:163 [opt]
+    frame #3: 0x000000010d07f1bc grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h3c39dca0ef7f5268 (.llvm.3947505605838019694) + 1612
+    frame #4: 0x000000010d0914a5 grin`std::panicking::try::do_call::hfe1eaf9a0f9f7d19 (.llvm.14717098492377848207) + 37
+    frame #5: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #6: 0x000000010d0825d3 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h9c8eb2422ac00a2d + 163
+    frame #7: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #8: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #9: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #10: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #11: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #12: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #21, name = 'peer'
+    frame #0: 0x00007fff7eacdaee libsystem_kernel.dylib`__psynch_rw_wrlock + 10
+    frame #1: 0x00007fff7ec9a879 libsystem_pthread.dylib`_pthread_rwlock_lock_wait + 63
+    frame #2: 0x00007fff7ec9a80c libsystem_pthread.dylib`_pthread_rwlock_lock_slow + 523
+    frame #3: 0x000000010d0f88ae grin`grin_chain::chain::Chain::process_block_single::hc3b9cac025183195 + 670
+    frame #4: 0x000000010d0f85af grin`grin_chain::chain::Chain::process_block::hc740c1ba3f4f0701 + 79
+    frame #5: 0x000000010cd0f33c grin`grin_servers::common::adapters::NetToChainAdapter::process_block::h19b08e5308dc98e3 + 444
+    frame #6: 0x000000010cd0b7b2 grin`_$LT$grin_servers..common..adapters..NetToChainAdapter$u20$as$u20$grin_p2p..types..ChainAdapter$GT$::compact_block_received::h15ea316d5c4d028a + 3810
+    frame #7: 0x000000010d09d7db grin`_$LT$grin_p2p..peers..Peers$u20$as$u20$grin_p2p..types..ChainAdapter$GT$::compact_block_received::h7be0c294ab298957 + 139
+    frame #8: 0x000000010d086b83 grin`_$LT$grin_p2p..peer..TrackingAdapter$u20$as$u20$grin_p2p..types..ChainAdapter$GT$::compact_block_received::h016d35c5aef7c772 + 147
+    frame #9: 0x000000010d08bf5d grin`_$LT$grin_p2p..protocol..Protocol$u20$as$u20$grin_p2p..conn..MessageHandler$GT$::consume::h0086f73932a5e5bf + 4765
+    frame #10: 0x000000010d07ed8b grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h3c39dca0ef7f5268 (.llvm.3947505605838019694) + 539
+    frame #11: 0x000000010d0914a5 grin`std::panicking::try::do_call::hfe1eaf9a0f9f7d19 (.llvm.14717098492377848207) + 37
+    frame #12: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #13: 0x000000010d0825d3 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h9c8eb2422ac00a2d + 163
+    frame #14: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #15: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #16: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #17: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #18: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #19: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #22, name = 'peer'
+    frame #0: 0x00007fff7eacdd82 libsystem_kernel.dylib`__semwait_signal + 10
+    frame #1: 0x00007fff7ea48724 libsystem_c.dylib`nanosleep + 199
+    frame #2: 0x000000010d352cd0 grin`std::sys::unix::thread::Thread::sleep::hd4df4d722df2c1ef at thread.rs:163 [opt]
+    frame #3: 0x000000010d07f1bc grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h3c39dca0ef7f5268 (.llvm.3947505605838019694) + 1612
+    frame #4: 0x000000010d0914a5 grin`std::panicking::try::do_call::hfe1eaf9a0f9f7d19 (.llvm.14717098492377848207) + 37
+    frame #5: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #6: 0x000000010d0825d3 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h9c8eb2422ac00a2d + 163
+    frame #7: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #8: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #9: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #10: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #11: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #12: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #23, name = 'peer'
+    frame #0: 0x00007fff7eacf262 libsystem_kernel.dylib`sem_wait + 10
+    frame #1: 0x000000010d251d18 grin`mdb_txn_renew0 + 72
+    frame #2: 0x000000010d252483 grin`mdb_txn_begin + 899
+    frame #3: 0x000000010d11946c grin`lmdb_zero::tx::WriteTransaction::new::h6a4ed8ccfd47a0cb + 140
+    frame #4: 0x000000010d117fef grin`grin_store::lmdb::Store::batch::h478305c588e87b1a + 47
+    frame #5: 0x000000010d0fa49b grin`grin_chain::chain::Chain::process_block_header::h09ce237e0dd3e625 + 59
+    frame #6: 0x000000010cd0c44a grin`_$LT$grin_servers..common..adapters..NetToChainAdapter$u20$as$u20$grin_p2p..types..ChainAdapter$GT$::header_received::h0ee3654747364d6d + 490
+    frame #7: 0x000000010d09d960 grin`_$LT$grin_p2p..peers..Peers$u20$as$u20$grin_p2p..types..ChainAdapter$GT$::header_received::hf2a937178dda5f8f + 112
+    frame #8: 0x000000010d086cbd grin`_$LT$grin_p2p..peer..TrackingAdapter$u20$as$u20$grin_p2p..types..ChainAdapter$GT$::header_received::hccee0f9593a7ad76 + 269
+    frame #9: 0x000000010d08bc0b grin`_$LT$grin_p2p..protocol..Protocol$u20$as$u20$grin_p2p..conn..MessageHandler$GT$::consume::h0086f73932a5e5bf + 3915
+    frame #10: 0x000000010d07ed8b grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h3c39dca0ef7f5268 (.llvm.3947505605838019694) + 539
+    frame #11: 0x000000010d0914a5 grin`std::panicking::try::do_call::hfe1eaf9a0f9f7d19 (.llvm.14717098492377848207) + 37
+    frame #12: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #13: 0x000000010d0825d3 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h9c8eb2422ac00a2d + 163
+    frame #14: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #15: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #16: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #17: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #18: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #19: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #24, name = 'peer'
+    frame #0: 0x00007fff7eacdd82 libsystem_kernel.dylib`__semwait_signal + 10
+    frame #1: 0x00007fff7ea48724 libsystem_c.dylib`nanosleep + 199
+    frame #2: 0x000000010d352cd0 grin`std::sys::unix::thread::Thread::sleep::hd4df4d722df2c1ef at thread.rs:163 [opt]
+    frame #3: 0x000000010d07f1bc grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h3c39dca0ef7f5268 (.llvm.3947505605838019694) + 1612
+    frame #4: 0x000000010d0914a5 grin`std::panicking::try::do_call::hfe1eaf9a0f9f7d19 (.llvm.14717098492377848207) + 37
+    frame #5: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #6: 0x000000010d0825d3 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h9c8eb2422ac00a2d + 163
+    frame #7: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #8: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #9: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #10: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #11: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #12: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #25, name = 'peer'
+    frame #0: 0x00007fff7eacf262 libsystem_kernel.dylib`sem_wait + 10
+    frame #1: 0x000000010d251d18 grin`mdb_txn_renew0 + 72
+    frame #2: 0x000000010d252483 grin`mdb_txn_begin + 899
+    frame #3: 0x000000010d11946c grin`lmdb_zero::tx::WriteTransaction::new::h6a4ed8ccfd47a0cb + 140
+    frame #4: 0x000000010d117fef grin`grin_store::lmdb::Store::batch::h478305c588e87b1a + 47
+    frame #5: 0x000000010d0fa49b grin`grin_chain::chain::Chain::process_block_header::h09ce237e0dd3e625 + 59
+    frame #6: 0x000000010cd0c44a grin`_$LT$grin_servers..common..adapters..NetToChainAdapter$u20$as$u20$grin_p2p..types..ChainAdapter$GT$::header_received::h0ee3654747364d6d + 490
+    frame #7: 0x000000010d09d960 grin`_$LT$grin_p2p..peers..Peers$u20$as$u20$grin_p2p..types..ChainAdapter$GT$::header_received::hf2a937178dda5f8f + 112
+    frame #8: 0x000000010d086cbd grin`_$LT$grin_p2p..peer..TrackingAdapter$u20$as$u20$grin_p2p..types..ChainAdapter$GT$::header_received::hccee0f9593a7ad76 + 269
+    frame #9: 0x000000010d08bc0b grin`_$LT$grin_p2p..protocol..Protocol$u20$as$u20$grin_p2p..conn..MessageHandler$GT$::consume::h0086f73932a5e5bf + 3915
+    frame #10: 0x000000010d07ed8b grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h3c39dca0ef7f5268 (.llvm.3947505605838019694) + 539
+    frame #11: 0x000000010d0914a5 grin`std::panicking::try::do_call::hfe1eaf9a0f9f7d19 (.llvm.14717098492377848207) + 37
+    frame #12: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #13: 0x000000010d0825d3 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h9c8eb2422ac00a2d + 163
+    frame #14: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #15: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #16: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #17: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #18: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #19: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #26, name = 'peer'
+    frame #0: 0x00007fff7eacf262 libsystem_kernel.dylib`sem_wait + 10
+    frame #1: 0x000000010d251d18 grin`mdb_txn_renew0 + 72
+    frame #2: 0x000000010d252483 grin`mdb_txn_begin + 899
+    frame #3: 0x000000010d11946c grin`lmdb_zero::tx::WriteTransaction::new::h6a4ed8ccfd47a0cb + 140
+    frame #4: 0x000000010d117fef grin`grin_store::lmdb::Store::batch::h478305c588e87b1a + 47
+    frame #5: 0x000000010d0fa49b grin`grin_chain::chain::Chain::process_block_header::h09ce237e0dd3e625 + 59
+    frame #6: 0x000000010cd0c44a grin`_$LT$grin_servers..common..adapters..NetToChainAdapter$u20$as$u20$grin_p2p..types..ChainAdapter$GT$::header_received::h0ee3654747364d6d + 490
+    frame #7: 0x000000010d09d960 grin`_$LT$grin_p2p..peers..Peers$u20$as$u20$grin_p2p..types..ChainAdapter$GT$::header_received::hf2a937178dda5f8f + 112
+    frame #8: 0x000000010d086cbd grin`_$LT$grin_p2p..peer..TrackingAdapter$u20$as$u20$grin_p2p..types..ChainAdapter$GT$::header_received::hccee0f9593a7ad76 + 269
+    frame #9: 0x000000010d08bc0b grin`_$LT$grin_p2p..protocol..Protocol$u20$as$u20$grin_p2p..conn..MessageHandler$GT$::consume::h0086f73932a5e5bf + 3915
+    frame #10: 0x000000010d07ed8b grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h3c39dca0ef7f5268 (.llvm.3947505605838019694) + 539
+    frame #11: 0x000000010d0914a5 grin`std::panicking::try::do_call::hfe1eaf9a0f9f7d19 (.llvm.14717098492377848207) + 37
+    frame #12: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #13: 0x000000010d0825d3 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h9c8eb2422ac00a2d + 163
+    frame #14: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #15: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #16: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #17: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #18: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #19: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #27, name = 'peer'
+    frame #0: 0x00007fff7eacdaee libsystem_kernel.dylib`__psynch_rw_wrlock + 10
+    frame #1: 0x00007fff7ec9a879 libsystem_pthread.dylib`_pthread_rwlock_lock_wait + 63
+    frame #2: 0x00007fff7ec9a80c libsystem_pthread.dylib`_pthread_rwlock_lock_slow + 523
+    frame #3: 0x000000010d09e51c grin`_$LT$grin_p2p..peers..Peers$u20$as$u20$grin_p2p..types..NetAdapter$GT$::peer_difficulty::ha69259042b28e260 + 60
+    frame #4: 0x000000010d087057 grin`_$LT$grin_p2p..peer..TrackingAdapter$u20$as$u20$grin_p2p..types..NetAdapter$GT$::peer_difficulty::h261fe63cefb0d223 + 71
+    frame #5: 0x000000010d08af36 grin`_$LT$grin_p2p..protocol..Protocol$u20$as$u20$grin_p2p..conn..MessageHandler$GT$::consume::h0086f73932a5e5bf + 630
+    frame #6: 0x000000010d07ed8b grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h3c39dca0ef7f5268 (.llvm.3947505605838019694) + 539
+    frame #7: 0x000000010d0914a5 grin`std::panicking::try::do_call::hfe1eaf9a0f9f7d19 (.llvm.14717098492377848207) + 37
+    frame #8: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #9: 0x000000010d0825d3 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h9c8eb2422ac00a2d + 163
+    frame #10: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #11: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #12: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #13: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #14: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #15: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #28, name = 'peer'
+    frame #0: 0x00007fff7eacdd82 libsystem_kernel.dylib`__semwait_signal + 10
+    frame #1: 0x00007fff7ea48724 libsystem_c.dylib`nanosleep + 199
+    frame #2: 0x000000010d352cd0 grin`std::sys::unix::thread::Thread::sleep::hd4df4d722df2c1ef at thread.rs:163 [opt]
+    frame #3: 0x000000010d07f1bc grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h3c39dca0ef7f5268 (.llvm.3947505605838019694) + 1612
+    frame #4: 0x000000010d0914a5 grin`std::panicking::try::do_call::hfe1eaf9a0f9f7d19 (.llvm.14717098492377848207) + 37
+    frame #5: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #6: 0x000000010d0825d3 grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::h9c8eb2422ac00a2d + 163
+    frame #7: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #8: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #9: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #10: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #11: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #12: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+  thread #29, name = 'compactor'
+    frame #0: 0x00007fff7eacf262 libsystem_kernel.dylib`sem_wait + 10
+    frame #1: 0x000000010d251d18 grin`mdb_txn_renew0 + 72
+    frame #2: 0x000000010d252483 grin`mdb_txn_begin + 899
+    frame #3: 0x000000010d11946c grin`lmdb_zero::tx::WriteTransaction::new::h6a4ed8ccfd47a0cb + 140
+    frame #4: 0x000000010d117fef grin`grin_store::lmdb::Store::batch::h478305c588e87b1a + 47
+    frame #5: 0x000000010d0b63bc grin`grin_chain::txhashset::txhashset::extending_readonly::hc28d2c8c2397f52a + 76
+    frame #6: 0x000000010d0ff33d grin`grin_chain::chain::Chain::compact::h2bbc6295cfc72be7 + 605
+    frame #7: 0x000000010cd23fc0 grin`std::sys_common::backtrace::__rust_begin_short_backtrace::h2b1a1d1961e66748 + 32
+    frame #8: 0x000000010d37ac9f grin`__rust_maybe_catch_panic at lib.rs:105 [opt]
+    frame #9: 0x000000010cd465da grin`_$LT$F$u20$as$u20$alloc..boxed..FnBox$LT$A$GT$$GT$::call_box::hbc55f3eee32ac616 + 138
+    frame #10: 0x000000010d36e338 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee [inlined] _$LT$alloc..boxed..Box$LT$$LP$dyn$u20$alloc..boxed..FnBox$LT$A$C$$u20$Output$u3d$R$GT$$u20$$u2b$$u20$$u27$a$RP$$GT$$u20$as$u20$core..ops..function..FnOnce$LT$A$GT$$GT$::call_once::h1d35a37e87c76063 at boxed.rs:652 [opt]
+    frame #11: 0x000000010d36e335 grin`std::sys_common::thread::start_thread::h59f0664183cf4fee at thread.rs:24 [opt]
+    frame #12: 0x000000010d352c29 grin`std::sys::unix::thread::Thread::new::thread_start::hc540161418c41395 at thread.rs:90 [opt]
+    frame #13: 0x00007fff7ec95661 libsystem_pthread.dylib`_pthread_body + 340
+    frame #14: 0x00007fff7ec9550d libsystem_pthread.dylib`_pthread_start + 377
+    frame #15: 0x00007fff7ec94bf9 libsystem_pthread.dylib`thread_start + 13
+(lldb)
