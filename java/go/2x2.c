@@ -5,38 +5,41 @@
 #include <stdio.h>
 #define NSHOW 4
 #define NMOVES 4
-#define CUT 0   /* 0 for plain minimax */
+#define CUT 1   /* 0 for plain minimax */
+#define MAXN 22 /* maximum game length, show all games at this length */
 
 char h[256];   /* bitmap of positions in game history */
 int nodes[100]; /* number of nodes visited at each depth */
+int whites[100],blacks[100]; /* move history */
 long ngames;
 long ngamesatdepth[100];
 
-void show(int n, int black, int white, int alpha, int beta, int passed)
+void show(int n)
 	/* print 2-line ascii representation of position */
 {
-  int i;
-  printf("%d (%d,%d)%s\n", n, alpha, beta, passed?" pass":"");
-  for (i=0; i<4; i++) {
-    printf(" %c", ".XO#"[(black>>i&1)+2*(white>>i&1)]);
-    if (i&1)
-      putchar('\n');
+  for (int j=0; j<=n; j++) {
+    printf("%d\n", j);
+    for (int i=0; i<4; i++) {
+      printf(" %c", ".XO#"[(blacks[j]>>i&1)+2*(whites[j]>>i&1)]);
+      if (i&1)
+        putchar('\n');
+  }
   }
 }
 
-void visit(int black, int white)
+void visit(int n)
 {
-  h[black +16* white] = 1;
+  h[blacks[n] +16* whites[n]] = 1;
 }
 
-void unvisit(int black, int white)
+void unvisit(int n)
 {
-  h[black +16* white] = 0;
+  h[blacks[n] +16* whites[n]] = 0;
 }
 
-int visited(int black, int white)
+int visited(int n)
 {
-  return h[black +16* white];
+  return h[blacks[n] +16* whites[n]];
 }
 
 int owns(int bb)
@@ -46,54 +49,59 @@ int owns(int bb)
 
 int popcnt[16] = {0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4}; /* number of 1 bits */
 
-int score(int depth, int black, int white)
+int score(int n)
 {
   ngames++;
-  ngamesatdepth[depth]++;
-  if (black==0)
-    return white ? -4 : 0;
-  if (white==0)
+  ngamesatdepth[n]++;
+  if (blacks[n]==0)
+    return whites[n] ? -4 : 0;
+  if (whites[n]==0)
     return 4;
-  else return popcnt[black]-popcnt[white];
+  else return popcnt[blacks[n]]-popcnt[whites[n]];
 }
 
-int xhasmove(int black, int white, int move, int *newblack, int *newwhite)
+int xhasmove(int n, int move)
 {
   move = 1<<move;
-  if ((black|white)&move || popcnt[black]==3 || owns(white))
+  if ((blacks[n]|whites[n])&move || popcnt[blacks[n]]==3 || owns(whites[n]))
     return 0;
-  *newblack = black|move;
-  *newwhite = (*newblack|white)==15 || owns(*newblack) ? 0 : white;
-  return !visited(*newblack,*newwhite);
+  blacks[n+1] = blacks[n] | move;
+  whites[n+1] = (blacks[n+1]|whites[n])==15 || owns(blacks[n+1]) ? 0 : whites[n];
+  return !visited(n+1);
 }
 
-int ohasmove(int black, int white, int move, int *newblack, int *newwhite)
+void pass(int n) {
+  whites[n+1] = whites[n];
+  blacks[n+1] = blacks[n];
+}
+
+int ohasmove(int n, int move)
 {
   move = 1<<move;
-  if ((black|white)&move || popcnt[white]==3 || owns(black))
+  if ((blacks[n]|whites[n])&move || popcnt[whites[n]]==3 || owns(blacks[n]))
     return 0;
-  *newwhite = white|move;
-  *newblack = (*newwhite|black)==15 || owns(*newwhite) ? 0 : black;
-  return !visited(*newblack,*newwhite);
+  whites[n+1] = whites[n] | move;
+  blacks[n+1] = (whites[n+1]|blacks[n])==15 || owns(whites[n+1]) ? 0 : blacks[n];
+  return !visited(n+1);
 }
 
-int xab(int n, int black, int white, int alpha, int beta, int passed)
+int xab(int n, int alpha, int beta, int passed)
 {
-  int i,s,newblack,newwhite;
-  int oab(int, int, int, int, int, int);
+  int i,s;
+  int oab(int, int, int, int);
 
   nodes[n]++;
-  if (n<NSHOW)
-    show(n,black,white,alpha,beta,passed);
+  if (n == MAXN)
+    show(n);
 
-  s = passed ? score(n, black, white) : oab(n,black,white,alpha,beta,1);
+  s = passed ? score(n) : (pass(n), oab(n+1,alpha,beta,1));
   if (s > alpha && (alpha=s) >= beta && CUT) return alpha;
 
   for (i=0; i<NMOVES; i++) {
-    if (xhasmove(black,white,i,&newblack,&newwhite)) {
-      visit(newblack,newwhite);
-      s = oab(n+1, newblack, newwhite, alpha, beta, 0);
-      unvisit(newblack,newwhite);
+    if (xhasmove(n,i)) {
+      visit(n+1);
+      s = oab(n+1, alpha, beta, 0);
+      unvisit(n+1);
       if (s > alpha && (alpha=s) >= beta && CUT) return alpha;
     }
   }
@@ -101,22 +109,22 @@ int xab(int n, int black, int white, int alpha, int beta, int passed)
   return alpha;
 }
 
-int oab(int n, int black, int white, int alpha, int beta, int passed)
+int oab(int n, int alpha, int beta, int passed)
 {
-  int i,s,newblack,newwhite;
+  int i,s;
 
   nodes[n]++;
-  if (n<NSHOW)
-    show(n,black,white,alpha,beta,passed);
+  if (n == MAXN)
+    show(n);
 
-  s = passed ? score(n, black, white) : xab(n,black,white,alpha,beta,1);
+  s = passed ? score(n) : (pass(n), xab(n+1,alpha,beta,1));
   if (s < beta && (beta=s) <= alpha && CUT) return beta;
 
   for (i=0; i<NMOVES; i++) {
-    if (ohasmove(black,white,i,&newblack,&newwhite)) {
-      visit(newblack,newwhite);
-      s = xab(n+1, newblack, newwhite, alpha, beta, 0);
-      unvisit(newblack,newwhite);
+    if (ohasmove(n,i)) {
+      visit(n+1);
+      s = xab(n+1, alpha, beta, 0);
+      unvisit(n+1);
       if (s < beta && (beta=s) <= alpha && CUT) return beta;
     }
   }
@@ -127,13 +135,14 @@ int oab(int n, int black, int white, int alpha, int beta, int passed)
 int main()
 {
   int i,c,s;
-  c = xab(0, 0, 0, -4, 4, 0);
+  blacks[0] = whites[0] = 0;
+  c = xab(0, -4, 4, 0);
   for (i=s=0; nodes[i]; i++) {
     s += nodes[i];
     printf("%d: %d\n", i, nodes[i]);
   }
-  for (i=0; i<100; i++)
-    printf("%2d: nodes %ld games %ld\n", i, nodes[i], ngamesatdepth[i]);
+  for (i=0; nodes[i]; i++)
+    printf("%2d: nodes %d games %ld\n", i, nodes[i], ngamesatdepth[i]);
   printf("total: %d\nngames: %ld\nx wins by %d\n", s, ngames, c);
   return 0;
 }
