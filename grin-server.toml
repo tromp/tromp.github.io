@@ -1,12 +1,11 @@
 
-# Sample Server Configuration File for Grin
+# Generated Server Configuration File for Grin
 #
 # When running the grin executable without specifying any command line
-# arguments, it will look for this file in three places, in the following
+# arguments, it will look for this file in two places, in the following
 # order:
 #
 # -The working directory
-# -The directory in which the executable resides
 # -[user home]/.grin
 #
 
@@ -19,20 +18,29 @@
 
 #the directory, relative to current, in which the grin blockchain
 #is stored
-db_root = "/Users/tromp/grin/testnet3/chain_data"
+db_root = "/Users/tromp/.grin/main/chain_data"
+
+#path of TLS certificate file, self-signed certificates are not supported
+#tls_certificate_file = ""
+#private key for the TLS certificate
+#tls_certificate_key = ""
 
 #the address on which services will listen, e.g. Transaction Pool
-api_http_addr = "127.0.0.1:13413"
+api_http_addr = "127.0.0.1:3413"
+
+#path of the secret token used by the API to authenticate the calls
+#comment the it to disable basic auth
+api_secret_path = "/Users/tromp/.grin/main/.api_secret"
 
 #The chain type, which defines the genesis block and the set of cuckoo
-#parameters used for mining. Can be:
+#parameters used for mining as well as wallet output coinbase maturity. Can be:
 #AutomatedTesting - For CI builds and instant blockchain creation
 #UserTesting - For regular user testing (cuckoo 16)
-#Testnet1 - Testnet1 genesis block (cuckoo 16)
-#Testnet2 - Testnet2 genesis block (cuckoo 30)
-chain_type = "Testnet3"
+#Floonet - For the long term floonet test network
+#Mainnet - For mainnet
+chain_type = "Mainnet"
 
-#The chain validation mode, defines how often (if at all) we
+#the chain validation mode, defines how often (if at all) we
 #want to run a full chain validation. Can be:
 #"EveryBlock" - run full chain validation when processing each block (except during sync)
 #"Disabled" - disable full chain validation (just run regular block validation)
@@ -48,21 +56,13 @@ skip_sync_wait = false
 #will also disable logging to stdout
 run_tui = true
 
-#Whether to run the wallet listener with the server by default
-run_wallet_listener = true
-
-# Whether to run the web-wallet API (will only run on localhost)
-# grin wallet web will run this automatically, so this should
-# only be set to true for test/development purposes
-run_wallet_owner_api = false
-
 #Whether to run a test miner. This is only for developer testing (chaintype
 #usertesting) at cuckoo 16, and will only mine into the default wallet port.
 #real mining should use the standalone grin-miner
 run_test_miner = false
 
 #test miner wallet URL (burns if this doesn't exist)
-#test_miner_wallet_url = "http://127.0.0.1:13415"
+#test_miner_wallet_url = "http://127.0.0.1:3415"
 
 #########################################
 ### SERVER P2P CONFIGURATION          ###
@@ -70,53 +70,65 @@ run_test_miner = false
 #The P2P server details (i.e. the server that communicates with other
 [server.p2p_config]
 
-#The interface on which to listen. 
-#0.0.0.0 will listen on all interfaces, alowing others to interact
+#The interface on which to listen.
+#0.0.0.0 will listen on all interfaces, allowing others to interact
 #127.0.0.1 will listen on the local machine only
 host = "0.0.0.0"
 
 #The port on which to listen.
-port = 13414
+port = 3414
 
-#How to seed this server, can be None, List, WebStatic or DNSSeed
-#If the seeding type is List, the list of peers to connect to can
-#be specified as follows:
-#seeds = ["192.168.0.1:13414","192.168.0.2:13414"]
+#how to seed this server, can be None, List or DNSSeed
 seeding_type = "DNSSeed"
 
-#7 = Bit flags for FULL_NODE, this structure needs to be changed
-#internally to make it more configurable
-[server.p2p_config.capabilities]
-bits = 7
+#If the seeding type is List, the list of peers to connect to can
+#be specified as follows:
+#seeds = ["192.168.0.1:3414","192.168.0.2:3414"]
 
 #hardcoded peer lists for allow/deny
 #will *only* connect to peers in allow list
-#peers_allow = ["192.168.0.1:13414", "192.168.0.2:13414"]
+#peers_allow = ["192.168.0.1:3414", "192.168.0.2:3414"]
 #will *never* connect to peers in deny list
-#peers_deny = ["192.168.0.3:13414", "192.168.0.4:13414"]
+#peers_deny = ["192.168.0.3:3414", "192.168.0.4:3414"]
 #a list of preferred peers to connect to
-#peers_preferred = ["192.168.0.1:13414","192.168.0.2:13414"]
+peers_preferred = ["213.239.215.236:3414","192.168.0.1:3414","192.168.0.2:3414"]
 
 #how long a banned peer should stay banned
 #ban_window = 10800
 
 #maximum number of peers
-#peer_max_count = 25
+#peer_max_count = 125
 
 #preferred minimum number of peers (we'll actively keep trying to add peers
 #until we get to at least this number
 #peer_min_preferred_count = 8
+
+# 15 = Bit flags for FULL_NODE
+#This structure needs to be changed internally, to make it more configurable
+
+# A preferred dandelion_peer, mainly used for testing dandelion
+# dandelion_peer = "10.0.0.1:13144"
+
+[server.p2p_config.capabilities]
+bits = 15
+
 
 #########################################
 ### MEMPOOL CONFIGURATION             ###
 #########################################
 [server.pool_config]
 
-#Base fee that's accepted into the pool
+#base fee that's accepted into the pool
 accept_fee_base = 1000000
 
-#Maximum number of transactions allowed in the pool
+#maximum number of transactions allowed in the pool
 max_pool_size = 50000
+
+#maximum number of transactions allowed in the stempool
+max_stempool_size = 50000
+
+#maximum total weight of transactions that can get selected to build a block
+mineable_max_weight = 40000
 
 
 #########################################
@@ -124,14 +136,14 @@ max_pool_size = 50000
 #########################################
 [server.dandelion_config]
 
-#dandelion relay time (choose new relay peer every n secs)
-relay_secs = 600
+#dandelion epoch duration
+epoch_secs = 600
 
 #fluff and broadcast after embargo expires if tx not seen on network
 embargo_secs = 180
 
-#run dandelion stem/fluff processing every n secs (stem tx aggregation in this window)
-patience_secs = 10
+#dandelion aggregation period in secs
+aggregation_secs = 30
 
 #dandelion stem probability (stem 90% of the time, fluff 10% of the time)
 stem_probability = 90
@@ -146,20 +158,24 @@ stem_probability = 90
 enable_stratum_server = true
 
 #what port and address for the stratum server to listen on
-stratum_server_addr = "127.0.0.1:13416"
+stratum_server_addr = "127.0.0.1:3416"
 
-#The amount of time, in seconds, to attempt to mine on a particular
+#the amount of time, in seconds, to attempt to mine on a particular
 #header before stopping and re-collecting transactions from the pool
 attempt_time_per_block = 15
 
-#The minimum acceptable share difficulty to request from miners
+#the minimum acceptable share difficulty to request from miners
 minimum_share_difficulty = 1
 
 #the wallet receiver to which coinbase rewards will be sent
-wallet_listener_url = "http://127.0.0.1:13415"
+wallet_listener_url = "http://127.0.0.1:3415"
 
 #whether to ignore the reward (mostly for testing)
 burn_reward = false
+
+[server.webhook_config]
+nthreads = 4
+timeout = 10
 
 
 #########################################
@@ -167,21 +183,28 @@ burn_reward = false
 #########################################
 [logging]
 
-# Whether to log to stdout
+#whether to log to stdout
 log_to_stdout = true
 
-# Log level for stdout: Critical, Error, Warning, Info, Debug, Trace
+#log level for stdout: Error, Warning, Info, Debug, Trace
 stdout_log_level = "Warning"
 
-# Whether to log to a file
+#whether to log to a file
 log_to_file = true
 
-# Log level for file: Critical, Error, Warning, Info, Debug, Trace
+#log level for file: Error, Warning, Info, Debug, Trace
 file_log_level = "Debug"
 
-# Log file path
-log_file_path = "/Users/tromp/grin/testnet3/grin-server.log"
+#log file path
+log_file_path = "/Users/tromp/.grin/main/grin-server.log"
 
-# Whether to append to the log file (true), or replace it on every run (false)
+#whether to append to the log file (true), or replace it on every run (false)
 log_file_append = true
+
+#maximum log file size in bytes before performing log rotation
+#comment it to disable log rotation
+log_max_size = 16777216
+
+#maximum count of the log files to rotate over
+log_max_files = 32
 
