@@ -102,7 +102,7 @@ fac n = fac64!n where fac64 = listArray (0,64) (scanl (*) 1 [1..64])
  
 -- given a number of pawns to fix for each color (1 for en passant)
 -- and amount of space available for pawns
--- and number of white and black rookks fixed by castling
+-- and number of white and black rooks fixed by castling
 -- return number of possible positions
 count fixp pspace fixwr fixbr = sum $ do
   let np = 8-fixp
