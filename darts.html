@@ -28,10 +28,10 @@ How many possible 9-darter games are there?
 </H2>
 This seems rather dificult to count until we start to distinguish cases
 based on final double and minimum of the first 8 darts.
-The 50,50 entry for instance is calculated as
+The 50,50 entry for instance is calculated as partitions of 501 - 50 - 8 * 50 = 51 into 0s, 1s, 4s, 7s, and 10s, with at least one 0:
 <PRE>
-( 8 )   (  8  )   ( 8 )
-(2 1) + (2 1 1) + (3 2) = 168+840+560 = 1568.
+(    8    )   (    8    )   (    8    )
+(2 1 0 0 5) + (2 0 1 1 4) + (2 0 0 3 3) = 168 + 840 + 560 = 1568.
 
 
   \dbl     24    30    34    36    40    50
@@ -75,7 +75,7 @@ That's 20 ways.
 What is the most impressive 9-darter?
 </H2>
 That would be throwing three 167 "finishes" in a row, repeating triple 20, triple 19, and bulls eye.
-The bulls eye is much harder to hit than any triple, and a 9-darter can include at most three of them.
+The bulls eye is harder to hit than any triple, and a 9-darter can include at most three of them.
 I will likely never witness that in my lifetime, but then who could have imagined all of these incredible <a href="https://www.youtube.com/watch?v=Jod15uXDMOE">rarities</a>?
 
 <HR>
