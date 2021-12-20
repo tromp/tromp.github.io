@@ -134,7 +134,7 @@ Hein Roehrig</A>, who is now in Silicon Valley.
 <IMG SRC="img/glowbar.gif" ALIGN=bottom>
 </CENTER>
 If your browser can preview postscript, have a look at my
-<A HREF="sig.ps">signature</A>:
+<A HREF="img/sig.pdf">signature</A>:
 <PRE>
 %!PS                         %  -John Tromp (http://tromp.github.io/)
 42 42 scale 7 9 translate .07 setlinewidth .5 setgray/c{arc clip fill
@@ -144,7 +144,15 @@ arcn 270 90 c -2 2 4{-6 moveto 0 12 rlineto}for -5 2 5{-3 exch moveto
 </PRE>
 (when using ghostview make sure
 to turn off Antialias under State/gv Options or the colors won't show
-correctly)
+correctly) or <A HREF="img/pinwheel.pdf">this one</A>:
+<PRE>
+%!PS                           %  -John Tromp (http://tromp.github.io/)
+/t{1 sub gsave dup 0 gt{[.4 .2 -.2 .4 .4 .2]concat dup t .2 currentgray
+.8 mul add setgray -1 1 scale dup t -1 2 translate dup t 1 -1 scale dup
+t[0 1 1 0 0 2]concat t}{0 moveto 1 0 lineto 0 2 lineto closepath clip
+fill}ifelse grestore}def 10 10 translate 600 600 scale 5 t showpage
+</PRE>
+
 <P>
 <H5> nulkukel S S K(S(K(S S(S(S S K))))K) </H5>
 
