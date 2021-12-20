@@ -136,7 +136,7 @@ Hein Roehrig</A>, who is now in Silicon Valley.
 If your browser can preview postscript, have a look at my
 <A HREF="img/sig.pdf">signature</A>:
 <PRE>
-%!PS                         %  -John Tromp (http://tromp.github.io/)
+%!PS                            % -John Tromp http://tromp.github.io/
 42 42 scale 7 9 translate .07 setlinewidth .5 setgray/c{arc clip fill
 setgray}def 1 0 0 42 1 0 c 0 1 1{0 3 3 90 270 arc 0 0 6 0 -3 3 90 270
 arcn 270 90 c -2 2 4{-6 moveto 0 12 rlineto}for -5 2 5{-3 exch moveto
@@ -146,10 +146,10 @@ arcn 270 90 c -2 2 4{-6 moveto 0 12 rlineto}for -5 2 5{-3 exch moveto
 to turn off Antialias under State/gv Options or the colors won't show
 correctly) or <A HREF="img/pinwheel.pdf">this one</A>:
 <PRE>
-%!PS                           %  -John Tromp (http://tromp.github.io/)
-/t{1 sub gsave dup 0 gt{[.4 .2 -.2 .4 .4 .2]concat dup t .2 currentgray
-.8 mul add setgray -1 1 scale dup t -1 2 translate dup t 1 -1 scale dup
-t[0 1 1 0 0 2]concat t}{0 moveto 1 0 lineto 0 2 lineto closepath clip
+%!PS                           % -John Tromp http://tromp.github.io/
+/t{dup 1 sub gsave dup 0 gt{[.4 .2 -.2 .4 .4 .2]concat t currentgray
+.8 mul .2 add setgray -1 1 scale t -1 2 translate t 1 -1 scale t[0 1
+1 0 0 2]concat t pop}{0 moveto 1 0 lineto 0 2 lineto closepath clip
 fill}ifelse grestore}def 10 10 translate 600 600 scale 5 t showpage
 </PRE>
 
