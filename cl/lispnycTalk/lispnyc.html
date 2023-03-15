@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Made with "minslides", possibly the easiest presentation slides ever -->
+<head>
+	<title>A little minslides presentation</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<style>
+        /*
+           Modify these CSS properties to suit your unique style!
+        */
+                abs { color: red }
+                app { color: limegreen }
+                idx { color: deepskyblue }
+		body {
+			background-color: #ffd;
+			color: #333;
+			font-size: 5vmin;
+		}
+		div.slide {
+			height: 100vh;
+			border-bottom: 2px solid silver;
+			padding: 1em;
+		}
+	pre {
+            color: pink;
+            background: black;
+            padding: 1em;
+            font-size: 4vmin;
+        }
+
+	h { font-weight: bold; margin: 0 0 0.5em 0; }
+        h1 {
+            color: blue;
+            font-size: 5vw;
+            font-weight: bold;
+            margin: 0 0 0.5em 0;
+            overflow: hidden; /* https://stackoverflow.com/a/15421257/695615 */
+        }
+        p { margin-top: 0.5em; }
+        p.quote {
+            background: white; font-family: sans-serif;
+            display: block; padding: 1em;
+            border: 1px solid #555;
+        }
+        p.quoteby {
+            margin: -1em 0 1em 2em;
+            font-style: italic;
+            font-size: 0.7em;
+        }
+        p.small { font-size: 24pt; }
+		pre {
+            color: white;
+            background: black;
+            padding: 1em 1em 0 1em; /* assume extra line at end */
+            font-size: 3vmin;
+            overflow-x: auto;
+        }
+        pre i {
+            font-style: normal;
+            color: #1bb;
+        }
+        pre b {
+            color: #F6F;
+        }
+        div.notes {
+            font-size: 12pt;
+            display: none;
+            background: white;
+            padding: 5px;
+            border: 1px solid gold;
+        }
+
+        /* for printing the slides - collapse heights and show notes */
+        @media print{
+            div.slide { min-height: 0; break-inside: avoid; }
+            div.notes { display: block; }
+            img { max-height: 300px !important; }
+        }
+	</style>
+</head>
+<body>
+
+<div class="slide">
+<h1>Binary Lambda Calculus:</h1>
+<p>
+<h1>The Smallest Program Language</h1>
+<p>
+John Tromp
+</div>
+
+</div>
+
+<div class="slide">
+<p>
+<a href="https://tromp.github.io"><img src="john.png"></a>
+</div>
+
+<div class="slide">
+<h1>Overview</h1>
+<ul>
+<li> AIT: Algorithmic Information Theory
+<ul>
+   <li> Idea
+   <li> Founders
+   <li> Informal definition and basic properties
+   <li> Prefix complexity
+   <li> Halting Probability
+</ul>
+<li> Building a Lambda Universal machine
+<ul>
+   <li> Lambda bits, pairs, lists
+   <li> Encoding and decoding lambda terms
+</ul>
+<li> Concrete Theorems
+<li> A BLC toolkit and Program Art
+<li> Concrete Halting Probability
+<li> International Obfuscated C Code Contest
+<li> Dessert
+</ul>
+</div>
+
+<div class="slide">
+<img src="dilbert.gif" height = 400>
+</div>
+
+<div class="slide">
+<h1>Which of these bitstrings are random?</h1>
+
+<pre>
+01101000100000001000000000000000100000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+</pre>
+<pre>
+01101001100101101001011001101001100101100110100101101001100101101001011001101001011010011001011001101001100101101001011001101001100101100110100101101001100101100110100110010110100101100110100101101001100101101001011001101001100101100110100101101001100101101001011001101001011010011001011001101001100101101001011001101001011010011001011010010110011010011001011001101001011010011001011001101001100101101001011001101001100101100110100101101001100101101001011001101001011010011001011001101001100101101001011001101001
+</pre>
+<pre>
+01101110010111011110001001101010111100110111101111100001000110010100111010010101101101011111000110011101011011111001110111110111111000001000011000101000111001001001011001101001111010001010011010101010111011001011011011101011111100001100011100101100111101001101011101101101111110001110011110101110111111001111011111101111111000000100000110000101000011100010010001011000110100011110010001001001100101010010111001100100110110011101001111101000010100011010010101001110101001010101101011010101111011000101100110110101
+</pre>
+<pre>
+11001001000011111101101010100010001000010110100011000010001101001100010011000110011000101000101110000000110111000001110011010001001010010000001001001110000010001000101001100111110011000111010000000010000010111011111010100110001110110001001110011011001000100101000101001010000010000111100110001110001101000000010011011101111011111001010100011001101100111100110100111010010000110001101100110000001010110000101001101101111100100101111100010100001101110100111111100001001101010110110101101101010100011100001001000101
+</pre>
+
+The 512 bit lengths avoid mistakes made by articles such as <a href="https://www.americanscientist.org/article/the-quest-for-randomness">this</a> that claim
+<p class="small">
+To illustrate, a sequence such as 00000000000000000000000000000000000000000000000000000000000000000000000000000000 can be described by a computer program much shorter than itself, namely: print 80 zeros
+<p> Just how much shorter? 14 bytes = 112 bits (or 98 bits of 7-bit ASCII).
+<p> We must avoid such bit vs byte confusion. Not engrave them in gold...
+</div>
+
+<div class="slide">
+<h1>Algorithmic Information Theory</h1>
+
+<p>
+<img src="ray.jpeg" height=500>
+<img src="andrey.jpg" height=500>
+<img src="gregory.jpeg" height=500>
+</div>
+
+<div class="slide">
+<img src="ray.jpeg"> Ray J. Solomonoff (25 Jul 1926 – 7 Dec 2009)
+<p> November 1960 <a href="http://raysolomonoff.com/publications/z138.pdf">"A preliminary report on a general theory of inductive inference"</a>
+<p> Technical Report ZTB-138, Zator Company, Cambridge, Massachusetts
+</div>
+
+<div class="slide">
+<img src="andrey.jpg"> Andrey N. Kolmogorov (25 Apr 1903 – 20 Oct 1987)
+<p> 1965 <a href="http://alexander.shen.free.fr/library/Kolmogorov65_Three-Approaches-to-Information.pdf">"Three approaches to the definition of the quantity of information"</a>
+<p> Problems of Information Transmission (1): 3–11. 
+
+</div>
+
+<div class="slide">
+<img src="gregory.jpeg"> Gregory J. Chaitin (25 Jun 1947 - )
+<p> 1966 <a href="https://dl.acm.org/doi/pdf/10.1145/321356.321363">"On the Length of Programs for Computing Finite Binary Sequences"</a>
+<p> Journal of the Association for Computing Machinery. 13 (4): 547–569.
+</div>
+
+<div class="slide">
+Define the complexity of an object x relative to description method M as
+<p>
+K<sub>M</sub>(x) = min {|p|: M(p) = x}
+<p>
+Objects can be binary strings, or natural numbers in a 1-1 correspondence:
+
+<pre>
+ 0  1  2  3  4  5  6   7   8   9  10  11 ...
+ |  |  |  |  |  |  |   |   |   |   |   |
+""  0  1 00 01 10 11 000 001 010 011 100 ...
+</pre>
+(bitstring n is n+1 written in binary without its leading 1)
+<p>
+So we can take the length of a number, and consider that length as a binary string.
+<p> How do we avoid the description method parameter?
+</div>
+
+<div class="slide">
+Call a description method U <b>universal</b> if for any other method M,
+we have that U complexities are at most a constant longer:
+<p>
+K<sub>U</sub>(x) &le; K<sub>M</sub>(x) + O(1)
+<p>
+<b>Invariance Theorem</b> There is a universal description method U. Define K(x) = K<sub>U</sub>(x)
+<p>
+<b>Theorem</b> K(x) is uncomputable
+<p>
+<b>Theorem</b> For strings of length n, K(x) &le; n + O(1)
+<p> 
+<b>Theorem</b> Fraction of { |x|= n, K(x) &lt; n - c } is less than 2<sup>-c</sup>
+<p>
+<b>Chaitin's Incompleteness Theorem</b> It's impossible to prove in general that a program p is <i>elegant</i>, i.e. of minimal length.
+</div>
+
+<div class="slide">
+<h1>Some questions</h1>
+<p>
+What to make of K(&lt;x,y&gt;) &le; K(x) + K(y) + ???
+<p>
+How to define a random infinite string x in terms of complexity of its prefixes x<sub>1..n</sub>?
+<p>
+How to define an algorithmic probability P(x) ?
+</div>
+
+<div class="slide">
+<h1>Prefix Complexity</h1>
+<p>
+Restrict programs to a <i>prefix-free</i> set, i.e. when p and q are different programs, then neither is a prefix of the other.
+<p>
+Define a universal prefix machine UP and corresponding complexity KP(x).
+<p>
+Call x <i>random</i> if KP(x) &ge; |x|.
+<p> Chaitin has a rather strong view on plain complexity:
+<p class="small">
+"Anyway, in my opinion AIT really begins with my 1975 ACM Journal paper ``A theory of program size formally identical to information theory;'' the rest was the pre-history of the field!"
+Think of a computer as decoding equipment at the receiving end of a noiseless
+binary communications channel.
+Think of its programs as code words, and of the result of the computation as
+the decoded message.
+Then it is natural to require that the programs/code words form what is called
+a “prefix-free set,” so that successive messages sent across the channel
+(e.g. subroutines) can be separated.
+</div>
+
+<div class="slide">
+<h1>Some Answers</h1>
+<p>
+KP(&lt;x,y&gt;) = KP(y) + KP(x|y*) + O(1)
+<p>
+KP(x) = KP(n) + KP(x|n*) + O(1), with n = |x|
+<p>
+An infinite binary string x is <i>random</i> if all but finitely many of its prefixes x<sub>1..n</sub> are.
+<p>
+With probability 1, a randomly chosen infinite binary string is random.
+<p> This definition is equivalent to one by Per Martin-Löf from 1966 in terms of so-called constructive null-sets.
+</div>
+
+<div class="slide">
+<h1>Algorithmic Probability</h1>
+<p>
+Define P(x) as the probability that the universal prefix machine outputs x.
+<p>
+Then P(x) = Θ(2<sup>-KP(x)</sup>)
+<p>
+So algorithmic probability is concentrated on the shortest program.
+<p>
+What is Ω = &sum;<sub>x</sub> P(x) ?
+</div>
+
+<div class="slide">
+<h1>The number of wisdom (Chaitin)</h1>
+<p>
+Ω is the halting probability of UP on a random input. Ω is enumerable / semi-computable.
+<p>
+<b>Theorem</b> Ω is random
+<p>
+Many mathematical questions can (in theory) be settled by knowledge of the first few thousand bits of Ω.
+<p> Sketch: Ω<sub>1..n</sub>, dovetail all programs contributing to Ω until their sum contribution exceeds Ω<sub>1..n</sub>. At that point all unfinished programs up to length n are known not to halt.
+<p>
+Chaitin showed that proving the value of <i>any</i> k bits of Ω requires a formal theory of complexity at least k+O(1).
+</div>
+
+<div class="slide">
+<h1>Making AIT concrete</h1>
+<p> Goals for universal machine
+<ul>
+<li> make programs as small as possible (no bit left behind)
+<li> as simple as possible
+<li> unify plain and prefix universal machines, and ones taking conditional arguments
+<li> allow rich variety of output: tuples, lists (finite and infinite), functions, ...
+</ul>
+</div>
+
+<div class="slide">
+<h1>Chaitin's choice</h1>
+In <a href="https://web.archive.org/web/20160305182720/https://www.cs.auckland.ac.nz/~chaitin/inv.html">An Invitation to Algorithmic Information Theory</a>,
+<p class="small">
+ DMTCS’96 Proceedings, Springer Verlag, Singapore, 1997, pp. 1–23,
+<p> Gregory Chaitin paraphrases John McCarthy about his invention of
+LISP, as "This is a better universal Turing machine. Let’s do recursive function theory that way!"
+Chaitin continues:
+<p class="small">
+And the funny thing is that nobody except me has really I think taken
+that seriously. And the reason of course is that theoreticians didn't really
+much care about programming, about really playing with the computer. So the
+thing I've added is I think nowadays you have no excuse! If a theory has to do
+with the size of computer programs, you want to damn well see the programs, you
+want to be able to run them, it ought to be a programming language that is easy
+to use.
+
+<p class="small">
+So I’ve done that using LISP because LISP is simple enough, LISP is in the
+intersection between theoretical
+and practical programming. Lambda calculus is even simpler and more elegant
+than LISP, but it’s unusable. Pure lambda calculus with combinators S and K,
+11 it’s beautifully elegant, but you can’t really run programs that way, they’re too
+slow.
+<p> Turns out, neither is too slow to run programs. And while SK combinators
+are <i>slightly</i> simpler than lambda calculus, the latter is significantly more
+expressive, bit-for-bit. So that's what we're going with.
+</div>
+
+<div class="slide">
+<h1>Let's build a pure functional machine</h1>
+<p> Functional bits
+<ul>
+<li> 0 = λx<sub>0</sub> λx<sub>1</sub>. x<sub>0</sub>
+<li> 1 = λx<sub>0</sub> λx<sub>1</sub>. x<sub>1</sub>
+</ul>
+    Input and output are lists built from <b>cons</b> as in LISP.
+<p> Unlike LISP, neither <b>cons</b> nor <b>car</b>/<b>cdr</b>/<b>nil</b>/<b>null</b> are primitives
+<ul>
+<li> cons = λx λy. (λz. z x y)
+<li> car = λL. L 0
+<li> car (cons T<sub>0</sub> T<sub>1</sub>) = cons T<sub>0</sub> T<sub>1</sub> 0 = 0 T<sub>0</sub> T<sub>1</sub> = T<sub>0</sub> 
+<li> cdr = λL. L 1
+<li> cdr (cons T<sub>0</sub> T<sub>1</sub>) = cons T<sub>0</sub> T<sub>1</sub>1 = 1 T<sub>0</sub> T<sub>1</sub> = T<sub>1</sub> 
+</ul>
+</div>
+
+<div class="slide">
+<h1>Functional binary strings/streams</h1>
+<ul>
+<li> nil = 1
+<li> null = λL. L (λh λt λx. false) true
+<li> null nil = nil (λh λt λx. false) true = 1 (λh λt λx. false) true = true
+<li> null (cons M N) = cons M N (λh λt λx. false) true = (λh λt λx. false) M N true = false
+<li> true = 0
+<li> false = 1
+</ul>
+The booleans allow writing <b>if</b> bool <b>then</b> foo <b>else</b> bar as
+<pre> bool foo bar </pre>
+</div>
+
+<div class="slide">
+<h1>car/cdr/null are mostly redundant</h1>
+Instead of
+<pre>if not null L then foo (car L) (cdr L) else bar</pre>
+we can write
+<pre>L (λh λt λ_. foo h t) bar</pre>
+Or if L is known to be non-empty, simply
+<pre>L foo</pre>
+</div>
+
+<div class="slide">
+<h1>Lambda Machines</h1>
+For a finite binary string s=b<sub>0</sub>b<sub>1</sub>..b<sub>n-1</sub> and lambda term T, denote by s:T the T-terminated list of its bits
+<pre>cons b<sub>0</sub> (cons b<sub>1</sub> (cons ... (cons b<sub>n-1</sub> T)...)</pre>
+A Lambda machine is a lambda calculus term M applied to a binary input stream that may or may not be terminated. The normalized result of this application is the output of the machine.
+<p> Example with identity machine ID = λx. x and input string 10
+<pre>(λx. x) (cons 1 (cons 0 nil)) -&gt;<sup>*</sup> cons 1 (cons 0 nil)</pre>
+showing ID (10:T) = (10:T).
+What does this say about K<sub>ID</sub>(10) ?
+</div>
+
+<div class="slide">
+<h1>A Universal Machine</h1>
+We have shown how to translate bitstrings into lambda terms.
+<p>
+We'd now like to do the inverse: translate a lambda term M into a bitstring code(M).
+Then a Universal machine can operate as
+<pre>U(code(M) : T} = M(T)</pre>
+<p>
+We thus need to encode
+<ul>
+<li> abstraction
+<li> application
+<li> variables
+</ul>
+How to translate the latter?
+</div>
+
+<div class="slide">
+<h1>Enter Dutch mathematician</h1>
+<img src="Nicolaas_de_Bruijn.jpeg">
+<h1>Nicolaas de Bruijn</h1>
+</div>
+
+<div class="slide">
+<h1>De Bruijn indices</h1>
+De Bruijn came up with a name-free notation for variables
+in which each variable is replaced by the number of nested lambdas up to its binding lambda.
+For example, the pairing function
+<pre>λx λy λz. z x y</pre> is written <pre>λ  λ  λ . 1 3 2</pre> in De Bruijn notation
+(also known for his <a href="https://en.wikipedia.org/wiki/De_Bruijn_sequence">De Bruijn sequence</a>s).
+</div>
+
+<div class="slide">
+<h1>Encoding lambda terms</h1>
+First write a term in De Bruijn notation with application as prefix operator.
+The last example becomes <pre>λ λ λ @ @ 1 3 2</pre>
+Now encode
+<pre>
+    λ as <abs>00</abs>
+    @ as <app>01</app>
+    n as <idx>1<sup>n</sup>0</idx>
+</pre>
+For example, code(λxλyλz. z x y) =
+<pre> code(λ λ λ @ @ 1 3 2) = <abs>00 00 00</abs> <app>01 01</app> <idx>10 1110 110</idx></pre>
+</div>
+
+<div class="slide">
+<h1>A decoder</h1>
+In my paper <a href="https://tromp.github.io/cl/LC.pdf">Functional Bits: Lambda Calculus based
+Algorithmic Information Theory</a>, I derive a self-interpreter
+<p class="small">
+E = (λ 1 1) (λ λ λ 1 (λ λ λ λ 3 (λ 5 (3 (λ 2 (3 (λ λ 3 (λ 1 2 3))) (4 (λ 4 (λ 3 1 (2 1)))))) (1 (2 (λ 1 2)) (λ 4 (λ 4 (λ 2 (1 4))) 5)))) (3 3) 2)
+<p>satisfying, for all closed terms M:
+<pre>
+E C (code(M) : N) = C (λz. M) N
+</pre>
+<p>
+code(E) is 206 bits long !
+
+<p>For non-closed terms M, the result depends on what's passed in as z.
+We can pass in a term loop = (λx. x x)(λx. x x) to make the interpreter diverge in that case.
+</div>
+
+<div class="slide">
+<h1>The Universal machine at last</h1>
+<pre>U = E (λz.z loop)</pre> satisfies
+<pre>U(code(M) : T) = M(T)</pre>
+<pre>
+code(U) =
+    <app>0101</app><abs>00</abs><app>01</app><idx>1010</idx><abs>000000</abs><app>010101</app><idx>10</idx><abs>000
+    00000</abs><app>01</app><idx>1110</idx><abs>00</abs><app>0101</app><idx>111110</idx><app>01</app><idx>1110
+    <abs>00</abs><app>0101</app><idx>110</idx><app>01</app><idx>1110</idx><abs>0000</abs><app>01</app><idx>1110</idx><abs>00</abs><app>01
+    01</app><idx>101101110</idx><app>01</app><idx>11110</idx><abs>00</abs><app>01</app><idx>11110</idx><abs>00</abs>
+    <app>0101</app><idx>111010</idx><app>01</app><idx>11010</idx><app>0101</app><idx>10</idx><app>01</app><idx>110</idx><abs>0
+    0</abs><app>01</app><idx>10110</idx><abs>00</abs><app>0101</app><idx>11110</idx><abs>00</abs><app>01</app><idx>11110</idx><abs>0
+    0</abs><app>01</app><idx>110</idx><app>01</app><idx>1011110111110</idx><app>01</app><idx>111011
+    10110</idx><abs>00</abs><app>01</app><idx>10</idx><app>01</app><abs>00</abs><app>01</app><idx>1010</idx><abs>00</abs><app>01</app><idx>1010</idx>
+</pre>
+</div>
+
+<div class="slide">
+<h1>Code optimality</h1>
+<pre>
+token   λ    @    1   2    3     4      5      6+
+freq   22   35   14   7    8     5      2      0
+code   <abs>00</abs>   <app>01</app>   <idx>10 110 1110 11110 111110 111111*</idx>
+</pre>
+
+U features the above code frequencies.
+The code lengths closely approximate an optimal Huffman code.
+A high indexed variable used several times within a local scope
+<pre>λv. λ λ λ λ λ λ λ  (    ... v  ... v  ...)</pre>
+can instead be re-bound with a single occurence to reduce code length:
+<pre>λv. λ λ λ λ λ λ λ ((λv' ... v' ... v' ...) v)</pre>
+</div>
+
+<div class="slide">
+<h1>AIT Made Concrete</h1>
+We can finally define plain and prefix (conditional) complexities of lambda terms as
+<pre>
+ K(x|y<sub>1</sub>, . . . , y<sub>k</sub>) = min{|p| | U (p : nil) y<sub>1</sub> . . . y<sub>k</sub> = x}
+KP(x|y<sub>1</sub>, . . . , y<sub>k</sub>) = min{|p| | U (p : T) y<sub>1</sub> . . . y<sub>k</sub> = cons x T}
+</pre>
+Through our standard encodings, we also obtain complexities of binary strings, pairs, tuple, lists, etc.
+E.g. for binary string s, K(s) = K(s : nil).
+<p>
+Note that programs consist of two parts: an encoded lambda term, and the bits that it "reads".
+<p> Programs terminated by nil are <i>delimited</i> while those with an unread tail T are <i>self-delimiting</i>. The latter by necessity form a prefix-free set.
+</div>
+
+<div class="slide">
+<h1>Binary Lambda Calculus</h1>
+Congratulations on making it this far!
+<p>
+BLC is the language of programs for the universal machine U.
+The simplest BLC programs are those starting with code(λx.x) = 0010 that prove
+<p>
+<b>Theorem</b> For strings x of length n, K(x) &le; n + 4
+<p>
+What would be a good upperbound for KP(x) for strings x of length n?
+<p> Recall that KP(x) = KP(n) + KP(x|n*) + O(1) &le; KP(n) + n + O(1)
+</div>
+
+<div class="slide">
+<h1>Relating strings to numbers</h1>
+We have the correspondence
+<pre>
+ 0  1  2  3  4  5  6   7   8   9  10  11 ...
+ |  |  |  |  |  |  |   |   |   |   |   |
+""  0  1 00 01 10 11 000 001 010 011 100 ...
+</pre>
+Another way to relate them is in a tree...
+</div>
+
+<div class="slide">
+<h1>Natural Binary Tree</h1>
+<img src="natree.png" height=500>
+<ul>
+<li> natural numbers as vertices
+<li> binary strings as edges
+<li> 2<sup>n</sup> length-n strings below vertex n
+<li> edge x goes from node |x| to x+1 (1w in binary)
+</ul>
+</div>
+
+<div class="slide">
+<h1>Levenshtein coding</h1>
+Vladimir Levenshtein discovered a <a
+href="https://en.wikipedia.org/wiki/Levenshtein_coding">prefix-free
+encoding</a> that corresponds to concatenating the edges on the path from 0 to n,
+prefixed with a unary encoding of the depth of vertex n in the tree.
+Its definition is as simple as code(0) = 0, code(n+1) = 1 code(|n|) n
+<pre>
+Number	String 	  Delimited
+0		  0
+1	0	  10
+2	1	  110 0
+3	00	  110 1
+4	01	  1110 0 00
+5	10	  1110 0 01
+6	11	  1110 0 10
+7	000	  1110 0 11
+8	001	  1110 1 000
+9	010	  1110 1 001
+127     0000000   11110 0 10 111111
+</pre>
+</div>
+
+<div class="slide">
+<h1>Levenshtein code properties</h1>
+<ul>
+<li> prefix-free and complete: &sum;<sub>n&ge;0</sub> 2<sup>−|code(n)|</sup> = 1.
+<li> preserves numeric order as lexicographic one
+<li> simple to encode/decode
+<li> only O(log<sup>*</sup>(n)) longer than optimal code for random x
+</ul>
+<h1>Prefix Complexity upperbound</h1>
+<b>Theorem</b> For strings x of length n, KP(x) &le; |code(x)| + 340
+<p> where 340 is the size of Levenshtein decoder
+<p class="small">
+(λ 1 1) (λ λ λ 1 (λ 1 (3 (λ λ 1)) (4 4 (λ 1 (λ λ λ 1 (λ 4 (λ λ 5 2 (5 2 (3 1 (2 1)))))) 4 (λ 1))))) (λ λ λ 1 (3 ((λ 1 1) (λ λ 1 (λ λ λ 3 (λ 1 (λ λ 1) 3) (λ 1 (λ λ 2) (6 6 3))) (λ 1 (λ λ 2) 2))) (λ λ 1) ((λ 1 1) (λ λ λ λ 2 (4 4) (λ 1 4 2))) (λ λ 1)) 2)
+</div>
+
+<div class="slide">
+<h1>Complexity of Sets</h1>
+A set of natural numbers can be identified with its <i>characteristic sequence</i> of bits, where bit i is 1 iff i is in the set. 
+<p>
+<b>Theorem</b> KP(PRIMES) &le; 167
+<p> where (prime number) 167 is the size of the prime number sieve
+<p class="small">
+(λ 1 1) (λ λ λ 1 (λ 1 (3 (λ λ 1)) (4 4 (λ 1 (λ λ λ 1 (λ 4 (λ λ 5 2 (5 2 (3 1 (2 1)))))) 4 (λ 1))))) (λ λ λ 1 (3 ((λ 1 1) (λ λ 1 (λ λ λ 3 (λ 1 (λ λ 1) 3) (λ 1 (λ λ 2) (6 6 3))) (λ 1 (λ λ 2) 2))) (λ λ 1) ((λ 1 1) (λ λ λ λ 2 (4 4) (λ 1 4 2))) (λ λ 1)) 2)
+<p> Clearly, BLC is more of a compile target than a source code language.
+<p> The only nontrivial programs I hand-coded in BLC are the self interpreter and an SK interpreter.
+</div>
+
+<div class="slide">
+<h1>A simple lambda calculus language</h1>
+<pre>
+\io.let
+   B0 = \x0\x1. x0;        -- bit 0
+   B1 = \x0\x1. x1;        -- bit 1
+   cons  = \x\y\z.z  x y;
+   cons0 =   \y\z.z B0 y;
+   Y = \f. (\x. x x) (\x. f (x x));
+
+   -- Sieving numerals Sn = Ssucc^n S0
+
+   S0    = \cont\x\xs. cons0  (xs cont);
+   Ssucc = \Sn\c\x\xs. cons x (xs (Sn c));
+
+   -- (x:xs) (Ssucc Sn cont) = Ssucc Sn cont x xs = x : xs (Sn cont)
+   -- (list (Y Sn)) sets every (n+1)'th element of list to B0
+   -- (11111111111111111111:T) (Y S0) = (00000000000000000000:T')
+   -- (11111111111111111111:T) (Y S1) = (10101010101010101010:T')
+   -- (11111111111111111111:T) (Y S2) = (11011011011011011011:T')
+
+   sieve = \Sn. cons B1 (let Ssn = Ssucc Sn in (sieve Ssn) (Y Sn))
+in cons0 (cons0 (sieve S0))
+</pre>
+</div>
+
+<div class="slide">
+<h1>A BLC toolkit written in Haskell</h1>
+<p class="small">
+<pre>$ ./blc help
+Usage: blc action progfile [args]...
+run	run given program applied to standard input bits and args
+run8	run given program applied to standard input bytes and args
+print	show program
+nf	show normal form
+hnf	show head normal form
+nf_size	show size of normal form
+comb_nf	normal form through SK reduction
+comb	show translation to combinatory logic
+bcw	encode in BCW combinators
+bcl	encode in binary combinatory logic
+diagram	show ascii diagram
+Diagram	show alternative ascii diagram
+boxchar	show boxdrawing character diagram
+Boxchar	show boxdrawing character alternative diagram
+pbm	show diagram in portable bitmap format
+Pbm	show alternative diagram in portable bitmap format
+tex	show program as TeX
+html	show program as html
+printlc	show lambda calculus program with de Bruijn indices
+blc	encode as binary lambda calculus bits
+Blc	encode as Binary lambda calculus bytes
+size	show size in bits
+help	show this text
+</pre>
+</div>
+
+<div class="slide">
+<h1>Compiling to BLC</h1>
+<pre>$ ../blc blc primes.lam 
+00010001100110010100011010000000010110000010010001010111110111101001000110100001110011010000000000101101110011100111111101111000000001111100110111000000101100000110110$ 
+</pre>
+Checking code size
+<pre>$ ../blc size primes.lam 
+167
+</pre>
+Running the prime sieve
+<pre>$ ../blc run primes.lam | head -c 64
+0011010100010100010100010000010100000100010100010000010000010100$
+</pre>
+</div>
+
+<div class="slide">
+<h1>Prime Art</h1>
+<p class="small">
+<pre>$ ../blc Boxchar primes.lam 
+─────────────────────────────────────────────────
+┬─┬───────────────────────────────────┬──── ────┬
+│ │ ┬─┬ ────┬─┬────────────────────── ┼───┬ ┬───┼
+│ │ └─┤ ────┼─┼───────────────────┬── ┼───┼ │ ┬ │
+│ │   │ ┬───┼─┼───────────────────┼── ┼─┬─┼ │ ┼ │
+│ │   │ │ ─ ┼─┼─┬─────┬──── ──────┼─┬ │ ├─┘ └─┤ │
+│ │   │ │ ┬ └─┤ │ ┬─┬ ┼─┬─┬ ──┬───┼─┼ ├─┘     ├─┘
+│ │   │ └─┤   └─┤ └─┤ │ ├─┘ ──┼─┬─┼─┼ │       │  
+│ │   │   │     │   │ ├─┘   ┬─┼─┼─┼─┼ │       │  
+│ │   │   │     │   ├─┘     └─┤ │ ├─┘ │       │  
+│ │   │   │     └───┤         │ ├─┘   │       │  
+│ │   │   │         │         ├─┘     │       │  
+│ │   │   │         ├─────────┘       │       │  
+│ │   │   ├─────────┘                 │       │  
+│ │   └───┤                           │       │  
+│ │       ├───────────────────────────┘       │  
+│ ├───────┘                                   │  
+└─┤                                           │  
+  └───────────────────────────────────────────┘  
+</pre>
+produces nice <a href="https://tromp.github.io/cl/diagrams.html">diagrams</a>
+</div>
+
+<div class="slide">
+<h1>Symmetry of Information I(x:y) = I(y:x)</h1>
+<ul>
+<li> Define information about x in y as I(x:y) = K(x) − K(x|y*)
+<li> Symmetry of Information says that y contains as much information about x as x does about y
+<li> Follows from K(x,y) = KP(x) + KP(y|x*) + O(1)
+</ul> 
+<p class="small">
+(λ 1 (λ λ 2) (λ 1 (λ λ 1)) (λ λ λ (λ 1 (3 2) (λ λ 3 1 (6 1 1 (4 ((λ 1 1) (λ λ λ λ λ 1 2 (λ 1 (λ λ 1) (λ λ λ 8 2) (λ λ 1) (4 (6 6) (λ 4 (λ 1 7 2)))))) 5) (λ λ 1) (λ λ λ λ 1) (λ λ 2) (λ λ 1)) (λ λ λ 1 (λ 1 6 4) 2))) (4 (λ 1) (λ 1) (λ 1) 1)) (λ 1)) (λ λ (λ 1 1) (λ λ λ λ 1 (λ (λ λ λ λ 3 (λ 6 (3 (λ 2 (3 (λ 14 (λ 3 (λ 1 2 3)))) (4 (λ 4 (λ 14 (3 1) (2 1)))))) (1 (2 (λ 1 2)) (λ λ 5 (λ 5 (λ 2 (1 5))) 7 6)) (λ 6 (λ 1 3 2)))) (λ 4 (λ 1 3 2))) (4 4) 3))
+<p> proves KP(x,y) &le; KP(x)+KP(y|x*)+657, the easy side of the Theorem. Chaitin's version of the theorem has a constant of 2872, as the size of his LISP program
+<p class="small">
+((’ (lambda (loop) ((’ (lambda (x*) ((’ (lambda (x) ((’ (lambda (y) (cons x
+(cons y nil)))) (eval (cons (’ (read-exp)) (cons (cons ’ (cons x* nil))
+nil)))))) (car (cdr (try no-time-limit (’ (eval (read-exp))) x*)))))) (loop
+nil)))) (’ (lambda (p) (if(= success (car (try no-time-limit (’ (eval
+(read-exp))) p))) p (loop (append p (cons (read-bit) nil)))))))
+<p> using a resource bounded eval primitive "try".
+</div>
+
+<div class="slide">
+<h1>Halting Probability</h1>
+The lambda halting probability is defined as the probability that U will output any normal form:
+<p>Ω<sub>λ</sub> = &sum; { 2<sup>−|p|</sup> : U(p:T)=cons x T, x ∈ NF }
+<p> With some <a href="Omega.html">effort</a>, we can determine the first 4 bits of this particular number of wisdom:
+
+<p> Ω<sub>λ</sub> = .0001...
+<p> where probability .0001 = 2<sup>−4</sup> is already contributed by programs 00100 and 00101 for terms True and False.
+</div>
+
+<div class="slide">
+<h1>Beware Fake Omegas</h1>
+<a href="https://www.watchreplica.is/product/omega-seamaster-planet-ocean-blue-dial-mens-watch-215-30-46-51-03-001"><img src="fake-Omega-Seamaster.jpg" height=600></a>
+<a href="https://www.jesus.ox.ac.uk/wp-content/uploads/2021/03/OtiumDidascali.pdf">
+<img src="chaitinmedalside3_orig.jpeg" height=600></a>
+<p>
+If you see papers proclaiming to have computed many dozens of Omega bits, then their universal machine is very wasteful with bits. Or not even universal, such as in <a href="https://arxiv.org/pdf/nlin/0112022.pdf">this paper</a>, where each data bit is counted as contributing 7 or 8 bits to the program length!
+</div>
+
+<div class="slide">
+<h1>Lambda Busy Beaver</h1>
+Many of the programs contributing to Omega read no binary data.
+
+</div>
+
+<div class="slide">
+<h1>Byte sized IO</h1>
+While bit streams are nice in theory, they fare poorly in interfacing with the
+real world.
+In the practice oriented BLC8, programs operate on a stream of bytes,
+each represented as a delimited list of 8 bits in big-endian order.
+<p> BLC8 requires a more complicated universal machine:
+<p class="small">
+U8 = λ 1 ((λ 1 1) (λ (λ λ λ 1 (λ λ λ 2 (λ λ λ (λ 7 (10 (λ 5 (2 (λ λ 3 (λ 1 2 3))) (11 (λ 3 (λ 3 1 (2 1))))) 3) (4 (1 (λ 1 5) 3) (10 (λ 2 (λ 2 (1 6))) 6))) 8) (λ 1 (λ 8 7 (λ 1 6 2)))) (λ 1 (4 3))) (1 1)) (λ λ 2 ((λ 1 1) (λ 1 1))))
+<p> The parser in U8 keeps track of both remaining bytes, and remaining bits in the current byte, discarding the latter when parsing is completed.
+<p> The size of U8, which is 355 bits as a BLC program, is 45 bytes in BLC8.
+</div>
+
+<div class="slide">
+<h1>International Obfuscated C Code Contest</h1>
+In 2012, I submitted this BLC interpreter to the 21st IOCCC:
+<p><img SRC="ioccc.png" height=700>
+<p>and won in the category of 
+<a href="http://www.ioccc.org/2012/tromp/hint.html">Most functional</a>.
+</div>
+
+<div class="slide">
+<h1>Busy Beaver</h1>
+Entry <a href="https://oeis.org/A333479">A333479</a> of the amazing Online Encyclopedia of Integer Sequences defines a BLC inspired Busy Beaver function as the maximum normal form size of any closed lambda term of size n. This is like an inverse of K<sub>min</sub>(x) = min { K(y) : y &ge; x }, particularly if those shortest programs consist of only the encoded lambda term.
+</div>
+
+<div class="slide">
+<h1>Dessert Time</h1>
+First in Haskell
+<pre>
+--         1   1   1 * 2   1 * 2 * 3   1 * 2 * 3 * 4
+-- pi/2 =  - + - + ----- + --------- + ------------- + ...
+--         1   3   3 * 5   3 * 5 * 7   3 * 5 * 7 * 9
+-- sum first n terms &lt; pi/2 &lt; sum first n terms + n'th term
+-- a/c is 2^j times the sum of the first n terms minus the value of the j bits already output
+-- b/c is 2^j times the n-th term product [1..n] / product [1,3..2*n+1]
+halfpi = go 1 1 1 1 where
+  go b a c = 
+    if a &gt;= c
+      then                \n. 1 : go (2*b) (2*(a-c) )  c       n
+      else if a + b &lt; c
+        then              \n. 0 : go (2*b) (2* a    )  c       n
+        else \n -&gt; let
+          n21 = 2*n + 1
+          bn = b*n
+        in                        go    bn (a*n21+bn) (c*n21) (n+1)
+</pre>
+How to do addition, subtraction, multiplication, comparison in BLC concisely?
+</div>
+
+<div class="slide">
+<h1>Numerals a la carte</h1>
+Use mix of Church numerals and Tuple numerals...
+<pre style="font-size: 24pt;">
+\io. let
+  id = \x. x; bit0 = \x0\x1. x0; bit1 = \x0\x1. x1; cons = \a\b\p. p a b;
+  C1 = id;
+  Csucc = \n\f\x. f (n f x);
+  Cadd = \a\b\f\x. a f (b f x);
+  -- Tm x (Tn y) = if n &lt; m then y (Tm-1-n x) else x (Tn-m y)
+  T1 = \x\f. f x;
+  Tadd = \tm\tn\x. tm (tn x);
+  Tsub = \tm\tn\x. tm id (tn x);
+  CTmul = \c\t. c t;
+  go = \Tb\Ta\Tc. let
+      prod = \bit\Ta'\Cn. cons bit (go (Tadd Tb Tb) (Tadd Ta' Ta') Tc Cn) in
+      (Tc (\_. prod bit1 (Tsub Tc Ta)))      -- case Ta &gt;= Tc
+      (Ta (\_.                               -- case Ta &lt; Tc
+         (Tc
+             (\_\Cn. let                     -- case Ta+Tb &gt;= Tc
+                    x2np1 = CTmul (Csucc (Cadd Cn Cn));
+                    CnxTb = CTmul Cn Tb
+              in go CnxTb (Tadd (x2np1 Ta) CnxTb) (x2np1 Tc) (Csucc Cn)))
+         (Ta (Tb (\_. prod bit0 Ta)))        -- case Ta+Tb &lt; Tc
+      ));
+in go T1 T1 T1 C1;
+</pre>
+</div>
+
+<div class="slide">
+<h1>Pi(e) Art</h1>
+<img SRC="pi.png" height=600>
+<img SRC="pie.png" height=600>
+<p>Enjoy your 401 bits of dessert!
+</div>
+
+<script>
+    /*
+	    Keyboard navigation - you can change 'j' and 'k' if you like!
+    */
+        var slides = document.getElementsByClassName("slide");
+	var current = 0;
+
+	document.addEventListener('keypress', function(event){
+		if(event.key == 'j'){ current++; }
+		if(event.key == 'k'){ current--; }
+		if(current < 0){ current = 0; }
+		if(current >= slides.length){ current = slides.length - 1; }
+		slides[current].scrollIntoView();
+	});
+</script>
+</body></html>

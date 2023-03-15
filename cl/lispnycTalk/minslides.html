@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Made with "minslides", possibly the easiest presentation slides ever -->
+<head>
+	<title>A little minslides presentation</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<style>
+        /*
+           Modify these CSS properties to suit your unique style!
+        */
+		body {
+			background-color: #ffd;
+			color: #333;
+			font-size: 6vmin;
+		}
+		div.slide {
+			height: 100vh;
+			border-bottom: 2px solid silver;
+			padding: 1em;
+		}
+		h1 { font-weight: bold; margin: 0 0 0.5em 0; }
+		pre {
+            color: pink;
+            background: black;
+            padding: 1em;
+            font-size: 4vmin;
+        }
+	</style>
+</head>
+<body>
+<div class="slide">
+	<h1>Hello world!</h1>
+    <p>This is <strong>minslides</strong>, the minimalistic HTML slide presentation "framework".
+    <p>Press the <strong>J</strong> key on your keyboard to go the next slide.
+</div>
+<div class="slide">
+    <h1>minslides is:</h1>
+    <ul>
+        <li>Almost nothing
+        <li>Just a single web page
+        <li>Keyboard driven slides!
+    </ul>
+    <p>(Try <strong>K</strong> to go back, then <strong>J</strong> to return.)
+</div>
+<div class="slide">
+	<h1>Content is HTML</h1>
+    <pre>&lt;div class="slide"&gt;Your content here...&lt;/div&gt;</pre>
+	<p>Like I said, it's just a web page.
+    <p>(Now try scrolling up and down like you would on any normal web page.)
+</div>
+<div class="slide">
+	<h1>The End</h1>
+    <p>Thanks for checking out <strong>minslides</strong>. Here's some links:
+    <p><a href="http://ratfactor.com/minslides">http://ratfactor.com/minslides</a>
+    <p><a href="https://github.com/ratfactor/minslides">https://github.com/ratfactor/minslides</a>
+</div>
+
+<script>
+    /*
+	    Keyboard navigation - you can change 'j' and 'k' if you like!
+    */
+	var slides = document.getElementsByClassName("slide");
+	var current = 0;
+
+	document.addEventListener('keypress', function(event){
+		if(event.key == 'j'){ current++; }
+		if(event.key == 'k'){ current--; }
+		if(current < 0){ current = 0; }
+		if(current >= slides.length){ current = slides.length - 1; }
+		slides[current].scrollIntoView();
+	});
+</script>
+</body></html>
