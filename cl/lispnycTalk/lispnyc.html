@@ -706,8 +706,8 @@ If you see papers proclaiming to have computed many dozens of Omega bits, then t
 </div>
 
 <div class="slide">
-<h1>Lambda Busy Beaver</h1>
-BLC inspired this <a href="https://oeis.org/A333479">functional busy beaver</a>, although its programs are plain lambda terms with no access to binary data.
+<h1>Busy Beaver</h1>
+Entry <a href="https://oeis.org/A333479">A333479</a> of the amazing Online Encyclopedia of Integer Sequences defines a BLC inspired Busy Beaver function as the maximum normal form size of any closed lambda term of size n. This is like an inverse of K<sub>min</sub>(x) = min { K(y) : y &ge; x }, particularly if those shortest programs consist of only the encoded lambda term.
 
 Curiously, the 63 bit Busy Beaver already far exceeds Graham's number, as witnessed by lambda term (λ 1 (1 (λ λ λ 1 3 2 1) 1) 1 1) (λ λ 2 (2 1)), or as a diagram:
 <p class="small">
@@ -748,11 +748,6 @@ In 2012, I submitted this BLC interpreter to the 21st IOCCC:
 <p><img SRC="ioccc.png" height=700>
 <p>and won in the category of 
 <a href="http://www.ioccc.org/2012/tromp/hint.html">Most functional</a>.
-</div>
-
-<div class="slide">
-<h1>Busy Beaver</h1>
-Entry <a href="https://oeis.org/A333479">A333479</a> of the amazing Online Encyclopedia of Integer Sequences defines a BLC inspired Busy Beaver function as the maximum normal form size of any closed lambda term of size n. This is like an inverse of K<sub>min</sub>(x) = min { K(y) : y &ge; x }, particularly if those shortest programs consist of only the encoded lambda term.
 </div>
 
 <div class="slide">
