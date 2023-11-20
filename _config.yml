@@ -1,2 +1,3 @@
 name: John Tromp, Dutch Computer Scientist
 markdown: kramdown
+permalink: /blog/:year/:month/:day/:title
