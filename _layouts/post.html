@@ -1,10 +1,36 @@
----
-layout: default
----
-<h1>{{ page.title }}</h1>
-<p class="meta">{{ page.date | date_to_string }}</p>
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+<TITLE>{{ page.title }}</TITLE>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+</HEAD>
 
-<div class="post">
-  {{ content }}
-</div>
+<BODY>
+<nav>
+	<ul>
+        	<li><a href="/">Home</a></li>
+		<!--
+	       	<li><a href="/about">About</a></li>
+        	<li><a href="/cv">CV</a></li>
+		-->
+        	<li><a href="/blog">Blog</a></li>
+	</ul>
+	</nav>
+	<div class="container">
 
+	<h1>{{ page.title }}</h1>
+	<p class="meta">{{ page.date | date_to_string }}</p>
+	
+	<div class="post">
+  	{{ content }}
+	</div>
+
+	</div><!-- /.container -->
+	<footer>
+    	<ul>
+        	<li><a href="mailto:john.tromp@gmail.com">email</a></li>
+        	<li><a href="https://github.com/tromp">github.com/tromp</a></li>
+		</ul>
+	</footer>
+</BODY>
+</HTML>
