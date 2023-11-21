@@ -1,4 +1,4 @@
--- implements the Logical Rules of Go (http://www.cwi.nl/~tromp/go.html)
+-- implements the Logical Rules of Go (http://tromp.github.io/go.html)
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 module Go where
 import Data.List
