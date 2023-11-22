@@ -106,7 +106,7 @@ names would be
 ```
 (λt. t t (λh λf λn. n h f n) t t t) (λf λx. f (f x))
 ```
-
+The top of this post shows a [graphical representation[(https://tromp.github.io/cl/diagrams.html) of the term.
 The last 16 bits of the program---making up more than a quarter of its
 size---encodes the term λf λx. f (f x), which takes arguments f and x in turn,
 and iterates f twice on x. This is the standard way of representing numbers in
@@ -138,7 +138,7 @@ usual f<sup>n</sup> and write f n instead of f(n) as normally done in λ-calculu
 
 ### Lemmas:
 
-1. 2 H 2 [ωi] n = H H2 [ωi] n =<sup>(Def. 1)<sup> n H2 [ω i] n =<sup>(n x Def. 4)<sup> [ωi+n] n =<sup>(Def. 5)<sup> [ω(i+1)] n
+1. 2 H 2 [ωi] n = H H2 [ωi] n =<sup>(Def. 1)</sup> n H2 [ω i] n =<sup>(n x Def. 4)</sup> [ωi+n] n =<sup>(Def. 5)</sup> [ω(i+1)] n
 2. 3 H 2 [ω<sup>2</sup>i] n = H (2 H 2) [ω<sup>2</sup>i] n =<sup>(Def. 1)</sup> n (2 H 2) [ω<sup>2</sup>i] n =<sup>(n x Lemma 1)</sup> [ω<sup>2</sup>i+ωn] n =<sup>(Def. 6)</sup> [ω<sup>2</sup>(i+1)] n
 3. 4 H 2 [0] n = H (3 H 2) [0] n =<sup>(Def. 1)</sup> n (3 H 2) [0] n =<sup>(n x Lemma 2)</sup> [ω2n] n =<sup>(Def 6)</sup> [ω<sup>3</sup>] n
 
