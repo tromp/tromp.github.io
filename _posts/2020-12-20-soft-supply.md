@@ -22,6 +22,6 @@ This motivates a definition of the “soft” end of emission as the time when t
 
 This allows for a sensible supply comparison of nearly all coins. The only coins with uncapped soft supply are those with some explicit positive percentage growth rate, such as what fiat currencies aim for. I think there are only a handful of proof-of-stake coins that fall into that category. For all others, it gives a sensible measure of how far along a coin is in its emission. Using soft supply, a daily dollar issuance ranking like [2] would no longer need to show infinities for remaining supply of coins with a tail emission.
 
-[1] [](https://medium.com/amberdata/why-the-bitcoin-supply-will-never-reach-21-million-7263e322de1)
+[1] [https://medium.com/amberdata/why-the-bitcoin-supply-will-never-reach-21-million-7263e322de1](https://medium.com/amberdata/why-the-bitcoin-supply-will-never-reach-21-million-7263e322de1)
 
 [2] [https://www.f2pool.com/coins](https://www.f2pool.com/coins)
