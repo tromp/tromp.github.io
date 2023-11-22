@@ -170,8 +170,8 @@ By Lemma 3, Graham = 64 g 4 < 64 [ω] 64 = [ω+1] 64
 
 ## A Functional Busy Beaver
 
-Based on the Binary Lambda Calculus, I recently added to OEIS a
-[functional Busy Beaver function](https://oeis.org/A333479) BB<sub>λ</sub>() that,
+Based on the λ-calculus, I recently added to OEIS a
+[functional Busy Beaver function](https://oeis.org/A333479) BB<sub>λ</sub> that,
 besides greater simplicity, has the advantage of
 measuring program size in bits rather than states. Note how, similar to BB<sub>TM</sub>(),
 the value of BB<sub>λ</sub>() is not the program output considered as a number itself, but
@@ -197,9 +197,7 @@ Programming a Turing machine has been called impossibly tedious, which is why
 people resort to implementing higher level languages like
 [Not-Quite-Laconic](https://github.com/sorear/metamath-turing-machines) for writing nontrivial program without wasting too many states.
 
-In his paper [The Busy Beaver Frontier](https://scottaaronson.com/papers/bb.pdf),
-
-[Scott Aaronson](https://scottaaronson.com/) tries to answer the question
+In his paper [The Busy Beaver Frontier](https://scottaaronson.com/papers/bb.pdf), [Scott Aaronson](https://scottaaronson.com/) tries to answer the question
 
 ## But why Turing machines?
 
@@ -223,7 +221,23 @@ progress against the uncomputable
 The claimed advantages for the "slightly unfortunate choice" do not hold over that even more
 ancient model of the λ-calculus, while the latter's relatively straightforward binary encoding make
 it a preferable yardstick for exploring the limits of computation. The real question then is
+"Why not λ-calculus?", the answer to which appears to be rooted in historical accident more than anything.
 
-## Why not λ-calculus?
+## A Universal Busy Beaver
 
-the answer to which appears to be rooted in historical accident more than anything.
+Is BB<sub>λ</sub> then the ideal Busy Beaver function (apart from a historical lack of study)?
+Not quite. It's still lacking one desirable property, namely universality.
+
+This property mirrors a notion of optimality for shortest description lengths, where it's known
+as the [Invariance theorem](https://en.wikipedia.org/wiki/Kolmogorov_complexity#Invariance_theorem):
+
+  Given any description language L, the optimal description language is at least as efficient as L, with some constant overhead.
+
+In the realm of Beavers, this means that given any Busy Beaver function BB---that satisifes a technical condition called self-delimiting---, an optimal Busy Beaver surpasses it with at most constant lag: for some constant c (depending on BB) and for all n, BB<sub>opt</sub>(n+c) &ge; BB(n).
+
+While BB<sub>λ</sub> is not universal, it's very close.
+By giving λ-calculus terms access to pure binary data, as in the Binary Lambda Calculus language,
+function [BB<sub>BLC</sub>](https://oeis.org/A361211) not only achieves universality,
+but lags only 2 bits behind BB<sub>λ</sub>. It's known to eventually outgrow the latter, but is not expected to do so for any BB<sub>λ</sub> value we're able to pin down.
+
+Besides having a somewhat more complicated definition, BB<sub>BLC</sub> has one other downside compared to BB<sub>λ</sub>: it doesn't represent the ginormous wCubed in 64 bits:-(
