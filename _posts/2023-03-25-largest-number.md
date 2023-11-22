@@ -171,52 +171,59 @@ By Lemma 3, Graham = 64 g 4 < 64 [ω] 64 = [ω+1] 64
 ## A Functional Busy Beaver
 
 Based on the Binary Lambda Calculus, I recently added to OEIS a
-[functional Busy Beaver function](https://oeis.org/A333479) BB<sub>λ</sub>() that, besides greater simplicity, has the advantage of
+[functional Busy Beaver function](https://oeis.org/A333479) BB<sub>λ</sub>() that,
+besides greater simplicity, has the advantage of
 measuring program size in bits rather than states. Note how, similar to BB<sub>TM</sub>(),
 the value of BB<sub>λ</sub>() is not the program output considered as a number itself, but
 rather the output size. And in case of binary λ-calculus, the size of a Church
 numeral n is 5n+6.
 
 We can try to compare growth rates of the two BB functions by how quickly they
-exceed Graham's number. The current best effort for BB<sub>TM</sub>(), after many rounds
+exceed Graham's number. The current best effort for BB<sub>TM</sub>, after many rounds
 of optimization, is [stuck at 16 states](https://googology.fandom.com/wiki/Busy_beaver_function#Small_values),
 weighing in at over 16\*2\*(2+4) = 192
 bits. The existence of a [29 bit Ackermann-like function](https://mathoverflow.net/questions/353514/whats-the-smallest-lambda-calculus-term-not-known-to-have-a-normal-form)
 and a [79 bit function](https://github.com/tromp/AIT/blob/master/fast_growing_and_conjectures/E0.lam)
 growing too fast to be provably total in Peano Arithmetic, also have no
-parallels in the realm of Turing machines. Which suggests that BB<sub>λ</sub> might grow a
-bit faster. This is borne out by all known existing values and lower bounds,
-suggesting the following
+parallels in the realm of Turing machines.
+Which suggests that the λ-calculus gets better mileage per bit.
 
-Conjecture: For all n, BB<sub>TM</sub>(n) < BB<sub>λ</sub>(⌈2n(2+log2(n+1))⌉)
+It further enjoys massive advantages in programmability.
+Modern high level pure functional languages like [Haskell](https://www.haskell.org/)
+are essentially just syntactically sugared λ-calculus,
+with programmer friendly features like [Algebraic Data Types](https://en.wikipedia.org/wiki/Algebraic_data_type)
+translating directly through [Scott encodings](https://en.wikipedia.org/wiki/Mogensen%E2%80%93Scott_encoding).
+Programming a Turing machine has been called impossibly tedious, which is why
+people resort to implementing higher level languages like
+[Not-Quite-Laconic](https://github.com/sorear/metamath-turing-machines) for writing nontrivial program without wasting too many states.
 
+In his paper [The Busy Beaver Frontier](https://scottaaronson.com/papers/bb.pdf),
 
-While [Scott Aaronson](https://scottaaronson.com/) tries to answer the question
+[Scott Aaronson](https://scottaaronson.com/) tries to answer the question
 
 ## But why Turing machines?
 
-in his paper [The Busy Beaver Frontier](https://scottaaronson.com/papers/bb.pdf):
-
 ```
-For all their historic importance, haven’t Turing
-machines been completely superseded by better alternatives—whether stylized
-assembly languages or various codegolf languages or Lisp? As we’ll see, there
-is a reason why Turing machines were a slightly unfortunate choice for the Busy
-Beaver game: namely, the loss incurred when we encode a state transition table
-by a string of bits or vice versa. But Turing machines also turn out to have a
-massive advantage that compensates for this. Namely, because Turing machines
-have no “syntax” to speak of, but only graph structure, we immediately start
-seeing interesting behavior even with machines of only 3, 4, or 5 states, which
-are feasible to enumerate. And there’s a second advantage. Precisely because
-the Turing machine model is so ancient and fixed, whatever emergent behavior we
-find in the Busy Beaver game, there can be no suspicion that we “cheated” by
-changing the model until we got the results we wanted. In short, the Busy
-Beaver game seems like about as good a yardstick as any for gauging humanity’s
+For all their historic importance, haven’t Turing machines been completely superseded
+by better alternatives—whether stylized assembly languages or various codegolf languages or Lisp?
+As we’ll see, there is a reason why Turing machines were a slightly unfortunate choice
+for the Busy Beaver game: namely, the loss incurred when we encode a state transition table
+by a string of bits or vice versa.
+But Turing machines also turn out to have a massive advantage that compensates for this.
+Namely, because Turing machines have no “syntax” to speak of, but only graph structure,
+we immediately start seeing interesting behavior even with machines of only 3, 4, or 5 states,
+which are feasible to enumerate.
+And there’s a second advantage. Precisely because the Turing machine model is so ancient and fixed,
+whatever emergent behavior we find in the Busy Beaver game, there can be no suspicion that
+we “cheated” by changing the model until we got the results we wanted.
+In short, the Busy Beaver game seems like about as good a yardstick as any for gauging humanity’s
 progress against the uncomputable
 ```
 
-we note that the binary λ-calculus doesn't suffer from any cheating toward
-wanted results or lack of interesting behaviour on small sizes, while enjoying
-several advantages of Turing Machines, so the real question is
+The claimed advantages for the "slightly unfortunate choice" do not hold over that even more
+ancient model of the λ-calculus, while the latter's relatively straightforward binary encoding make
+it a preferable yardstick for exploring the limits of computation. The real question then is
 
 ## Why not λ-calculus?
+
+the answer to which appears to be rooted in historical accident more than anything.
