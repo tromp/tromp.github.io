@@ -98,15 +98,18 @@ one final optimization applied, this is the program:
 010001010101011010000000010101101110110101010100000011100111010
 ```
 
-It's the [Binary Lambda Calculus](https://tromp.github.io/cl/cl.html) encoding of term (λ 1 1 (λ λ λ 1 3 2 1) 1 1 1)
-(λ λ 2 (2 1)), where λ (lambda) denotes an anonymous function, and number i is
+It's the [Binary Lambda Calculus](https://tromp.github.io/cl/cl.html) encoding of term
+```
+(λ 1 1 (λ λ λ 1 3 2 1) 1 1 1) (λ λ 2 (2 1))
+```
+where λ (lambda) denotes an anonymous function, and number i is
 the variable bound by the i-th nested λ. This is known as [De Bruijn notation](https://en.wikipedia.org/wiki/De_Bruijn_notation), a
 way to avoid naming variables. A more conventional notation using variable
 names would be
 ```
 (λt. t t (λh λf λn. n h f n) t t t) (λf λx. f (f x))
 ```
-The top of this post shows a [graphical representation[(https://tromp.github.io/cl/diagrams.html) of the term.
+The top of this post shows a [graphical representation](https://tromp.github.io/cl/diagrams.html) of the term.
 The last 16 bits of the program---making up more than a quarter of its
 size---encodes the term λf λx. f (f x), which takes arguments f and x in turn,
 and iterates f twice on x. This is the standard way of representing numbers in
@@ -138,8 +141,8 @@ usual f<sup>n</sup> and write f n instead of f(n) as normally done in λ-calculu
 
 ### Lemmas:
 
-1. 2 H 2 [ωi] n = H H2 [ωi] n =<sup>(Def. 1)</sup> n H2 [ω i] n =<sup>(n x Def. 4)</sup> [ωi+n] n =<sup>(Def. 5)</sup> [ω(i+1)] n
-2. 3 H 2 [ω<sup>2</sup>i] n = H (2 H 2) [ω<sup>2</sup>i] n =<sup>(Def. 1)</sup> n (2 H 2) [ω<sup>2</sup>i] n =<sup>(n x Lemma 1)</sup> [ω<sup>2</sup>i+ωn] n =<sup>(Def. 6)</sup> [ω<sup>2</sup>(i+1)] n
+1. 2 H 2 [ω i] n = H H2 [ω i] n =<sup>(Def. 1)</sup> n H2 [ω i] n =<sup>(n x Def. 4)</sup> [ω i+n] n =<sup>(Def. 5)</sup> [ω(i+1)] n
+2. 3 H 2 [ω<sup>2</sup>i] n = H (2 H 2) [ω<sup>2</sup>i] n =<sup>(Def. 1)</sup> n (2 H 2) [ω<sup>2</sup>i] n =<sup>(n x Lemma 1)</sup> [ω<sup>2</sup>i+ω n] n =<sup>(Def. 6)</sup> [ω<sup>2</sup>(i+1)] n
 3. 4 H 2 [0] n = H (3 H 2) [0] n =<sup>(Def. 1)</sup> n (3 H 2) [0] n =<sup>(n x Lemma 2)</sup> [ω2n] n =<sup>(Def 6)</sup> [ω<sup>3</sup>] n
 
 Lemma 3 gives wCubed = 2 2 H 2 2 2 = 4 H 2 [0] 2 = [ω<sup>3</sup>] 2. In comparison,
@@ -187,12 +190,15 @@ suggesting the following
 
 Conjecture: For all n, BB<sub>TM</sub>(n) < BB<sub>λ</sub>(⌈2n(2+log2(n+1))⌉)
 
+
+While [Scott Aaronson](https://scottaaronson.com/) tries to answer the question
+
 ## But why Turing machines?
 
-Although [Scott Aaronson](https://scottaaronson.com/) answers this question in his paper
-i[The Busy Beaver Frontier](https://scottaaronson.com/papers/bb.pdf)
+in his paper [The Busy Beaver Frontier](https://scottaaronson.com/papers/bb.pdf):
 
-But why Turing machines? For all their historic importance, haven’t Turing
+```
+For all their historic importance, haven’t Turing
 machines been completely superseded by better alternatives—whether stylized
 assembly languages or various codegolf languages or Lisp? As we’ll see, there
 is a reason why Turing machines were a slightly unfortunate choice for the Busy
@@ -207,10 +213,10 @@ find in the Busy Beaver game, there can be no suspicion that we “cheated” by
 changing the model until we got the results we wanted. In short, the Busy
 Beaver game seems like about as good a yardstick as any for gauging humanity’s
 progress against the uncomputable
+```
 
-one can argue that the mentioned properties:
+we note that the binary λ-calculus doesn't suffer from any cheating toward
+wanted results or lack of interesting behaviour on small sizes, while enjoying
+several advantages of Turing Machines, so the real question is
 
-1. emergence of interesting behaviour on small sizes, and
-2. lack of cheating toward wanted results
-
-hold just as much for binary λ-calculus as for Turing machines.
+## Why not λ-calculus?
