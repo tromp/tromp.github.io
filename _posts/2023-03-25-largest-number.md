@@ -147,7 +147,7 @@ Graham's number is known to be less than the much much smaller [ω+1] 64. As it
 turns out, this proof becomes almost trivial in our custom hierarchy. We start
 with defining Graham's number as a Church numeral, exploiting the fact that in
 [Knuth's up-arrow notation](https://en.wikipedia.org/wiki/Knuth%27s_up-arrow_notation),
-3 ↑ n = 3<sup></sup>n = upify (mult 3) n, and 3 ↑<sup>k+1</sup> n = (3 ↑<sup>k</sup>
+3 ↑ n = 3<sup>n</sup> = upify (mult 3) n, and 3 ↑<sup>k+1</sup> n = (3 ↑<sup>k</sup>
 )<sup>n-1</sup> 3 = (3 ↑<sup>k</sup> )<sup>n-1</sup> (3 ↑<sup>k</sup> 1) = (3 ↑<sup>k</sup> )<sup>n</sup> 1:
 
 ### Definitions:
@@ -161,7 +161,7 @@ with defining Graham's number as a Church numeral, exploiting the fact that in
 
 1. times 3 n ≤ n<sup>2</sup> = [0] n
 2. upify [α] n = n 1 < 2 n [α] 1 = [α+1] n
-3. g n = n upify (times 3) 3 ≤<sup>(Lemma 1)</sup> n upify [0] 3 <<sup>(Lemma 2)</sup> fn n = [ω] n
+3. g n = n upify (times 3) 3 ≤<sup>(Lemma 1)</sup> n upify [0] 3 &lt;<sup>(Lemma 2)</sup> fn n = [ω] n
 
 By Lemma 3, Graham = 64 g 4 < 64 [ω] 64 = [ω+1] 64
 
@@ -177,7 +177,7 @@ numeral n is 5n+6.
 We can try to compare growth rates of the two BB functions by how quickly they
 exceed Graham's number. The current best effort for BB<sub>TM</sub>(), after many rounds
 of optimization, is [stuck at 16 states](https://googology.fandom.com/wiki/Busy_beaver_function#Small_values),
-weighing in at over 16*2*(2+4) = 192
+weighing in at over 16\*2\*(2+4) = 192
 bits. The existence of a [29 bit Ackermann-like function](https://mathoverflow.net/questions/353514/whats-the-smallest-lambda-calculus-term-not-known-to-have-a-normal-form)
 and a [79 bit function](https://github.com/tromp/AIT/blob/master/fast_growing_and_conjectures/E0.lam)
 growing too fast to be provably total in Peano Arithmetic, also have no
