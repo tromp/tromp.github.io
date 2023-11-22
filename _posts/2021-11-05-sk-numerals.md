@@ -4,8 +4,6 @@ title: "SK numerals"
 date: 2021-11-05
 ---
 
-# SK numerals
-
 ## Church Numerals
 
 Church numerals are the standard way of representing natural numbers in the lambda calculus. Cn, the Church numeral for n, iterates a given function n times on a given argument. So we have
@@ -14,7 +12,6 @@ C0 f x = f⁰ x = x
 C1 f x = f¹ x = f x
 C2 f x = f² x = f (f x)
 ```
-
 etcetera. We can define a successor function "Csucc" which iterates a given function one more time than a given numeral does:
 ```
 Csucc = λn.λf.λx. f (n f x)
@@ -45,7 +42,7 @@ div = λn.λm.λf.λx.n(λx.λf.f x)(λd.x)(n (λt.m(λx.λf.f x)(λc.f(c t))(λ
 ```
 whose operation is illustrated in this Algorithmic Information Theory github repository.
 
-# SK Combinatory Logic
+## SK Combinatory Logic
 
 Combinatory Logic is concerned with terms consisting of the 2 basic combinators
 ```
