@@ -57,7 +57,7 @@ producing largest possible outputs. That is the language of
 
 The famous [Busy Beaver](https://en.wikipedia.org/wiki/Busy_beaver)
  function, [introduced](https://archive.org/details/bstj41-3-877/mode/2up) by
-i[Tibor Radó](https://en.wikipedia.org/wiki/Tibor_Rad%C3%B3) in 1962, which we'll
+[Tibor Radó](https://en.wikipedia.org/wiki/Tibor_Rad%C3%B3) in 1962, which we'll
 denote BB<sub>TM</sub>(n), is defined as the maximum number of 1s that can be written with
 an n state TM starting from an all 0 tape before halting. Note that if we
 consider this output as a number M written in binary, then it only gets
@@ -73,7 +73,7 @@ to describe in a straightforward manner, exceeding our budget. Just how big an
 output can we produce on a 6 state TM?
 
 The best known result for 6 states is
-[BB<sub>TM</sub>(6) >= 10↑↑15](https://www.sligocki.com/2022/06/21/bb-6-2-t15.html),
+[BB<sub>TM</sub>(6) > 10↑↑15](https://www.sligocki.com/2022/06/21/bb-6-2-t15.html),
 which denotes an
 exponential tower of fifteen 10s. Clearly, in this notation there's not that
 much difference between a number and its size in bits. Large as this number is,
@@ -193,6 +193,7 @@ Modern high level pure functional languages like [Haskell](https://www.haskell.o
 are essentially just syntactically sugared λ-calculus,
 with programmer friendly features like [Algebraic Data Types](https://en.wikipedia.org/wiki/Algebraic_data_type)
 translating directly through [Scott encodings](https://en.wikipedia.org/wiki/Mogensen%E2%80%93Scott_encoding).
+The [bruijn programming language](https://bruijn.marvinborner.de/) is an even thinner layer of syntactic sugar for the pure untyped lambda calculus, whose extensive [standard library](https://bruijn.marvinborner.de/std/) contains many datatypes and functions.
 Programming a Turing machine has been called impossibly tedious, which is why
 people resort to implementing higher level languages like
 [Not-Quite-Laconic](https://github.com/sorear/metamath-turing-machines) for writing nontrivial program without wasting too many states.
