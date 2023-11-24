@@ -125,7 +125,7 @@ The program, which we'll name after its underlying growth rate, can be expressed
 wCubed = let { 2 = λf λx. f (f x); H = λh λf λn. n h f n } in 2 2 H 2 2 2
 ```
 The next section is mostly for the benefit of readers familiar with ordinal arithmetic,
-and are probably better skipped by others.
+and is probably better skipped by others.
 
 ## Proof of exceeding Graham's Number
 
@@ -252,8 +252,7 @@ In the realm of beavers, this means that given any Busy Beaver function BB
 (based on self-delimiting programs), an optimal Busy Beaver surpasses it with
 at most constant lag:
 
-  for some constant c depending on BB, and for all n: BB<sub>opt</sub>(n+c) &ge; BB(n)
-
+for some constant c depending on BB, and for all n: BB<sub>opt</sub>(n+c) &ge; BB(n)
 
 While BB<sub>λ</sub> is not universal, it's not far from one either.
 By giving λ-calculus terms access to pure binary data, as in the Binary Lambda Calculus,
