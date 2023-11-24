@@ -29,13 +29,12 @@ available as datatype uint64_t in C or u64 in Rust.
 We can easily surpass this with floating point numbers. The 64-bit
 [double floating point format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)
 has a largest (finite) representable value of
-2<sup>1024</sup>(1-2<sup>-53</sup>) ~ 1.7976931\*10<sup>308</sup>.
+2<sup>1024</sup>(1-2<sup>-53</sup>) ~ 1.8\*10<sup>308</sup>.
 
 What if we allow representations beyond plain datatypes?
 Such as a program small enough to fit in 64 bits.
-For most programming languages, there is very little you can do in so few bits.
-64 bits is only 8 characters or bytes after all.
-In C that only leaves you with "main(){}", which does ... nothing.
+For most programming languages, there is very little you can do in a mere  8 bytes.
+In C that only leaves you with the nothingness of "main(){}".
 
 But there are plenty languages that require no such scaffolding. For instance,
 on Linux there is arbitrary precision calculator "bc". It happily
@@ -78,11 +77,12 @@ Just how big an output can a 6 state TM produce?
 The best known result for 6 states is
 [BB<sub>TM</sub>(6) > 10↑↑15](https://www.sligocki.com/2022/06/21/bb-6-2-t15.html),
 which denotes an exponential tower of fifteen 10s. Clearly, in this notation there's not that
-much difference between a number and its size in bits. Large as this number is,
-it's still pathetically small compared to even ack(5,5), which no known TM of less than 10 states
-(amouting to 110 bits of description) can surpass.
+much difference between a number and its size in bits.
+Large as this number is, it's still pathetically small compared to even
+ack(5,5), which no known TM of less than 10 states---amounting to 110 bits of
+description---can surpass.
 
-To surpass ack(9,9) in 64 bits, we need to move beyond Turing machines, into the language of
+For that, we need to move beyond Turing machines, into the language of
 
 ## Lambda Calculus
 
@@ -90,7 +90,7 @@ Alonzo Church conceived the [λ-calculus](https://en.wikipedia.org/wiki/Lambda_c
 in about 1928 as a formal logic system for expressing
 computation based on function abstraction and application using variable binding and substitution.
 
-A tiny program in this language represents a number unfathomably larger than not only ack(9,9),
+A tiny 63 bit program in this language represents a number unfathomably larger than not only ack(9,9),
 but the far larger [Graham's Number](https://en.wikipedia.org/wiki/Graham%27s_number) as well.
 It originates in a Code Golf challenge asking for the
 "Shortest terminating program whose output size exceeds Graham's number",
