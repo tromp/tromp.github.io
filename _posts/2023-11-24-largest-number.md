@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The largest number representable in 64 bits"
-date: 2023-03-25
+date: 2023-11-24
 ---
 
 ```
@@ -18,26 +18,30 @@ date: 2023-03-25
               └─┤ │    
                 └─┘    
 ```
-Most people believe 18446744073709551615, or 0xFFFFFFFFFFFFFFFF in hexadecimal,
-to be the largest number representable in 64 bits. Which is indeed the case if
-we are talking about 64 bit unsigned integers such as represented by the
-datatype uint64_t in C or u64 in Rust. We can reach quite a bit further with
-floating point values. The 64-bit
+Most people believe 2^<sup>64</sup>-1 = 18446744073709551615, or 0xFFFFFFFFFFFFFFFF in hexadecimal,
+to be the largest number representable in 64 bits. In English, it's quite the mouthful:
+eighteen quintillion four hundred forty-six quadrillion seven hundred forty-four
+trillion seventy-three billion seven hundred nine million five hundred fifty-one
+thousand six hundred fifteen.
+
+That is indeed the maximum possible value of 64 bit unsigned integers,
+available as datatype uint64_t in C or u64 in Rust.
+We can easily surpass this with floating point numbers. The 64-bit
 [double floating point format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)
-finds its largest (finite) representable value in the 309 digit number
-2<sup>1024</sup>(1-2<sup>-53</sup>) = 17976931...24858368.
+has a largest (finite) representable value of
+2<sup>1024</sup>(1-2<sup>-53</sup>) ~ 1.7976931\*10<sup>308</sup>.
 
-What if we allow representations beyond mere datatypes? Such as a program small
-enough to fit in 64 bits. For most programming languages, there is very little
-you can do in so few bits. 64 bits is only 8 characters or bytes after all.
+What if we allow representations beyond plain datatypes?
+Such as a program small enough to fit in 64 bits.
+For most programming languages, there is very little you can do in so few bits.
+64 bits is only 8 characters or bytes after all.
+In C that only leaves you with "main(){}", which does ... nothing.
 
-In the C language that only leaves you with "main(){}", which doesn't do much.
 But there are plenty languages that require no such scaffolding. For instance,
-on Linux there is bc, an arbitrary precision calculator language. It happily
+on Linux there is arbitrary precision calculator "bc". It happily
 computes the 954242 digit number 9^999999 = 35908462...48888889, which can thus
-be said to be representable in 64 bits. We can imagine a similar language
-featuring the symbol ! for computing factorials, which makes 9!!!!!!! a much
-larger number representable in 64 bits.
+be said to be representable in 64 bits. Had it supported the symbol ! for computing factorials,
+then 9!!!!!!! would make a much larger number representable in 64 bits.
 
 Allowing such primitives feels a bit like cheating though. Would we allow a
 language that has the [Ackerman function](https://en.wikipedia.org/wiki/Ackermann_function)
@@ -46,10 +50,11 @@ predefined, which sports the 8 byte expression ack(9,9) representing a truly hug
 ## No primitives needed
 
 As it turns out, the question is moot. There are simple languages with no built
-in primitives of any kind. Not even primitives for arithmetic. Not even numbers
-themselves. Languages in which all those must be defined from scratch. One such
-language allows us to blow way past ack(9,9) in under 64 bits. But let's first
-look at another such language, one that has been particularly well studied for
+in primitives. Not even basic arithmetic. Not even numbers themselves.
+Languages in which all those must be defined from scratch. One such
+language allows us to blow way past ack(9,9) in under 64 bits.
+
+But let's first look at another such language, one that has been particularly well studied for
 producing largest possible outputs. That is the language of
 [Turing machines](https://en.wikipedia.org/wiki/Turing_machine).
 
@@ -59,72 +64,74 @@ The famous [Busy Beaver](https://en.wikipedia.org/wiki/Busy_beaver)
  function, [introduced](https://archive.org/details/bstj41-3-877/mode/2up) by
 [Tibor Radó](https://en.wikipedia.org/wiki/Tibor_Rad%C3%B3) in 1962, which we'll
 denote BB<sub>TM</sub>(n), is defined as the maximum number of 1s that can be written with
-an n state TM starting from an all 0 tape before halting. Note that if we
+an n state Turing machine starting from an all 0 tape before halting. Note that if we
 consider this output as a number M written in binary, then it only gets
 credited for its length, which is log<sub>2</sub>(M+1).
 
-With 64 bits, we can fully specify a 6 state binary Turing machine, or TM for
-short. For each of its internal states and each of its 2 tape symbols, we can
+In 64 bits, one can fully specify a 6 state binary Turing machine, or TM for
+short. For each of its internal states and each of its 2 tape symbols, one can
 specify what new tape symbol it should write in the currently scanned tape
 cell, whether to move the tape head left or right, and what new internal state,
-or special halt state, to transition to. That takes 6\*2\*(2+⌈log2(6+1)⌉) = 60
-bits, leaving 4 bits to spare. 7 state TMs take 7\*2\*(2+log2(7+1)) = 70 bits
-to describe in a straightforward manner, exceeding our budget. Just how big an
-output can we produce on a 6 state TM?
+or special halt state, to transition to. That takes 6\*2\*(2+⌈log2(6+1)⌉) = 60 bits.
+Just how big an output can a 6 state TM produce?
 
 The best known result for 6 states is
 [BB<sub>TM</sub>(6) > 10↑↑15](https://www.sligocki.com/2022/06/21/bb-6-2-t15.html),
-which denotes an
-exponential tower of fifteen 10s. Clearly, in this notation there's not that
+which denotes an exponential tower of fifteen 10s. Clearly, in this notation there's not that
 much difference between a number and its size in bits. Large as this number is,
-it's still pathetically small compared to the earlier ack(9,9). To surpass
-that, we need to move beyond the language of Turing machines, into the language
-of [Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus).
+it's still pathetically small compared to even ack(5,5), which no known TM of less than 10 states
+(amouting to 110 bits of description) can surpass.
+
+To surpass ack(9,9) in 64 bits, we need to move beyond Turing machines, into the language of
 
 ## Lambda Calculus
 
-A 63 bit program in this language represents a number unfathomably larger than
-not only ack(9,9), but [Graham's Number](https://en.wikipedia.org/wiki/Graham%27s_number)
- as well. It originates in a Code Golf
-challenge asking for the "Shortest terminating program whose output size
-exceeds Graham's number",
+Alonzo Church conceived the [λ-calculus](https://en.wikipedia.org/wiki/Lambda_calculus)
+in about 1928 as a formal logic system for expressing
+computation based on function abstraction and application using variable binding and substitution.
+
+A tiny program in this language represents a number unfathomably larger than not only ack(9,9),
+but the far larger [Graham's Number](https://en.wikipedia.org/wiki/Graham%27s_number) as well.
+It originates in a Code Golf challenge asking for the
+"Shortest terminating program whose output size exceeds Graham's number",
 [answered](https://codegolf.stackexchange.com/questions/6430/shortest-terminating-program-whose-output-size-exceeds-grahams-number/219734#219734)
 by user [Patcail](https://codegolf.stackexchange.com/users/101119/patcail) and
 [further optimized](https://codegolf.stackexchange.com/questions/6430/shortest-terminating-program-whose-output-size-exceeds-grahams-number/219734#comment533337_219734) by user
-[2014MELO03](https://codegolf.stackexchange.com/users/98257/2014melo03). With
-one final optimization applied, this is the program:
+[2014MELO03](https://codegolf.stackexchange.com/users/98257/2014melo03).
+With one final optimization applied, the following 63 bit program
 
 ```
-010001010101011010000000010101101110110101010100000011100111010
+01 00 01 01 01 01 01 10 10 00 00 00 01 01 01 10 1110 110 10 10 10 10 00 00 01 110 01 110 10
 ```
 
-It's the [Binary Lambda Calculus](https://tromp.github.io/cl/cl.html) encoding of term
+is the [Binary Lambda Calculus](https://tromp.github.io/cl/cl.html) encoding of the term
 ```
 (λ 1 1 (λ λ λ 1 3 2 1) 1 1 1) (λ λ 2 (2 1))
 ```
-where λ (lambda) denotes an anonymous function, and number i is
-the variable bound by the i-th nested λ. This is known as [De Bruijn notation](https://en.wikipedia.org/wiki/De_Bruijn_notation), a
-way to avoid naming variables. A more conventional notation using variable
-names would be
+where λ (lambda) denotes an anonymous function, and number i is the variable bound by the i-th nested λ.
+This is known as [De Bruijn notation](https://en.wikipedia.org/wiki/De_Bruijn_notation), a
+way to avoid naming variables. A more conventional notation using variable names would be
 ```
 (λt. t t (λh λf λn. n h f n) t t t) (λf λx. f (f x))
 ```
 The top of this post shows a [graphical representation](https://tromp.github.io/cl/diagrams.html) of the term.
-The last 16 bits of the program---making up more than a quarter of its
-size---encodes the term λf λx. f (f x), which takes arguments f and x in turn,
-and iterates f twice on x. This is the standard way of representing numbers in
-lambda calculus, known as Church numerals. Church numeral n iterates a given
-function n times on a given argument. The program, which we'll name after the
-underlying growth rate, is thus
+The last 16 bits of the program---making up more than a quarter of its size---encodes
+the term λf λx. f (f x), which takes arguments f and x in turn, and iterates f twice on x.
+In general, the function that iterates a given function n times on a given argument
+is called Church numeral n, and is the standard way of representing numbers in the λ-calculus.
+The program, which we'll name after its underlying growth rate, can be expressed more legibly as
 
 ```
 wCubed = let { 2 = λf λx. f (f x); H = λh λf λn. n h f n } in 2 2 H 2 2 2
 ```
+The next section is mostly for the benefit of readers familiar with ordinal arithmetic,
+and are probably better skipped by others.
 
 ## Proof of exceeding Graham's Number
 
 Following the great suggestion of Googology user "BMS is not well-founded", let
-us start by defining a wCubed-customized [Fast-growing hierarchy](https://en.wikipedia.org/wiki/Fast-growing_hierarchy), a family that
+us start by defining a wCubed-customized
+[Fast-growing hierarchy](https://en.wikipedia.org/wiki/Fast-growing_hierarchy), a family that
 assigns, to each ordinal α, a function [α] (diverting from the usual f<sub>α</sub>
 notation for improved legibility) from natural numbers to natural numbers.
 We'll treat all numbers as Church Numerals, so we can write n f instead of the
@@ -175,28 +182,35 @@ Based on the λ-calculus, I recently added to OEIS a
 besides greater simplicity, has the advantage of
 measuring program size in bits rather than states. Note how, similar to BB<sub>TM</sub>(),
 the value of BB<sub>λ</sub>() is not the program output considered as a number itself, but
-rather the output size. And in case of binary λ-calculus, the size of a Church
-numeral n is 5n+6.
+rather the output size. And in case of binary λ-calculus, the size of a Church numeral n is 5n+6.
+[//]: # The first unknown BB<sub>TM</sub> is at 5 states, while the first unknown BB<sub>λ</sub> is at 37 bits.
 
-We can try to compare growth rates of the two BB functions by how quickly they
-exceed Graham's number. The current best effort for BB<sub>TM</sub>, after many rounds
-of optimization, is [stuck at 16 states](https://googology.fandom.com/wiki/Busy_beaver_function#Small_values),
-weighing in at over 16\*2\*(2+4) = 192
-bits. The existence of a [29 bit Ackermann-like function](https://mathoverflow.net/questions/353514/whats-the-smallest-lambda-calculus-term-not-known-to-have-a-normal-form)
+The growth rates of the two BB functions may be compared by how quickly they exceed
+that most famout of large numbers: Graham's number.
+The current best effort for BB<sub>TM</sub>, after many rounds of optimization,
+is [stuck at 16 states](https://googology.fandom.com/wiki/Busy_beaver_function#Small_values),
+weighing in at over 16\*2\*(2+4) = 192 bits. That compares rather unfavorably with our 63 bits.
+
+The existence of a [29 bit Ackermann-like function](https://mathoverflow.net/questions/353514/whats-the-smallest-lambda-calculus-term-not-known-to-have-a-normal-form)
 and a [79 bit function](https://github.com/tromp/AIT/blob/master/fast_growing_and_conjectures/E0.lam)
-growing too fast to be provably total in Peano Arithmetic, also have no
-parallels in the realm of Turing machines.
-Which suggests that the λ-calculus gets better mileage per bit.
+growing too fast to be provably total in Peano Arithmetic,
+also have no parallels in the realm of Turing machines, suggesting that the λ-calculus exhibits faster growth.
 
 It further enjoys massive advantages in programmability.
 Modern high level pure functional languages like [Haskell](https://www.haskell.org/)
 are essentially just syntactically sugared λ-calculus,
 with programmer friendly features like [Algebraic Data Types](https://en.wikipedia.org/wiki/Algebraic_data_type)
 translating directly through [Scott encodings](https://en.wikipedia.org/wiki/Mogensen%E2%80%93Scott_encoding).
-The [bruijn programming language](https://bruijn.marvinborner.de/) is an even thinner layer of syntactic sugar for the pure untyped lambda calculus, whose extensive [standard library](https://bruijn.marvinborner.de/std/) contains many datatypes and functions.
-In contrast, programming a Turing machine has been called impossibly tedious, which is why
-people resort to implementing higher level languages like
-[Not-Quite-Laconic](https://github.com/sorear/metamath-turing-machines) for writing nontrivial program without wasting too many states.
+The [bruijn programming language](https://bruijn.marvinborner.de/) is an even
+thinner layer of syntactic sugar for the pure untyped lambda calculus, whose
+extensive [standard library](https://bruijn.marvinborner.de/std/) contains many
+datatypes and functions.
+It is this excellent programmability of the λ-calculus that facilitated the creation of wCubed.
+
+In contrast, programming a Turing machine has been called impossibly tedious,
+which explains why people have resorted to implementing higher level languages like
+[Not-Quite-Laconic](https://github.com/sorear/metamath-turing-machines)
+for writing nontrivial programs that don't waste too many states.
 
 In his paper [The Busy Beaver Frontier](https://scottaaronson.com/papers/bb.pdf), [Scott Aaronson](https://scottaaronson.com/) tries to answer the question
 
@@ -226,7 +240,7 @@ it a preferable yardstick for exploring the limits of computation. The real ques
 
 ## A Universal Busy Beaver
 
-Is BB<sub>λ</sub> then the ideal Busy Beaver function (apart from a historical lack of study)?
+Is BB<sub>λ</sub> then an ideal Busy Beaver function (apart from a historical lack of study)?
 Not quite. It's still lacking one desirable property, namely universality.
 
 This property mirrors a notion of optimality for shortest description lengths, where it's known
@@ -234,11 +248,18 @@ as the [Invariance theorem](https://en.wikipedia.org/wiki/Kolmogorov_complexity#
 
   Given any description language L, the optimal description language is at least as efficient as L, with some constant overhead.
 
-In the realm of Beavers, this means that given any Busy Beaver function BB---that satisifes a technical condition called self-delimiting---, an optimal Busy Beaver surpasses it with at most constant lag: for some constant c (depending on BB) and for all n, BB<sub>opt</sub>(n+c) &ge; BB(n).
+In the realm of beavers, this means that given any Busy Beaver function BB
+(based on self-delimiting programs), an optimal Busy Beaver surpasses it with
+at most constant lag:
+```
+for some constant c depending on BB, and for all n: BB<sub>opt</sub>(n+c) &ge; BB(n)
+```
 
-While BB<sub>λ</sub> is not universal, it's very close.
-By giving λ-calculus terms access to pure binary data, as in the Binary Lambda Calculus language,
-function [BB<sub>BLC</sub>](https://oeis.org/A361211) not only achieves universality,
-but lags only 2 bits behind BB<sub>λ</sub>. It's known to eventually outgrow the latter, but is not expected to do so for any BB<sub>λ</sub> value we're able to pin down.
+While BB<sub>λ</sub> is not universal, it's not far from one either.
+By giving λ-calculus terms access to pure binary data, as in the Binary Lambda Calculus,
+function [BB<sub>BLC</sub>](https://oeis.org/A361211) achieves universality
+while lagging only 2 bits behind BB<sub>λ</sub>.
+It's known to eventually outgrow the latter, but that could take thousands of bits.
 
-Besides having a somewhat more complicated definition, BB<sub>BLC</sub> has one other downside compared to BB<sub>λ</sub>: it doesn't represent the ginormous wCubed in 64 bits:-(
+Besides having a somewhat more complicated definition, and being somewhat harder to analyze,
+BB<sub>BLC</sub> has one other downside: it doesn't represent the ginormous wCubed in 64 bits...
