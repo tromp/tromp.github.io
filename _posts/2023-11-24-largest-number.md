@@ -251,9 +251,9 @@ as the [Invariance theorem](https://en.wikipedia.org/wiki/Kolmogorov_complexity#
 In the realm of beavers, this means that given any Busy Beaver function BB
 (based on self-delimiting programs), an optimal Busy Beaver surpasses it with
 at most constant lag:
-```
-for some constant c depending on BB, and for all n: BB<sub>opt</sub>(n+c) &ge; BB(n)
-```
+
+  for some constant c depending on BB, and for all n: BB<sub>opt</sub>(n+c) &ge; BB(n)
+
 
 While BB<sub>λ</sub> is not universal, it's not far from one either.
 By giving λ-calculus terms access to pure binary data, as in the Binary Lambda Calculus,
