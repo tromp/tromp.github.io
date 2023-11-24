@@ -61,7 +61,7 @@ The famous [Busy Beaver](https://en.wikipedia.org/wiki/Busy_beaver)
 denote BB<sub>TM</sub>(n), is defined as the maximum number of 1s that can be written with
 an n state TM starting from an all 0 tape before halting. Note that if we
 consider this output as a number M written in binary, then it only gets
-credited for its length, which is log2(M+1).
+credited for its length, which is log<sub>2</sub>(M+1).
 
 With 64 bits, we can fully specify a 6 state binary Turing machine, or TM for
 short. For each of its internal states and each of its 2 tape symbols, we can
@@ -194,7 +194,7 @@ are essentially just syntactically sugared λ-calculus,
 with programmer friendly features like [Algebraic Data Types](https://en.wikipedia.org/wiki/Algebraic_data_type)
 translating directly through [Scott encodings](https://en.wikipedia.org/wiki/Mogensen%E2%80%93Scott_encoding).
 The [bruijn programming language](https://bruijn.marvinborner.de/) is an even thinner layer of syntactic sugar for the pure untyped lambda calculus, whose extensive [standard library](https://bruijn.marvinborner.de/std/) contains many datatypes and functions.
-Programming a Turing machine has been called impossibly tedious, which is why
+In contrast, programming a Turing machine has been called impossibly tedious, which is why
 people resort to implementing higher level languages like
 [Not-Quite-Laconic](https://github.com/sorear/metamath-turing-machines) for writing nontrivial program without wasting too many states.
 
