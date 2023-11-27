@@ -186,7 +186,7 @@ rather the output size. And in case of binary λ-calculus, the size of a Church 
 [//]: # The first unknown BB<sub>TM</sub> is at 5 states, while the first unknown BB<sub>λ</sub> is at 37 bits.
 
 The growth rates of the two BB functions may be compared by how quickly they exceed
-that most famout of large numbers: Graham's number.
+that most famous of large numbers: Graham's number.
 The current best effort for BB<sub>TM</sub>, after many rounds of optimization,
 is [stuck at 16 states](https://googology.fandom.com/wiki/Busy_beaver_function#Small_values),
 weighing in at over 16\*2\*(2+4) = 192 bits. That compares rather unfavorably with our 63 bits.
