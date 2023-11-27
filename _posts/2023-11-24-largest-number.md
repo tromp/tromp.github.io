@@ -18,7 +18,7 @@ date: 2023-11-24
               └─┤ │    
                 └─┘    
 ```
-Most people believe 2^<sup>64</sup>-1 = 18446744073709551615, or 0xFFFFFFFFFFFFFFFF in hexadecimal,
+Most people believe 2<sup>64</sup>-1 = 18446744073709551615, or 0xFFFFFFFFFFFFFFFF in hexadecimal,
 to be the largest number representable in 64 bits. In English, it's quite the mouthful:
 eighteen quintillion four hundred forty-six quadrillion seven hundred forty-four
 trillion seventy-three billion seven hundred nine million five hundred fifty-one
