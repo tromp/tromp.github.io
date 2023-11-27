@@ -172,8 +172,8 @@ with defining Graham's number as a Church numeral, exploiting the fact that in
 ### Lemmas (assuming n ≥ 3):
 
 1. times 3 n ≤ n<sup>2</sup> = [0] n
-2. upify [α] n = n 1 < 2 n [α] 1 = [α+1] n
-3. g n = n upify (times 3) 3 ≤<sup>(Lemma 1)</sup> n upify [0] 3 &lt;<sup>(Lemma 2)</sup> fn n = [ω] n
+2. upify [α] n = n [α] 1 < 2 n [α] 1 = [α+1] n
+3. g n = n upify (times 3) 3 ≤<sup>(Lemma 1)</sup> n upify [0] 3 &lt;<sup>(Lemma 2)</sup> f<sub>n</sub> n = [ω] n
 
 By Lemma 3, Graham = 64 g 4 < 64 [ω] 64 = [ω+1] 64
 
