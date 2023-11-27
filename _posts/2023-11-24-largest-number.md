@@ -104,7 +104,7 @@ With one final optimization applied, the following 63 bit program
 01 00 01 01 01 01 01 10 10 00 00 00 01 01 01 10 1110 110 10 10 10 10 00 00 01 110 01 110 10
 ```
 
-is the [Binary Lambda Calculus](https://tromp.github.io/cl/cl.html) encoding of the term
+is the [Binary Lambda Calculus](https://tromp.github.io/cl/cl.html) [encoding](https://gist.github.com/tromp/86b3184f852f65bfb814e3ab0987d861#lambda-encoding) of the term
 ```
 (λ 1 1 (λ λ λ 1 3 2 1) 1 1 1) (λ λ 2 (2 1))
 ```
