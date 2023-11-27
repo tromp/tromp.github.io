@@ -152,7 +152,7 @@ usual f<sup>n</sup> and write f n instead of f(n) as normally done in λ-calculu
 
 1. 2 H 2 [ω i] n = H H2 [ω i] n =<sup>(Def. 1)</sup> n H2 [ω i] n =<sup>(n x Def. 4)</sup> [ω i+n] n =<sup>(Def. 5)</sup> [ω(i+1)] n
 2. 3 H 2 [ω<sup>2</sup>i] n = H (2 H 2) [ω<sup>2</sup>i] n =<sup>(Def. 1)</sup> n (2 H 2) [ω<sup>2</sup>i] n =<sup>(n x Lemma 1)</sup> [ω<sup>2</sup>i+ω n] n =<sup>(Def. 6)</sup> [ω<sup>2</sup>(i+1)] n
-3. 4 H 2 [0] n = H (3 H 2) [0] n =<sup>(Def. 1)</sup> n (3 H 2) [0] n =<sup>(n x Lemma 2)</sup> [ω2n] n =<sup>(Def 6)</sup> [ω<sup>3</sup>] n
+3. 4 H 2 [0] n = H (3 H 2) [0] n =<sup>(Def. 1)</sup> n (3 H 2) [0] n =<sup>(n x Lemma 2)</sup> [ω<sup>2</sup>n] n =<sup>(Def 6)</sup> [ω<sup>3</sup>] n
 
 Lemma 3 gives wCubed = 2 2 H 2 2 2 = 4 H 2 [0] 2 = [ω<sup>3</sup>] 2. In comparison,
 Graham's number is known to be less than the much much smaller [ω+1] 64. As it
