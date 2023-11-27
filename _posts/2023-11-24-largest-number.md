@@ -124,7 +124,9 @@ The program, which we'll name after its underlying growth rate, can be expressed
 ```
 wCubed = let { 2 = λf λx. f (f x); H = λh λf λn. n h f n } in 2 2 H 2 2 2
 ```
-The next section is mostly for the benefit of readers familiar with ordinal arithmetic,
+The next section is mostly for the benefit of readers familiar with
+[ordinal](https://en.wikipedia.org/wiki/Ordinal_number)
+[arithmetic](https://en.wikipedia.org/wiki/Ordinal_arithmetic),
 and is probably better skipped by others.
 
 ## Proof of exceeding Graham's Number
