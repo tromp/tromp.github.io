@@ -144,7 +144,7 @@ usual f<sup>n</sup> and write f n instead of f(n) as normally done in λ-calculu
 1. H h f n = n h f n
 2. H2 = H 2
 3. [0] n = 2 n = n<sup>2</sup>
-4. [α+1] n = 2 n [α] n = H 2 [α] n
+4. [α+1] n = n 2 [α] n = H 2 [α] n
 5. [ωα+ω] n = [ωα+n] n
 6. [ω<sup>i+1</sup>(α+1)] n = [ω<sup>i+1</sup>α+ω<sup>i</sup> n] n
 
