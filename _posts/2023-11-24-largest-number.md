@@ -185,7 +185,7 @@ besides greater simplicity, has the advantage of
 measuring program size in bits rather than states. Note how, similar to BB<sub>TM</sub>(),
 the value of BB<sub>λ</sub>() is not the program output considered as a number itself, but
 rather the output size. And in case of binary λ-calculus, the size of a Church numeral n is 5n+6.
-[//]: # The first unknown BB<sub>TM</sub> is at 5 states, while the first unknown BB<sub>λ</sub> is at 37 bits.
+The first unknown BB<sub>TM</sub> is at 5 states, while the first unknown BB<sub>λ</sub> is at 37 bits.
 
 The growth rates of the two BB functions may be compared by how quickly they exceed
 that most famous of large numbers: Graham's number.
