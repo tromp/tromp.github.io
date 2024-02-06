@@ -38,8 +38,8 @@ Originally, Turing machines, the most well known formalism for computation, were
 Binary strings in BLC
 
 BLC represents bits 0 and 1 are as the standard lambda booleans B0 = True and B1 = False:
-True = \lambda x\, \lambda y.\, x
-False = \lambda x\, \lambda y.\, y
+B0 = \lambda x0\, \lambda x1.\, x0 = True
+B1 = \lambda x0\, \lambda x1.\, x1 = False
 which can be seen to directly implement the if-then-else operator.
 The standard pairing function
 \langle,\rangle = \lambda x \,\lambda y \,\lambda z.\, z x y
@@ -96,7 +96,7 @@ The program
 (\lambda 1 1) (\lambda \lambda \lambda 1 (\lambda 1 (3 (\lambda \lambda 1)) (4 4 (\lambda 1 (\lambda \lambda \lambda 1 (\lambda 4 (\lambda \lambda 5 2 (5 2 (3 1 (2 1)))))) 4 (\lambda 1))))) (\lambda \lambda \lambda 1 (3 ((\lambda 1 1) (\lambda \lambda \lambda \lambda 1 (\lambda 5 5 (\lambda \lambda 3 5 6 (\lambda 1 (\lambda \lambda 6 1 2) 3)) (\lambda \lambda 5 (\lambda 1 4 3))) (3 1)) (\lambda \lambda 1 (\lambda \lambda 2) 2) (\lambda 1)) (\lambda \lambda 1)) 2)
 proves that
 KP(x) \leq \ell(\overline{x})+338
-where \overline{x} is the Levenstein code for x defined by
+where \overline{x} is the Levenshtein code for x defined by
 \begin{array}{ll}\overline{0} & = 0 \\\overline{n+1} & = 1\ \overline{\ell(n)}\ n\\\end{array}
 in which we identify numbers and bitstrings according to lexicographic order. This code has the nice property that for all k,
 \ell(\overline{n}) \leq \ell(n)+\ell(\ell(n))+\cdots+ \ell^{k-1}(n) + O(\ell^k(n))
