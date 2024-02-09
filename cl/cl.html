@@ -47,16 +47,15 @@ in both binary and graphical notation, together with the first 300 bits of outpu
 You can run this right away by feeding <A HREF="primes.blc">primes.blc</A> into
 the tiny <A HREF="blc.pl">blc interpreter in perl</A> with
 <pre>
-  perl blc.pl -b < primes.blc | head -c 300
+  perl blc.pl -b < primes.blc
 </pre>
-(Outputting much more than 300 bits in Perl will land your computer in swap hell.)
-or into the <A HREF="uni.c">blc interpreter in C</A> with
+or into the much more performant and memory efficient <A HREF="uni.c">blc interpreter in C</A> with
 <pre>
-  cc -DM=999999 -m32 -std=c99 uni.c -o uni
-  ./uni -b < primes.blc | head -c 1024
+  cc -O uni.c -o uni
+  ./uni -b < primes.blc
 </pre>
 Option -b denotes bit-oriented IO rather than the default byte-oriented mode.
-An <A href="http://www.ioccc.org/2012/tromp/tromp.c">obfuscated version</A> of this interpreter
+An <A href="http://www.ioccc.org/2012/tromp/tromp.c">obfuscated blc interpreter</A> 
 won as <A href="http://www.ioccc.org/2012/tromp/hint.html">Most functional</a>
 in the 2012 International Obfuscated C Code Contest.
 <p>
