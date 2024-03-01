@@ -2,7 +2,8 @@ body {
     margin: 10px auto;
     width: 90%;
     font-family: monospace, sans-serif;
-    font-size: 1.3rem;
+    font-size: 1rem;
+    color: #E65100;
     margin-bottom: 5rem;
 }
 nav ul, footer ul {
@@ -23,7 +24,7 @@ a:hover {
     text-decoration: underline;
 }
 h1 {
-    font-size: 3em;
+    font-size: 2em;
     font-family: monospace, sans-serif;
 }
 p {
