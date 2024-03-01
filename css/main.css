@@ -1,9 +1,12 @@
 body {
-    margin: 60px auto;
-    width: 70%;
+    margin: 10px auto;
+    width: 90%;
+    font-family: monospace, sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 5rem;
 }
 nav ul, footer ul {
-    font-family:'Helvetica', 'Arial', 'Sans-Serif';
+    font-family: monospace, sans-serif;
     padding: 0px;
     list-style: none;
     font-weight: bold;
@@ -21,12 +24,10 @@ a:hover {
 }
 h1 {
     font-size: 3em;
-    font-family:'Helvetica', 'Arial', 'Sans-Serif';
+    font-family: monospace, sans-serif;
 }
 p {
-    font-size: 1.5em;
-    line-height: 1.4em;
-    color: #333;
+  padding: .5rem;
 }
 footer {
     border-top: 1px solid #d5d5d5;
