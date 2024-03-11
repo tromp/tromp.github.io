@@ -1,0 +1,326 @@
+(;GM[1]FF[3]
+RU[New Zealand]SZ[7]HA[0]KM[9]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[1996-05-23]
+SY[Cgoban 1.4.0]TM[-]
+C[In the American GO Journal (vol. 29, number 3, summer '95),
+James Davies had this to say:
+"On a 7x7 board, Go becomes challenging for even the strongest human players.
+The challenge (find the best moves for both sides) was taken up in 1977 by a group
+of Japanese amateurs including Kiga Yasuo, Nebashi Teruichi, Noro Natsuo and
+Yamashita Isao. In 1989, with some professional help from Kudo Norio and
+Nakayama Noriyuki, they reached the conclusion that Black wins by nine points.
+What follows is a tip-of-the-iceberg summary of the evidence. It should be added
+that the analysis is still somewhat tentative, and future discoveries may lead to
+further revisions."
+Many other remarks by Davies have been included in the node commentaries.
+]
+(;B[cc]C[suboptimal
+];W[dd];B[cd];W[de];B[dc];W[ec];B[eb];W[ce];B[ed];
+W[fc];B[fd];W[fe];B[fb];W[ee];B[gc];W[bd];B[bc];W[be];B[ge];W[gf];
+B[ac];W[ad];B[gd];W[ff]C[black loses by 6
+])
+
+(;B[dd]
+C[On a 7x7 board, Black's best opening is pretty certainly in the center.
+]
+(;W[ec]C[suboptimal
+];B[ed];W[dc];B[cc];W[cd];B[ce];W[bd];B[cb];W[be];
+B[fc];W[de];B[ee];W[cf];B[ef];W[bb];B[bc];W[ac];B[ba];W[ab];B[eb];
+W[df];B[dg];W[cg];B[eg];W[ad];B[ca];W[aa];B[db]C[black wins by 4
+])
+
+(;W[dc]C[White  should reply in contact.
+]
+(;B[ed]
+C[Under AGA rules, Ing rules and Chinese rules, this variation by black is equally good.
+Although this move loses by one point under Japanese and Korean rules, it yields him
+a jigo under these other rule systems by virtue of getting the last move.
+]
+;W[cc];B[cd];W[ec];B[bc];W[bb];B[bd];W[fd];B[fe];W[fc];B[ab];W[ge];
+B[ff];W[ba];B[gf];W[gd];B[ac];W[cb];B[aa]C[jigo
+])
+
+(;B[ec]
+C[White can flip a coin to choose between the cross-cut at E4 and the hane at C4.
+]
+(;W[cd]C[
+]
+(;B[cc]C[premature
+];W[de];B[db];W[ed];B[dc];W[ce];B[fe];W[ef];B[ff];
+W[ee];B[fd];W[bc];B[bb];W[ad];B[eg];W[dg];B[fg];W[ab];B[ba];W[ac];
+B[aa];W[be])
+
+(;B[de]
+C[Black should extend, after which White has another coin-flip: heads for C6,
+tails for E6.
+]
+(;W[eb]C[This triple hane opens the gates to a flood of variations.
+]
+(;B[cc]C[unique best move
+];W[db]
+C[Black has four equally good continuations: B4, C3, C6, or F5.
+]
+(;B[bd];W[ed];B[ee];W[fc];B[cb];W[fe];B[ff];W[gf];B[fg];W[ca];B[ba];
+W[da];B[bb];W[ge];B[ef];W[gg];B[ce]C[jigo
+])
+
+(;B[ce];W[bd]
+(;B[bc];W[bb];B[be];W[ed];B[fd]
+(;W[ee]C[too bad
+];B[fc];W[fe];B[ff];W[ef];B[ge])
+
+(;W[fc];B[fe];W[cb];B[ad];W[ee];B[ef];W[ec];B[ab];W[gd];B[gf];W[ba];
+B[ge];W[gc];B[ac];W[aa]C[jigo
+])
+)
+
+(;B[fc];W[be];B[bf]
+(;W[bb];B[fb];W[af];B[ea];W[cb];B[bg];W[da];B[fa];W[ae];B[cf];W[ag];
+B[tt];W[bc]C[jigo
+])
+
+(;W[bc];B[fb]
+(;W[bb];B[af];W[fa];B[gb];W[ae];B[ga];W[ea];B[tt];W[cb]C[jigo
+])
+
+(;W[af];B[ea];W[cb];B[bg];W[da];B[fa];W[ae];B[cf];W[ag]C[jigo
+])
+)
+)
+)
+
+(;B[cb];W[ed];B[fc];W[fb];B[ce];W[bd];B[bc];W[ee];B[ef];W[fd];B[ff];
+W[be];B[bf];W[cf];B[df];W[af];B[cg];W[ca]
+(;B[ba];W[ac];B[da];W[ab]C[oops
+])
+
+(;B[ab];W[ba];B[ge];W[gc];B[fe];W[bb];B[ac];W[da];B[ae];W[aa];B[ad];
+W[gd];B[ag]C[jigo
+])
+)
+
+(;B[fc];W[bc];B[ce];W[bd];B[fb];W[be];B[ea];W[cb];B[bf];W[af]
+(;B[ae]
+(;W[cf];B[ag];W[ad];B[df];W[af];B[cg];W[bg];B[cf];W[fa];B[ga];W[da];
+B[fa]
+(;W[ae];B[bb];W[ba];B[ab];W[ac];B[ag];W[aa];B[bg]C[black wins by 2
+])
+
+(;W[bb];B[ag];W[ed];B[fd];W[bg];B[ee];W[ae];B[ag]
+(;W[tt];B[bg]C[black wins by 2
+])
+
+(;W[ff];B[bg];W[fe];B[eg];W[fg];B[ef])
+)
+)
+
+(;W[ad];B[bg];W[da];B[fa];W[ae];B[cf];W[bb];B[ag]C[black wins by 2
+])
+)
+
+(;B[bg];W[da];B[fa];W[ae];B[df];W[ag]C[jigo
+])
+)
+)
+
+(;B[db]C[Black should resist this temptation.
+];W[cc];B[fb];W[ce];
+B[df];W[cf]C[Black loses.
+])
+)
+
+(;W[cc]C[suboptimal
+];B[eb];W[ce];B[cf];W[bf];B[df];W[db];B[bg];W[af];
+B[da];W[ca];B[ea]
+(;W[be];B[cg];W[ag]C[
+];B[bb]C[
+];W[cb];B[bc]C[Black gets a seki.
+])
+
+(;W[bd];B[cg]
+(;W[bb];B[ag]C[black wins by 2
+])
+
+(;W[ag];B[bb];W[cb];B[ac];W[ad];B[ba]C[
+];W[ab];B[aa]
+C[black wins by 11
+])
+)
+)
+
+(;W[cb]C[White C6 is simplest.
+];B[db];W[cc]
+C[It's black's turn to flip the coin to choose E6 or C3. Whichever of these points Black
+takes, White will take the other.
+]
+(;B[eb];W[ce];B[cf];W[bf];B[df];W[bg];B[ca];W[ba];B[da]
+(;W[ab];B[cg]C[black wins by 2
+])
+
+(;W[cg]C[The key move in this sequence.
+]
+(;B[dg];W[ab]C[jigo
+])
+
+(;B[bb]C[Inviting Black to this ko.
+]
+(;W[bc]C[not such a good idea for white, because...
+];B[aa];W[dg];
+B[ac];W[ad];B[be];W[ab];B[af];W[ae];B[ac]C[oops
+])
+
+(;W[dg]C[this almost works, but not quite.
+];B[ef];W[ff];B[eg];W[ab];
+B[aa];W[ed];B[fd];W[ba];B[be];W[ae];B[aa];W[fg];B[ee];W[ba];B[af];
+W[bd];B[aa];W[fe];B[ed];W[ba];B[ad];W[ac];B[aa]C[one threat short...
+])
+
+(;W[ab]
+C[White can barely win this ko, altough the details area bit tricky, to say the least.
+]
+;B[aa];W[ed]
+(;B[fd];W[ba]
+(;B[dg];W[bc];B[ee]C[jigo
+])
+
+(;B[bc];W[bd];B[aa];W[dg];B[ad];W[be];B[ac];W[ef];B[ee];W[fe];B[ed];
+W[gf];B[ae];W[af];B[gd];W[ge]C[black loses by 2
+])
+)
+
+(;B[be];W[bd];B[ad];W[ae];B[bc]
+(;W[ac]
+C[Obvious, but bad, since Black gets to win the A7 ko in sente.
+];
+B[ad];W[ac];B[ff];W[ef];B[ee];W[eg];B[fg];W[dg];B[fd];W[ad];B[ba];
+W[ab]C[black wins by 2
+])
+
+(;W[be]
+C[Now with the ko at A7 still open, Black has to handle E4 as solidly as possible.
+]
+;B[fd];W[dg];B[ac];W[ef];B[ee];W[fe];B[ed];W[gf];B[gd];W[ge]
+C[black loses by 4
+])
+)
+)
+)
+)
+)
+
+(;B[ce];W[eb];B[fb];W[da]
+(;B[fc]C[This apparent underplay is the critical move.
+];W[be];B[bf];
+W[bd];B[af];W[fa];B[ae];W[gb];B[ad];W[ac];B[fe];W[ea];B[gc];W[ga]
+C[jigo
+])
+
+(;B[fa];W[be];B[bf];W[af];B[bd];W[ad];B[ae];W[fc];B[ed];W[be];B[bg];
+W[bc];B[fd];W[ea];B[cf];W[ae];B[ag];W[tt];B[gc]C[jigo
+])
+)
+)
+)
+)
+
+(;W[ed]
+(;B[de]C[
+];W[eb];B[fc];W[cc]
+(;B[bd];W[fb];B[fd];W[bc];B[be]
+C[This is perhaps the only move for which black has any choice, the other choices
+being C3 or C4.
+]
+;W[gb];B[gc];W[cd];B[ce];W[ad];B[ae];W[ac];B[ee]C[jigo
+])
+
+(;B[fb]C[optimal only under area rules
+];W[be];B[bf];W[ce];B[cf]
+(;W[df];B[ef];W[ee];B[dg];W[cd];B[df];W[db]
+(;B[ae];W[ad];B[af];W[fa];B[gb];W[bb];B[fe];W[ea];B[ga];W[tt];B[fd]
+C[jigo
+])
+
+(;B[fa];W[af];B[ea];W[da];B[bb];W[bc];B[ad];W[ae];B[ac];W[bg];B[ff];
+W[ba])
+)
+
+(;W[cd];B[df];W[db];B[fa];W[af];B[ea];W[da];B[bb];W[bc];B[ad];W[ae];
+B[ac];W[ba];B[bg])
+)
+)
+
+(;B[fc]C[suboptimal
+];W[cd];B[de];W[ce]
+(;B[cc]
+(;W[db]C[suboptimal
+];B[cb];W[df];B[ee];W[ef];B[fe];W[bc];B[bb];W[bd];
+B[ab];W[ff];B[gf];W[bf];B[ac];W[ad];B[ge];W[fg];B[gg]C[
+];W[tt];B[fd];
+W[tt];B[eb];W[tt];B[da]C[black wins by 2
+])
+
+(;W[df];B[ee];W[bc];B[db];W[bb];B[ef];W[cf];B[dg];W[cg];B[eg];W[cb];
+B[da];W[ca];B[dc];W[tt];B[fd]C[black loses by 2
+])
+)
+
+(;B[df];W[db];B[cc];W[cb];B[cf];W[fd];B[fe];W[fb];B[bc];W[bb];B[gd];
+W[eb];B[ee];W[bd];B[be];W[ac];B[ae];W[gb];B[gc];W[ad];B[bf]
+C[black loses by 4
+])
+)
+)
+)
+)
+)
+
+(;B[dc]C[suboptimal
+]
+(;W[de];B[ce];W[dd];B[cd];W[ec];B[eb];W[cc];B[db];W[cf];B[bf];W[df];
+B[bc];W[fc];B[fb];W[bg];B[gc];W[fe];B[af];W[gd];B[gb];W[cg];B[be];
+W[ag];B[cb]C[black loses by 4
+])
+
+(;W[tt];B[de];W[dd];B[cd];W[ed];B[ee];W[ec];B[db];W[fe];B[ff];W[eb];
+B[fd];W[fc];B[ge];W[cc];B[cb];W[bc];B[bb];W[bd];B[ce];W[be];B[fa];
+W[cf];B[af])
+)
+
+(;B[gg];W[dd];B[de];W[ee];B[cd];W[cc];B[ce];W[dc];B[ef];W[fe];B[ff];
+W[bd];B[be];W[bc];B[ge];W[fc];B[gc];W[gb];B[gd];W[fd];B[gf];W[ae];
+B[af];W[ad];B[bf];W[fb])
+
+(;B[gd];W[dd];B[dc]
+(;W[ec];B[ed];W[cc];B[db];W[ee];B[fd];W[cd];B[cb];W[bb];B[fc];W[ca];
+B[eb];W[fe];B[ge];W[ff];B[gf];W[fg];B[ba];W[aa];B[da];W[bc];B[ba];
+W[ab];B[fa];W[ca];B[de];W[df];B[ba];W[ce];B[ca];W[gg])
+
+(;W[cc];B[ed];W[de];B[ee];W[ef];B[cb];W[ff];B[ec];W[bc];B[bb];W[cd];
+B[ac];W[ad];B[ab];W[fe];B[fd];W[ge])
+)
+
+(;B[ff]
+(;W[dd]
+(;B[ee]
+(;W[ed];B[fd];W[de];B[df];W[fc];B[ce];W[cd];B[be];W[bd];B[gc];W[fb];
+B[ad];W[ac];B[ae];W[bb];B[gb];W[fa];B[gd];W[ga])
+
+(;W[de];B[df];W[ed];B[fd];W[fc];B[ce];W[cd];B[be];W[gd];B[fe];W[bd];
+B[ad];W[ac];B[ae];W[bc];B[ge];W[gc])
+)
+
+(;B[dc];W[cc];B[ec];W[ed];B[fd];W[cb];B[cd];W[ce];B[bd];W[be];B[de];
+W[ee];B[df];W[bc];B[ef];W[ad];B[fe];W[cd];B[db];W[da];B[fb];W[fa];
+B[bf];W[cf];B[cg];W[gb];B[gc];W[ea];B[ga];W[ca];B[gb];W[eb];B[fc];
+W[af];B[bg];W[ae];B[dg];W[ag])
+)
+
+(;W[ee];B[dd];W[de];B[cd];W[ce];B[ed];W[fe];B[fd];W[gd];B[be];W[bf];
+B[bd];W[fc];B[af];W[bg];B[eb];W[fb];B[fa];W[ec];B[db];W[dc];B[cc];
+W[ge];B[bb];W[gc];B[ae];W[df];B[ga];W[gb];B[ea];W[dg];B[ag])
+)
+
+)
