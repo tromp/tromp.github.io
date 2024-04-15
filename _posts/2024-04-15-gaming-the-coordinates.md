@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Gaming the coordinates
+title: "Gaming the coordinates"
 date: 2024-04-15
 ---
 
@@ -361,3 +361,6 @@ date: 2024-04-15
 </svg>
 
 Coordinates of the go board.
+
+
+[1] [https://forums.online-go.com/t/board-coordinates/15816](https://forums.online-go.com/t/board-coordinates/15816)
