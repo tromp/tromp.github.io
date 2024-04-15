@@ -362,17 +362,17 @@ Sensei's library [1] lists several systems of coordinates for the standard 19x19
 The system shown above must rank as one of the more unusual ones.
 
 It was inspired by a recent email from fellow games researcher Ryan Hayward [2], in which he noticed
-that the number of legal triangular boards is 19, and that the number of legal games one can
-play on this board (under the Logical rules [3]) is 3439.
+that the number of legal positions on a triangle shaped 3 point board is 19,
+and that the number of legal games one can play on this board (under the Logical rules [3]) is 3439.
 
 Having studied Hamiltonian games in our Combinatorics of Go paper [4], I was naturally curious to see
 if triangular Go was also Hamiltonian. That is, whether one can play a game that visits all legal positions.
 
-As it turns out, not only can one do so, but (up to symmetry) the game is essentially unique!
+As it turns out, not only can one do so, but (up to symmetry) the game is unique and has no intermediate passes!
 
 That makes it even more natural to use these 19 positions as coordinates, with adjacent rows or columns marked by adjacent markers, just as with traditional coordinate systems.
 
-Note that the row coordinates are positions in a game played on a vertically flipped triangle. This makes it easier to name the points on the board, as the two coordinates align into a slanted 2x3 grid. Curiously, the star points are exactly the points whose coordinates both have 2 black stones. For example, tengen is 
+Note that, compared to column coordinates, the row coordinates are positions in a game played on a vertically flipped triangle. This makes it easier to name the points on the board, as the two coordinates align into a slanted 2x3 grid. Curiously, the star points are exactly the points whose coordinates both have 2 black stones. For example, tengen is 
 <svg width="154" height="80" viewbox = "0 0 154 80" xmlns="http://www.w3.org/2000/svg">
 <polygon points="0,21 44,21 22,59" style="fill:white;stroke:black"/>
 <circle cx="44" cy="21" r="21" stroke="black" fill="black"/>
