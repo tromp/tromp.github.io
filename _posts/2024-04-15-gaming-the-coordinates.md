@@ -373,15 +373,13 @@ As it turns out, not only can one do so, but (up to symmetry) the game is essent
 That makes it even more natural to use these 19 positions as coordinates, with adjacent rows or columns marked by adjacent markers, just as with traditional coordinate systems.
 
 Note that the row coordinates are positions in a game played on a vertically flipped triangle. This makes it easier to name the points on the board, as the two coordinates align into a slanted 2x3 grid. Curiously, the star points are exactly the points whose coordinates both have 2 black stones. For example, tengen is 
-<svg width="154" height="154" viewbox = "0 0 154 154" xmlns="http://www.w3.org/2000/svg">
-<polygon points="21,21 65,21 43,59" style="fill:white;stroke:black"/>
-<circle cx="21" cy="21" r="0" stroke="black" fill="white"/>
-<circle cx="65" cy="21" r="21" stroke="black" fill="black"/>
-<circle cx="43" cy="59" r="21" stroke="black" fill="black"/>
-<polygon points="89,59 133,59 111,21" style="fill:white;stroke:black"/>
-<circle cx="89" cy="59" r="0" stroke="black" fill="white"/>
-<circle cx="133" cy="59" r="21" stroke="black" fill="black"/>
-<circle cx="111" cy="21" r="21" stroke="black" fill="black"/>
+<svg width="154" height="80" viewbox = "0 0 154 80" xmlns="http://www.w3.org/2000/svg">
+<polygon points="0,21 44,21 22,59" style="fill:white;stroke:black"/>
+<circle cx="44" cy="21" r="21" stroke="black" fill="black"/>
+<circle cx="22" cy="59" r="21" stroke="black" fill="black"/>
+<polygon points="68,59 112,59 90,21" style="fill:white;stroke:black"/>
+<circle cx="112" cy="59" r="21" stroke="black" fill="black"/>
+<circle cx="90" cy="21" r="21" stroke="black" fill="black"/>
 </svg>
 
 Obviously this is not the most practical of coordinate systems, but it does have a certain aesthetic appeal...
