@@ -359,7 +359,7 @@ date: 2024-04-15
 </svg>
 
 Sensei's library [1] lists several systems of coordinates for the standard 19x19 size Go board.
-The system shown above must rank as one of the more uncommon ones.
+The system shown above must rank as one of the more unusual ones.
 
 It was inspired by a recent email from fellow games researcher Ryan Hayward, in which he noticed
 that the number of legal triangular boards is 19, and that the number of legal games one can
@@ -372,12 +372,20 @@ As it turns out, not only can one do so, but (up to symmetry) the game is essent
 
 That makes it even more natural to use these 19 positions as coordinates, with adjacent rows or columns marked by adjacent markers, just as with traditional coordinate systems.
 
-Note that the row coordinates are positions in a game played on a vertically flipped triangle. This makes it easier to name the points on the board, as the two coordinates align into a slanted 2x3 grid.
+Note that the row coordinates are positions in a game played on a vertically flipped triangle. This makes it easier to name the points on the board, as the two coordinates align into a slanted 2x3 grid. Curiously, the star points are exactly the points whose coordinates both have 2 black stones. For example, tengen is 
+<svg width="130" height="130" viewbox = "0 0 390 300" xmlns="http://www.w3.org/2000/svg">
+<polygon points="106,109 150,109 128,147" style="fill:white;stroke:black"/>
+<circle cx="106" cy="109" r="0" stroke="black" fill="white"/>
+<circle cx="150" cy="109" r="21" stroke="black" fill="black"/>
+<circle cx="128" cy="147" r="21" stroke="black" fill="black"/>
+<polygon points="174,147 218,147 196,109" style="fill:white;stroke:black"/>
+<circle cx="174" cy="147" r="0" stroke="black" fill="white"/>
+<circle cx="218" cy="147" r="21" stroke="black" fill="black"/>
+<circle cx="196" cy="109" r="21" stroke="black" fill="black"/>
+</svg>.
 
 [1] [Sensei's Library](https://senseis.xmp.net/?Coordinates)
 
 [2] [The Logical rules of Go](https://tromp.github.io/go.html)
 
 [3] [Combinatorics of Go](https://tromp.github.io/go/gostate.pdf)
-
-[9] [Online-go.com](https://forums.online-go.com/t/board-coordinates/15816)
