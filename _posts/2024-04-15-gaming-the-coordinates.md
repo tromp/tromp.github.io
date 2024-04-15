@@ -372,6 +372,8 @@ As it turns out, not only can one do so, but (up to symmetry) the game is essent
 
 That makes it even more natural to use these 19 positions as coordinates, with adjacent rows or columns marked by adjacent markers, just as with traditional coordinate systems.
 
+Note that the row coordinates are positions in a game played on a vertically flipped triangle. This makes it easier to name the points on the board, as the two coordinates align into a slanted 2x3 grid.
+
 [1] [Sensei's Library](https://senseis.xmp.net/?Coordinates)
 
 [2] [The Logical rules of Go](https://tromp.github.io/go.html)
