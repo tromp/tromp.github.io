@@ -5,7 +5,6 @@ date: 2024-04-15
 ---
 
 <svg width="700" height="700" viewbox = "0 0 2800 2800" xmlns="http://www.w3.org/2000/svg">
-
 <line x1="256" y1="256" x2="2560" y2="256" style="stroke:black;"/>
 <line x1="256" y1="384" x2="2560" y2="384" style="stroke:black;"/>
 <line x1="256" y1="512" x2="2560" y2="512" style="stroke:black;"/>
@@ -205,78 +204,78 @@ date: 2024-04-15
 <circle cx="2538" cy="2669" r="0" stroke="black" fill="white"/>
 <circle cx="2582" cy="2669" r="21" stroke="black" fill="white"/>
 <circle cx="2560" cy="2707" r="21" stroke="black" fill="white"/>
-<polygon points="106,275 150,275 128,237" style="fill:white;stroke:black"/>
-<circle cx="106" cy="275" r="0" stroke="black" fill="white"/>
-<circle cx="150" cy="275" r="0" stroke="black" fill="white"/>
-<circle cx="128" cy="237" r="0" stroke="black" fill="white"/>
-<polygon points="2666,275 2710,275 2688,237" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="275" r="0" stroke="black" fill="white"/>
-<circle cx="2710" cy="275" r="0" stroke="black" fill="white"/>
-<circle cx="2688" cy="237" r="0" stroke="black" fill="white"/>
-<polygon points="106,403 150,403 128,365" style="fill:white;stroke:black"/>
-<circle cx="106" cy="403" r="21" stroke="black" fill="black"/>
-<circle cx="150" cy="403" r="0" stroke="black" fill="white"/>
-<circle cx="128" cy="365" r="0" stroke="black" fill="white"/>
-<polygon points="2666,403 2710,403 2688,365" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="403" r="21" stroke="black" fill="black"/>
-<circle cx="2710" cy="403" r="0" stroke="black" fill="white"/>
-<circle cx="2688" cy="365" r="0" stroke="black" fill="white"/>
-<polygon points="106,531 150,531 128,493" style="fill:white;stroke:black"/>
-<circle cx="106" cy="531" r="21" stroke="black" fill="black"/>
-<circle cx="150" cy="531" r="21" stroke="black" fill="white"/>
-<circle cx="128" cy="493" r="0" stroke="black" fill="white"/>
-<polygon points="2666,531 2710,531 2688,493" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="531" r="21" stroke="black" fill="black"/>
-<circle cx="2710" cy="531" r="21" stroke="black" fill="white"/>
-<circle cx="2688" cy="493" r="0" stroke="black" fill="white"/>
-<polygon points="106,659 150,659 128,621" style="fill:white;stroke:black"/>
-<circle cx="106" cy="659" r="21" stroke="black" fill="black"/>
-<circle cx="150" cy="659" r="0" stroke="black" fill="white"/>
-<circle cx="128" cy="621" r="21" stroke="black" fill="black"/>
-<polygon points="2666,659 2710,659 2688,621" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="659" r="21" stroke="black" fill="black"/>
-<circle cx="2710" cy="659" r="0" stroke="black" fill="white"/>
-<circle cx="2688" cy="621" r="21" stroke="black" fill="black"/>
-<polygon points="106,787 150,787 128,749" style="fill:white;stroke:black"/>
-<circle cx="106" cy="787" r="0" stroke="black" fill="white"/>
-<circle cx="150" cy="787" r="21" stroke="black" fill="white"/>
-<circle cx="128" cy="749" r="0" stroke="black" fill="white"/>
-<polygon points="2666,787 2710,787 2688,749" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="787" r="0" stroke="black" fill="white"/>
-<circle cx="2710" cy="787" r="21" stroke="black" fill="white"/>
-<circle cx="2688" cy="749" r="0" stroke="black" fill="white"/>
-<polygon points="106,915 150,915 128,877" style="fill:white;stroke:black"/>
-<circle cx="106" cy="915" r="0" stroke="black" fill="white"/>
-<circle cx="150" cy="915" r="21" stroke="black" fill="white"/>
-<circle cx="128" cy="877" r="21" stroke="black" fill="black"/>
-<polygon points="2666,915 2710,915 2688,877" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="915" r="0" stroke="black" fill="white"/>
-<circle cx="2710" cy="915" r="21" stroke="black" fill="white"/>
-<circle cx="2688" cy="877" r="21" stroke="black" fill="black"/>
-<polygon points="106,1043 150,1043 128,1005" style="fill:white;stroke:black"/>
-<circle cx="106" cy="1043" r="21" stroke="black" fill="white"/>
-<circle cx="150" cy="1043" r="21" stroke="black" fill="white"/>
-<circle cx="128" cy="1005" r="0" stroke="black" fill="white"/>
-<polygon points="2666,1043 2710,1043 2688,1005" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="1043" r="21" stroke="black" fill="white"/>
-<circle cx="2710" cy="1043" r="21" stroke="black" fill="white"/>
-<circle cx="2688" cy="1005" r="0" stroke="black" fill="white"/>
-<polygon points="106,1171 150,1171 128,1133" style="fill:white;stroke:black"/>
-<circle cx="106" cy="1171" r="0" stroke="black" fill="white"/>
-<circle cx="150" cy="1171" r="0" stroke="black" fill="white"/>
-<circle cx="128" cy="1133" r="21" stroke="black" fill="black"/>
-<polygon points="2666,1171 2710,1171 2688,1133" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="1171" r="0" stroke="black" fill="white"/>
-<circle cx="2710" cy="1171" r="0" stroke="black" fill="white"/>
-<circle cx="2688" cy="1133" r="21" stroke="black" fill="black"/>
-<polygon points="106,1299 150,1299 128,1261" style="fill:white;stroke:black"/>
-<circle cx="106" cy="1299" r="21" stroke="black" fill="white"/>
-<circle cx="150" cy="1299" r="0" stroke="black" fill="white"/>
-<circle cx="128" cy="1261" r="21" stroke="black" fill="black"/>
-<polygon points="2666,1299 2710,1299 2688,1261" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="1299" r="21" stroke="black" fill="white"/>
-<circle cx="2710" cy="1299" r="0" stroke="black" fill="white"/>
-<circle cx="2688" cy="1261" r="21" stroke="black" fill="black"/>
+<polygon points="106,2579 150,2579 128,2541" style="fill:white;stroke:black"/>
+<circle cx="106" cy="2579" r="0" stroke="black" fill="white"/>
+<circle cx="150" cy="2579" r="0" stroke="black" fill="white"/>
+<circle cx="128" cy="2541" r="0" stroke="black" fill="white"/>
+<polygon points="2666,2579 2710,2579 2688,2541" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="2579" r="0" stroke="black" fill="white"/>
+<circle cx="2710" cy="2579" r="0" stroke="black" fill="white"/>
+<circle cx="2688" cy="2541" r="0" stroke="black" fill="white"/>
+<polygon points="106,2451 150,2451 128,2413" style="fill:white;stroke:black"/>
+<circle cx="106" cy="2451" r="21" stroke="black" fill="black"/>
+<circle cx="150" cy="2451" r="0" stroke="black" fill="white"/>
+<circle cx="128" cy="2413" r="0" stroke="black" fill="white"/>
+<polygon points="2666,2451 2710,2451 2688,2413" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="2451" r="21" stroke="black" fill="black"/>
+<circle cx="2710" cy="2451" r="0" stroke="black" fill="white"/>
+<circle cx="2688" cy="2413" r="0" stroke="black" fill="white"/>
+<polygon points="106,2323 150,2323 128,2285" style="fill:white;stroke:black"/>
+<circle cx="106" cy="2323" r="21" stroke="black" fill="black"/>
+<circle cx="150" cy="2323" r="21" stroke="black" fill="white"/>
+<circle cx="128" cy="2285" r="0" stroke="black" fill="white"/>
+<polygon points="2666,2323 2710,2323 2688,2285" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="2323" r="21" stroke="black" fill="black"/>
+<circle cx="2710" cy="2323" r="21" stroke="black" fill="white"/>
+<circle cx="2688" cy="2285" r="0" stroke="black" fill="white"/>
+<polygon points="106,2195 150,2195 128,2157" style="fill:white;stroke:black"/>
+<circle cx="106" cy="2195" r="21" stroke="black" fill="black"/>
+<circle cx="150" cy="2195" r="0" stroke="black" fill="white"/>
+<circle cx="128" cy="2157" r="21" stroke="black" fill="black"/>
+<polygon points="2666,2195 2710,2195 2688,2157" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="2195" r="21" stroke="black" fill="black"/>
+<circle cx="2710" cy="2195" r="0" stroke="black" fill="white"/>
+<circle cx="2688" cy="2157" r="21" stroke="black" fill="black"/>
+<polygon points="106,2067 150,2067 128,2029" style="fill:white;stroke:black"/>
+<circle cx="106" cy="2067" r="0" stroke="black" fill="white"/>
+<circle cx="150" cy="2067" r="21" stroke="black" fill="white"/>
+<circle cx="128" cy="2029" r="0" stroke="black" fill="white"/>
+<polygon points="2666,2067 2710,2067 2688,2029" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="2067" r="0" stroke="black" fill="white"/>
+<circle cx="2710" cy="2067" r="21" stroke="black" fill="white"/>
+<circle cx="2688" cy="2029" r="0" stroke="black" fill="white"/>
+<polygon points="106,1939 150,1939 128,1901" style="fill:white;stroke:black"/>
+<circle cx="106" cy="1939" r="0" stroke="black" fill="white"/>
+<circle cx="150" cy="1939" r="21" stroke="black" fill="white"/>
+<circle cx="128" cy="1901" r="21" stroke="black" fill="black"/>
+<polygon points="2666,1939 2710,1939 2688,1901" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="1939" r="0" stroke="black" fill="white"/>
+<circle cx="2710" cy="1939" r="21" stroke="black" fill="white"/>
+<circle cx="2688" cy="1901" r="21" stroke="black" fill="black"/>
+<polygon points="106,1811 150,1811 128,1773" style="fill:white;stroke:black"/>
+<circle cx="106" cy="1811" r="21" stroke="black" fill="white"/>
+<circle cx="150" cy="1811" r="21" stroke="black" fill="white"/>
+<circle cx="128" cy="1773" r="0" stroke="black" fill="white"/>
+<polygon points="2666,1811 2710,1811 2688,1773" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="1811" r="21" stroke="black" fill="white"/>
+<circle cx="2710" cy="1811" r="21" stroke="black" fill="white"/>
+<circle cx="2688" cy="1773" r="0" stroke="black" fill="white"/>
+<polygon points="106,1683 150,1683 128,1645" style="fill:white;stroke:black"/>
+<circle cx="106" cy="1683" r="0" stroke="black" fill="white"/>
+<circle cx="150" cy="1683" r="0" stroke="black" fill="white"/>
+<circle cx="128" cy="1645" r="21" stroke="black" fill="black"/>
+<polygon points="2666,1683 2710,1683 2688,1645" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="1683" r="0" stroke="black" fill="white"/>
+<circle cx="2710" cy="1683" r="0" stroke="black" fill="white"/>
+<circle cx="2688" cy="1645" r="21" stroke="black" fill="black"/>
+<polygon points="106,1555 150,1555 128,1517" style="fill:white;stroke:black"/>
+<circle cx="106" cy="1555" r="21" stroke="black" fill="white"/>
+<circle cx="150" cy="1555" r="0" stroke="black" fill="white"/>
+<circle cx="128" cy="1517" r="21" stroke="black" fill="black"/>
+<polygon points="2666,1555 2710,1555 2688,1517" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="1555" r="21" stroke="black" fill="white"/>
+<circle cx="2710" cy="1555" r="0" stroke="black" fill="white"/>
+<circle cx="2688" cy="1517" r="21" stroke="black" fill="black"/>
 <polygon points="106,1427 150,1427 128,1389" style="fill:white;stroke:black"/>
 <circle cx="106" cy="1427" r="0" stroke="black" fill="white"/>
 <circle cx="150" cy="1427" r="21" stroke="black" fill="black"/>
@@ -285,79 +284,78 @@ date: 2024-04-15
 <circle cx="2666" cy="1427" r="0" stroke="black" fill="white"/>
 <circle cx="2710" cy="1427" r="21" stroke="black" fill="black"/>
 <circle cx="2688" cy="1389" r="21" stroke="black" fill="black"/>
-<polygon points="106,1555 150,1555 128,1517" style="fill:white;stroke:black"/>
-<circle cx="106" cy="1555" r="21" stroke="black" fill="white"/>
-<circle cx="150" cy="1555" r="0" stroke="black" fill="white"/>
-<circle cx="128" cy="1517" r="0" stroke="black" fill="white"/>
-<polygon points="2666,1555 2710,1555 2688,1517" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="1555" r="21" stroke="black" fill="white"/>
-<circle cx="2710" cy="1555" r="0" stroke="black" fill="white"/>
-<circle cx="2688" cy="1517" r="0" stroke="black" fill="white"/>
-<polygon points="106,1683 150,1683 128,1645" style="fill:white;stroke:black"/>
-<circle cx="106" cy="1683" r="21" stroke="black" fill="white"/>
-<circle cx="150" cy="1683" r="21" stroke="black" fill="black"/>
-<circle cx="128" cy="1645" r="0" stroke="black" fill="white"/>
-<polygon points="2666,1683 2710,1683 2688,1645" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="1683" r="21" stroke="black" fill="white"/>
-<circle cx="2710" cy="1683" r="21" stroke="black" fill="black"/>
-<circle cx="2688" cy="1645" r="0" stroke="black" fill="white"/>
-<polygon points="106,1811 150,1811 128,1773" style="fill:white;stroke:black"/>
-<circle cx="106" cy="1811" r="21" stroke="black" fill="white"/>
-<circle cx="150" cy="1811" r="0" stroke="black" fill="white"/>
-<circle cx="128" cy="1773" r="21" stroke="black" fill="white"/>
-<polygon points="2666,1811 2710,1811 2688,1773" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="1811" r="21" stroke="black" fill="white"/>
-<circle cx="2710" cy="1811" r="0" stroke="black" fill="white"/>
-<circle cx="2688" cy="1773" r="21" stroke="black" fill="white"/>
-<polygon points="106,1939 150,1939 128,1901" style="fill:white;stroke:black"/>
-<circle cx="106" cy="1939" r="0" stroke="black" fill="white"/>
-<circle cx="150" cy="1939" r="21" stroke="black" fill="black"/>
-<circle cx="128" cy="1901" r="0" stroke="black" fill="white"/>
-<polygon points="2666,1939 2710,1939 2688,1901" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="1939" r="0" stroke="black" fill="white"/>
-<circle cx="2710" cy="1939" r="21" stroke="black" fill="black"/>
-<circle cx="2688" cy="1901" r="0" stroke="black" fill="white"/>
-<polygon points="106,2067 150,2067 128,2029" style="fill:white;stroke:black"/>
-<circle cx="106" cy="2067" r="0" stroke="black" fill="white"/>
-<circle cx="150" cy="2067" r="21" stroke="black" fill="black"/>
-<circle cx="128" cy="2029" r="21" stroke="black" fill="white"/>
-<polygon points="2666,2067 2710,2067 2688,2029" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="2067" r="0" stroke="black" fill="white"/>
-<circle cx="2710" cy="2067" r="21" stroke="black" fill="black"/>
-<circle cx="2688" cy="2029" r="21" stroke="black" fill="white"/>
-<polygon points="106,2195 150,2195 128,2157" style="fill:white;stroke:black"/>
-<circle cx="106" cy="2195" r="21" stroke="black" fill="black"/>
-<circle cx="150" cy="2195" r="21" stroke="black" fill="black"/>
-<circle cx="128" cy="2157" r="0" stroke="black" fill="white"/>
-<polygon points="2666,2195 2710,2195 2688,2157" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="2195" r="21" stroke="black" fill="black"/>
-<circle cx="2710" cy="2195" r="21" stroke="black" fill="black"/>
-<circle cx="2688" cy="2157" r="0" stroke="black" fill="white"/>
-<polygon points="106,2323 150,2323 128,2285" style="fill:white;stroke:black"/>
-<circle cx="106" cy="2323" r="0" stroke="black" fill="white"/>
-<circle cx="150" cy="2323" r="0" stroke="black" fill="white"/>
-<circle cx="128" cy="2285" r="21" stroke="black" fill="white"/>
-<polygon points="2666,2323 2710,2323 2688,2285" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="2323" r="0" stroke="black" fill="white"/>
-<circle cx="2710" cy="2323" r="0" stroke="black" fill="white"/>
-<circle cx="2688" cy="2285" r="21" stroke="black" fill="white"/>
-<polygon points="106,2451 150,2451 128,2413" style="fill:white;stroke:black"/>
-<circle cx="106" cy="2451" r="21" stroke="black" fill="black"/>
-<circle cx="150" cy="2451" r="0" stroke="black" fill="white"/>
-<circle cx="128" cy="2413" r="21" stroke="black" fill="white"/>
-<polygon points="2666,2451 2710,2451 2688,2413" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="2451" r="21" stroke="black" fill="black"/>
-<circle cx="2710" cy="2451" r="0" stroke="black" fill="white"/>
-<circle cx="2688" cy="2413" r="21" stroke="black" fill="white"/>
-<polygon points="106,2579 150,2579 128,2541" style="fill:white;stroke:black"/>
-<circle cx="106" cy="2579" r="0" stroke="black" fill="white"/>
-<circle cx="150" cy="2579" r="21" stroke="black" fill="white"/>
-<circle cx="128" cy="2541" r="21" stroke="black" fill="white"/>
-<polygon points="2666,2579 2710,2579 2688,2541" style="fill:white;stroke:black"/>
-<circle cx="2666" cy="2579" r="0" stroke="black" fill="white"/>
-<circle cx="2710" cy="2579" r="21" stroke="black" fill="white"/>
-<circle cx="2688" cy="2541" r="21" stroke="black" fill="white"/>
-
+<polygon points="106,1299 150,1299 128,1261" style="fill:white;stroke:black"/>
+<circle cx="106" cy="1299" r="21" stroke="black" fill="white"/>
+<circle cx="150" cy="1299" r="0" stroke="black" fill="white"/>
+<circle cx="128" cy="1261" r="0" stroke="black" fill="white"/>
+<polygon points="2666,1299 2710,1299 2688,1261" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="1299" r="21" stroke="black" fill="white"/>
+<circle cx="2710" cy="1299" r="0" stroke="black" fill="white"/>
+<circle cx="2688" cy="1261" r="0" stroke="black" fill="white"/>
+<polygon points="106,1171 150,1171 128,1133" style="fill:white;stroke:black"/>
+<circle cx="106" cy="1171" r="21" stroke="black" fill="white"/>
+<circle cx="150" cy="1171" r="21" stroke="black" fill="black"/>
+<circle cx="128" cy="1133" r="0" stroke="black" fill="white"/>
+<polygon points="2666,1171 2710,1171 2688,1133" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="1171" r="21" stroke="black" fill="white"/>
+<circle cx="2710" cy="1171" r="21" stroke="black" fill="black"/>
+<circle cx="2688" cy="1133" r="0" stroke="black" fill="white"/>
+<polygon points="106,1043 150,1043 128,1005" style="fill:white;stroke:black"/>
+<circle cx="106" cy="1043" r="21" stroke="black" fill="white"/>
+<circle cx="150" cy="1043" r="0" stroke="black" fill="white"/>
+<circle cx="128" cy="1005" r="21" stroke="black" fill="white"/>
+<polygon points="2666,1043 2710,1043 2688,1005" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="1043" r="21" stroke="black" fill="white"/>
+<circle cx="2710" cy="1043" r="0" stroke="black" fill="white"/>
+<circle cx="2688" cy="1005" r="21" stroke="black" fill="white"/>
+<polygon points="106,915 150,915 128,877" style="fill:white;stroke:black"/>
+<circle cx="106" cy="915" r="0" stroke="black" fill="white"/>
+<circle cx="150" cy="915" r="21" stroke="black" fill="black"/>
+<circle cx="128" cy="877" r="0" stroke="black" fill="white"/>
+<polygon points="2666,915 2710,915 2688,877" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="915" r="0" stroke="black" fill="white"/>
+<circle cx="2710" cy="915" r="21" stroke="black" fill="black"/>
+<circle cx="2688" cy="877" r="0" stroke="black" fill="white"/>
+<polygon points="106,787 150,787 128,749" style="fill:white;stroke:black"/>
+<circle cx="106" cy="787" r="0" stroke="black" fill="white"/>
+<circle cx="150" cy="787" r="21" stroke="black" fill="black"/>
+<circle cx="128" cy="749" r="21" stroke="black" fill="white"/>
+<polygon points="2666,787 2710,787 2688,749" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="787" r="0" stroke="black" fill="white"/>
+<circle cx="2710" cy="787" r="21" stroke="black" fill="black"/>
+<circle cx="2688" cy="749" r="21" stroke="black" fill="white"/>
+<polygon points="106,659 150,659 128,621" style="fill:white;stroke:black"/>
+<circle cx="106" cy="659" r="21" stroke="black" fill="black"/>
+<circle cx="150" cy="659" r="21" stroke="black" fill="black"/>
+<circle cx="128" cy="621" r="0" stroke="black" fill="white"/>
+<polygon points="2666,659 2710,659 2688,621" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="659" r="21" stroke="black" fill="black"/>
+<circle cx="2710" cy="659" r="21" stroke="black" fill="black"/>
+<circle cx="2688" cy="621" r="0" stroke="black" fill="white"/>
+<polygon points="106,531 150,531 128,493" style="fill:white;stroke:black"/>
+<circle cx="106" cy="531" r="0" stroke="black" fill="white"/>
+<circle cx="150" cy="531" r="0" stroke="black" fill="white"/>
+<circle cx="128" cy="493" r="21" stroke="black" fill="white"/>
+<polygon points="2666,531 2710,531 2688,493" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="531" r="0" stroke="black" fill="white"/>
+<circle cx="2710" cy="531" r="0" stroke="black" fill="white"/>
+<circle cx="2688" cy="493" r="21" stroke="black" fill="white"/>
+<polygon points="106,403 150,403 128,365" style="fill:white;stroke:black"/>
+<circle cx="106" cy="403" r="21" stroke="black" fill="black"/>
+<circle cx="150" cy="403" r="0" stroke="black" fill="white"/>
+<circle cx="128" cy="365" r="21" stroke="black" fill="white"/>
+<polygon points="2666,403 2710,403 2688,365" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="403" r="21" stroke="black" fill="black"/>
+<circle cx="2710" cy="403" r="0" stroke="black" fill="white"/>
+<circle cx="2688" cy="365" r="21" stroke="black" fill="white"/>
+<polygon points="106,275 150,275 128,237" style="fill:white;stroke:black"/>
+<circle cx="106" cy="275" r="0" stroke="black" fill="white"/>
+<circle cx="150" cy="275" r="21" stroke="black" fill="white"/>
+<circle cx="128" cy="237" r="21" stroke="black" fill="white"/>
+<polygon points="2666,275 2710,275 2688,237" style="fill:white;stroke:black"/>
+<circle cx="2666" cy="275" r="0" stroke="black" fill="white"/>
+<circle cx="2710" cy="275" r="21" stroke="black" fill="white"/>
+<circle cx="2688" cy="237" r="21" stroke="black" fill="white"/>
 </svg>
 
 Sensei's library [1] lists several systems of coordinates for the standard 19x19 size Go board.
