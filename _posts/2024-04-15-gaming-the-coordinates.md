@@ -361,11 +361,11 @@ date: 2024-04-15
 Sensei's library [1] lists several systems of coordinates for the standard 19x19 size Go board.
 The system shown above must rank as one of the more unusual ones.
 
-It was inspired by a recent email from fellow games researcher Ryan Hayward, in which he noticed
+It was inspired by a recent email from fellow games researcher Ryan Hayward [2], in which he noticed
 that the number of legal triangular boards is 19, and that the number of legal games one can
-play on this board (under the Logical rules [2]) is 3439.
+play on this board (under the Logical rules [3]) is 3439.
 
-Having studied Hamiltonian games in our Combinatorics of Go paper [3], I was naturally curious to see
+Having studied Hamiltonian games in our Combinatorics of Go paper [4], I was naturally curious to see
 if triangular Go was also Hamiltonian. That is, whether one can play a game that visits all legal positions.
 
 As it turns out, not only can one do so, but (up to symmetry) the game is essentially unique!
@@ -384,8 +384,12 @@ Note that the row coordinates are positions in a game played on a vertically fli
 <circle cx="111" cy="21" r="21" stroke="black" fill="black"/>
 </svg>
 
+Obviously this is not the most practical of coordinate systems, but it does have a certain aesthetic appeal...
+
 [1] [Sensei's Library](https://senseis.xmp.net/?Coordinates)
 
-[2] [The Logical rules of Go](https://tromp.github.io/go.html)
+[2] [Ryan Hayward](https://webdocs.cs.ualberta.ca/~hayward/)
 
-[3] [Combinatorics of Go](https://tromp.github.io/go/gostate.pdf)
+[3] [The Logical rules of Go](https://tromp.github.io/go.html)
+
+[4] [Combinatorics of Go](https://tromp.github.io/go/gostate.pdf)
