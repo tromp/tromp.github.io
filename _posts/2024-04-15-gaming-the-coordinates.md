@@ -263,9 +263,10 @@ if triangular Go was also Hamiltonian. That is, whether one can play a game that
 As it turns out, not only can one do so, but (up to symmetry) the game is unique and has no intermediate passes!
 
 That makes it quite natural to use the 19 successive positions in that game as
-coordinates to mark the successive lines of the Go board. If we furthermore
-vertically flip the triangles of the vertical coordinates as shown above, then x and y
-coordinates nicely align into a slanted 2x3 grid, as shown with tengen coordinates
+coordinates to mark the successive vertical lines of the Go board.
+We similarly mark successive horizontal lines of the Go board, except for 
+flipping the triangles upside-down, so that x and y coordinates nicely align into
+a slanted 2x3 grid, as shown for example with tengen coordinates
 
 <svg width="154" height="80" viewbox = "0
 0 154 80" xmlns="http://www.w3.org/2000/svg">
@@ -277,7 +278,7 @@ coordinates nicely align into a slanted 2x3 grid, as shown with tengen coordinat
 <circle cx="90" cy="21" r="21" stroke="black" fill="black"/>
 </svg>
 
-Curiously, the star points are exactly those whose coordinates both have 2 black stones.
+Curiously, the star points are exactly those, both of whose coordinates have 2 black stones.
 
 Obviously this is not the most practical of coordinate systems, but it does have a certain aesthetic appeal...
 
