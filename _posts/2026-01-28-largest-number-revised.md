@@ -4,8 +4,6 @@ title: "The largest number representable in 64 bits - Revised"
 date: 2026-01-28
 ---
 
-Under construction...
-
 ```
 ┬─┬ ┬─┬──────────				┬─┬─┬ ┬─┬────────────
 └─┤ │ │ ──┬──────				└─┤ │ │ │ ──┬────────
@@ -83,7 +81,7 @@ The current 6-state champion shows that
 which denotes an exponential tower of M 2s, where M is an exponential tower of N 2s,
 and N is an exponential tower fo 10 2s (phew!). Clearly, in this notation there's not that
 much difference between a number and its size in bits.
-Large as this number is, it's still pathetically small compared to ack(9,9).
+Large as this number is, it's still very small compared to ack(9,9).
 It is known however that
 [BB(7) > 2↑<sup>11</sup>2↑<sup>11</sup>3 > ack(9,9) ](https://wiki.bbchallenge.org/wiki/BB(7)),
 and any 7 state TM can be described in 7\*2\*(2+log2(7+1)) = 70 bits.
@@ -119,7 +117,7 @@ where λ (lambda) denotes an anonymous function, and number i is the variable bo
 This is known as [De Bruijn notation](https://en.wikipedia.org/wiki/De_Bruijn_notation), a
 way to avoid naming variables. A more conventional notation using variable names would be
 ```
-(λJ.J J) (λy.y (y (λg.λm.m g (λf.λx.f (f x)))))
+(λJ.J J) (λy.y (y (λg λm. m g (λf.λx.f (f x)))))
 ```
 The top left of this post shows a [graphical representation](https://tromp.github.io/cl/diagrams.html) of the term.
 The last 16 bits of the program---making up almost a third of its size---encodes
@@ -188,20 +186,20 @@ H (n H 2) 2 2 = 2 (n H 2) 2 2 = n H 2 (n H 2 2) 2 ><sup>Lm2</sup> 3{n}(1+3{n}(1+
 ## Leaving Melo's Number in the dust
 
 With 15 bits to spare, opportunities for vastly boosting Melo abound.
-Discord user 50\_ft\_lock found the following term that extends Melo's H with an extra argument:
+Discord users 50\_ft\_lock and Sam found the following term that extends Melo's H with an extra argument:
 ```
 w218 = let { 2 = λf λx. f (f x); A = λa λb λc. c a b 2; T = λy. y (y A) } in T T T
-(λt. t t (λh λf λn. n h f n) t t t) (λf λx. f (f x))
+(λT.T T T) (λy.y (y (λa λb λc. c a b (λf.λx.f (f x)))))
 (λ 1 1 1) (λ 1 (1 (λ λ λ 1 3 2 (λ λ 2 (2 1)))))
 01 00 01 01 10 10 10 00 01 10 01 10 00 00 00 01 01 01 10 1110 110 00 00 01 110 01 110 10
 ```
 shown together with its convention notation, de Bruijn notation, and 61-bit encoding.
-The similarity to melo is also apparent in its graphical representation at the top right of this post.
+The similarity to Melo is also apparent in its graphical representation at the top right of this post.
 The name is inspired by the following
 
-### Lemma 4. T T T = 2↑↑18 AA 2 2 2 2 2 2 2 2 2 2, where AA denotes A A
+### Lemma 4. T T T = 2↑↑18 A 2 2 2 2 2 2 2 2 2 2
 
-### Proof:
+### Proof: Let AA denote A A
       T T                                                            T
     = T (T A)                                                        T
     = T (A AA)                                                       T
@@ -279,19 +277,19 @@ Base k=0:
 Step k>0:
 k+1 A 2 [ω<sup>k</sup> α] n = A (k A 2) [ω<sup>k</sup> α] n = n (k A 2) [ω<sup>k</sup> α] 2 = [ω<sup>k</sup> α + ω<sup>k-1</sup> n] 2 = [ω<sup>k</sup> (α+1)] n
 
-Lemma 5 gives w218 = (2↑↑18 A 2 [0] 2) 2 2 2 2 2 2 2 = 2^2^2^2^2^2^2^([2↑↑18-1] 2).
+Lemma 5 gives w218 = (2↑↑18 A 2 [0] 2) 2 2 2 2 2 2 2 = 2^2^2^2^2^2^2^([ω↑↑18-1] 2).
 In comparison, Graham's number is known to be less than the much smaller [ω+1] 64.
 
 ## A Functional Busy Beaver
 
-Based on the λ-calculus, I added to OEIS a
-[functional Busy Beaver function](https://oeis.org/A333479) BBλ that,
-besides being simpler than BB, has the advantage of
-measuring program size in bits, the standard unit of information theory,
+The λ-calculus analogue to BB is:
+
+BBλ(n) = the maximum beta normal form size in bits of any closed lambda term of size n
+
+which appears in the Online Encyclopedia of Integer Sequences (OEIS) as
+[functional Busy Beaver function](https://oeis.org/A333479)
+Besides being simpler than BB, it has the advantage of using the standard unit of information theory,
 rather than states.
-Similar to BB(), the value of BBλ() is not the program output considered as a number itself
-(which would unnecessarily limit one to terms that are Church numerals)
-but rather the output size.
 In the binary λ-calculus, the size of a Church numeral n is 5n+6.
 The much more fine-grained use of bits allows the first 36 values of BBλ 
 to be currently known, versus only 5 values of BB.
@@ -300,7 +298,7 @@ The growth rates of the two BB functions may be compared by how quickly they are
 to exceed famous large numbersmilestones such as Graham's number.
 
 The current best effort for BB rests at [14 states](https://wiki.bbchallenge.org/wiki/Champions),
-weighing in at 14\*2\*(2+4) = 168 bits. That compares rather unfavorably with melo's 49 bits.
+weighing in at 14\*2\*(2+4) = 168 bits. That compares rather unfavorably with Melo's 49 bits.
 Several leading BB researchers do believe however that Graham can be exceeded with only half that
 number of states, namely 7, going so far as to bet $1000 with me on the premise that a proof
 should be found within 10 years.
@@ -313,7 +311,7 @@ or an 1850 bit program for exceeding Loader's Number,
 also have no parallels in the realm of Turing machines,
 suggesting that the λ-calculus exhibits faster growth.
 
-It further enjoys massive advantages in programmability.
+It further enjoys a sizeable advantage in programmability.
 Modern high level pure functional languages like [Haskell](https://www.haskell.org/)
 are essentially just syntactically sugared λ-calculus,
 with programmer friendly features like [Algebraic Data Types](https://en.wikipedia.org/wiki/Algebraic_data_type)
@@ -351,10 +349,18 @@ In short, the Busy Beaver game seems like about as good a yardstick as any for g
 progress against the uncomputable
 ```
 
-The claimed advantages for the "slightly unfortunate choice" do not hold over that even more
-ancient model of the λ-calculus, while the latter's relatively straightforward binary encoding make
-it a preferable yardstick for exploring the limits of computation. The real question then is
-"Why not λ-calculus?", the answer to which appears to be rooted in historical accident more than anything.
+The claimed "massive advantage" of TMs do not hold over the λ-calculus.
+
+First, the number of uniquely behaving TMs with "only" 5 states is
+4^10 \* [632700](https://oeis.org/A107668) = 663434035200 , which is more than
+the number of closed lambda terms of size at most 52 bits (513217604750),
+which exhibit as much if not more interesting behaviour.
+
+Second, the  λ-calculus is more ancient (by just a few years) and more fixed (no choice of
+tape alphabet size, or number of tapes), leaving no suspicion either.
+
+BBλ's use of bits, the standard unit of information theory, therefore make it the prefered
+yardstick for exploring the limits of computation.
 
 ## A Universal Busy Beaver
 
