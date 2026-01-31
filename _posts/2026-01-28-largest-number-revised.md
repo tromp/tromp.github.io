@@ -5,42 +5,56 @@ date: 2026-01-28
 ---
 
 ```
-┬─┬ ┬─┬──────────				┬─┬─┬ ┬─┬────────────
-└─┤ │ │ ──┬──────				└─┤ │ │ │ ──┬────────
-  │ │ │ ┬─┼──────				  └─┤ │ │ ──┼─┬──────
-  │ │ │ └─┤ ┬─┬──				    │ │ │ ┬─┼─┼──────
-  │ │ │   │ ┼─┼─┬				    │ │ │ └─┤ │ ┬─┬──
-  │ │ │   │ │ ├─┘				    │ │ │   └─┤ ┼─┼─┬
-  │ │ │   │ ├─┘  				    │ │ │     │ │ ├─┘
-  │ │ │   ├─┘    				    │ │ │     │ ├─┘  
-  │ │ ├───┘      				    │ │ │     ├─┘    
-  │ ├─┘          				    │ │ ├─────┘      
-  └─┘            				    │ ├─┘            
-						    └─┘              
+┬─┬ ┬─┬──────────                                  ┬─┬─┬ ┬─┬────────────
+└─┤ │ │ ──┬──────                                  └─┤ │ │ │ ──┬────────
+  │ │ │ ┬─┼──────                                    └─┤ │ │ ──┼─┬──────
+  │ │ │ └─┤ ┬─┬──                                      │ │ │ ┬─┼─┼──────
+  │ │ │   │ ┼─┼─┬                                      │ │ │ └─┤ │ ┬─┬──
+  │ │ │   │ │ ├─┘                                      │ │ │   └─┤ ┼─┼─┬
+  │ │ │   │ ├─┘                                        │ │ │     │ │ ├─┘
+  │ │ │   ├─┘                                          │ │ │     │ ├─┘  
+  │ │ ├───┘                                            │ │ │     ├─┘    
+  │ ├─┘                                                │ │ ├─────┘      
+  └─┘                                                  │ ├─┘            
+                                                       └─┘              
 ```
-Most people believe 2<sup>64</sup>-1 = 18446744073709551615, or 0xFFFFFFFFFFFFFFFF in hexadecimal,
-to be the largest number representable in 64 bits. In English, it's quite the mouthful:
-eighteen quintillion four hundred forty-six quadrillion seven hundred forty-four
-trillion seventy-three billion seven hundred nine million five hundred fifty-one
-thousand six hundred fifteen.
+Most people believe 2<sup>64</sup>-1 = 18446744073709551615, or
+0xFFFFFFFFFFFFFFFF in hexadecimal, to be the largest number
+representable in 64 bits. In English, it's quite the mouthful: eighteen
+quintillion four hundred forty-six quadrillion seven hundred forty-four
+trillion seventy-three billion seven hundred nine million five hundred
+fifty-one thousand six hundred fifteen.
 
 That is indeed the maximum possible value of 64 bit unsigned integers,
-available as datatype uint64_t in C or u64 in Rust.
-We can easily surpass this with floating point numbers. The 64-bit
-[double floating point format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format)
-has a largest (finite) representable value of
+available as datatype uint64_t in C or u64 in Rust. We can easily
+surpass this with floating point numbers. The 64-bit double [floating
+point format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format) has a largest (finite) representable value of
 2<sup>1024</sup>(1-2<sup>-53</sup>) ~ 1.8\*10<sup>308</sup>.
 
 What if we allow representations beyond plain datatypes?
-Such as a program small enough to fit in 64 bits.
-For most programming languages, there is very little you can do in a mere  8 bytes.
-In C that only leaves you with the nothingness of "main(){}".
+Since we want representations to remain computable, the most general
+kind of representation would be a program in some programming language.
+But the program must be small enough to fit in 64 bits.
 
-But there are plenty languages that require no such scaffolding. For instance,
-on Linux there is arbitrary precision calculator "bc". It happily
-computes the 954242 digit number 9^999999 = 35908462. . .48888889, which can thus
-be said to be representable in 64 bits. Had it supported the symbol ! for computing factorials,
-then 9!!!!!!! would represent a much larger number.
+## The largest number programmable in 64 bits
+
+The smallest possible valid C program is "main(){}",
+consisting of 8 ASCII characters.
+[ASCII](https://en.wikipedia.org/wiki/ASCII) is a 7-bit
+character encoding standard representing 128 unique characters,
+but all modern computers use 8-bit bytes to store either plain ASCII
+or [UTF-8](https://en.wikipedia.org/wiki/UTF-8), a unicode character encoding that's backward compatible with
+ASCII.  So we'll consider the above all-scaffold do-nothing program to
+be the only valid 64-bit C program.
+
+Plenty other languages require no such scaffolding though. For instance,
+Linux features the arbitrary precision calculator
+[bc](https://en.wikipedia.org/wiki/Bc_(programming_language)). It happily
+computes the 954242 digit number 9^999999 = 35908462...48888889, making
+it programmable in 8 bytes. So is the much larger 9^9^9^99 =
+9^(9^(9^99)) with over 10^10^953 digits, which bc is less happy to
+compute. If bc supported the symbol ! for computing factorials, then
+9!!!!!!! would represent a much larger number still.
 
 Allowing such primitives feels a bit like cheating though. Would we allow a
 language that has the [Ackerman function](https://en.wikipedia.org/wiki/Ackermann_function)
@@ -277,7 +291,7 @@ Base k=0:
 Step k>0:
 k+1 A 2 [ω<sup>k</sup> α] n = A (k A 2) [ω<sup>k</sup> α] n = n (k A 2) [ω<sup>k</sup> α] 2 = [ω<sup>k</sup> α + ω<sup>k-1</sup> n] 2 = [ω<sup>k</sup> (α+1)] n
 
-Lemma 5 gives w218 = (2↑↑18 A 2 [0] 2) 2 2 2 2 2 2 2 = 2^2^2^2^2^2^2^([ω↑↑18-1] 2).
+Lemma 5 gives w218 = (2↑↑18 A 2 [0] 2) 2 2 2 2 2 2 2 = 2^2^2^2^2^2^2^([ω<sup>2↑↑18-1</sup>] 2).
 In comparison, Graham's number is known to be less than the much smaller [ω+1] 64.
 
 ## A Functional Busy Beaver
