@@ -423,8 +423,8 @@ and publications about it.
 
 ## A Universal Busy Beaver
 
-Is BBλ then an ideal Busy Beaver function.
-Not quite. It's still lacking one desirable property, namely universality.
+Is BBλ then an ideal Busy Beaver function? Not quite.
+It's still lacking one desirable property, namely universality.
 
 This property mirrors a notion of optimality for shortest description lengths, where it's known
 as the [Invariance theorem](https://en.wikipedia.org/wiki/Kolmogorov_complexity#Invariance_theorem):
