@@ -60,15 +60,15 @@ Allowing such primitives feels a bit like cheating though. Would we allow a
 language that has the [Ackerman function](https://en.wikipedia.org/wiki/Ackermann_function)
 predefined, which sports the 8 byte expression ack(9,9) representing a truly huge number?
 
-## No primitives needed
+## Ackerman considered unhelpful
 
 As it turns out, the question is moot.
 One can blow way past ack(9,9) in under 64 bits in a language with no built
 in primitive whatsoever. A language with no basic arithmetic; not even numbers themselves.
 A language in which all those must be defined from scratch.
 
-But let's first look at another primitives-lacking language, one that has been particularly well studied for
-producing largest possible outputs. That is the language of
+But let's first look at another primitives-lacking language, one that has been particularly
+well studied for producing largest possible outputs. That is the language of
 [Turing machines](https://en.wikipedia.org/wiki/Turing_machine).
 
 ## Busy Beaver
@@ -76,31 +76,53 @@ producing largest possible outputs. That is the language of
 The famous [Busy Beaver](https://en.wikipedia.org/wiki/Busy_beaver)
  function, [introduced](https://archive.org/details/bstj41-3-877/mode/2up) by
 [Tibor Radó](https://en.wikipedia.org/wiki/Tibor_Rad%C3%B3) in 1962, which we'll
-denote BB(n), is defined as the maximum number of 1s that can be written with
-an n state Turing Machine (TM) starting from an all 0 tape before halting. Note that if we
-consider this output as a number M written in binary, then it only gets
-credited for its length, which is log<sub>2</sub>(M+1).
+denote BB(n), is defined as the maximal number of steps taken by
+an n-state Turing Machine (TM) with a binary tape alphabet,
+starting from an all-0 tape, before halting.
+Note that output of a number M written in binary only gets
+credited for its length log<sub>2</sub>(M+1).
 
-60 bits suffice to fully specify any 6 state binary TM.
-For each of its 6 internal states and each of its 2 tape symbols,
-it writes either symbol in the currently scanned tape cell (1 bit),
-moves the tape head left or right (1 bit),
-and transitions to any of the 6 states or the special halt state (⌈log2(6+1)⌉ = ⌈2.81⌉ = 3 bits),
-totalling 6\*2\*(2+3) = 60 bits.
-Just how big an output can a 6 state TM produce?
+Here we have a discrepancy between how the size of a TM is measured, in states,
+versus how program size is measured, in bits.
+Fortunately there is a straightforward binary encoding of n-state TMs,
+which is entirely determined by its transition function.
+For each of the n states that the machine's finite control can be in,
+and each of its 2 tape symbols that could be scanned by its tape head,
+the transition function specifies what new symbol to write in the scanned tape cell (1 bit),
+whether to move the tape head left or right (1 bit),
+and what new state (or special halt state) to transition to (⌈log2(n+1)⌉ bits).
+This encoding takes 6\*2\*(2+3) = 60 bits for a a 6-state TM,
+and 7\*2\*(2+3) = 70 bits for a a 7-state TM.
+So the largest number TM programmable in 64 bits is BB(6).
 
-Nobody knows for sure, since BB(n) has only been determined for n <= 5.
-The current 6-state champion shows that
-[BB(6) > 2↑↑2↑↑2↑↑10 ](https://wiki.bbchallenge.org/wiki/BB(6)),
-which denotes an exponential tower of M 2s, where M is an exponential tower of N 2s,
-and N is an exponential tower fo 10 2s (phew!). Clearly, in this notation there's not that
-much difference between a number and its size in bits.
-Large as this number is, it's still very small compared to ack(9,9).
+## How large is BB(6)?
+
+Unfortunately, we may never know. While all BB(n) have been determined (and even
+formally proven) for n<=5, there are some 6-state TMs  whose halting behaviour are
+closely related to very hard mathematical problems.
+Most if not all of these so-called [cryptids](https://wiki.bbchallenge.org/wiki/Cryptids)
+are likely not to halt.
+The machine with the currently known longest finite runtime, that is,
+the current 6-state champion, shows that
+[BB(6) > 2↑↑2↑↑2↑↑10 ](https://wiki.bbchallenge.org/wiki/BB(6)).
+Here, m↑↑n is [Knuth's up-arrow notation](https://en.wikipedia.org/wiki/Knuth%27s_up-arrow_notation)
+for an exponential tower of n m's, so that for example 2↑↑3 = 2<sup>2<sup>2</sup></sup>.
+
+Large as this number is, it's still very small compared to
+ack(9,9) = 2↑<sup>7</sup>12 - 3 = 2↑↑↑↑↑↑↑12 - 3.
 It is known however that
-[BB(7) > 2↑<sup>11</sup>2↑<sup>11</sup>3 > ack(9,9) ](https://wiki.bbchallenge.org/wiki/BB(7)),
-and any 7 state TM can be described in 7\*2\*(2+log2(7+1)) = 70 bits.
+[BB(7) > 2↑<sup>11</sup>2↑<sup>11</sup>3 > ack(9,9) ](https://wiki.bbchallenge.org/wiki/BB(7)).
 
-For exceeding ack(9,9) within 64 bits, we need to move beyond Turing machines, into the language of
+Several leading BB researchers believe that BB(7) is even larger than the famous
+[Graham's Number](https://en.wikipedia.org/wiki/Graham%27s_number), which iterates
+the function mapping n to 3↑<sup>n</sup>3 64 times starting from n=3.
+This is quite a bold belief, considering that the smallest known Graham exceeding TM has
+[14 states](https://wiki.bbchallenge.org/wiki/Champions), twice as many.
+But they stand behind their belief, by accepting my
+$1000 bet that a proof of BB(7) > Graham's Number won't be found within 10 years.
+
+Meanwhile, Graham's Number is easily surpassed within 64 bits, by moving beyond Turing machines
+into the language of
 
 ## Lambda Calculus
 
@@ -108,10 +130,7 @@ Alonzo Church conceived the [λ-calculus](https://en.wikipedia.org/wiki/Lambda_c
 in about 1928 as a formal logic system for expressing
 computation based on function abstraction and application using variable binding and substitution.
 
-A tiny 49 bit program in this language represents a number exceeding not just ack(9,9),
-but the unfathomably larger [Graham's Number](https://en.wikipedia.org/wiki/Graham%27s_number) as well.
-
-It originates in a Code Golf challenge asking for the
+The Graham beating lambda term originates in a Code Golf challenge asking for the
 "Shortest terminating program whose output size exceeds Graham's number",
 [answered](https://codegolf.stackexchange.com/questions/6430/shortest-terminating-program-whose-output-size-exceeds-grahams-number/219734#219734)
 by user [Patcail](https://codegolf.stackexchange.com/users/101119/patcail) and
@@ -144,12 +163,7 @@ The program, which we'll name after its discoverer, can be expressed more legibl
 Melo = let { 2 = λf λx. f (f x); H = λg λm. m g 2; J = λy. y (y H) } in J J
 ```
 
-Melo evaluates to a Church numeral, "Melo's Number", that comfortably exceeds the famous Graham's Number.
-
-The next section is mostly for the benefit of readers familiar with
-[ordinal](https://en.wikipedia.org/wiki/Ordinal_number)
-[arithmetic](https://en.wikipedia.org/wiki/Ordinal_arithmetic),
-and is probably better skipped by others.
+Melo evaluates to a Church numeral, "Melo's Number", that comfortably exceeds Graham's Number.
 
 ## Proof of exceeding Graham's Number
 
@@ -171,31 +185,33 @@ J J = J (J H) = J (H HH) = H HH (H HH H)
     = 2 2 2 2 2 2   HH 2
     = 2↑↑6          HH 2
 
-### Lemma 2. For k,n >= 2, k H 2 n > 3{k}(1+n)
+### Lemma 2. For k,n >= 2, k H 2 n > 3↑<sup>k</sup>(1+n)
 
 ### Proof:
 By induction on k.  First note that H2 n = H 2 n = n 2 2 = 2^2^n
 
-Base:   2 H 2 n = H H2 n = n H2 2 = 2↑↑(1+2n) > 3{2}(1+n)
+Base:   2 H 2 n = H H2 n = n H2 2 = 2↑↑(1+2n) > 3↑<sup>2</sup>(1+n)
         already at n=2, since 2↑↑5 = 2^2^16 > 3^27 = 3↑↑3
-Step: k+1 H 2 n = H (k H 2) n = n (k H 2) 2 > 3{k}(1+ 3{k}(1+ ... 3{k}(1+2)...))
-                                            > 3{k+1}(1+n)
+Step: k+1 H 2 n = H (k H 2) n = n (k H 2) 2 > 3↑<sup>k</sup>(1+ 3↑<sup>k</sup>(1+ ...
+3↑<sup>k</sup>(1+2)...))
+                                            > 3↑<sup>k+1</sup>(1+n)
 
-### Lemma 3. For n >= 2, HH (HH n) > 3{n}3
+### Lemma 3. For n >= 2, HH (HH n) > 3↑<sup>n</sup>3
 
 ### Proof
 By induction on n
 
-Base: Lemma 1's proof shows HH (HH 2) = 2↑↑6 > 3{2}3
+Base: Lemma 1's proof shows HH (HH 2) = 2↑↑6 > 3{2</sup>3
 Step: HH (HH 1+n) = HH 1+n H 2 = 1+n H 2 H 2 = H (n H 2) H 2 =
-H (n H 2) 2 2 = 2 (n H 2) 2 2 = n H 2 (n H 2 2) 2 ><sup>Lm2</sup> 3{n}(1+3{n}(1+2)) 2 > 3{n+1}3.
+H (n H 2) 2 2 = 2 (n H 2) 2 2 = n H 2 (n H 2 2) 2 ><sup>Lm2</sup>
+3↑<sup>n</sup>(1+3↑<sup>n</sup>(1+2)) 2 > 3↑<sup>n+1</sup>3.
 
-### Theorem: J J > Graham's Number G(64), where G(n) = n (\n -> 3{n}3) 4
+### Theorem: J J > Graham's Number G(64), where G(n) = n (\n -> 3↑<sup>n</sup>3) 4
 
 ### Proof:
- J J =<sup>Lm1</sup> 2↑↑6 HH 2 ><sup>Lm3</sup> (2↑↑6 / 2 - 1) (\n -> 3{n}3) 3{2}3
-> (2↑↑6 / 2 - 1) (\n -> 3{n}3) 4 = G(2↑↑6 / 2 - 1) > G(64)
-
+ J J =<sup>Lm1</sup> 2↑↑6 HH 2 ><sup>Lm3</sup> (2↑↑6 / 2 - 1) (\n -> 3↑<sup>n</sup>3)
+3↑<sup>2</sup>3
+> (2↑↑6 / 2 - 1) (\n -> 3↑<sup>n</sup>3) 4 = G(2↑↑6 / 2 - 1) > G(64)
 
 ## Leaving Melo's Number in the dust
 
@@ -203,13 +219,19 @@ With 15 bits to spare, opportunities for vastly boosting Melo abound.
 Discord users 50\_ft\_lock and Sam found the following term that extends Melo's H with an extra argument:
 ```
 w218 = let { 2 = λf λx. f (f x); A = λa λb λc. c a b 2; T = λy. y (y A) } in T T T
+```
+represents the lambda term
+```
 (λT.T T T) (λy.y (y (λa λb λc. c a b (λf.λx.f (f x)))))
+```
+in conventional notation, or
+```
 (λ 1 1 1) (λ 1 (1 (λ λ λ 1 3 2 (λ λ 2 (2 1)))))
+```
+in de Bruijn notation, with 61-bit encoding.
+```
 01 00 01 01 10 10 10 00 01 10 01 10 00 00 00 01 01 01 10 1110 110 00 00 01 110 01 110 10
 ```
-shown together with its convention notation, de Bruijn notation, and 61-bit encoding.
-The similarity to Melo is also apparent in its graphical representation at the top right of this post.
-The name is inspired by the following
 
 ### Lemma 4. T T T = 2↑↑18 A 2 2 2 2 2 2 2 2 2 2
 
@@ -272,7 +294,12 @@ notation for improved legibility) from natural numbers to natural numbers.
 We'll treat all numbers as Church Numerals, so we can write n f instead of the
 usual f<sup>n</sup> and write f n instead of f(n) as normally done in λ-calculus.
 
-The following definition differs slightly from the standard one,
+Readers unfamiliar with
+[ordinal](https://en.wikipedia.org/wiki/Ordinal_number)
+[arithmetic](https://en.wikipedia.org/wiki/Ordinal_arithmetic),
+may want to skip the next section.
+
+The following FGH definition differs slightly from the standard one,
 which has the slightly slower growing [0] n = n+1 and [α+1] n = n [α] n.
 This allows Lemma 5 to be exact rather than a mere lower bound.
 
@@ -298,34 +325,45 @@ In comparison, Graham's number is known to be less than the much smaller [ω+1] 
 
 The λ-calculus analogue to BB is:
 
-BBλ(n) = the maximum beta normal form size in bits of any closed lambda term of size n
+BBλ(n) = the maximum beta normal form size of any closed lambda term of size n
 
 which appears in the Online Encyclopedia of Integer Sequences (OEIS) as
 [functional Busy Beaver function](https://oeis.org/A333479)
 Besides being simpler than BB, it has the advantage of using the standard unit of information theory,
-rather than states.
-In the binary λ-calculus, the size of a Church numeral n is 5n+6.
+bits, rather than states.
 The much more fine-grained use of bits allows the first 36 values of BBλ 
 to be currently known, versus only 5 values of BB.
 
+## BB vs BBλ growth compared on bit-by-bit basis
+
 The growth rates of the two BB functions may be compared by how quickly they are known
-to exceed famous large numbersmilestones such as Graham's number.
+to exceed certain large number milestones, that correspond to well known ordinals in the
+Fast Growing Hierarchy.
 
-The current best effort for BB rests at [14 states](https://wiki.bbchallenge.org/wiki/Champions),
-weighing in at 14\*2\*(2+4) = 168 bits. That compares rather unfavorably with Melo's 49 bits.
-Several leading BB researchers do believe however that Graham can be exceeded with only half that
-number of states, namely 7, going so far as to bet $1000 with me on the premise that a proof
-should be found within 10 years.
+For Graham's Number, at ordinal ω+1, we saw earlier that Melo's 49 bits compares with 14 states,
+which take 14\*2\*(2+4) = 168 bits to encode. If I lose my bet, then the comparison
+becomes rather closer at 49 vs 70 bits.
 
-The existence of a [29 bit Ackermann-like function](https://mathoverflow.net/questions/353514/whats-the-smallest-lambda-calculus-term-not-known-to-have-a-normal-form),
-a [79 bit function](https://github.com/tromp/AIT/blob/master/fast_growing_and_conjectures/E0.lam)
-growing too fast to be provably total in Peano Arithmetic,
-a 331 bit program for reaching the limit of the Bashicu Matrix System (BMS),
-or an 1850 bit program for exceeding Loader's Number,
-also have no parallels in the realm of Turing machines,
-suggesting that the λ-calculus exhibits faster growth.
+For [Goodstein's function](https://en.wikipedia.org/wiki/Goodstein%27s_theorem) at ordinal ε<sub>0</sub>,
+[111
+bits](https://github.com/tromp/AIT/blob/master/fast_growing_and_conjectures/BBE0.lam)
+compares with 51 states taking 51\*2\*(2+6) = 816 bits.
 
-It further enjoys a sizeable advantage in programmability.
+For the limit of Bashicu Matrix System (BMS), at (presumed) ordinal PTO(Z<sub>2</sub>),
+[331 bits](https://github.com/tromp/AIT/blob/master/fast_growing_and_conjectures/bms.lam)
+compares with a 150 state TM by Discord user patcail (link needed), which takes 
+150\*2\*(2+8) = 3000 bits.
+
+Finally, for Loader's Number, at (presumed) ordinal PTO(Z<sub>ω</sub>),
+[1850
+bits](https://codegolf.stackexchange.com/questions/176966/golf-a-number-bigger-than-loaders-number/274634#274634)
+compares with a [1015 state TM
+](https://github.com/CatsAreFluffy/metamath-turing-machines/tree/master), taking 
+1015\*2\*(2+10) = 24360 bits.
+
+One reason for TMs taking many more bits to achieve comparable growth,
+especially at the larger milestones, is the extremely poor programmability of TMs.
+The λ-calculus, despite its similar bare bones nature, doesn't share this drawback.
 Modern high level pure functional languages like [Haskell](https://www.haskell.org/)
 are essentially just syntactically sugared λ-calculus,
 with programmer friendly features like [Algebraic Data Types](https://en.wikipedia.org/wiki/Algebraic_data_type)
@@ -337,54 +375,62 @@ datatypes and functions.
 It is this excellent programmability of the λ-calculus that facilitated the construction 
 of highly optimized programs for BMS and Loader's.
 
-In contrast, programming a Turing machine has been called impossibly tedious,
-which explains why people have resorted to implementing higher level languages like
+It is because programming a Turing machine is so impossibly tedious,
+that people have resorted to implementing higher level languages like
 [Not-Quite-Laconic](https://github.com/sorear/metamath-turing-machines)
-for writing nontrivial programs that don't waste too many states.
+for writing nontrivial programs such as the TM that halts only upon
+finding an inconstency in ZFC. The above 1015 state TM for exceeding Loader's Number
+even includes a λ-calculus interpreter written in NQL!
 
 In his paper [The Busy Beaver Frontier](https://scottaaronson.com/papers/bb.pdf),
 [Scott Aaronson](https://scottaaronson.com/) tries to answer the question
 ## But why Turing machines?
 
-```
-For all their historic importance, haven’t Turing machines been completely superseded
+"For all their historic importance, haven’t Turing machines been completely superseded
 by better alternatives—whether stylized assembly languages or various codegolf languages or Lisp?
 As we’ll see, there is a reason why Turing machines were a slightly unfortunate choice
 for the Busy Beaver game: namely, the loss incurred when we encode a state transition table
 by a string of bits or vice versa.
-But Turing machines also turn out to have a massive advantage that compensates for this.
-Namely, because Turing machines have no “syntax” to speak of, but only graph structure,
+But Turing machines also turn out to have a massive advantage that compensates for this."
+
+### Interesting behaviour at small sizes
+
+"Namely, because Turing machines have no “syntax” to speak of, but only graph structure,
 we immediately start seeing interesting behavior even with machines of only 3, 4, or 5 states,
-which are feasible to enumerate.
-And there’s a second advantage. Precisely because the Turing machine model is so ancient and fixed,
-whatever emergent behavior we find in the Busy Beaver game, there can be no suspicion that
-we “cheated” by changing the model until we got the results we wanted.
-In short, the Busy Beaver game seems like about as good a yardstick as any for gauging humanity’s
-progress against the uncomputable
-```
+which are feasible to enumerate."
 
-The claimed "massive advantage" of TMs do not hold over the λ-calculus.
-
-First, the number of uniquely behaving TMs with "only" 5 states is
+The number of uniquely behaving TMs with "only" 5 states is
 4^10 \* [632700](https://oeis.org/A107668) = 663434035200 , which is more than
-the number of closed lambda terms of size at most 52 bits (513217604750),
-which exhibit as much if not more interesting behaviour.
+the number of closed lambda terms of size at most 52 bits (513217604750).
+The latter certainly exhibit no less interesting behaviour, so TMs hold no advantage here.
 
-Second, the  λ-calculus is more ancient (by just a few years) and more fixed (no choice of
-tape alphabet size, or number of tapes), leaving no suspicion either.
+### Ancient and fixed computational model
 
-BBλ's use of bits, the standard unit of information theory, therefore make it the prefered
-yardstick for exploring the limits of computation.
+"And there’s a second advantage. Precisely because the Turing machine model is so ancient and fixed,
+whatever emergent behavior we find in the Busy Beaver game, there can be no suspicion that
+we “cheated” by changing the model until we got the results we wanted."
+
+The λ-calculus is just slightly more ancient and is arguably more fixed.
+There is no choice of tape alphabet size, no choice of whether the tape head needs
+to move in every transition, no choice of halting and output
+convention, and no choice in number of tapes or tape heads.
+
+The λ-calculus can neither be suspected of being designed toward fast growth,
+so again TMs hold no advantage here.
+
+The only remaining advantage of BB over BBλ is the many decades of research behind
+and publications about it.
 
 ## A Universal Busy Beaver
 
-Is BBλ then an ideal Busy Beaver function (apart from a historical lack of study)?
+Is BBλ then an ideal Busy Beaver function.
 Not quite. It's still lacking one desirable property, namely universality.
 
 This property mirrors a notion of optimality for shortest description lengths, where it's known
 as the [Invariance theorem](https://en.wikipedia.org/wiki/Kolmogorov_complexity#Invariance_theorem):
 
-  Given any description language L, the optimal description language is at least as efficient as L, with some constant overhead.
+  Given any description language L, the optimal description language
+  is at least as efficient as L, with at most constant additive overhead.
 
 In the realm of beavers, this means that given any Busy Beaver function BB
 (based on self-delimiting programs), an optimal Busy Beaver surpasses it with
