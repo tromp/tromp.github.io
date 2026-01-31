@@ -98,7 +98,7 @@ So the largest number TM programmable in 64 bits is BB(6).
 ## How large is BB(6)?
 
 Unfortunately, we may never know. While all BB(n) have been determined (and even
-formally proven) for n<=5, there are some 6-state TMs  whose halting behaviour are
+formally proven) for n&le;5, there are some 6-state TMs  whose halting behaviour are
 closely related to very hard mathematical problems.
 Most if not all of these so-called [cryptids](https://wiki.bbchallenge.org/wiki/Cryptids)
 are likely not to halt.
@@ -185,7 +185,7 @@ J J = J (J H) = J (H HH) = H HH (H HH H)
     = 2 2 2 2 2 2   HH 2
     = 2↑↑6          HH 2
 
-### Lemma 2. For k,n >= 2, k H 2 n > 3↑<sup>k</sup>(1+n)
+### Lemma 2. For k,n &ge; 2, k H 2 n > 3↑<sup>k</sup>(1+n)
 
 ### Proof:
 By induction on k.  First note that H2 n = H 2 n = n 2 2 = 2^2^n
@@ -196,7 +196,7 @@ Step: k+1 H 2 n = H (k H 2) n = n (k H 2) 2 > 3↑<sup>k</sup>(1+ 3↑<sup>k</su
 3↑<sup>k</sup>(1+2)...))
                                             > 3↑<sup>k+1</sup>(1+n)
 
-### Lemma 3. For n >= 2, HH (HH n) > 3↑<sup>n</sup>3
+### Lemma 3. For n &ge; 2, HH (HH n) > 3↑<sup>n</sup>3
 
 ### Proof
 By induction on n
@@ -228,7 +228,7 @@ in conventional notation, or
 ```
 (λ 1 1 1) (λ 1 (1 (λ λ λ 1 3 2 (λ λ 2 (2 1)))))
 ```
-in de Bruijn notation, with 61-bit encoding.
+in de Bruijn notation, with 61-bit encoding
 ```
 01 00 01 01 10 10 10 00 01 10 01 10 00 00 00 01 01 01 10 1110 110 00 00 01 110 01 110 10
 ```
@@ -309,7 +309,7 @@ This allows Lemma 5 to be exact rather than a mere lower bound.
 2. [α+1] n = n 2 [α] 2 = A 2 [α] n
 3. [ω<sup>i+1</sup>(α+1)] n = [ω<sup>i+1</sup>α+ω<sup>i</sup> n] 2
 
-### Lemma 5. For k>=0, n>=2, : k+1 A 2 [ω<sup>k</sup> α] n = [ω<sup>k</sup> (α+1)] n
+### Lemma 5. For k&ge;0, n>=2, : k+1 A 2 [ω<sup>k</sup> α] n = [ω<sup>k</sup> (α+1)] n
 
 ### Proof:
 Base k=0:
@@ -429,17 +429,22 @@ Not quite. It's still lacking one desirable property, namely universality.
 This property mirrors a notion of optimality for shortest description lengths, where it's known
 as the [Invariance theorem](https://en.wikipedia.org/wiki/Kolmogorov_complexity#Invariance_theorem):
 
-  Given any description language L, the optimal description language
+  Given any description language L, L<sub<opt</sub>
   is at least as efficient as L, with at most constant additive overhead.
 
-In the realm of beavers, this means that given any Busy Beaver function BB
-(based on self-delimiting programs), an optimal Busy Beaver surpasses it with
-at most constant lag:
+In the realm of beavers, this means we require of an optimal Busy Beaver BB<sub>opt</sub> that
+it surpass any Busy Beaver function bb (based on self-delimiting programs) with at most constant lag:
 
-for some constant c depending on BB, and for all n: BBopt(n+c) &ge; BB(n)
+for some constant c depending on bb, and for all n: BB<sub>opt</sub>(n+c) &ge; bb(n)
 
-While BBλ is not universal, it's not far from one either.
-By giving λ-calculus terms access to pure binary data, as in the Binary Lambda Calculus,
-function [BBλ2](https://oeis.org/A361211) achieves universality
-while lagging only 2 bits behind BBλ (still leaving room for w218 in under 64 bits).
-It's known to eventually outgrow the latter, but that could take thousands of bits.
+While BBλ is not universal, the closely related
+
+[BBλ2](https://oeis.org/A361211)(n) = the maximum output size of self-delimiting BLC programs of size n
+
+achieves universality by giving λ-calculus terms access to pure binary data,
+as in the [Binary Lambda Calculus](https://gist.github.com/tromp/86b3184f852f65bfb814e3ab0987d861).
+
+BBλ champions provide lower bounds for BBλ2. If term t of size n has normal form nft,
+then the encoding of λ_. t, which is 00 followed by the code of t, is a BLC program with
+output nft, hence for all n: BBλ2(n+2) &ge; BBλ(n).
+Thus, w218 is also BLC programmable in under 64 bits.
