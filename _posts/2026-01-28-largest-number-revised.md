@@ -83,10 +83,15 @@ The famous [Busy Beaver](https://en.wikipedia.org/wiki/Busy_beaver)
 denote BB(n), is defined as the maximal number of steps taken by
 an n-state Turing Machine (TM) with a binary tape alphabet,
 starting from an all-0 tape, before halting.
-Note that output of a number M written in binary only gets
-credited for its length log<sub>2</sub>(M+1).
 
-Here we have a discrepancy between how the size of a TM is measured, in states,
+Note that this is stretching the meaning of "representable" a bit,
+since BB considers the runtime of the machine instead of its output.
+Besides the above BB (that Radó called S), Radó did define another
+function called Σ that considers the output of the machine as a number in unary,
+namely the number of 1s in the final tape contents. But BB has received
+more attention as it allows one to determine from BB(n) all halting n-state machines.
+
+The definition also leaves a discrepancy between how the size of a TM is measured, in states,
 versus how program size is measured, in bits.
 Fortunately there is a straightforward binary encoding of n-state TMs,
 which is entirely determined by its transition function.
@@ -97,6 +102,7 @@ whether to move the tape head left or right (1 bit),
 and what new state (or special halt state) to transition to (⌈log2(n+1)⌉ bits).
 This encoding takes 6\*2\*(2+3) = 60 bits for a a 6-state TM,
 and 7\*2\*(2+3) = 70 bits for a a 7-state TM.
+
 So the largest number TM programmable in 64 bits is BB(6).
 
 ## How large is BB(6)?
@@ -160,8 +166,10 @@ way to avoid naming variables. A more conventional notation using variable names
 The top left of this post shows a [graphical representation](https://tromp.github.io/cl/diagrams.html) of the term.
 The last 16 bits of the program---making up almost a third of its size---encodes
 the term λf λx. f (f x), which takes arguments f and x in turn, and iterates f twice on x.
-In general, the function that iterates a given function n times on a given argument
+The function λf λx. f<sup>n</sup> x, that iterates a given function n times on a given argument
 is called Church numeral n, and is the standard way of representing numbers in the λ-calculus.
+The encoding of Church numeral n is 00 00 (01 110)<sup>n</sup> 10 of size 5n+6 bits.
+
 The program, which we'll name after its discoverer, can be expressed more legibly as
 
 ```
@@ -335,9 +343,14 @@ BBλ(n) = the maximum beta normal form size of any closed lambda term of size n
 which appears in the Online Encyclopedia of Integer Sequences (OEIS) as
 [functional Busy Beaver function](https://oeis.org/A333479)
 Besides being simpler than BB, it has the advantage of using the standard unit of information theory,
-bits, rather than states.
+bits, rather than states. And it doesn't require stretching the meaning of "representable" as did
+BB's measuring of runtime instead of output size.
+
 The much more fine-grained use of bits allows the first 36 values of BBλ 
 to be currently known, versus only 5 values of BB.
+
+Since both are Church numerals, term Melo implies that BBλ(49) &ge; 5 (Melo's Number) + 6,
+while w218 implies that BBλ(61) &ge; 5 (2^2^2^2^2^2^2^([ω<sup>2↑↑18-1</sup>] 2)) + 6.
 
 ## BB vs BBλ growth compared on bit-by-bit basis
 
@@ -446,12 +459,13 @@ While BBλ is not universal, the closely related
 
 [BBλ2](https://oeis.org/A361211)(n) = the maximum output size of self-delimiting BLC programs of size n
 
-achieves universality by giving λ-calculus terms access to pure binary data,
-as in the [Binary Lambda Calculus](https://gist.github.com/tromp/86b3184f852f65bfb814e3ab0987d861).
+achieves universality by giving λ-calculus terms access to pure binary data. BLC programs
+consist of an encoded lambda term, followed by arbitrary binary data, that the term is applied to.
 
-BBλ champions provide lower bounds for BBλ2. If term t of size n has normal form nft,
-then the encoding of λ\_. t, which is 00 followed by the code of t, is a BLC program with
-output nft, hence for all n: BBλ2(n+2) &ge; BBλ(n).
+Since (λ\_. t) applied to any (standard lambda representation of) binary data equals t,
+BBλ champions provide lower bounds for BBλ2: for all n, BBλ2(2+n) &ge; BBλ(n).
 
-Our conclusion is that the largest number currently known to be representable in 64 bits is w218
-either as a 61 bit lambda term, or as a 63 bit BLC program.
+## In conclusion
+
+The largest number (currently known to be) representable in 64 bits is w218,
+which lower bounds both BBλ(61) and BBλ2(63).
