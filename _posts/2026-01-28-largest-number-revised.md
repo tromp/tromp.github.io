@@ -30,13 +30,12 @@ trillion seventy-three billion seven hundred nine million five hundred
 fifty-one thousand six hundred fifteen.
 
 That is indeed the maximum possible value of 64 bit unsigned integers,
-available as datatype uint64\_t in C or u64 in Rust. 
-Floating point numbers can represent much larger values courtesy of their base 2 exponent.
+available as data type uint64\_t in C or u64 in Rust. 
+Floating point data types can represent much larger values, courtesy of their base 2 exponent.
 The 64-bit double [floating
-point format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format) has a largest (finite) representable value of
-2<sup>1024</sup>(1-2<sup>-53</sup>) ~ 1.8\*10<sup>308</sup>.
+point format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format) has a largest (finite) representable value of 2<sup>1024</sup>(1-2<sup>-53</sup>) ~ 1.8\*10<sup>308</sup>.
 
-What if we allow representations beyond plain datatypes?
+What if we allow representations beyond plain data types?
 Since we want representations to remain computable, the most general
 kind of representation would be a program in some programming language.
 But the program must be small enough to fit in 64 bits.
@@ -48,11 +47,11 @@ consisting of 8 ASCII characters.
 [ASCII](https://en.wikipedia.org/wiki/ASCII) is a 7-bit
 character encoding standard representing 128 unique characters,
 but all modern computers use 8-bit bytes to store either plain ASCII
-or [UTF-8](https://en.wikipedia.org/wiki/UTF-8), a unicode character encoding that's backward compatible with
+or [UTF-8](https://en.wikipedia.org/wiki/UTF-8), a Unicode character encoding that's backward compatible with
 ASCII.  So we'll consider the above all-scaffold do-nothing program to
 be the only valid 64-bit C program.
 
-Plenty other languages require no such scaffolding though. For instance,
+Plenty other languages require no such scaffolding. For instance,
 Linux features the arbitrary precision calculator
 [bc](https://en.wikipedia.org/wiki/Bc_(programming_language)). It happily
 computes the 954242 digit number 9^999999 = 35908462...48888889, making
@@ -63,7 +62,7 @@ compute. If bc supported the symbol ! for computing factorials, then
 
 Allowing such primitives feels a bit like cheating though. Would we allow a
 language that has the [Ackerman function](https://en.wikipedia.org/wiki/Ackermann_function)
-predefined, which sports the 8 byte expression ack(9,9) representing a truly huge number?
+predefined, letting the 8 byte expression ack(9,9) represent a truly huge number?
 
 ## Ackerman considered unhelpful
 
@@ -83,16 +82,9 @@ The famous [Busy Beaver](https://en.wikipedia.org/wiki/Busy_beaver)
 [Tibor Radó](https://en.wikipedia.org/wiki/Tibor_Rad%C3%B3) in 1962, which we'll
 denote BB(n), is defined as the maximal number of steps taken by
 an n-state Turing Machine (TM) with a binary tape alphabet,
-starting from an all-0 tape, before halting.
+starting from an all 0 tape, before halting.
 
-Note that this is stretching the meaning of "representable" a bit,
-since BB considers the runtime of the machine instead of its output.
-Besides the above BB (that Radó called S), Radó did define another
-function called Σ that considers the output of the machine as a number in unary,
-namely the number of 1s in the final tape contents. But BB has received
-more attention as it allows one to determine from BB(n) all halting n-state machines.
-
-The definition also leaves a discrepancy between how the size of a TM is measured, in states,
+Here we have a discrepancy between how the size of a TM is measured, in states,
 versus how program size is measured, in bits.
 Fortunately there is a straightforward binary encoding of n-state TMs,
 which is entirely determined by its transition function.
@@ -104,6 +96,15 @@ and what new state (or special halt state) to transition to (⌈log2(n+1)⌉ bit
 This encoding takes 6\*2\*(2+3) = 60 bits for a a 6-state TM,
 and 7\*2\*(2+3) = 70 bits for a a 7-state TM.
 
+We're also stretching the meaning of "representable" a bit,
+since BB considers the runtime of the machine instead of its output.
+Besides the above BB (that Radó called S), Radó did define another
+function called Σ that considers the output of the machine as a number in unary,
+namely the number of 1s in the final tape contents. But BB has received
+more attention as it allows one to determine from BB(n) all halting n-state machines.
+For 6-states and up though, there is no discernable difference in magnitude between the two functions
+so we could have just as easily used Σ.
+
 So the largest number TM programmable in 64 bits is BB(6).
 
 ## How large is BB(6)?
@@ -113,25 +114,24 @@ formally proven) for n&le;5, there are some 6-state TMs whose halting behaviour 
 closely related to very hard mathematical problems.
 Most of these so-called [cryptids](https://wiki.bbchallenge.org/wiki/Cryptids)
 are likely not to halt, with some,
-like [Lucy's Moonlight](https://wiki.bbchallenge.org/wiki/Lucy%27s_Moonlight)
+like [Lucy's Moonlight](https://wiki.bbchallenge.org/wiki/Lucy%27s_Moonlight),
 likely to halt but unlikely to beat the current champion.
 The current 6-state champion shows that
 [BB(6) > 2↑↑2↑↑2↑↑10 ](https://wiki.bbchallenge.org/wiki/BB(6)).
 Here, m↑↑n is [Knuth's up-arrow notation](https://en.wikipedia.org/wiki/Knuth%27s_up-arrow_notation)
 for an exponential tower of n m's, so that for example 2↑↑3 = 2<sup>2<sup>2</sup></sup>.
-
 Large as this number is, it's still very small compared to
 ack(9,9) = 2↑<sup>7</sup>12 - 3 = 2↑↑↑↑↑↑↑12 - 3.
+
 It is known however that
 [BB(7) > 2↑<sup>11</sup>2↑<sup>11</sup>3 > ack(9,9) ](https://wiki.bbchallenge.org/wiki/BB(7)).
-
 Several leading BB researchers believe that BB(7) is even larger than the famous
 [Graham's Number](https://en.wikipedia.org/wiki/Graham%27s_number), which iterates
 the function mapping n to 3↑<sup>n</sup>3 64 times starting from n=3.
-This is quite a bold belief, considering that the smallest known Graham exceeding TM has
+This appears to me a rather bold belief, considering that the smallest known Graham exceeding TM has
 [14 states](https://wiki.bbchallenge.org/wiki/Champions), twice as many.
-But they stand behind their belief, by accepting my
-$1000 bet that a proof of BB(7) > Graham's Number won't be found within 10 years.
+So I offered a $1000 bet that a proof of BB(7) > Graham's Number won't be found within 10 years,
+which BB researcher [Shawn Ligocki](https://www.sligocki.com/about/) was happy to accept.
 
 Meanwhile, Graham's Number is easily surpassed within 64 bits, by moving beyond Turing machines
 into the language of
@@ -165,11 +165,11 @@ way to avoid naming variables. A more conventional notation using variable names
 (λJ.J J) (λy.y (y (λg λm. m g (λf.λx.f (f x)))))
 ```
 The top left of this post shows a [graphical representation](https://tromp.github.io/cl/diagrams.html) of the term.
-The last 16 bits of the program---making up almost a third of its size---encodes
+The last 16 bits of the program, making up almost a third of its size, encodes
 the term λf λx. f (f x), which takes arguments f and x in turn, and iterates f twice on x.
-The function λf λx. f<sup>n</sup> x, that iterates a given function n times on a given argument
-is called Church numeral n, and is the standard way of representing numbers in the λ-calculus.
-The encoding of Church numeral n is 00 00 (01 110)<sup>n</sup> 10 of size 5n+6 bits.
+In its generalized form, the function λf λx. f<sup>n</sup> x, 
+called Church numeral n, is the most common way of representing numbers in the λ-calculus.
+The encoding of Church numeral n is 0000(01110)<sup>n</sup>10, of size 5n+6 bits.
 
 The program, which we'll name after its discoverer, can be expressed more legibly as
 
@@ -234,7 +234,7 @@ Discord users 50\_ft\_lock and Sam found the following term that extends Melo's 
 ```
 w218 = let { 2 = λf λx. f (f x); A = λa λb λc. c a b 2; T = λy. y (y A) } in T T T
 ```
-represents the lambda term
+which desugars to lambda term
 ```
 (λT.T T T) (λy.y (y (λa λb λc. c a b (λf.λx.f (f x)))))
 ```
@@ -333,7 +333,8 @@ Step k>0:
 k+1 A 2 [ω<sup>k</sup> α] n = A (k A 2) [ω<sup>k</sup> α] n = n (k A 2) [ω<sup>k</sup> α] 2 = [ω<sup>k</sup> α + ω<sup>k-1</sup> n] 2 = [ω<sup>k</sup> (α+1)] n
 
 Lemma 5 gives w218 = (2↑↑18 A 2 [0] 2) 2 2 2 2 2 2 2 = 2^2^2^2^2^2^2^([ω<sup>2↑↑18-1</sup>] 2).
-In comparison, Graham's number is known to be less than the much smaller [ω+1] 64.
+In comparison, Graham's and Melo's Numbers are known to be much smaller at around [ω+1] 64 and [ω+1] (2↑↑6)
+respectively.
 
 ## A Functional Busy Beaver
 
@@ -344,16 +345,15 @@ BBλ(n) = the maximum beta normal form size of any closed lambda term of size n
 which appears in the Online Encyclopedia of Integer Sequences (OEIS) as
 [functional Busy Beaver function](https://oeis.org/A333479)
 Besides being simpler than BB, it has the advantage of using the standard unit of information theory,
-bits, rather than states. And it doesn't require stretching the meaning of "representable" as did
-BB's measuring of runtime instead of output size.
+bits, rather than states.
 
 The much more fine-grained use of bits allows the first 36 values of BBλ 
 to be currently known, versus only 5 values of BB.
 
-Since both are Church numerals, term Melo implies that BBλ(49) &ge; 5 (Melo's Number) + 6,
-while w218 implies that BBλ(61) &ge; 5 (2^2^2^2^2^2^2^([ω<sup>2↑↑18-1</sup>] 2)) + 6.
+Since both are Church numerals, term Melo implies that BBλ(49) &ge; 5(Melo's Number)+6,
+while w218 implies that BBλ(61) &ge; 5(2^2^2^2^2^2^2^([ω<sup>2↑↑18-1</sup>] 2))+6.
 
-## BB vs BBλ growth compared on bit-by-bit basis
+## BB compared bit-by-bit to BBλ
 
 The growth rates of the two BB functions may be compared by how quickly they are known
 to exceed certain large number milestones, that correspond to well known ordinals in the
@@ -370,14 +370,13 @@ compares with [51 states](https://wiki.bbchallenge.org/wiki/Champions) taking 51
 
 For the limit of Bashicu Matrix System (BMS), at (presumed) ordinal PTO(Z<sub>2</sub>),
 [331 bits](https://github.com/tromp/AIT/blob/master/fast_growing_and_conjectures/bms.lam)
-compares with a [150 state TM](https://morphett.info/turing/turing.html) by Discord user patcail,
-which takes 150\*2\*(2+8) = 3000 bits.
+compares with [150 states](https://morphett.info/turing/turing.html) taking 150\*2\*(2+8) = 3000 bits.
 
 Finally, for Loader's Number, at (presumed) ordinal PTO(Z<sub>ω</sub>),
 [1850
 bits](https://codegolf.stackexchange.com/questions/176966/golf-a-number-bigger-than-loaders-number/274634#274634)
-compares with a [1015 state TM
-](https://github.com/CatsAreFluffy/metamath-turing-machines/tree/master), taking 
+compares with [1015 states
+](https://github.com/CatsAreFluffy/metamath-turing-machines/tree/master) taking 
 1015\*2\*(2+10) = 24360 bits.
 
 One reason for TMs taking many more bits to achieve comparable growth,
@@ -394,7 +393,7 @@ datatypes and functions.
 It is this excellent programmability of the λ-calculus that facilitated the construction 
 of highly optimized programs for BMS and Loader's.
 
-It is because programming a Turing machine is so impossibly tedious,
+Because programming a Turing machine is so impossibly tedious,
 that people have resorted to implementing higher level languages like
 [Not-Quite-Laconic](https://github.com/sorear/metamath-turing-machines)
 for writing nontrivial programs such as the TM that halts only upon
