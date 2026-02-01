@@ -98,12 +98,13 @@ So the largest number TM programmable in 64 bits is BB(6).
 ## How large is BB(6)?
 
 Unfortunately, we may never know. While all BB(n) have been determined (and even
-formally proven) for n&le;5, there are some 6-state TMs  whose halting behaviour are
+formally proven) for n&le;5, there are some 6-state TMs whose halting behaviour are
 closely related to very hard mathematical problems.
-Most if not all of these so-called [cryptids](https://wiki.bbchallenge.org/wiki/Cryptids)
-are likely not to halt.
-The machine with the currently known longest finite runtime, that is,
-the current 6-state champion, shows that
+Most of these so-called [cryptids](https://wiki.bbchallenge.org/wiki/Cryptids)
+are likely not to halt, with some,
+like [Lucy's Moonlight](https://wiki.bbchallenge.org/wiki/Lucy%27s_Moonlight)
+likely to halt but unlikely to beat the current champion.
+The current 6-state champion shows that
 [BB(6) > 2↑↑2↑↑2↑↑10 ](https://wiki.bbchallenge.org/wiki/BB(6)).
 Here, m↑↑n is [Knuth's up-arrow notation](https://en.wikipedia.org/wiki/Knuth%27s_up-arrow_notation)
 for an exponential tower of n m's, so that for example 2↑↑3 = 2<sup>2<sup>2</sup></sup>.
@@ -429,7 +430,7 @@ It's still lacking one desirable property, namely universality.
 This property mirrors a notion of optimality for shortest description lengths, where it's known
 as the [Invariance theorem](https://en.wikipedia.org/wiki/Kolmogorov_complexity#Invariance_theorem):
 
-  Given any description language L, L<sub<opt</sub>
+  Given any description language L, L<sub>opt</sub>
   is at least as efficient as L, with at most constant additive overhead.
 
 In the realm of beavers, this means we require of an optimal Busy Beaver BB<sub>opt</sub> that
@@ -447,4 +448,6 @@ as in the [Binary Lambda Calculus](https://gist.github.com/tromp/86b3184f852f65b
 BBλ champions provide lower bounds for BBλ2. If term t of size n has normal form nft,
 then the encoding of λ_. t, which is 00 followed by the code of t, is a BLC program with
 output nft, hence for all n: BBλ2(n+2) &ge; BBλ(n).
-Thus, w218 is also BLC programmable in under 64 bits.
+
+Our conclusion is that the largest number currently known to be representable in 64 bits is w218
+either as a 61 bit lambda term, or as a 63 bit BLC program.
