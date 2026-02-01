@@ -352,12 +352,12 @@ becomes rather closer at 49 vs 70 bits.
 For [Goodstein's function](https://en.wikipedia.org/wiki/Goodstein%27s_theorem) at ordinal ε<sub>0</sub>,
 [111
 bits](https://github.com/tromp/AIT/blob/master/fast_growing_and_conjectures/BBE0.lam)
-compares with 51 states taking 51\*2\*(2+6) = 816 bits.
+compares with [51 states](https://wiki.bbchallenge.org/wiki/Champions) taking 51\*2\*(2+6) = 816 bits.
 
 For the limit of Bashicu Matrix System (BMS), at (presumed) ordinal PTO(Z<sub>2</sub>),
 [331 bits](https://github.com/tromp/AIT/blob/master/fast_growing_and_conjectures/bms.lam)
-compares with a 150 state TM by Discord user patcail (link needed), which takes 
-150\*2\*(2+8) = 3000 bits.
+compares with a [150 state TM](https://morphett.info/turing/turing.html) by Discord user patcail,
+which takes 150\*2\*(2+8) = 3000 bits.
 
 Finally, for Loader's Number, at (presumed) ordinal PTO(Z<sub>ω</sub>),
 [1850
@@ -450,7 +450,7 @@ achieves universality by giving λ-calculus terms access to pure binary data,
 as in the [Binary Lambda Calculus](https://gist.github.com/tromp/86b3184f852f65bfb814e3ab0987d861).
 
 BBλ champions provide lower bounds for BBλ2. If term t of size n has normal form nft,
-then the encoding of λ_. t, which is 00 followed by the code of t, is a BLC program with
+then the encoding of λ\_. t, which is 00 followed by the code of t, is a BLC program with
 output nft, hence for all n: BBλ2(n+2) &ge; BBλ(n).
 
 Our conclusion is that the largest number currently known to be representable in 64 bits is w218
