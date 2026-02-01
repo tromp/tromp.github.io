@@ -1,8 +1,12 @@
 ---
 layout: post
-title: "The largest number representable in 64 bits - Revised"
+title: "The largest number representable in 64 bits"
 date: 2026-01-28
 ---
+
+This post is a rewrite of my earlier blog post from
+[Nov 2023](https://tromp.github.io/blog/2023/11/24/largest-number)
+with many new insights and updates.
 
 ```
 ┬─┬ ┬─┬──────────                                  ┬─┬─┬ ┬─┬────────────
