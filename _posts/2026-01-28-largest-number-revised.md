@@ -30,8 +30,9 @@ trillion seventy-three billion seven hundred nine million five hundred
 fifty-one thousand six hundred fifteen.
 
 That is indeed the maximum possible value of 64 bit unsigned integers,
-available as datatype uint64_t in C or u64 in Rust. We can easily
-surpass this with floating point numbers. The 64-bit double [floating
+available as datatype uint64\_t in C or u64 in Rust. 
+Floating point numbers can represent much larger values courtesy of their base 2 exponent.
+The 64-bit double [floating
 point format](https://en.wikipedia.org/wiki/Double-precision_floating-point_format) has a largest (finite) representable value of
 2<sup>1024</sup>(1-2<sup>-53</sup>) ~ 1.8\*10<sup>308</sup>.
 
