@@ -368,6 +368,10 @@ For [Goodstein's function](https://en.wikipedia.org/wiki/Goodstein%27s_theorem) 
 bits](https://github.com/tromp/AIT/blob/master/fast_growing_and_conjectures/BBE0.lam)
 compares with [51 states](https://wiki.bbchallenge.org/wiki/Champions) taking 51\*2\*(2+6) = 816 bits.
 
+The ε<sub>0</sub> growth term is actually obsoleted by a [100-bit term](https://github.com/tromp/AIT/blob/master/fast_growing_and_conjectures/BO.lam) recently discovered by Patcail that grows at the unfathomably larger Bucholz' Ordinal,
+the catching point between the [SGH](https://en.wikipedia.org/wiki/Slow-growing_hierarchy) and the FGH.
+As such, that term easily exceeds another famously large number, TREE(3).
+
 For the limit of Bashicu Matrix System (BMS), at (presumed) ordinal PTO(Z<sub>2</sub>),
 [331 bits](https://github.com/tromp/AIT/blob/master/fast_growing_and_conjectures/bms.lam)
 compares with [150 states](https://morphett.info/turing/turing.html) taking 150\*2\*(2+8) = 3000 bits.
