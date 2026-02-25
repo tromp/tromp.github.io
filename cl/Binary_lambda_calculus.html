@@ -407,9 +407,9 @@
 <p>What could be the shortest program that produces a larger output? The following is a good candidate: the program <span class="math inline">(<em>λ</em>1111(<em>λ</em><em>λ</em>1(<em>λ</em><em>λ</em>1)2))(<em>λ</em><em>λ</em>2(21))</span>, of size 55 bits, uses <a href="https://en.wikipedia.org/wiki/Church_numerals">Church numerals</a> to output exactly <span class="math inline">2<sup>2<sup>2<sup>2</sup></sup></sup> = 65536</span> ones. That beats both <a href="https://en.wikipedia.org/wiki/Gzip">gzip</a> and <a href="https://en.wikipedia.org/wiki/Bzip2">bzip2</a>, compressors that need 344 and 352 bits respectively, to describe the same output (as an 8192 byte file with a single letter name).</p>
 <h2 id="halting_probability">Halting probability</h2>
 <p>The <a href="https://en.wikipedia.org/wiki/Halting_probability">halting probability</a> of the prefix universal machine is defined as the probability it will output any term that has a closed normal form (this includes all translated strings):</p>
-<p><span class="math display"><em>Ω</em><sub><em>λ</em></sub> = ∑<sub><em>U</em>(<em>p</em> : <em>z</em>) ∈ <em>N</em><em>F</em></sub>  2<sup> − ℓ(<em>p</em>)</sup></span></p>
+<p><span class="math display"><em>Ω</em><sub><em>λ</em>2</sub> = ∑<sub><em>U</em>(<em>p</em> : <em>z</em>) ∈ <em>N</em><em>F</em></sub>  2<sup> − ℓ(<em>p</em>)</sup></span></p>
 <p>With some effort, we can determine the first 3 bits of this particular number of wisdom:</p>
-<p><span class="math display"><em>Ω</em><sub><em>λ</em></sub> = .000…<sub>2</sub></span> and either the 4th or 5th bit must be 1.</p>
+<p><span class="math display"><em>Ω</em><sub><em>λ</em>2</sub> = .000…<sub>2</sub></span> and either the 4th or 5th bit must be 1.</p>
 <h2 id="blc8_byte_sized_io">BLC8: byte sized I/O</h2>
 <p>While bit streams are nice in theory, they fare poorly in interfacing with the real world. The language BLC8 is a more practical variation on BLC in which programs operate on a stream of bytes, where each byte is represented as a delimited list of 8 bits in <a href="https://en.wikipedia.org/wiki/Big-endian">big-endian</a> order.</p>
 <p>BLC8 requires a more complicated universal machine:</p>
