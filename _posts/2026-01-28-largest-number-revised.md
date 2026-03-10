@@ -218,7 +218,7 @@ Step: k+1 H 2 n = H (k H 2) n = n (k H 2) 2 > 3↑<sup>k</sup>(1+ 3↑<sup>k</su
 ### Proof
 By induction on n
 
-Base: Lemma 1's proof shows HH (HH 2) = 2↑↑6 > 3{2</sup>3
+Base: Lemma 1's proof shows HH (HH 2) = 2↑↑6 > 3↑<sup>2</sup>3
 Step: HH (HH 1+n) = HH 1+n H 2 = 1+n H 2 H 2 = H (n H 2) H 2 =
 H (n H 2) 2 2 = 2 (n H 2) 2 2 = n H 2 (n H 2 2) 2 ><sup>Lm2</sup>
 3↑<sup>n</sup>(1+3↑<sup>n</sup>(1+2)) 2 > 3↑<sup>n+1</sup>3.
