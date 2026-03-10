@@ -127,7 +127,7 @@ It is known however that
 [BB(7) > 2↑<sup>11</sup>2↑<sup>11</sup>3 > ack(9,9) ](https://wiki.bbchallenge.org/wiki/BB(7)).
 Several leading BB researchers believe that BB(7) is even larger than the famous
 [Graham's Number](https://en.wikipedia.org/wiki/Graham%27s_number), which iterates
-the function mapping n to 3↑<sup>n</sup>3 64 times starting from n=3.
+the function mapping n to 3↑<sup>n</sup>3 64 times starting from n=4.
 This appears to me a rather bold belief, considering that the smallest known Graham exceeding TM has
 [14 states](https://wiki.bbchallenge.org/wiki/Champions), twice as many.
 So I offered a $1000 bet that a proof of BB(7) > Graham's Number won't be found within 10 years,
