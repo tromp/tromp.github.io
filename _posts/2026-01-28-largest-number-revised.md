@@ -184,7 +184,10 @@ Melo evaluates to a Church numeral, "Melo's Number", that comfortably exceeds Gr
 ### Lemma 1. J J = 2↑↑6 HH 2, where HH denotes H H
 
 ### Proof:
-J J = J (J H) = J (H HH) = H HH (H HH H)
+      J J
+    = J (J H)
+    = J (H HH)
+    = H HH (H HH H)
     = H HH H        HH 2
     = H HH 2        HH 2
     = 2 HH 2        HH 2
