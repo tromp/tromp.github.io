@@ -188,19 +188,19 @@ Melo evaluates to a Church numeral, "Melo's Number", that comfortably exceeds Gr
     = J (J H)
     = J (H HH)
     = H HH (H HH H)
-    = H HH H        HH 2
-    = H HH 2        HH 2
-    = 2 HH 2        HH 2
-    = HH (HH 2)     HH 2
-    = HH 2 H 2      HH 2
-    = 2 H 2 H 2     HH 2
-    = H (H 2) H 2   HH 2
-    = H (H 2) 2 2   HH 2
-    = 2 (H 2) 2 2   HH 2
-    = H 2 (H 2 2) 2 HH 2
-    = H 2 2 2 2 2   HH 2
-    = 2 2 2 2 2 2   HH 2
-    = 2↑↑6          HH 2
+    = H HH H            HH 2
+    = H HH 2            HH 2
+    = 2 HH 2            HH 2
+    = HH (HH 2)         HH 2
+    = HH 2          H 2 HH 2
+    = 2 H 2         H 2 HH 2
+    = H (H 2) H       2 HH 2
+    = H (H 2) 2       2 HH 2
+    = 2 (H 2) 2       2 HH 2
+    = H 2 (H 2 2)     2 HH 2
+    = H 2 2       2 2 2 HH 2
+    = 2 2 2       2 2 2 HH 2
+    = 2↑↑6              HH 2
 
 ### Lemma 2. For k,n &ge; 2, k H 2 n > 3↑<sup>k</sup>(1+n)
 
@@ -226,8 +226,7 @@ H (n H 2) 2 2 = 2 (n H 2) 2 2 = n H 2 (n H 2 2) 2 ><sup>Lm2</sup>
 ### Theorem: J J > Graham's Number G(64), where G(n) = n (\n -> 3↑<sup>n</sup>3) 4
 
 ### Proof:
- J J =<sup>Lm1</sup> 2↑↑6 HH 2 ><sup>Lm3</sup> (2↑↑6 / 2 - 1) (\n -> 3↑<sup>n</sup>3)
-3↑<sup>2</sup>3
+ J J =<sup>Lm1</sup> 2↑↑6 HH 2 ><sup>Lm3</sup> (2↑↑6 / 2 - 1) (\n -> 3↑<sup>n</sup>3) 3↑<sup>2</sup>3
 > (2↑↑6 / 2 - 1) (\n -> 3↑<sup>n</sup>3) 4 = G(2↑↑6 / 2 - 1) > G(64)
 
 ## Leaving Melo's Number in the dust
