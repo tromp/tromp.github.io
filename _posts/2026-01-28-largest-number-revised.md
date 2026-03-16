@@ -376,7 +376,8 @@ As such, that term easily exceeds another famously large number, TREE(3).
 
 For the limit of Bashicu Matrix System (BMS), at (presumed) ordinal PTO(Z<sub>2</sub>),
 [331 bits](https://github.com/tromp/AIT/blob/master/fast_growing_and_conjectures/bms.lam)
-compares with [150 states](https://morphett.info/turing/turing.html) taking 150\*2\*(2+8) = 3000 bits.
+compares with [150 states](
+https://morphett.info/turing/turing.html?c95a199c8e8a3dd56452f8b7e28fabbf) taking 150\*2\*(2+8) = 3000 bits.
 
 Finally, for Loader's Number, at (presumed) ordinal PTO(Z<sub>ω</sub>),
 [1850
