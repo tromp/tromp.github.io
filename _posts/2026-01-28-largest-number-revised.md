@@ -56,7 +56,7 @@ Linux features the arbitrary precision calculator
 [bc](https://en.wikipedia.org/wiki/Bc_(programming_language)). It happily
 computes the 954242 digit number 9^999999 = 35908462...48888889, making
 it programmable in 8 bytes. So is the much larger 9^9^9^99 =
-9^(9^(9^99)) with over 10^10^953 digits, which bc is less happy to
+9^(9^(9^99)) with over 10^10^94 digits, which bc is less happy to
 compute. If bc supported the symbol ! for computing factorials, then
 9!!!!!!! would represent a much larger number still.
 
