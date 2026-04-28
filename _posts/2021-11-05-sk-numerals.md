@@ -128,9 +128,9 @@ But it turns out we can do better still, courtesy of good old Bertram:
 pair = λx.λy. λp. p x y
 F2C = λn.(λp. n p(p p) False) (pair (λf.λy.λx. pair f (Csucc y)) C0)
 ```
-This size 60 combinator
+This size 58 combinator
 ```
-S (S (K (S S (K (K (S K))))) (S S (S K))) (K (S (S (S K K) (K (S (K (S (K (S (K (S (K (S (K (S (K (S S (K (S (K (S (K (S (K K))) S)) (S (K (S (K S) K))))))) K)) S)) K)) S)) (S (S K K)))) K))) (S K)))
+S (S (K (S S (K (K (S K))))) (S S (K (S I I)))) (K (S (S I (K (S (K (S (K (S S (K (S (S (K S) K))))) K)) (S (K (S (K (S (K (S (K (S (K (S S (K K))) K)) (S (K K)))) S)) (S I))) K)))) (K (S K))))
 ```
 applies the SK numeral to x and y that are both pairs of some function and a church numeral. Applying one such pair to another results in the function applied to itself and the two numerals:
 ```
