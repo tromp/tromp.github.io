@@ -102,22 +102,25 @@ F2C = λn. Fiszero n C0 (Csucc (F2C (pred n)))
 ```
 We may check that
 ```
-Fpred F1 x y = F1 (K y) x = x
-Fpred F2 x y = F2 (K y) x = K y x = y
+Fpred (Fsucc n) = \x\y. S n (K y) x = \x\y. n x y = n
 ```
-and by induction, Fpred F(n+1) = Fn holds for all n. In fact, it works so well, it lets us venture into the negative numbers:
+so Fpred F(n+1) = Fn for all n.
+
+Fiszero works as follows:
+```
+Fiszero F0 = F0 False I S K = False S K = K = True
+Fiszero F(n+1) False I S K = S Fn False I S K = Fn I I S K = I S K = S K = False
+```
+
+While Fpred lets us define negative numbers as well:
 ```
 F-1 x y = Fpred F0 x y = F0 (K y) x = K y
 F-2 x y = Fpred F-1 x y = F-1 (K y) x = K x
 F-3 x y = Fpred F-2 x y = F-2 (K y) x = K (K y)
 ```
-etcetera. And Fsucc works on these negative numerals too.
+Fsucc doesn't work on these, so they're mostly useless.
 
-Fiszero however works on non-negative numerals only, as follows:
-```
-Fiszero F0 = F0 False I S K = False S K = K = True
-Fiszero F(n+1) False I S K = S Fn False I S K = Fn I I S K = I S K = S K = False
-```
+
 Using the optimal Y combinator S S K (S (K (S S (S (S S K)))) K), F2C is combinator of size 69, a huge improvement.
 
 But it turns out we can do better still, courtesy of good old Bertram:
