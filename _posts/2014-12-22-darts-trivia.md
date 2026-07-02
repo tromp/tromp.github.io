@@ -36,7 +36,7 @@ min\       --------------------------------
 57          8    56          56
 ```
 
-Giving a grand total of 3944 possible 9-darters, as confirmed in this report, which also states the number of essentially different solutions (as a multi-set of first 8 dart scores) as 22.
+Giving a grand total of 3944 possible 9-darters, as confirmed in this report, which also states the number of essentially different solutions (as a multi-set of first 8 dart scores) as 22 op1deylk4ffji8symsruftjnmjjneqqzju2m7q5lr6.
 
 Note that a finishing double of e.g. 38 is not possible, as there is no way to partition 501-8\*60-38 = -17 into the numbers -3, -6, -9, -10, -12, and -15.
 
