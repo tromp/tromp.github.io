@@ -6,8 +6,10 @@ date: 2026-01-28
 
 This post is a rewrite of my earlier blog post from
 [Nov 2023](https://tromp.github.io/blog/2023/11/24/largest-number)
-with many new insights and updates.
+with new insights and updates.
 
+A paper based on this blog post has been published in the journal Entropy
+at [MDPI](https://www.mdpi.com/1099-4300/28/5/494).
 ```
 ┬─┬ ┬─┬──────────                                  ┬─┬─┬ ┬─┬────────────
 └─┤ │ │ ──┬──────                                  └─┤ │ │ │ ──┬────────
